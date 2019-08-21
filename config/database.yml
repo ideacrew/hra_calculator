@@ -1,0 +1,16 @@
+# config/database.yml
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  url: <%= ENV['DATABASE_URL'] %>
+
+development:
+  <<: *default
+  database: cartafact_development
+  host: localhost
+
+test:
+  <<: *default
+  database: cartafact_test
+  host: localhost
