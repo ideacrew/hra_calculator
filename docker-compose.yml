@@ -1,13 +1,29 @@
-version: '3'
+version: '3.1'
+
 services:
+  mongo:
+    image: mongo
+    # restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
   db:
     image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    #   POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
     ports:
       - 5432:5432
-    # environment:
-    #   POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+    # volumes:
+    #   - ./tmp/db:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"

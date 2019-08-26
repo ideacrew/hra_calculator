@@ -1,20 +1,19 @@
 FROM ruby:2.6.3
 
-RUN apt-get update -yqq 
+RUN apt install curl
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
-# RUN apt-cache show nodejs
+# RUN sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
 
-RUN apt-get install -yqq nodejs
-RUN apt-get install -yqq yarn
+RUN apt-get update -yqq 
+RUN apt-get install -yqq nodejs yarn
 
 RUN node --version
 RUN npm --version
 RUN yarn --version
-
-RUN apt-get install -yqq build-essential postgresql-client
-RUN mkdir -p /usr/local/nvm
 
 RUN mkdir -p /usr/local/nvm
 RUN mkdir -p /usr/src/app
