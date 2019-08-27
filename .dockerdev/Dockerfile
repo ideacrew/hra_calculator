@@ -42,7 +42,7 @@ ENV MONGO_PACKAGE=${MONGO_PACKAGE} MONGO_REPO=${MONGO_REPO}
 
 # bashbrew-architectures:amd64 arm64v8
 # http://repo.mongodb.org/apt/debian/dists/stretch/mongodb-org/4.2/main/binary-amd64/Packages
-RUN echo "deb http://$MONGO_REPO/apt/debian stretch/${MONGO_PACKAGE%/$MONGO_MAJOR main" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE%}.list"
+RUN echo "deb http://$MONGO_REPO/apt/debian stretch/${MONGO_PACKAGE}/$MONGO_MAJOR main" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE}.list"
 # RUN echo "deb http://$MONGO_REPO/apt/ubuntu xenial/${MONGO_PACKAGE%-unstable}/$MONGO_MAJOR multiverse" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE%-unstable}.list"
 
 RUN set -x \
