@@ -1,2 +1,0 @@
-# cartafact
-Document management service
