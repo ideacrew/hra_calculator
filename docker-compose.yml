@@ -43,12 +43,11 @@ services:
     <<: *backend
     command: /bin/bash
     ports:
-      - '3000:3000'
       - '3002:3002'
 
   rails:
     <<: *backend
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle &&  bundle exec rails server -p 3000 -b '0.0.0.0'"
     ports:
       - '3000:3000'
 
