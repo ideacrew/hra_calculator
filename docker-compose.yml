@@ -10,8 +10,6 @@ services:
         BUNDLER_VERSION: '2.0.2'
         NODE_MAJOR: '11'
         YARN_VERSION: '1.17.3'
-        MONGO_MAJOR: '4.2'
-        MONGO_VERSION: '4.2.0'
     image: hra_calculator-dev:0.1.0
     tmpfs:
       - /tmp
@@ -26,16 +24,11 @@ services:
       - bundle:/bundle
       - node_modules:/app/node_modules
       - packs:/app/public/packs
-      - mongo:/mongo
-
-# # Pass Database Location on file system as parameter to MongoDB 
-# CMD ["--dbpath", "/var/lib/mongodb"]
 
     environment:
       - NODE_ENV=development
       - RAILS_ENV=${RAILS_ENV:-development}
       - REDIS_URL=redis://redis:6379/
-      - DATABASE_URL=mongo://mongo:mongo@mongo:27017/
       - BOOTSNAP_CACHE_DIR=/bundle/bootsnap
       - WEBPACKER_DEV_SERVER_HOST=webpacker
       - WEB_CONCURRENCY=1
@@ -60,16 +53,9 @@ services:
       - '3000:3000'
 
   mongo:
-    image: mongo:4.2.0
-    volumes:
-      - mongo:/data/db
-      - mongo:/data/configdb
-      - mongo:/var/lib/mongod
-    # environment:
-      # MONGO_INITDB_ROOT_USERNAME: root
-      # MONGO_INITDB_ROOT_PASSWORD: example
+    image: mongo:latest
     ports:
-      - 27017
+      - 27017:27017
 
   redis:
     image: redis:3.2-alpine
@@ -94,7 +80,6 @@ services:
       - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
 
 volumes:
-  mongo:
   redis:
   bundle:
   node_modules:
