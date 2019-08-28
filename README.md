@@ -1,24 +1,74 @@
-# README
+# HRA Calculator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Setup
+The HRA Calculator is a Dockerized project.  You will need to download and install the Docker Desktop for Mac in order to use and develop the code.
 
-* Ruby version
+In the directory where you have cloned the repo, run the following command to configure Webpacker to run as a separate service:
 
-* System dependencies
+```
+$ docker-compose run runner ./bin/setup
+```
 
-* Configuration
+Next, create docker containers for the service dependencies.  Note that the following two commands will both start a rails server running on localhost:3000.  The difference is the first command will run the server process in the terminal window (where log output may be observed) while the second command will daemonize the server in its own background process.  
 
-* Database creation
+```
+$ docker-compose up --build rails
+```
 
-* Database initialization
+```
+$ docker-compose up -d --build rails
+```
 
-* How to run the test suite
+You can stop the server running in background:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ docker-compose stop rails
+```
 
-* Deployment instructions
+## Helpful Docker Commands
 
-* ...
+Following are some useful commands to manage your Docker environment.  These commands must be run in the project directory.
+
+
+Initiate a terminatl session in the Docker container context:
+
+```
+$ docker-compose run runner
+```
+
+Entering CTRL-D to exit the terminal session
+
+Get a list of active containers
+
+```
+$ docker-compose ps
+```
+
+See log file output for the application and dependent services
+
+```
+$ docker-compose logs
+```
+
+Start and stop application and all dependent container services.  These commands work after the containers are created following successful execution of the ```docker-compose up``` command above.
+
+```
+$ docker-compose start
+$ docker-compose stop
+```
+
+
+## Configuration
+
+* Ruby 2.6.3
+* Rails 6.0 w/options:
+  * --skip-action-cable 
+  * --skip-active-record 
+  * --skip-test 
+  * --skip-system-test 
+  * --webpack-=angular
+* Dependencies
+  *  Webpacker
+  *  MongoDb 4.2
+  *  Redis
