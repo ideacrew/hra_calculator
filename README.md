@@ -2,7 +2,7 @@
 
 
 ## Setup
-The HRA Calculator is a Dockerized project.  You will need to download and install the Docker Desktop for Mac in order to use and develop the code.
+The HRA Calculator is a Dockerized project.  You will need to download and install the [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/) in order to use and develop the code.
 
 In the directory where you have cloned the repo, run the following command to configure Webpacker to run as a separate service:
 
@@ -31,13 +31,13 @@ $ docker-compose stop rails
 Following are some useful commands to manage your Docker environment.  These commands must be run in the project directory.
 
 
-Initiate a terminatl session in the Docker container context:
+Initiate a terminal session in the Docker container context:
 
 ```
 $ docker-compose run runner
 ```
 
-Entering CTRL-D to exit the terminal session
+Enter CTRL-D to exit the terminal session
 
 Get a list of active containers
 
