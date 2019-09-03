@@ -27,6 +27,7 @@ gem 'mongoid',  git: 'https://github.com/mongodb/mongoid.git', branch: 'master'
 # Settings, validation and dependency injection
 gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'master'
 gem 'fast_jsonapi'
+gem 'devise_token_auth'
 
 
 group :development, :test do

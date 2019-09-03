@@ -1,0 +1,18 @@
+.container.signin.mt-5
+  .row.justify-content-md-center
+    .col-md-6.col-sm-8.col-xs-12
+      h1.heading-text.text-center Sign In
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'needs-validation', data: {controller:'signup'}, novalidate: true }) do |f|
+        .form-group.required
+          = f.label :username
+          = f.text_field :login, autofocus: true, class: "form-control", required: true
+          .invalid-feedback
+            | Please enter your username.
+        .form-group.required
+          = f.label :password
+          = f.password_field :password, autocomplete: "off", class: "form-control", required: true
+          .invalid-feedback
+            | Please enter your password.
+        .actions
+          = f.submit "Sign in", class: "btn btn-primary sign-in-btn"
+        br
