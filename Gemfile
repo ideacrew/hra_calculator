@@ -28,6 +28,12 @@ gem 'mongoid',  git: 'https://github.com/mongodb/mongoid.git', branch: 'master'
 gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'master'
 gem 'fast_jsonapi'
 
+gem 'dry-monads',               '~> 1.2'
+gem 'dry-validation',           '~> 1.2'
+gem 'dry-struct',               '~> 1.0'
+gem 'dry-types',                '~> 1.0'
+gem 'dry-initializer',          '~> 3.0'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,6 +57,3 @@ group :development do
   gem 'rubocop-rspec'
   gem 'rubocop-git'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
