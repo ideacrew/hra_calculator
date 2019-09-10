@@ -63,12 +63,38 @@ $ docker-compose stop
 
 * Ruby 2.6.3
 * Rails 6.0 w/options:
-  * --skip-action-cable 
-  * --skip-active-record 
-  * --skip-test 
-  * --skip-system-test 
+  * --skip-action-cable
+  * --skip-active-record
+  * --skip-test
+  * --skip-system-test
   * --webpack-=angular
 * Dependencies
   *  Webpacker
   *  MongoDb 4.2
   *  Redis
+
+## Frontend UI
+
+  The frontend uses the Angular framework to handle user interactions and is built using the Angular-cli generator.
+
+  To get started do the following:
+
+  ```
+  cd clients/html && npm install
+  ```
+
+  You can start the Angular Live Development Server with:
+
+  ```
+  ng serve
+  ```
+
+  Now you can visit [`localhost:4200`](http://localhost:4200) from your browser.
+
+## Helpful UI Resources
+
+  [`Angular`](https://angular.io/)
+
+  [`Angular cli`](https://cli.angular.io/)
+
+  [`Monster Angular Dashboard Template`](https://www.wrappixel.com/demos/angular-admin-templates/monster-angular/docs/documentation.html)
