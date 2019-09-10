@@ -80,7 +80,7 @@ $ docker-compose stop
   To get started do the following:
 
   ```
-  cd clients/html && npm install
+  cd clients/html && npm install -g @angular/cli && npm install
   ```
 
   You can start the Angular Live Development Server with:
