@@ -1,2 +1,261 @@
-<p>starter works!</p>
-<a href="/home">Home</a>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="container hra_results border">
+                    <form>
+                        <div class="tab" [hidden]="!(currentTab === 0)">
+                            <h1>About You</h1>
+                            <hr/>
+                            <div class="d-inline-flex">
+                                <div>
+                                    <img src="../../assets/images/profile_pic.png" />
+                                </div>
+                                <div class="col-md-9">
+                                    <p>
+                                        <strong>
+                                            Enter the following information for the family member
+                                            who is offered the HRA.
+                                            <sup
+                                            data-toggle="tooltip"
+                                            title="This is the family member whose employer or former employer (if family member is a retiree) is offering the HRA."
+                                            >
+                                                <i class="fas fa-question-circle"></i>
+                                            </sup>
+                                        </strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>
+                                    <strong>Place of Residence
+                                        <sup data-toggle="tooltip" title="Enter the family member’s place of residence, even if the employer is located somewhere else."
+                                        >
+                                            <i class="fas fa-question-circle"></i>
+                                        </sup>
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="state">
+                                        State
+                                        <sup
+                                        data-toggle="tooltip"
+                                        title="If you are not a resident of this state, please visit [hyperlink] to find the Marketplace in your state."
+                                        >
+                                            <i class="fas fa-question-circle"></i>
+                                        </sup>
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control form-control-sm" id="state">
+                                            <option value="Maryland">Maryland</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="zipcode">Zip Code</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-sm" id="zipcode" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="country">County</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control form-control-sm" id="county">
+                                            <option value="Howard">Howard</option>
+                                            <option value="Baltimore">Baltimore</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="dob">Date of Birth</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control form-control-sm" id="dob" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>
+                                    <strong>
+                                        Expected 2020 Household Income
+                                        <sup
+                                        data-toggle="tooltip"
+                                        title="This is your household income before taxes. For most people, yearly household income is the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040).Specifically, household income is equal to adjusted gross income plus the following amounts: Social Security benefits excluded from gross income, interest from tax-exempt bonds, any foreign-source income excluded from gross income under section 911 of Internal Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare)."
+                                        >
+                                            <i class="fas fa-question-circle"></i>
+                                        </sup>
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="frequency">Frequency</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-sm" id="frequency" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="amount">Amount</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-sm" id="amount" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab" [hidden]="!(currentTab === 1)">
+                            <h1>About the HRA You've Been Offered</h1>
+                            <hr/>
+                            <div class="d-inline-flex">
+                                <div>
+                                    <img src="../../assets/images/profile_pic.png" />
+                                </div>
+                                <div class="col-md-9">
+                                    <p>
+                                        <strong>
+                                            Enter the following information about the HRA that
+                                            you have been offered.
+                                        </strong>
+                                            All answers can be found in the
+                                            HRA notice provided by the employer.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="col-sm-2 col-form-label col-form-label-sm" for="hra_type">Type of HRA</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-sm" id="hra_type" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="col-sm-2 col-form-label col-form-label-sm" for="start_month">
+                                        Start Month
+                                        <sup
+                                        data-toggle="tooltip"
+                                        title="This is the first month ofthe HRA plan year."
+                                        >
+                                            <i class="fas fa-question-circle"></i>
+                                        </sup>
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control form-control-sm" id="start_month">
+                                            <option value="1">Januray 2019</option>
+                                            <option value="2">February 2019</option>
+                                            <option value="3">March 2019</option>
+                                            <option value="4">April 2019</option>
+                                            <option value="5">May 2019</option>
+                                            <option value="6">June 2019</option>
+                                            <option value="7">July 2019</option>
+                                            <option value="8">August 2019</option>
+                                            <option value="9">September 2019</option>
+                                            <option value="10">October 2019</option>
+                                            <option value="11">November 2019</option>
+                                            <option value="12">December 2019</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="col-sm-2 col-form-label col-form-label-sm" for="end_month">
+                                        End Month
+                                        <sup
+                                        data-toggle="tooltip"
+                                        title="This is the last month of the HRA plan year."
+                                        >
+                                            <i class="fas fa-question-circle"></i>
+                                        </sup>
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control form-control-sm" id="end_month">
+                                            <option value="1">Januray 2019</option>
+                                            <option value="2">February 2019</option>
+                                            <option value="3">March 2019</option>
+                                            <option value="4">April 2019</option>
+                                            <option value="5">May 2019</option>
+                                            <option value="6">June 2019</option>
+                                            <option value="7">July 2019</option>
+                                            <option value="8">August 2019</option>
+                                            <option value="9">September 2019</option>
+                                            <option value="10">October 2019</option>
+                                            <option value="11">November 2019</option>
+                                            <option value="12">December 2019</option>
+                                            <option value="13">Januray 2020</option>
+                                            <option value="14">February 2020</option>
+                                            <option value="15">March 2020</option>
+                                            <option value="16">April 2020</option>
+                                            <option value="17">May 2020</option>
+                                            <option value="18">June 2020</option>
+                                            <option value="19">July 2020</option>
+                                            <option value="20">August 2020</option>
+                                            <option value="21">September 2020</option>
+                                            <option value="22">October 2020</option>
+                                            <option value="23">November 2020</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>
+                                    <strong>
+                                        Maximum HRA Amount for Employee-Only Health Insurance
+                                        <sup
+                                        data-toggle="tooltip"
+                                        title="This is the amount the employer has offered to contribute to the HRA if you purchase health insurance for only the employee (not including other family members).Some employers offer to provide one amount if only the employee enrolls in coverage, and a larger amount if the employee plus other family members enroll in coverage.We need to know the amount of the HRA if only the employee enrolls."
+                                        >
+                                            <i class="fas fa-question-circle"></i>
+                                        </sup>
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="frequency">Frequency</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-sm" id="frequency" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="amount">Amount</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control form-control-sm" id="amount" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="overflow:auto;">
+                            <div style="float:left;">
+                                <button type="button" class="btn btn-info" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><- About You</button>
+                            </div>
+                            <div style="float:right;">
+                                <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)" (click)="showTab(currentTab+1)">About Your HRA -></button>
+                                <button type="button" class="btn btn-info" [hidden]="(currentTab != 1)">Your Results -></button>
+                            </div>
+                        </div>
+
+                        <!-- Circles which indicates the steps of the form: -->
+                        <div style="text-align:center;margin-top:40px;">
+                            <span [ngClass]="currentTab === 0 ? 'step active' : 'step'"></span>
+                            <span [ngClass]="currentTab === 1 ? 'step active' : 'step'"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
