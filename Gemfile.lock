@@ -247,6 +247,9 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    roo (2.1.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
     rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.4)
@@ -277,6 +280,7 @@ GEM
       rubocop (>= 0.60.0)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
+    rubyzip (1.2.4)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -324,6 +328,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 6.0.0)
   resource_registry!
+  roo (~> 2.1.0)
   rspec-rails (~> 3.8)
   rubocop
   rubocop-git
