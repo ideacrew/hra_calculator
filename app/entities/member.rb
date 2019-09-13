@@ -6,6 +6,7 @@ class Member < Dry::Struct
   attribute :income_year, Types::Integer
   attribute :site_address
 
+
   attribute :email
 
 end
@@ -62,13 +63,19 @@ class PremiumTable < Dry::Struct
 
   attribute :plan_id
   attribute :rating_area_id
-  attribute :member_age
-  attribute :premium_cost
+
+  attribute :premium do
+    attribute :member_age
+    attribute :monthly_premium
+  end
   
 end
 
 class UsState < Dry::Struct
   transform_keys(&:to_sym)
+
+  attribute :name # Maryland
+  attribute :usps_abbrevation # MD
 
 end
 
@@ -145,8 +152,9 @@ module Locations::Operations
   end
 end
 
-class HraAffordabilityDetermination
 
+class HraAffordabilityDetermination
+  attribute :id
   attribute :timestamp
   attribute :benefit_year
   attribute :member
@@ -154,7 +162,7 @@ class HraAffordabilityDetermination
   attribute :low_cost_reference_plan
   attribute :hra_cost
   attribute :expected_contribution
-
+  attribute :determination
 end
 
 
@@ -179,7 +187,7 @@ class DetermineAffordability
   end
 
   def calculate_hra_cost
-    low_cost_reference_plan. hra.monthly_reimburse_amount
+    low_cost_reference_plan hra.monthly_reimburse_amount
   end
 
   def calculate_expected_contribution
