@@ -8,22 +8,16 @@ require Rails.root.join('lib', 'object_builders', 'qhp_rate_builder.rb')
 namespace :xml do
   desc "Import qhp plans from xml files"
   task :plans, [:file] => :environment do |task, args|
-    binding.pry
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", Settings.aca.state_abbreviation.downcase, "plans", "**", "*.xml"))
-    binding.pry
+    # TODO: Get the state_abbreviation to look for specific states folder
+
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'ma', "plans", "**", "*.xml"))
     qhp_import_product_hash = files.inject(ProductBuilder.new({})) do |qhp_product_hash, file|
-      binding.pry
       puts file
-      binding.pry
       xml = Nokogiri::XML(File.open(file))
-      binding.pry
       product = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-      binding.pry
       qhp_product_hash.add(product.to_hash)
-      binding.pry
       qhp_product_hash
     end
-    binding.pry
     qhp_import_product_hash.run
 
     qhp_import_hash = files.inject(QhpBuilder.new({})) do |qhp_hash, file|
@@ -42,7 +36,9 @@ end
 namespace :xml do
   desc "Import qhp rates from xml files"
   task :rates, [:action] => :environment do |task, args|
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", Settings.aca.state_abbreviation.downcase, "rates", "**", "*.xml"))
+    # TODO: Get the state_abbreviation to look for specific states folder
+
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'ma', "rates", "**", "*.xml"))
     # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/rates/2017/Health/United (Shop Only)", "UHIC", "**", "*.xml"))
     # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/rates/2017/Health/United (Shop Only)/UHIC/UHIC_SHOP_Rate_Tables_2017_v.1.xml"))
     rate_import_hash = files.inject(QhpRateBuilder.new()) do |rate_hash, file|

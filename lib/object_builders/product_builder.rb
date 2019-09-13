@@ -186,7 +186,6 @@ class ProductBuilder
   end
 
   def build_benefits
-    binding.pry
     benefits_params.each { |benefit| @qhp.qhp_benefits.build(benefit) }
   end
 
@@ -269,7 +268,6 @@ class ProductBuilder
   end
 
   def benefits_params
-    binding.pry
     @products[:benefits_list][:benefits]
   end
 
