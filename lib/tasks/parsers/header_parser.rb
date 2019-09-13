@@ -1,4 +1,4 @@
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers', 'header_parser')
+require Rails.root.join('lib', 'tasks', 'parsers', 'header_parser')
 
 module Parser
   class HeaderParser

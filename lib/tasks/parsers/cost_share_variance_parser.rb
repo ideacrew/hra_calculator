@@ -1,8 +1,8 @@
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers','sbc_parser')
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers','maximum_out_of_pockets_parser')
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers','deductible_parser')
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers','service_visits_parser')
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers','hsa_parser')
+require Rails.root.join('lib', 'tasks', 'parsers','sbc_parser')
+require Rails.root.join('lib', 'tasks', 'parsers','maximum_out_of_pockets_parser')
+require Rails.root.join('lib', 'tasks', 'parsers','deductible_parser')
+require Rails.root.join('lib', 'tasks', 'parsers','service_visits_parser')
+require Rails.root.join('lib', 'tasks', 'parsers','hsa_parser')
 
 module Parser
   class CostShareVarianceParser

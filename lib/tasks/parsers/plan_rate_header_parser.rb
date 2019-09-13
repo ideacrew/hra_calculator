@@ -1,5 +1,3 @@
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers', 'plan_rate_header_parser')
-
 module Parser
   class PlanRateHeaderParser
     include HappyMapper

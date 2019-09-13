@@ -1,5 +1,5 @@
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers', 'plan_rate_header_parser')
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers', 'plan_rate_items_parser')
+require Rails.root.join('lib', 'tasks', 'parsers', 'plan_rate_header_parser')
+require Rails.root.join('lib', 'tasks', 'parsers', 'plan_rate_items_parser')
 
 module Parser
   class PlanRateGroupParser

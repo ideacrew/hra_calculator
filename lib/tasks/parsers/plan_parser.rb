@@ -1,5 +1,5 @@
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers', 'plan_attributes_parser')
-require Rails.root.join('lib', 'tasks', 'hbx_import', 'qhp', 'parsers', 'cost_share_variance_parser')
+require Rails.root.join('lib', 'tasks', 'parsers', 'plan_attributes_parser')
+require Rails.root.join('lib', 'tasks', 'parsers', 'cost_share_variance_parser')
 
 module Parser
   class PlanParser

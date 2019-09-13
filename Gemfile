@@ -33,7 +33,8 @@ gem 'dry-validation',           '~> 1.2'
 gem 'dry-struct',               '~> 1.0'
 gem 'dry-types',                '~> 1.0'
 gem 'dry-initializer',          '~> 3.0'
-
+gem 'nokogiri',                 '~> 1.10'
+gem 'nokogiri-happymapper',     '~> 0.8.0', :require => 'happymapper'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,6 +43,7 @@ group :development, :test do
   gem 'yard' #,                   '~> 0.9.12',  require: false
   gem 'climate_control' #
   gem 'factory_bot_rails',      '~> 4.11'
+  gem 'pry-byebug'
 end
 
 group :development do
