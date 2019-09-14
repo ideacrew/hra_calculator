@@ -35,6 +35,7 @@ gem 'dry-types',                '~> 1.0'
 gem 'dry-initializer',          '~> 3.0'
 gem 'nokogiri',                 '~> 1.10'
 gem 'nokogiri-happymapper',     '~> 0.8.0', :require => 'happymapper'
+gem 'money-rails',              '~> 1.13'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

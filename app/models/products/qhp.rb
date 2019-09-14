@@ -86,10 +86,10 @@ class Products::Qhp
 
   scope :by_hios_ids_and_active_year, -> (sc_id, year) { where(:standard_component_id.in => sc_id, active_year: year ) }
 
-  # embeds_many :qhp_benefits,
-  #   class_name: "Products::QhpBenefit",
-  #   cascade_callbacks: true,
-  #   validate: true
+  embeds_many :qhp_benefits,
+    class_name: "::Products::QhpBenefit",
+    cascade_callbacks: true,
+    validate: true
 
   embeds_many :qhp_cost_share_variances,
     class_name: "Products::QhpCostShareVariance",
@@ -155,7 +155,7 @@ class Products::Qhp
 
   def self.get_cost_share_variances
     Rails.cache.fetch("csvs-hios-ids-#{@hios_ids}-year-#{@year}", expires_in: 5.hour) do
-      Products::QhpCostShareVariance.find_qhp_cost_share_variances(@hios_ids, @year, "")
+      ::Products::QhpCostShareVariance.find_qhp_cost_share_variances(@hios_ids, @year, "")
     end
   end
 

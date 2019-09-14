@@ -63,51 +63,50 @@ class QhpBuilder
     @xml_plan_counter, @success_plan_counter = 0,0
     iterate_plans
     show_qhp_stats
-    mark_2015_dental_plans_as_individual
-    mark_2015_catastrophic_plans_as_individual
-    mark_one_2015_plan_as_shop
-    remove_2016_metlife_plans
+    # mark_2015_dental_plans_as_individual
+    # mark_2015_catastrophic_plans_as_individual
+    # mark_one_2015_plan_as_shop
+    # remove_2016_metlife_plans
   end
 
-  def remove_2016_metlife_plans
-    # deleting metlife plans based on carrier profile id
-    Plan.where(active_year: 2016, carrier_profile_id: "53e67210eb899a460300001d").size
-  end
+  # def remove_2016_metlife_plans
+  #   # deleting metlife plans based on carrier profile id
+  #   Plan.where(active_year: 2016, carrier_profile_id: "53e67210eb899a460300001d").size
+  # end
 
-  def mark_one_2015_plan_as_shop
-    Plan.where(active_year: 2015, hios_id: /94506DC0350012/).each do |plan|
-      plan.update_attribute(:market, "shop")
-    end
-  end
+  # def mark_one_2015_plan_as_shop
+  #   Plan.where(active_year: 2015, hios_id: /94506DC0350012/).each do |plan|
+  #     plan.update_attribute(:market, "shop")
+  #   end
+  # end
 
-  def mark_2015_catastrophic_plans_as_individual
-    Plan.catastrophic_level.by_active_year(2015).each do |plan|
-      plan.update_attribute(:market, "individual")
-    end
-  end
+  # def mark_2015_catastrophic_plans_as_individual
+  #   Plan.catastrophic_level.by_active_year(2015).each do |plan|
+  #     plan.update_attribute(:market, "individual")
+  #   end
+  # end
 
-  def mark_2015_dental_plans_as_individual
-    # find ivl dental plans that are marked as shop.
-    #delete bestone plans as they do not have corresponding serff templates.
-    Plan.shop_dental_by_active_year(2015).each do |plan|
-      if BEST_LIFE_HIOS_IDS.include?(plan.hios_id)
-        plan.destroy
-      else
-        plan.update_attribute(:market, "individual") if plan.coverage_kind == "dental"
-      end
-    end
-  end
+  # def mark_2015_dental_plans_as_individual
+  #   # find ivl dental plans that are marked as shop.
+  #   #delete bestone plans as they do not have corresponding serff templates.
+  #   Plan.shop_dental_by_active_year(2015).each do |plan|
+  #     if BEST_LIFE_HIOS_IDS.include?(plan.hios_id)
+  #       plan.destroy
+  #     else
+  #       plan.update_attribute(:market, "individual") if plan.coverage_kind == "dental"
+  #     end
+  #   end
+  # end
 
-  def update_dental_plans
-    Plan.where(:active_year.in => [2015, 2016], coverage_kind: "dental").each do |plan|
-      plan.hios_id = plan.hios_base_id
-      plan.csr_variant_id = ""
-      plan.save
-    end
-  end
+  # def update_dental_plans
+  #   Plan.where(:active_year.in => [2015, 2016], coverage_kind: "dental").each do |plan|
+  #     plan.hios_id = plan.hios_base_id
+  #     plan.csr_variant_id = ""
+  #     plan.save
+  #   end
+  # end
 
   def iterate_plans
-    update_dental_plans
     # @qhp_hash[:packages_list][:packages].each do |plans|
     @qhp_array.each do |plans|
       @plans = plans
@@ -158,8 +157,6 @@ class QhpBuilder
     @plan_year = effective_date.year
 
     @dental_metal_level = @qhp.metal_level.downcase if @qhp.dental_plan_only_ind.downcase == "yes"
-    create_plan_from_serff_data
-    # create_product_from_serff_data
 
     candidate_plans = Plan.where(active_year: @plan_year, hios_id: /#{@qhp.standard_component_id.strip}/).to_a
     plan = candidate_plans.sort_by do |plan| plan.hios_id.gsub('-','').to_i end.first
@@ -195,97 +192,6 @@ class QhpBuilder
       ["true", "false"]
     else
       ["false", "true"]
-    end
-  end
-
-  def create_plan_from_serff_data
-    @qhp.qhp_cost_share_variances.each do |cost_share_variance|
-      if cost_share_variance.hios_plan_and_variant_id.split("-").last != "00"
-        if cost_share_variance.plan_marketing_name[-2..-1] != "RE" # dont import plans ending with RE (Religious Exemption)
-          csr_variant_id = parse_metal_level == "dental" ? "" : /#{cost_share_variance.hios_plan_and_variant_id.split('-').last}/
-          plan = Plan.where(active_year: @plan_year,
-            hios_id: /#{@qhp.standard_component_id.strip}/,
-            hios_base_id: /#{cost_share_variance.hios_plan_and_variant_id.split('-').first}/,
-            csr_variant_id: csr_variant_id).to_a.first
-          if plan.present?
-            plan.update_attributes(name: cost_share_variance.plan_marketing_name.squish!)
-          else
-            issuer_id = cost_share_variance.hios_plan_and_variant_id[0..4]
-            carrier_profile = CarrierProfile.for_issuer_hios_id(issuer_id).first
-            carrier_profile_id = carrier_profile.nil? ? nil : carrier_profile.id
-            new_plan = Plan.new(
-              name: cost_share_variance.plan_marketing_name.squish!,
-              hios_id: cost_share_variance.hios_plan_and_variant_id,
-              hios_base_id: cost_share_variance.hios_plan_and_variant_id.split("-").first,
-              csr_variant_id: cost_share_variance.hios_plan_and_variant_id.split("-").last,
-              active_year: @plan_year,
-              metal_level: parse_metal_level,
-              market: parse_market,
-              ehb: @qhp.ehb_percent_premium,
-              carrier_profile_id: carrier_profile_id,
-              coverage_kind: @qhp.dental_plan_only_ind.downcase == "no" ? "health" : "dental",
-              dental_level: @dental_metal_level,
-              service_area_id: @qhp.service_area_id
-              )
-            if new_plan.valid?
-              new_plan.save!
-            else
-              @logger.error "\n Failed to create plan: #{new_plan.name}, \n hios product id: #{new_plan.hios_id}\n Errors: #{new_plan.errors.full_messages}\n ******************** \n"
-            end
-          end
-        end
-      end
-    end
-  end
-
-  def create_product_from_serff_data
-    @qhp.qhp_cost_share_variances.each do |cost_share_variance|
-      if cost_share_variance.hios_plan_and_variant_id.split("-").last != "00"
-        if cost_share_variance.plan_marketing_name[-2..-1] != "RE" # dont import plans ending with RE (Religious Exemption)
-          csr_variant_id = parse_metal_level == "dental" ? "" : /#{cost_share_variance.hios_plan_and_variant_id.split('-').last}/
-          product = ::Products::Product.where(
-            hios_id: /#{@qhp.standard_component_id.strip}/,
-            hios_base_id: /#{cost_share_variance.hios_plan_and_variant_id.split('-').first}/,
-            csr_variant_id: csr_variant_id).select{|a| a.active_year == @plan_year}.first
-          if product.present?
-            product.update_attributes(title: cost_share_variance.plan_marketing_name.squish!)
-          else
-            issuer_id = cost_share_variance.hios_plan_and_variant_id[0..4]
-            carrier_profile = CarrierProfile.for_issuer_hios_id(issuer_id).first
-            carrier_profile_id = carrier_profile.nil? ? nil : carrier_profile.id
-            shared_attributes ={
-              benefit_market_kind: "aca_#{parse_market}",
-              title: cost_share_variance.plan_marketing_name.squish!,
-              # issuer_profile_id: get_issuer_profile_id,
-              hios_id: cost_share_variance.hios_plan_and_variant_id,
-              hios_base_id: cost_share_variance.hios_plan_and_variant_id.split("-").first,
-              csr_variant_id: cost_share_variance.hios_plan_and_variant_id.split("-").last,
-              application_period: (Date.new(@plan_year, 1, 1)..Date.new(@plan_year, 12, 31)),
-              service_area_id: mapped_service_area_id,
-              # sbc_document: plan.sbc_document, # pending
-              deductible: cost_share_variance.qhp_deductable.in_network_tier_1_individual,
-              family_deductible: cost_share_variance.qhp_deductable.in_network_tier_1_family,
-              is_reference_plan_eligible: true,
-            }
-            if is_health_product?
-              new_product = ::Products::HealthProduct.new({
-                health_plan_kind: @qhp.plan_type.downcase,
-                metal_level_kind: parse_metal_level.to_sym,
-                ehb: set_ehb,
-              }.merge(shared_attributes))
-            else
-              new_product = ::Products::DentalProduct.new({
-                product_package_kinds: ::Products::DentalProduct::PRODUCT_PACKAGE_KINDS
-              }.merge(shared_attributes))
-            end
-            if new_product.valid?
-              new_product.save!
-            else
-              @logger.error "\n Failed to create product: #{new_product.title}, \n hios product id: #{new_product.hios_id}\n Errors: #{new_product.errors.full_messages}\n ******************** \n"
-            end
-          end
-        end
-      end
     end
   end
 
@@ -347,7 +253,7 @@ class QhpBuilder
       @csvp = csvp
       next if hios_plan_and_variant_id.split("-").last == "00"
       update_hsa_eligibility
-      build_cost_share_variance
+      # build_cost_share_variance
     end
   end
 

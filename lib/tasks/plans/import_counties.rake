@@ -1,10 +1,10 @@
 namespace :import do
   task :county_zips, [:file] => :environment do |task, args|
 
-    files = Rails.env.test? ? [args[:file]] : Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/xls_templates/2019", "SHOP_ZipCode_CY2017_FINAL.xlsx"))
+    files = Rails.env.test? ? [args[:file]] : Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/", "SHOP_ZipCode_CY2017_FINAL.xlsx"))
     count = 0
     files.each do |file|
-      year = file.split("/")[-2].to_i
+      year = 2019
       puts "*"*80 unless Rails.env.test?
       puts "Importing county, zips from #{file}..." unless Rails.env.test?
       if file.present?
@@ -19,17 +19,15 @@ namespace :import do
           ::Locations::CountyZip.find_or_create_by!({
             county_name: row_info[@headers["county"]].squish!,
             zip: row_info[@headers["zip"]].squish!,
-            state: "MA"
+            state: "MA" # TODO: fetch short name of the state
           })
           count+=1
         end
       end
-
     end
     puts "*"*80 unless Rails.env.test?
     puts "successfully created #{count} county, zip records" unless Rails.env.test?
     puts "*"*80 unless Rails.env.test?
-    
   end
 
   def assign_headers

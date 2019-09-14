@@ -8,10 +8,7 @@ require Rails.root.join('lib', 'object_builders', 'qhp_rate_builder.rb')
 namespace :xml do
   desc "Import qhp plans from xml files"
   task :plans, [:file] => :environment do |task, args|
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", Settings.aca.state_abbreviation.downcase, "plans", "**", "*.xml"))
-    # # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/plans/2017", "**", "*.xml"))
-    # # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/plans/2017/Dental/IVL/Dominion/DominionIVLPlanBenefits7.20.16.xml"))
-    # # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", "plans", "**", "Best Life IVL Plan Benefits Template.xml"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'ma', "plans", "**", "*.xml"))
 
     qhp_import_product_hash = files.inject(ProductBuilder.new({})) do |qhp_product_hash, file|
       puts file
@@ -22,26 +19,14 @@ namespace :xml do
     end
 
     qhp_import_product_hash.run
-
-    qhp_import_hash = files.inject(QhpBuilder.new({})) do |qhp_hash, file|
-      puts file
-      xml = Nokogiri::XML(File.open(file))
-      plan = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-      qhp_hash.add(plan.to_hash, file)
-      qhp_hash
-    end
-
-    qhp_import_hash.run
   end
 end
-
 
 namespace :xml do
   desc "Import qhp rates from xml files"
   task :rates, [:action] => :environment do |task, args|
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", Settings.aca.state_abbreviation.downcase, "rates", "**", "*.xml"))
-    # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/rates/2017/Health/United (Shop Only)", "UHIC", "**", "*.xml"))
-    # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/rates/2017/Health/United (Shop Only)/UHIC/UHIC_SHOP_Rate_Tables_2017_v.1.xml"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'ma', "rates", "**", "*.xml"))
+
     rate_import_hash = files.inject(QhpRateBuilder.new()) do |rate_hash, file|
       action = args[:action] == "update" ? "update" : "new"
       puts file

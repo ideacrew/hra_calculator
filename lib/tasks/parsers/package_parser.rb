@@ -15,6 +15,8 @@ module Parser
 
     has_one :plans_list, Parser::PlanListParser, tag: "plansList"
 
+    has_one :benefits_list, Parser::BenefitsListParser, tag: 'benefitsList'
+
     has_one :header, Parser::HeaderParser, tag: 'header'
 
     def to_hash

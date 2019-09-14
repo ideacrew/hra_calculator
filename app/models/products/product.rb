@@ -11,9 +11,18 @@ module Products
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    CSR_KIND_TO_PRODUCT_VARIANT_MAP = ::EligibilityDetermination::CSR_KIND_TO_PLAN_VARIANT_MAP
+    CSR_KIND_TO_PRODUCT_VARIANT_MAP = {
+      "csr_100" => "01",
+      "csr_94"  => "06",
+      "csr_87"  => "05",
+      "csr_73"  => "04",
+      "csr_0"   => "02",
+      "limited" => "03"
+    }
+
     MARKET_KINDS = %w[shop individual].freeze
     INDIVIDUAL_MARKET_KINDS = %w[individual coverall].freeze
+    BENEFIT_MARKET_KINDS = [:aca_shop, :aca_individual, :fehb, :medicaid, :medicare]
 
     field :benefit_market_kind,   type: Symbol
 

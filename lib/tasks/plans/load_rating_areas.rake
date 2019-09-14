@@ -3,7 +3,7 @@
 namespace :load_rate_reference do
 
   task :run_all_rating_areas => :environment do
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/xls_templates/rating_areas", "**", "*.xlsx"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/rating_areas", "**", "*.xlsx"))
 
     puts "*"*80 unless Rails.env.test?
     files.each do |file|
@@ -19,7 +19,7 @@ namespace :load_rate_reference do
   task :update_rating_areas, [:file] => :environment do |t, args|
     begin
       file = args[:file]
-      file_year = file.split("/")[-2].to_i
+      file_year = 2019
       xlsx = Roo::Spreadsheet.open(file)
       sheet = xlsx.sheet(0)
 

@@ -1,7 +1,7 @@
 namespace :load_service_reference do
 
   task :run_all_service_areas => :environment do
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/xls_templates/service_areas", "**", "*.xlsx"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/service_areas", "**", "*.xlsx"))
     puts "*"*80 unless Rails.env.test?
     files.sort.each do |file|
       puts "processing file #{file}" unless Rails.env.test?
@@ -18,7 +18,7 @@ namespace :load_service_reference do
     total = 0
     begin
       file = args[:file]
-      @year = file.split("/")[-2].to_i
+      @year = 2019
 
       xlsx = Roo::Spreadsheet.open(file)
       sheet = xlsx.sheet(0)

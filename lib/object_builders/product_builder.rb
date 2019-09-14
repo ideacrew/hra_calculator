@@ -36,6 +36,7 @@ class ProductBuilder
   end
 
   def build_qhp_params
+    build_qhp
     build_benefits
     build_cost_share_variances_list
     validate_and_persist_qhp
@@ -85,7 +86,6 @@ class ProductBuilder
         shared_attributes ={
           benefit_market_kind: "aca_#{parse_market}",
           title: cost_share_variance.plan_marketing_name.squish!,
-          # issuer_profile_id: get_issuer_profile_id,
           hios_id: is_health_product? ? cost_share_variance.hios_plan_and_variant_id : hios_base_id,
           hios_base_id: hios_base_id,
           csr_variant_id: csr_variant_id,
@@ -144,21 +144,13 @@ class ProductBuilder
   end
 
   def mapped_service_area_id
-    if Settings.site.key == :cca
-      @service_area_map[[@qhp.issuer_id,@qhp.service_area_id,@qhp.active_year]]
-    else
-      @service_area_map[[@qhp.service_area_id,@qhp.active_year]]
-    end
+    @service_area_map[[@qhp.issuer_id,@qhp.service_area_id,@qhp.active_year]]
   end
 
   def set_service_areas
     @service_area_map = {}
     ::Locations::ServiceArea.all.map do |sa|
-      if Settings.site.key == :cca
-        @service_area_map[[sa.issuer_hios_id,sa.issuer_provided_code,sa.active_year]] = sa.id
-      else
-        @service_area_map[[sa.issuer_provided_code,sa.active_year]] = sa.id
-      end
+      @service_area_map[[sa.issuer_hios_id,sa.issuer_provided_code,sa.active_year]] = sa.id
     end
   end
 
@@ -244,7 +236,7 @@ class ProductBuilder
   end
 
   def service_visits_params
-    @csvp[:service_visits_attributes]
+    @csvp[:service_visits_attributes] || []
   end
 
   def deductible_params
@@ -252,7 +244,7 @@ class ProductBuilder
   end
 
   def maximum_out_of_pockets_params
-    @csvp[:maximum_out_of_pockets_attributes]
+    @csvp[:maximum_out_of_pockets_attributes] || []
   end
 
   def sbc_params
