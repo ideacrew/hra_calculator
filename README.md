@@ -91,6 +91,26 @@ $ docker-compose stop
 
   Now you can visit [`localhost:4200`](http://localhost:4200) from your browser.
 
+### Enable CORS
+
+Cross Origin Resource Sharing (CORS) enables white-listing requests from domains other than the server's.  This enables APIs to service requests from other domains and simplifies CRUD UI development using external frameworks.  Client UI frameworks commonly issue an OPTIONS request to the server to verify subsequent requests are valid from the given domain.  
+
+To enable CORS, uncomment the rack-cors gem in the Gemfile.  Then update the CORS initializer file with something like the following:
+```
+# config/initializers/cors.rb
+#
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins '*'
+
+    resource '*',
+      headers: :any,
+      expose:  ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+end
+```
+
 ## Helpful UI Resources
 
   [`Angular`](https://angular.io/)
