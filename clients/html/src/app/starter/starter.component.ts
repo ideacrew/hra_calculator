@@ -56,7 +56,7 @@ export class StarterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.httpClient.post<any>(environment.apiUrl+"/hra_results/hra", this.hraForm.value).subscribe(
+    this.httpClient.post<any>(environment.apiUrl+"/hra_results/hra_payload", this.hraForm.value).subscribe(
       (res) => {
         console.log(res)
       },
