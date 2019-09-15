@@ -116,6 +116,7 @@ class ProductBuilder
           product.update_attributes(all_attributes)
         else
           new_product = if is_health_product?
+            validate_health_product(all_attributes)
             ::Products::HealthProduct.new(all_attributes)
           else
             ::Products::DentalProduct.new(all_attributes)
@@ -130,6 +131,14 @@ class ProductBuilder
           end
         end
       end
+    end
+  end
+
+  def validate_health_product(attributes)
+    product_contract = Validations::ProductContract.new
+    result = product_contract.call(attributes.slice(:benefit_market_kind, :title, :application_period, :service_area_id))
+    if result.failure?
+      # raise an exception
     end
   end
 

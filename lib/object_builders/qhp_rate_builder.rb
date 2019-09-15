@@ -84,6 +84,14 @@ class QhpRateBuilder
     end
   end
 
+  def validate_premium_tables_and_premium_tuples(premium_tables_params)
+    premium_table_contract = Validations::PremiumTableContract.new
+    result = premium_table_contract.call(premium_tables_params)
+    if result.failure?
+      # raise an exception
+    end
+  end
+
   def find_product_and_create_premium_tables
     @results_array.uniq.each do |value|
       hios_id, year = value.split(",")
@@ -97,12 +105,14 @@ class QhpRateBuilder
       product_hios_id, rating_area_id, applicable_range = k
       premium_tables = []
       premium_tuples = []
+      premium_tuples_params = []
 
       v.each_pair do |pt_age, pt_cost|
         premium_tuples << ::Products::PremiumTuple.new(
           age: pt_age,
           cost: pt_cost
         )
+        premium_tuples_params.push({age: pt_age, cost: pt_cost})
       end
 
       premium_tables << ::Products::PremiumTable.new(
@@ -111,6 +121,13 @@ class QhpRateBuilder
         rating_area_id: rating_area_id,
         premium_tuples: premium_tuples
       )
+
+      premium_tables_params = {
+        effective_period: applicable_range,
+        rating_area_id: rating_area_id,
+        premium_tuples: premium_tuples_params
+      }
+      validate_premium_tables_and_premium_tuples(premium_tables_params)
 
       active_year = applicable_range.first.year
       products = ::Products::Product.where(hios_id: /#{product_hios_id}/).select{|a| a.active_year == active_year}
