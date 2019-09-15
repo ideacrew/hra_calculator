@@ -1,18 +1,43 @@
 .step {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
-    border: none;
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.5;
-  }
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
 
-  .step.active {
-    opacity: 1;
-  }
+.step.active {
+  opacity: 1;
+}
 
-  .hra_results{
-     max-width: 700px;
-  }
+.hra_results{
+    max-width: 700px;
+}
+
+#household_frequency, #hra_frequency, #hra_type{
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  cursor: pointer;
+}
+
+#hra_type + button {
+  font-size: 10px;
+  height: 40px;
+}
+
+#household_frequency:checked + button,
+#hra_type:checked + button,
+#hra_frequency:checked + button  {
+  background-color: #009efb;
+  color: #ffffff;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
