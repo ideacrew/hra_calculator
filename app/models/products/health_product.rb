@@ -36,12 +36,6 @@ class Products::HealthProduct < ::Products::Product
   class_name: "BenefitMarkets::Products::HealthProducts::HealthProduct",
   optional: true
 
-  validates_presence_of :hios_id, :health_plan_kind, :ehb
-
-  validates_numericality_of :ehb, greater_than: 0.0, less_than_or_equal_to: 1.0, allow_nil: false
-
-  validate :product_package_kinds
-
   index({ hios_id: 1, "active_period.min": 1, "active_period.max": 1, name: 1 }, {name: "products_health_product_hios_active_period_name_index"})
   index({ "active_period.min": 1, "active_period.max": 1, market: 1, coverage_kind: 1, nationwide: 1, name: 1 }, {name: "health_products_a_period_market_c_kind_nationwide_name_index"})
   index({ csr_variant_id: 1}, {sparse: true, name: "product_health_products_csr_variant_index"})
@@ -58,14 +52,6 @@ class Products::HealthProduct < ::Products::Product
   scope :gold_plans,          ->{ where(metal_level_kind: :gold) }
   scope :platinum_plans,      ->{ where(metal_level_kind: :platinum) }
   scope :catastrophic_plans,  ->{ where(metal_level_kind: :catastrophic) }
-
-  validates :health_plan_kind,
-            presence: true,
-            inclusion: {in: HEALTH_PLAN_MAP.keys, message: "%{value} is not a valid health product kind"}
-
-  validates :metal_level_kind,
-            presence: true,
-            inclusion: {in: METAL_LEVEL_KINDS, message: "%{value} is not a valid metal level kind"}
 
   alias_method :is_standard_plan?, :is_standard_plan
   alias_method :is_reference_plan_eligible?, :is_reference_plan_eligible

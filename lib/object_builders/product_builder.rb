@@ -7,7 +7,6 @@ class ProductBuilder
     @log_path = LOG_PATH
     @qhp_hash = qhp_hash
     @qhp_array = []
-    # set_issuer_profile_hash
     set_service_areas
     FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
     @logger = Logger.new(@log_path)
@@ -115,9 +114,9 @@ class ProductBuilder
           @existing_qhp_counter += 1
           product.update_attributes(all_attributes)
         else
-          new_product = if is_health_product?
-            validate_health_product(all_attributes)
-            ::Products::HealthProduct.new(all_attributes)
+          new_product = if is_health_product? && retrieve_metal_level == 'silver'
+            result = validate_health_product(all_attributes)
+            ::Products::HealthProduct.new(result.to_h)
           else
             ::Products::DentalProduct.new(all_attributes)
           end
@@ -136,9 +135,14 @@ class ProductBuilder
 
   def validate_health_product(attributes)
     product_contract = Validations::ProductContract.new
-    result = product_contract.call(attributes.slice(:benefit_market_kind, :title, :application_period, :service_area_id))
+    result = product_contract.call(attributes.slice(:benefit_market_kind, :metal_level_kind, :title, :hios_id, :health_plan_kind, :application_period, :service_area_id))
     if result.failure?
-      # raise an exception
+      result.errors.messages.each do |error|
+        @logger.error "\n Failed to create product: #{attributes[:title]}, \n hios product id: #{attributes[:hios_id]}\n Attribute: #{error.path.join}, Error: #{error.text}, Value: #{error.input} \n ******************** \n"
+      end
+      nil
+    else
+      result
     end
   end
 

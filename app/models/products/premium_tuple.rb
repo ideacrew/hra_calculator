@@ -9,10 +9,7 @@ module Products
     field :age,   type: Integer
     field :cost,  type: Float
 
-    validates_presence_of :age, :cost
-
     default_scope   ->{ order(:"age".asc) }
-
 
     def comparable_attrs
       [:age, :cost]

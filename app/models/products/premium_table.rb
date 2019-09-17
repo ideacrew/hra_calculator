@@ -21,10 +21,6 @@ module Products
     embeds_many :premium_tuples,
                 class_name: "::Products::PremiumTuple"
 
-    validates_presence_of :effective_period, :rating_area
-    # validates_presence_of :premium_tuples, :allow_blank => false
-
-
     scope :effective_period_cover,    ->(compare_date = TimeKeeper.date_of_record) { where(
                                                                            :"effective_period.min".lte => compare_date,
                                                                            :"effective_period.max".gte => compare_date)

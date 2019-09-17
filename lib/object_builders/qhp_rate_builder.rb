@@ -2,14 +2,18 @@ class QhpRateBuilder
 
   INVALID_PLAN_IDS = ["78079DC0320003","78079DC0320004","78079DC0340002","78079DC0330002"]
   METLIFE_HIOS_IDS = ["43849DC0090001", "43849DC0080001"]
+  LOG_PATH = "#{Rails.root}/log/rake_xml_import_rates_#{Time.now.to_s.gsub(' ', '')}.log"
 
   def initialize
+    @log_path = LOG_PATH
     @rates_array = []
     @results_array = []
     @rating_area_id_cache = {}
     @rating_area_cache = {}
     @premium_table_cache = Hash.new {|h, k| h[k] = Hash.new}
     @action = "new"
+    FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
+    @logger = Logger.new(@log_path)
   end
 
   def set_rating_area_cache
@@ -84,11 +88,16 @@ class QhpRateBuilder
     end
   end
 
-  def validate_premium_tables_and_premium_tuples(premium_tables_params)
+  def validate_premium_tables_and_premium_tuples(hios_id, premium_tables_params)
     premium_table_contract = Validations::PremiumTableContract.new
     result = premium_table_contract.call(premium_tables_params)
     if result.failure?
-      # raise an exception
+      result.errors.messages.each do |error|
+        @logger.error "\n Failed to create premium table for hios_id #{hios_id} for period #{premium_tables_params[:effective_period]} \n Attribute: #{error.path.join}, Error: #{error.text}, Value: #{error.input} \n ***************** \n"
+      end
+      nil
+    else
+      result
     end
   end
 
@@ -101,39 +110,29 @@ class QhpRateBuilder
         product.save
       end
     end
+
+    hios_ids = Products::Product.where(kind: :health).pluck(:hios_id)
+
     @premium_table_cache.each_pair do |k, v|
       product_hios_id, rating_area_id, applicable_range = k
-      premium_tables = []
-      premium_tuples = []
       premium_tuples_params = []
 
       v.each_pair do |pt_age, pt_cost|
-        premium_tuples << ::Products::PremiumTuple.new(
-          age: pt_age,
-          cost: pt_cost
-        )
         premium_tuples_params.push({age: pt_age, cost: pt_cost})
       end
-
-      premium_tables << ::Products::PremiumTable.new(
-        effective_period: applicable_range,
-        rating_area: @rating_area_cache[rating_area_id],
-        rating_area_id: rating_area_id,
-        premium_tuples: premium_tuples
-      )
 
       premium_tables_params = {
         effective_period: applicable_range,
         rating_area_id: rating_area_id,
         premium_tuples: premium_tuples_params
       }
-      validate_premium_tables_and_premium_tuples(premium_tables_params)
-
+      result = validate_premium_tables_and_premium_tuples(product_hios_id, premium_tables_params)
       active_year = applicable_range.first.year
       products = ::Products::Product.where(hios_id: /#{product_hios_id}/).select{|a| a.active_year == active_year}
       products.each do |product|
-        product.premium_tables << premium_tables
-        product.premium_ages = premium_tuples.map(&:age).minmax
+        premium_table = Products::PremiumTable.new(result.to_h)
+        product.premium_tables << premium_table
+        product.premium_ages = premium_table.premium_tuples.map(&:age).minmax
         product.save
       end
     end
