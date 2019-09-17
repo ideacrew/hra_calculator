@@ -111,8 +111,6 @@ class QhpRateBuilder
       end
     end
 
-    hios_ids = Products::Product.where(kind: :health).pluck(:hios_id)
-
     @premium_table_cache.each_pair do |k, v|
       product_hios_id, rating_area_id, applicable_range = k
       premium_tuples_params = []
