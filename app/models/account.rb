@@ -46,7 +46,7 @@ class Account
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  include DeviseTokenAuth::Concerns::Account
+  include DeviseTokenAuth::Concerns::User
 
   index({ email: 1 }, { name: 'email_index', unique: true, background: true })
   index({ reset_password_token: 1 }, { name: 'reset_password_token_index', unique: true, sparse: true, background: true })
