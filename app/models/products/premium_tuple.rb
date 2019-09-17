@@ -13,6 +13,7 @@ module Products
 
     default_scope   ->{ order(:"age".asc) }
 
+    scope :by_age,  ->(age) { where(age: age)}
 
     def comparable_attrs
       [:age, :cost]
