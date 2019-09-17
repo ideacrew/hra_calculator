@@ -23,6 +23,7 @@ gem 'rack-cors'
 # MongoDB NoSQL database ORM
 # gem 'mongoid',                  '~> 7.0'
 gem 'mongoid',  git: 'https://github.com/mongodb/mongoid.git', branch: 'master'
+gem 'mongoid-locker'
 
 # Settings, validation and dependency injection
 gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'master'
@@ -36,6 +37,7 @@ gem 'dry-initializer',          '~> 3.0'
 gem 'nokogiri',                 '~> 1.10'
 gem 'nokogiri-happymapper',     '~> 0.8.0', :require => 'happymapper'
 gem 'money-rails',              '~> 1.13'
+gem 'devise_token_auth'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
