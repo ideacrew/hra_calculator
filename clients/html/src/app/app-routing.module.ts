@@ -3,18 +3,28 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { InfoComponent } from './info/info.component';
 
-import { FullComponent } from './layouts/full/full.component';
+// import { FullComponent } from './layouts/full/full.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: FullComponent,
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'info',
+    component: InfoComponent,
     children: [
-      { path: '', redirectTo: '/starter', pathMatch: 'full' },
+      { path: '', redirectTo: '/info', pathMatch: 'full' },
       {
-        path: 'starter',
-        loadChildren: () => import('./starter/starter.module').then(m => m.StarterModule)
+        path: 'info',
+        loadChildren: () => import('./info/info.module').then(m => m.InfoModule)
       },
       {
         path: 'component',
@@ -23,16 +33,12 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
     path: 'about',
     component: AboutComponent
   },
   {
     path: '**',
-    redirectTo: 'starter'
+    redirectTo: 'home'
   }
 ];
 

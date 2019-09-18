@@ -11,12 +11,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { FullComponent } from './layouts/full/full.component';
-import { BlankComponent } from './layouts/blank/blank.component';
+// import { FullComponent } from './layouts/full/full.component';
+// import { BlankComponent } from './layouts/blank/blank.component';
 
-import { NavigationComponent } from './shared/header-navigation/navigation.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+// import { NavigationComponent } from './shared/header-navigation/navigation.component';
+// import { SidebarComponent } from './shared/sidebar/sidebar.component';
+// import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 
 import { routes } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { InfoComponent } from './info/info.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -39,13 +40,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   declarations: [
     AppComponent,
     SpinnerComponent,
-    FullComponent,
-    BlankComponent,
-    NavigationComponent,
-    BreadcrumbComponent,
-    SidebarComponent,
+    // FullComponent,
+    // BlankComponent,
+    // NavigationComponent,
+    // BreadcrumbComponent,
+    // SidebarComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    InfoComponent
   ],
   imports: [
     CommonModule,
