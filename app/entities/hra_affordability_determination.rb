@@ -1,15 +1,24 @@
 class HraAffordabilityDetermination < Dry::Struct
+  include DryStructSetters
   transform_keys(&:to_sym)
 
   attribute :state, Types::String
-  attribute :zipcode, Types::Integer
+  attribute :zipcode, Types::String
   attribute :county, Types::String
   attribute :dob, Types::Date
-  attribute :household_frequency, Types::String
+  attribute :household_frequency, Types::String # 'monthly' or 'annually'
   attribute :household_amount, Types::Float
   attribute :hra_type, Types::String # :ichra or :qsehra
   attribute :start_month, Types::Date
   attribute :end_month, Types::Date
-  attribute :hra_frequency, Types::String
+  attribute :hra_frequency, Types::String # 'monthly' or 'annually'
   attribute :hra_amount, Types::Float
+
+  attribute :member_premium, Types::Float.default(0.00.freeze)
+  attribute :age, Types::Integer.default(0.freeze)
+  attribute :hra, Types::Float.default(0.00.freeze)
+  attribute :hra_determination, Types::String.meta(omittable: true)
+  attribute :rating_area_id, Types::String.meta(omittable: true)
+  attribute :service_area_id, Types::String.meta(omittable: true)
+  attribute :errors, Types::Array.default([].freeze)
 end
