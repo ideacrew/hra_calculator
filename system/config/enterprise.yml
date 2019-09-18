@@ -1,0 +1,39 @@
+key: :enterprise
+namespaces:
+  - key: :tenants
+    namespaces:
+      - key: :dchbx
+        settings:
+          - key: :organization_name
+            default: DC Health Benefit Exchange Authority
+          - key: :owner_account_name
+            default: admin@hbx_org.com
+        namespaces:
+          - key: :sites
+            namespaces:
+              - key: :primary
+                settings:
+                  - key: :url
+                    type: URL
+                    default: https://shop.openhbx.org
+                  - key: :title
+                    type: string
+                    default: HRA Calculator
+                  - key: :description
+                    type: string
+                    default: shop market
+                namespaces:
+                  - key: :environments
+                    namespaces:
+                    - key: :production
+                      namespaces:
+                        - key: :options
+                          namespaces:
+                            - key: :settings
+                              settings:
+                                - key: offerings_constrained_to_service_areas
+                                  type: :boolean
+                                  default: true
+                                - key: validate_county
+                                  type: :boolean
+                                  default: true
