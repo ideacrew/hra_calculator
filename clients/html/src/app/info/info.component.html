@@ -56,7 +56,7 @@
                 <div class="input-group">
                   <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="zipcode">Zip Code</label>
                   <div class="col-sm-4">
-                    <input type="number" class="form-control form-control-sm" formControlName="zipcode" id="zipcode" ngModel required />
+                    <input type="string" class="form-control form-control-sm" formControlName="zipcode" id="zipcode" ngModel required />
                     <div *ngIf="hraForm.controls['zipcode'].invalid && (hraForm.controls['zipcode'].dirty || hraForm.controls['zipcode'].touched)" class="alert alert-danger">
                       <div *ngIf="hraForm.controls['zipcode'].errors.required">
                         Zipcode is required.
@@ -70,8 +70,9 @@
                   <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="country">County</label>
                   <div class="col-sm-4">
                     <select class="form-control form-control-sm" id="county" formControlName="county" ngModel rquired>
-                      <option value="Howard">Howard</option>
-                      <option value="Baltimore">Baltimore</option>
+                      <option value="Hampden">Hampden</option>
+                      <option value="Hampshire">Hampshire</option>
+                      <option value="Franklin">Franklin</option>
                     </select>
                     <div *ngIf="hraForm.controls['county'].invalid && (hraForm.controls['county'].dirty || hraForm.controls['county'].touched)" class="alert alert-danger">
                       <div *ngIf="hraForm.controls['county'].errors.required">
@@ -194,18 +195,18 @@
                   </label>
                   <div class="col-sm-4">
                     <select class="form-control form-control-sm" id="start_month" formControlName="start_month" ngModel required>
-                      <option value="1">Januray 2019</option>
-                      <option value="2">February 2019</option>
-                      <option value="3">March 2019</option>
-                      <option value="4">April 2019</option>
-                      <option value="5">May 2019</option>
-                      <option value="6">June 2019</option>
-                      <option value="7">July 2019</option>
-                      <option value="8">August 2019</option>
-                      <option value="9">September 2019</option>
-                      <option value="10">October 2019</option>
-                      <option value="11">November 2019</option>
-                      <option value="12">December 2019</option>
+                      <option value="2019-1-1">Januray 2019</option>
+                      <option value="2019-2-1">February 2019</option>
+                      <option value="2019-3-1">March 2019</option>
+                      <option value="2019-4-1">April 2019</option>
+                      <option value="2019-5-1">May 2019</option>
+                      <option value="2019-6-1">June 2019</option>
+                      <option value="2019-7-1">July 2019</option>
+                      <option value="2019-8-1">August 2019</option>
+                      <option value="2019-9-1">September 2019</option>
+                      <option value="2019-10-1">October 2019</option>
+                      <option value="2019-11-1">November 2019</option>
+                      <option value="2019-12-1">December 2019</option>
                     </select>
                     <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger">
                       <div *ngIf="hraForm.controls['start_month'].errors.required">
@@ -225,29 +226,29 @@
                   </label>
                   <div class="col-sm-4">
                     <select class="form-control form-control-sm" id="end_month" formControlName="end_month" ngModel required>
-                      <option value="1">Januray 2019</option>
-                      <option value="2">February 2019</option>
-                      <option value="3">March 2019</option>
-                      <option value="4">April 2019</option>
-                      <option value="5">May 2019</option>
-                      <option value="6">June 2019</option>
-                      <option value="7">July 2019</option>
-                      <option value="8">August 2019</option>
-                      <option value="9">September 2019</option>
-                      <option value="10">October 2019</option>
-                      <option value="11">November 2019</option>
-                      <option value="12">December 2019</option>
-                      <option value="13">Januray 2020</option>
-                      <option value="14">February 2020</option>
-                      <option value="15">March 2020</option>
-                      <option value="16">April 2020</option>
-                      <option value="17">May 2020</option>
-                      <option value="18">June 2020</option>
-                      <option value="19">July 2020</option>
-                      <option value="20">August 2020</option>
-                      <option value="21">September 2020</option>
-                      <option value="22">October 2020</option>
-                      <option value="23">November 2020</option>
+                      <option value="2019-1-1">Januray 2019</option>
+                      <option value="2019-2-1">February 2019</option>
+                      <option value="2019-3-1">March 2019</option>
+                      <option value="2019-4-1">April 2019</option>
+                      <option value="2019-5-1">May 2019</option>
+                      <option value="2019-6-1">June 2019</option>
+                      <option value="2019-7-1">July 2019</option>
+                      <option value="2019-8-1">August 2019</option>
+                      <option value="2019-9-1">September 2019</option>
+                      <option value="2019-10-1">October 2019</option>
+                      <option value="2019-11-1">November 2019</option>
+                      <option value="2019-12-1">December 2019</option>
+                      <option value="2020-1-1">Januray 2020</option>
+                      <option value="2020-2-1">February 2020</option>
+                      <option value="2020-3-1">March 2020</option>
+                      <option value="2020-4-1">April 2020</option>
+                      <option value="2020-5-1">May 2020</option>
+                      <option value="2020-6-1">June 2020</option>
+                      <option value="2020-7-1">July 2020</option>
+                      <option value="2020-8-1">August 2020</option>
+                      <option value="2020-9-1">September 2020</option>
+                      <option value="2020-10-1">October 2020</option>
+                      <option value="2020-11-1">November 2020</option>
                     </select>
                     <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger">
                       <div *ngIf="hraForm.controls['end_month'].errors.required">

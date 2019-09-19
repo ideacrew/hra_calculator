@@ -2,7 +2,7 @@ module Validations
   class HraContract < Dry::Validation::Contract
     params do
       required(:state).filled(:string)
-      required(:zipcode).filled(:integer)
+      required(:zipcode).filled(:string)
       required(:county).value(:string)
       required(:dob).value(:date)
       required(:household_frequency).filled(:string)
@@ -21,20 +21,20 @@ module Validations
       key.failure("State must be #{state}") if value != state
     end
 
-    rule(:zipcode, :county) do
-      county_zip = ::Locations::CountyZip.where(county_name: values[:county].titleize).first
-      if county_zip.nil?
+    rule(:county, :zipcode) do
+      county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
+      if county_zips.blank?
         key.failure('Entered county is invalid')
       else
         # TODO: refactor accordingly for states with or without Zipcodes.
         zip_enabled = true
-        key.failure('must be after start date') if zip_enabled && county_zip.zip != values[:zipcode].to_s
+        key.failure('Entered zip and county combination does not exist') if zip_enabled && county_zips.where(zip: values[:zipcode]).blank?
       end
     end
 
     rule(:dob) do
       begin
-        values.data[:dob] = Date.strptime(value, '%Y-%m-%d')
+        values.data[:dob] = Date.strptime(value.to_s, '%Y-%m-%d')
         key.failure('DOB cannot exist in future') if value > Date.today
       rescue
         key.failure('DOB is not in a valid format')

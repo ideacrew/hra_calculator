@@ -2,6 +2,7 @@ class HraResultsController < ApplicationController
 
   def hra_payload
     determine_affordability = ::Transactions::DetermineAffordability.new.call(formatted_params)
+
     if determine_affordability.success?
       render :json => {status: "success", data: determine_affordability.success.to_h.to_json}
     else

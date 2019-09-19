@@ -17,7 +17,7 @@ class HraAffordabilityDetermination < Dry::Struct
   attribute :member_premium, Types::Float.default(0.00.freeze)
   attribute :age, Types::Integer.default(0.freeze)
   attribute :hra, Types::Float.default(0.00.freeze)
-  attribute :hra_determination, Types::String.meta(omittable: true)
+  attribute :hra_determination, Types::String.default('No Determination'.freeze)
   attribute :rating_area_id, Types::String.meta(omittable: true)
   attribute :service_area_id, Types::String.meta(omittable: true)
   attribute :errors, Types::Array.default([].freeze)
