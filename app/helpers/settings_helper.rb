@@ -6,4 +6,12 @@ module SettingsHelper
   def validate_county
     Registry['enterprise.dchbx.primary.production.validate_county']
   end
+
+  def validate_zipcode
+    Registry['enterprise.dchbx.primary.production.validate_zipcode']
+  end
+
+  def state_full_name
+    Registry['enterprise.dchbx.primary.production.state_full_name']
+  end
 end

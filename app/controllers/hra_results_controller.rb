@@ -1,5 +1,10 @@
 class HraResultsController < ApplicationController
 
+  # def hra_information
+  #   hra_default_setter = ::Operations::HraDefaultSetter.new.call
+  #   render :json => {status: "success", data: hra_default_setter.success.to_h.to_json}
+  # end
+
   def hra_payload
     determine_affordability = ::Transactions::DetermineAffordability.new.call(formatted_params)
 

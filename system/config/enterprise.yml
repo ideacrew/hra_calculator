@@ -37,3 +37,9 @@ namespaces:
                                 - key: validate_county
                                   type: :boolean
                                   default: true
+                                - key: validate_zipcode
+                                  type: :boolean
+                                  default: true
+                                - key: state_full_name
+                                  type: :string
+                                  default: 'Maryland'
