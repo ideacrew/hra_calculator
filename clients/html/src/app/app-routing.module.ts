@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { InfoComponent } from './info/info.component';
+import { ResultComponent } from './result/result.component';
 
 // import { FullComponent } from './layouts/full/full.component';
 
@@ -16,6 +17,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'result',
+    component: ResultComponent,
   },
   {
     path: 'info',

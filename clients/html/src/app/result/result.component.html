@@ -1,0 +1,186 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="container hra_results border">
+          <div class="content">
+            <h1> Your Results </h1>
+            <hr>
+          </div>
+          <div *ngIf="(showUnaffordableQsehraText)">
+            <p> <strong>Based on the information you entered, the HRA offered to you is not large enough on its own to make health insurance “affordable” under the ACA’s standards.</strong> As a result, you may be eligible for a [tax credit], in addition to your HRA, to help you buy [MARKETPLACE] coverage, if you qualify based on your income and other factors.</p>
+            <div class="content">
+              <h2> Next Steps </h2>
+              <p>To find out if you’re eligible for a [tax credit], you will complete the [MARKETPLACE] application. But first, here are some important things to keep in mind:</p>
+            </div>
+
+            <div class="content">
+              <h4> When completing the application:</h4>
+              <ul>
+                <li>
+                  <strong>Answer “no” when asked if you’re offered health insurance by an employer</strong> (unless you are separately offered health insurance by a second employer). If you are offered a second HRA by a different employer, go back and use this tool for that one as well.
+                </li>
+                <li>
+                  If you are eligible for a [tax credit], using it along with your HRA will generally be your most affordable option for purchasing a plan. <strong>If you accept a [tax credit], you must reduce it by at least the amount of your HRA to help avoid having to pay back money at tax time.</strong> [You will have the chance to reduce your tax credit when you are completing the Marketplace application].
+                </li>
+                <li>
+                  If you are <strong>not</strong> eligible for a [tax credit], you may still purchase an ACA-compliant plan and use the HRA to help pay for it.
+                </li>
+              </ul> 
+            </div>
+            <div class="content">
+              <h4> Informing your employer: </h4>
+              <ul>
+                <li>
+                  If you buy an ACA-compliant plan – with or without a [tax credit] – inform your employer that you are accepting the HRA.
+                </li>
+                <li>
+                  If you decide not to purchase health insurance or you purchase a non-ACA-compliant plan, such as a short-term plan or association health plan, <strong>you cannot use your HRA and must notify your employer that you are declining the HRA</strong>.
+                </li>
+              </ul> 
+            </div>
+          </div>
+
+          <div *ngIf="(showAffordableQsehraText)">
+            <p> <strong>Based on the information you entered, the HRA offered to you is large enough to make health insurance “affordable” based on the ACA’s standards.</strong> As a result, you are not eligible for a [tax credit] to help you buy health insurance through [MARKETPLACE] for yourself or for any family member who is eligible to benefit from the HRA. Using your HRA to buy a [MARKETPLACE] plan will generally be your most affordable option for purchasing health insurance.</p>
+            <div class="content">
+              <h2> Next Steps </h2>
+              <p>Complete the [MARKETPLACE] application to learn about your options for purchasing health insurance. But first, here are some important things to keep in mind:</p>
+            </div>
+
+            <div class="content">
+              <h4> When completing the application:</h4>
+              <ul>
+                <li>
+                  <strong>Do not accept a [tax credit] to purchase health insurance through [MARKETPLACE]. If you do, you will owe money back at tax time. [HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC]</strong> 
+                </li>
+              </ul> 
+            </div>
+            <div class="content">
+              <h4> Informing your employer: </h4>
+              <ul>
+                <li> 
+                  <strong>If you buy an ACA-compliant plan, inform your employer that you are accepting the HRA.</strong>
+                </li>
+                <li>
+                  <strong>If you decide not to purchase health insurance or you purchase a non-ACA- compliant plan, such as a short-term plan or association health plan, you cannot use your HRA and must notify your employer that you are declining the HRA.</strong>.
+                </li>
+              </ul> 
+            </div>
+            <div class="p-2 bd-highlight" style="border: 1px solid grey">
+              <p style="font-weight:bold" align="center"> Remember: Do not accept a [tax credit] to purchase health insurance through [MARKETPLACE]. </p>
+            </div>
+          </div>
+
+          <div *ngIf="(showUnaffordableIchraText)">
+            <p> <strong>Based on the information you entered, the HRA offered to you is not large enough to make health insurance “affordable” under the ACA’s standards.</strong> As a result, you may be eligible for a [tax credit] to help you buy [MARKETPLACE] coverage, if you qualify based on your income and other factors.</p>
+            <div class="content">
+              <h2> Next Steps </h2>
+              <p>To find out if you’re eligible for a [tax credit], you will complete the [MARKETPLACE] application. But first, here are some important things to keep in mind:</p>
+            </div>
+
+            <div class="content">
+              <h4> When completing the application:</h4>
+              <ul>
+                <li>
+                  <strong>Answer “no” when asked if you’re offered health insurance by an employer</strong> (unless you are separately offered health insurance by a second employer). If you are offered a second HRA by a different employer, go back and use this tool for that one as well.
+                </li>
+                <li>
+                  <strong>If you are eligible for a [tax credit], that will generally be a better deal for you than accepting the HRA. If you accept a [tax credit], notify your employer that you are declining the HRA. You cannot receive both an HRA and a [tax credit] from the [MARKETPLACE].</strong> If you receive a [tax credit] and accept the HRA, you will owe money back at tax time.
+                </li>
+                <li>
+                  <strong>If you are not eligible for a [tax credit], you may still purchase an ACA-compliant plan – either through [MARKETPLACE] or [off Marketplace] – and use the HRA to help pay for it.</strong> If your employer has offered you a “salary reduction agreement” to pay the share of the health insurance premium not covered by the HRA, you may be better off purchasing an ACA-compliant plan [off Marketplace]. If your employer has offered you a salary reduction agreement, you should have been notified in writing. If you have questions, contact your employer.<strong>If you buy an ACA-compliant plan without a [tax credit], inform your employer that you are accepting the HRA.</strong>>
+                </li>
+                <li>
+                  If you decide not to purchase health insurance or you purchase a non-ACA-compliant plan, such as a short-term plan or association health plan, <strong>you cannot use your HRA and must notify your employer that you are declining the HRA</strong>
+                </li>
+              </ul> 
+            </div>
+            <div class="p-2 bd-highlight" style="border: 1px solid grey">
+              <p style="font-weight:bold" align="center">  Remember: If you receive a [tax credit] from [MARKETPLACE], you must notify your employer that you are declining the HRA.</p>
+            </div>
+          </div>
+
+          <div *ngIf="(showAffordableIchraText)">
+            <p> <strong>Based on the information you entered, the HRA offered to you is large enough to make health insurance “affordable” under the ACA’s standards.</strong> As a result, you are not eligible for a [tax credit] to help you buy health insurance through [MARKETPLACE] for yourself or any family member who is eligible to benefit from the HRA.</p>
+
+            <p> <strong>You may accept the HRA and use it to purchase an ACA-compliant health plan, either through the [MARKETPLACE] or [OFF MARKETPLACE].</strong> Using your HRA to purchase coverage will generally be your most affordable option for purchasing health insurance.</p>
+            <div class="content">
+              <h2> Next Steps </h2>
+              <p>Complete the [MARKETPLACE] application to learn about your options for purchasing health insurance. But first, here are some important things to keep in mind:</p>
+            </div>
+
+            <div class="content">
+              <h4> Purchasing Health Insurance:</h4>
+              <ul>
+                <li>
+                  If your employer has offered you a “salary reduction agreement” to pay the share of the health insurance premium not covered by the HRA, you may be better off purchasing an ACA-compliant plan [off Marketplace]. If your employer has offered you a salary reduction agreement, you should have been notified in writing.If you have questions, contact your employer
+                </li>
+                <li>
+                  <strong>If you buy a [MARKETPLACE] plan, do not accept a [tax credit], or you will owe money back at tax time. [HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC]</strong>
+                </li>
+              </ul> 
+            </div>
+            <div class="content">
+              <h4> Informing your employer: </h4>
+              <ul>
+                <li>
+                  <strong>If you buy an ACA-compliant plan, inform your employer that you are accepting the HRA.</strong>
+                </li>
+                <li>
+                  <strong>If you decide not to purchase health insurance or you purchase a non-ACA- compliant plan, such as a short-term plan or association health plan, you cannot use your HRA and must notify your employer that you are declining the HRA.</strong>.
+                </li>
+              </ul> 
+            </div>
+            <div class="p-2 bd-highlight" style="border: 1px solid grey">
+              <p style="font-weight:bold" align="center"> Remember: Do not accept a [tax credit] to purchase health insurance through [MARKETPLACE].</p>
+            </div>
+          </div>
+          <div class="content">
+            <h2> The Information You Entered </h2>
+              <table style="width:80%" align="center">
+                <tr>
+                  <td>Residence</td>
+                  <td style="font-weight:bold">{{ state }} / {{zipcode}} / {{county}}</td>
+                </tr>
+                <tr>
+                  <td>Date of Birth</td>
+                  <td style="font-weight:bold">{{dob}}</td>
+                </tr>
+                <tr>
+                  <td>2020 Household Income</td>
+                  <td style="font-weight:bold"> $ {{household_amount}} ({{household_frequency}})</td>
+                </tr>
+                <tr>
+                  <td>HRA Type</td>
+                  <td style="font-weight:bold">{{hra_type}}</td>
+                </tr>
+                <tr>
+                  <td>Start Date</td>
+                  <td style="font-weight:bold">{{start_month}}</td>
+                </tr>
+                <tr>
+                  <td>End Date</td>
+                  <td style="font-weight:bold">{{end_month}}</td>
+                </tr>
+                <tr>
+                  <td>Employer Contribution</td>
+                  <td style="font-weight:bold"> $ {{hra_amount}} ({{hra_frequency}})</td>
+                </tr>
+              </table> 
+          </div>
+          <br><br>
+          <div style="overflow:auto;">
+            <div style="float:left;">
+              <button type="button" class="btn btn-info"><- About Your HRA</button>
+            </div>
+            <div style="float:right;">
+              <button type="button" class="btn btn-info"> Print Your Results </button>
+            </div>
+          </div>
+          <br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

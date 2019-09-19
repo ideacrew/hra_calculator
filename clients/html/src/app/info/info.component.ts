@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
+import { Router } from '@angular/router';
+import { ResultService } from '../result.service'
 
 @Component({
   templateUrl: './info.component.html',
@@ -14,8 +16,16 @@ export class InfoComponent implements OnInit {
   showPrevBtn: boolean = false;
   showNextBtn: boolean =  true;
   hraForm: FormGroup;
+  selectedHouseholdFrequency: string;
+  selectedHraType: string;
+  selectedHraFrequency: string;
 
-  constructor(private fb: FormBuilder, private httpClient: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private httpClient: HttpClient,
+    private router: Router,
+    private resultService: ResultService
+  ) {
     this.subtitle = 'This is some text within a card block.';
     this.createForm();
   }
@@ -56,13 +66,31 @@ export class InfoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.httpClient.post<any>(environment.apiUrl+"/hra_results/hra_payload", this.hraForm.value).subscribe(
-      (res) => {
-        console.log(res)
-      },
-      (err) => {
-        console.log(err)
-      }
-    );
+    if (this.hraForm.valid) {
+      console.log(this.hraForm.value)
+      this.httpClient.post<any>(environment.apiUrl+"/hra_results/hra_payload", this.hraForm.value).subscribe(
+        (res) => {
+          console.log(res)
+          this.resultService.setResults(res);
+          this.router.navigateByUrl('/result');
+        },
+        (err) => {
+          console.log(err)
+        }
+      );
+    }
+  }
+
+  onHouseholdChange(entry: string){
+    console.log(entry)
+    this.selectedHouseholdFrequency = entry;
+  }
+
+  onHraTypeChange(entry: string){
+    this.selectedHraType = entry;
+  }
+
+  onHraFrequencyChange(entry: string){
+    this.selectedHraFrequency = entry;
   }
 }
