@@ -14,4 +14,8 @@ module SettingsHelper
   def state_full_name
     Registry['enterprise.dchbx.primary.production.state_full_name']
   end
+
+  def state_abbreviation
+    Registry['enterprise.dchbx.primary.production.state_abbr']
+  end
 end

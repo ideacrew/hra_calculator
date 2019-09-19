@@ -1,5 +1,7 @@
 module Validations
   class HraContract < Dry::Validation::Contract
+    include ::SettingsHelper
+
     params do
       required(:state).filled(:string)
       required(:zipcode).filled(:string)
@@ -17,18 +19,17 @@ module Validations
     end
 
     rule(:state) do
-      state = 'Maryland' # TODO: read the state from the settings
-      key.failure("State must be #{state}") if value != state
+      key.failure("State must be #{state_full_name}") if value != state_full_name
     end
 
     rule(:county, :zipcode) do
-      county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
-      if county_zips.blank?
-        key.failure('Entered county is invalid')
-      else
-        # TODO: refactor accordingly for states with or without Zipcodes.
-        zip_enabled = true
-        key.failure('Entered zip and county combination does not exist') if zip_enabled && county_zips.where(zip: values[:zipcode]).blank?
+      if validate_county && validate_zipcode
+        county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
+        if county_zips.blank?
+          key.failure('Entered county is invalid')
+        else
+          key.failure('Entered zip and county combination does not exist') if county_zips.where(zip: values[:zipcode]).blank?
+        end
       end
     end
 

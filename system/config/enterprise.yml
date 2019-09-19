@@ -42,4 +42,7 @@ namespaces:
                                   default: true
                                 - key: state_full_name
                                   type: :string
-                                  default: 'Maryland'
+                                  default: 'Massachusetts'
+                                - key: state_abbr
+                                  type: :string
+                                  default: 'MA'

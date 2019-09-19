@@ -3,8 +3,8 @@ class HraAffordabilityDetermination < Dry::Struct
   transform_keys(&:to_sym)
 
   attribute :state, Types::String
-  attribute :zipcode, Types::String
-  attribute :county, Types::String
+  attribute :zipcode, Types::String.default(''.freeze)
+  attribute :county, Types::String.default(''.freeze)
   attribute :dob, Types::Date
   attribute :household_frequency, Types::String # 'monthly' or 'annually'
   attribute :household_amount, Types::Float
@@ -19,6 +19,6 @@ class HraAffordabilityDetermination < Dry::Struct
   attribute :hra, Types::Float.default(0.00.freeze)
   attribute :hra_determination, Types::String.default('No Determination'.freeze)
   attribute :rating_area_id, Types::String.meta(omittable: true)
-  attribute :service_area_id, Types::String.meta(omittable: true)
+  attribute :service_area_ids, Types::Array.of(Types::String).meta(omittable: true)
   attribute :errors, Types::Array.default([].freeze)
 end
