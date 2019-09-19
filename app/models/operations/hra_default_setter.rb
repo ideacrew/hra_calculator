@@ -11,8 +11,8 @@ module Operations
         counties: counties,
         display_county: validate_county,
         display_zipcode: validate_zipcode,
-        start_month_dates: (Date.new(year, 1, 1)..Date.new(year, 12, 31)).map(&:to_s),
-        end_month_dates: (Date.new(year, 1, 1)..Date.new(year + 1, 11, 30)).map(&:to_s)
+        start_month_dates: (Date.new(year).beginning_of_year..Date.new(year).end_of_year).map(&:to_s),
+        end_month_dates: (Date.new(year).beginning_of_year..Date.new(year).end_of_year.prev_month).map(&:to_s)
       })
 
       Success(hra_defaulter)
