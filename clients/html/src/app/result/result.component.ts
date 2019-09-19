@@ -42,7 +42,6 @@ export class ResultComponent implements OnInit {
     this.hra_amount = this.result.data.hra_amount;
     this.hra_type = this.result.data.hra_type;
     this.hra_determination = this.result.data.hra_determination;
-    debugger
     if(this.hra_type == "qsehra") {
       if (this.hra_determination == 'unaffordable'){
         this.showUnaffordableQsehraText = true;
