@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -9,14 +10,20 @@
               <hr/>
               <div class="d-inline-flex">
                 <div>
-                  <img src="../../assets/images/profile_pic.png" />
+                  <img src="../../assets/images/profile_pic.png" alt="Profile picture" />
                 </div>
                 <div class="col-md-9">
                   <p>
                     <strong>
                       Enter the following information for the family member
                       who is offered the HRA.
-                      <sup data-toggle="tooltip" title="This is the family member whose employer or former employer (if family member is a retiree) is offering the HRA.">
+                      <ng-template #popContentFamily>
+                        <div style="min-width: 200px;">
+                          This is the family member whose employer or former employer (if family member is a retiree) is offering the HRA.
+                        </div>
+                      </ng-template>
+
+                      <sup [ngbPopover]="popContentFamily">
                         <i class="fas fa-question-circle"></i>
                       </sup>
                     </strong>
@@ -25,8 +32,10 @@
               </div>
               <div class="form-group">
                 <p>
-                  <strong>Place of Residence
-                    <sup data-toggle="tooltip" title="Enter the family member’s place of residence, even if the employer is located somewhere else.">
+                  <strong>
+                    Place of Residence
+                    <ng-template #popContentResidence>Enter the family member’s place of residence, even if the employer is located somewhere else.</ng-template>                      
+                    <sup [ngbPopover]="popContentResidence">
                       <i class="fas fa-question-circle"></i>
                     </sup>
                   </strong>
@@ -36,7 +45,12 @@
                 <div class="input-group">
                   <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="state">
                     State
-                    <sup data-toggle="tooltip" title="If you are not a resident of this state, please visit [hyperlink] to find the Marketplace in your state.">
+                    <ng-template #popContentState>
+                      <div style="min-width: 200px;">
+                        If you are not a resident of this state, please visit [hyperlink] to find the Marketplace in your state.
+                      </div>
+                    </ng-template>
+                    <sup [ngbPopover]="popContentState" >
                       <i class="fas fa-question-circle"></i>
                     </sup>
                   </label>
@@ -67,7 +81,7 @@
               </div>
               <div class="form-group">
                 <div class="input-group">
-                  <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="country">County</label>
+                  <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="county">County</label>
                   <div class="col-sm-4">
                     <select class="form-control form-control-sm" id="county" formControlName="county" ngModel rquired>
                       <option value="Hampden">Hampden</option>
@@ -99,31 +113,34 @@
                 <p>
                   <strong>
                     Expected 2020 Household Income
-                    <sup data-toggle="tooltip" title="This is your household income before taxes. For most people, yearly household income is the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040).Specifically, household income is equal to adjusted gross income plus the following amounts: Social Security benefits excluded from gross income, interest from tax-exempt bonds, any foreign-source income excluded from gross income under section 911 of Internal Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare).">
+                    <ng-template #popContentHouseholdIncome>This is your household income before taxes. For most people, yearly household income is the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040).Specifically, household income is equal to adjusted gross income plus the following amounts: Social Security benefits excluded from gross income, interest from tax-exempt bonds, any foreign-source income excluded from gross income under section 911 of Internal Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare).</ng-template>
+                    <sup [ngbPopover]="popContentHouseholdIncome">
                       <i class="fas fa-question-circle"></i>
                     </sup>
                   </strong>
                 </p>
               </div>
               <div class="form-group">
-                <div class="input-group">
-                  <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="household_frequency">Frequency</label>
-                  <div class="col-sm-4 row">
-                    <div class="col-6">
-                      <input type="radio" class="form-control form-control-sm" id="household_frequency" formControlName="household_frequency" value="monthly" ngModel required/>
-                      <button class="btn btn-outline-info">Monthly</button>
-                    </div>
-                    <div class="col-6">
-                      <input type="radio" class="form-control form-control-sm" id="household_frequency" formControlName="household_frequency" value="annually" ngModel required/>
-                      <button class="btn btn-outline-info">Annually</button>
-                    </div>
-                    <div *ngIf="hraForm.controls['household_frequency'].invalid && (hraForm.controls['household_frequency'].dirty || hraForm.controls['household_frequency'].touched)" class="alert alert-danger">
-                      <div *ngIf="hraForm.controls['household_frequency'].errors.required">
-                        Frequency is required.
+                  <div class="input-group">
+                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="household_frequency">Frequency</label>
+                    <div class="col-sm-4">
+                      <div class="btn-group" data-toggle="buttons">
+                        <span [ngClass]="(selectedHouseholdFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'">
+                            <input type="radio" class="form-control form-control-sm" id="household_frequency"
+                            formControlName="household_frequency" value="monthly" ngModel required (click)="onHouseholdChange('monthly')"/> Monthly
+                        </span>
+                        <span [ngClass]="(selectedHouseholdFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
+                            <input type="radio" class="form-control form-control-sm" id="household_frequency"
+                            formControlName="household_frequency" value="annually" ngModel required (click)="onHouseholdChange('annually')"/> Annually
+                        </span>
+                      </div>
+                      <div *ngIf="hraForm.controls['household_frequency'].invalid && (hraForm.controls['household_frequency'].dirty || hraForm.controls['household_frequency'].touched)" class="alert alert-danger">
+                        <div *ngIf="hraForm.controls['household_frequency'].errors.required">
+                          Frequency is required.
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
@@ -152,7 +169,7 @@
               <hr/>
               <div class="d-inline-flex">
                 <div>
-                  <img src="../../assets/images/profile_pic.png" />
+                  <img src="../../assets/images/profile_pic.png" alt="Profile picture"/>
                 </div>
                 <div class="col-md-9">
                   <p>
@@ -168,14 +185,16 @@
               <div class="form-group">
                 <div class="input-group">
                   <label class="col-sm-2 col-form-label col-form-label-sm" for="hra_type">Type of HRA</label>
-                  <div class="col-sm-6 row">
-                    <div class="col-6">
-                      <input type="radio" class="form-control form-control-sm" id="hra_type" formControlName="hra_type" value="ichra" ngModel required/>
-                      <button class="btn btn-outline-info">Individual Coverage HRA</button>
-                    </div>
-                    <div class="col-6">
-                      <input type="radio" class="form-control form-control-sm" id="hra_type" formControlName="hra_type" value="qsehra" ngModel required/>
-                      <button class="btn btn-outline-info">Qualified Small Employer HRA (QSEHRA)</button>
+                  <div class="col-sm-6">
+                    <div class="btn-group hra-type-group" data-toggle="buttons">
+                      <span [ngClass]="(selectedHraType=='ichra')?'btn btn-outline-info active':'btn btn-outline-info'">
+                          <input type="radio" class="form-control form-control-sm" id="hra_type"
+                          formControlName="hra_type" value="ichra" ngModel required (click)="onHraTypeChange('ichra')"/> Individual Coverage HRA
+                      </span>
+                      <span [ngClass]="(selectedHraType=='qsehra')?'btn btn-outline-info active':'btn btn-outline-info'">
+                          <input type="radio" class="form-control form-control-sm" id="hra_type"
+                          formControlName="hra_type" value="qsehra" ngModel required (click)="onHraTypeChange('qsehra')"/> Qualified Small Employer HRA (QSEHRA)
+                      </span>
                     </div>
                     <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger">
                       <div *ngIf="hraForm.controls['hra_type'].errors.required">
@@ -189,7 +208,8 @@
                 <div class="input-group">
                   <label class="col-sm-2 col-form-label col-form-label-sm" for="start_month">
                     Start Month
-                    <sup data-toggle="tooltip" title="This is the first month ofthe HRA plan year.">
+                    <ng-template #popContentStartMonth>This is the first month ofthe HRA plan year.</ng-template>
+                    <sup [ngbPopover]="popContentStartMonth">
                       <i class="fas fa-question-circle"></i>
                     </sup>
                   </label>
@@ -220,7 +240,8 @@
                 <div class="input-group">
                   <label class="col-sm-2 col-form-label col-form-label-sm" for="end_month">
                     End Month
-                    <sup data-toggle="tooltip" title="This is the last month of the HRA plan year.">
+                    <ng-template #popContentEndMonth>This is the last month of the HRA plan year.</ng-template>
+                    <sup [ngbPopover]="popContentEndMonth">
                       <i class="fas fa-question-circle"></i>
                     </sup>
                   </label>
@@ -262,7 +283,8 @@
                 <p>
                   <strong>
                     Maximum HRA Amount for Employee-Only Health Insurance
-                    <sup data-toggle="tooltip" title="This is the amount the employer has offered to contribute to the HRA if you purchase health insurance for only the employee (not including other family members).Some employers offer to provide one amount if only the employee enrolls in coverage, and a larger amount if the employee plus other family members enroll in coverage.We need to know the amount of the HRA if only the employee enrolls.">
+                    <ng-template #popContentHraAmount>This is the amount the employer has offered to contribute to the HRA if you purchase health insurance for only the employee (not including other family members).Some employers offer to provide one amount if only the employee enrolls in coverage, and a larger amount if the employee plus other family members enroll in coverage.We need to know the amount of the HRA if only the employee enrolls.</ng-template>
+                    <sup [ngbPopover]="popContentHraAmount">
                       <i class="fas fa-question-circle"></i>
                     </sup>
                   </strong>
@@ -271,14 +293,16 @@
               <div class="form-group">
                 <div class="input-group">
                   <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="hra_frequency">Frequency</label>
-                  <div class="col-sm-4 row">
-                    <div class="col-6">
-                      <input type="radio" class="form-control form-control-sm" id="hra_frequency" formControlName="hra_frequency" value="monthly" ngModel required/>
-                      <button class="btn btn-outline-info">Monthly</button>
-                    </div>
-                    <div class="col-6">
-                      <input type="radio" class="form-control form-control-sm" id="hra_frequency" formControlName="hra_frequency" value="annually" ngModel required/>
-                      <button class="btn btn-outline-info">Annually</button>
+                  <div class="col-sm-4">
+                    <div class="btn-group" data-toggle="buttons">
+                      <span [ngClass]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'">
+                          <input type="radio" class="form-control form-control-sm" id="hra_frequency"
+                          formControlName="hra_frequency" value="monthly" ngModel required (click)="onHraFrequencyChange('monthly')"/> Monthly
+                      </span>
+                      <span [ngClass]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
+                          <input type="radio" class="form-control form-control-sm" id="hra_frequency"
+                          formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> Annually
+                      </span>
                     </div>
                     <div *ngIf="hraForm.controls['hra_frequency'].invalid && (hraForm.controls['hra_frequency'].dirty || hraForm.controls['hra_frequency'].touched)" class="alert alert-danger">
                       <div *ngIf="hraForm.controls['hra_frequency'].errors.required">

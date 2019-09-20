@@ -14,9 +14,9 @@ class HraResultsController < ApplicationController
     determine_affordability = ::Transactions::DetermineAffordability.new.call(formatted_params)
 
     if determine_affordability.success?
-      render :json => {status: "success", data: determine_affordability.success.to_h.to_json}
+      render plain: {status: "success", data: determine_affordability.success.to_h}.to_json, content_type: 'application/json'
     else
-      render :json, {status: "failure", data: determine_affordability.failure.to_h.to_json}
+      render plain: {status: "failure", data: determine_affordability.failure.to_h}.to_json, content_type: 'application/json'
     end
   end
 

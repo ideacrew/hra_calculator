@@ -22,16 +22,15 @@
   position: absolute;
   width: 100%;
   cursor: pointer;
+  display: inline-grid;
 }
 
-#hra_type + button {
+.hra-type-group label {
   font-size: 10px;
   height: 40px;
 }
 
-#household_frequency:checked + button,
-#hra_type:checked + button,
-#hra_frequency:checked + button  {
+btn.active  {
   background-color: #009efb;
   color: #ffffff;
 }
