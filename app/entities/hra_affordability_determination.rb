@@ -20,5 +20,5 @@ class HraAffordabilityDetermination < Dry::Struct
   attribute :hra_determination, Types::String.default('No Determination'.freeze)
   attribute :rating_area_id, Types::String.meta(omittable: true)
   attribute :service_area_ids, Types::Array.of(Types::String).meta(omittable: true)
-  attribute :errors, Types::Array.default([].freeze)
+  attribute :errors, Types::Array.default([])
 end

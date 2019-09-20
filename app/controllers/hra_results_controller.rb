@@ -2,12 +2,12 @@ class HraResultsController < ApplicationController
 
   # def hra_counties
   #   counties_lookup = Operations::CountiesLookup.new.call(params.permit['zipcode'])
-  #   render :json => {status: "success", data: counties_lookup.success.to_h.to_json}
+      # render plain: {status: "success", data: counties_lookup.success.to_h}.to_json, content_type: 'application/json'
   # end
 
   # def hra_information
   #   hra_default_setter = ::Operations::HraDefaultSetter.new.call
-  #   render :json => {status: "success", data: hra_default_setter.success.to_h.to_json}
+  #   render plain: {status: "success", data: hra_default_setter.success.to_h}.to_json, content_type: 'application/json'
   # end
 
   def hra_payload

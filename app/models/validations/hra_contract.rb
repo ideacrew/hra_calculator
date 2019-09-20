@@ -23,13 +23,11 @@ module Validations
     end
 
     rule(:county, :zipcode) do
-      if validate_county && validate_zipcode
-        county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
-        if county_zips.blank?
-          key.failure('Entered county is invalid')
-        else
-          key.failure('Entered zip and county combination does not exist') if county_zips.where(zip: values[:zipcode]).blank?
-        end
+      county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
+      if validate_county && county_zips.blank?
+        key.failure('Entered county is invalid')
+      elsif validate_zipcode && county_zips.where(zip: values[:zipcode]).blank?
+        key.failure('Entered zip and county combination does not exist for zipcode')
       end
     end
 
