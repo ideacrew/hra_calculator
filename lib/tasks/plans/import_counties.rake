@@ -2,7 +2,7 @@ namespace :import do
   task :county_zips, [:file] => :environment do |task, args|
     include ::SettingsHelper
 
-    files = Rails.env.test? ? [args[:file]] : Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/", "SHOP_ZipCode_CY2017_FINAL.xlsx"))
+    files = Rails.env.test? ? [args[:file]] : Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/", "SHOP_ZipCode_CY2017_FINAL.xlsx"))
     count = 0
     files.each do |file|
       year = 2019

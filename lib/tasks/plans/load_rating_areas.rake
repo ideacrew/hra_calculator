@@ -5,7 +5,7 @@ namespace :load_rate_reference do
   task :run_all_rating_areas => :environment do
     include ::SettingsHelper
 
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/rating_areas", "**", "*.xlsx"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/rating_areas", "**", "*.xlsx"))
 
     puts "*"*80 unless Rails.env.test?
 
