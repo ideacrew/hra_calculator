@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
 import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
 
@@ -36,10 +35,6 @@ export const routes: Routes = [
         loadChildren: () => import('./component/component.module').then(m => m.ComponentsModule)
       }
     ]
-  },
-  {
-    path: 'about',
-    component: AboutComponent
   },
   {
     path: '**',

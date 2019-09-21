@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
-import { InfoComponent } from './info.component';
+// import { InfoComponent } from './info.component';
 
 const routes: Routes = [
   {
@@ -15,12 +15,12 @@ const routes: Routes = [
         { title: 'Info Page' }
       ]
     },
-    component: InfoComponent
+    // component: InfoComponent
   }
 ];
 
 @NgModule({
   imports: [ReactiveFormsModule, CommonModule, RouterModule.forChild(routes)],
-  declarations: [InfoComponent]
+  // declarations: [InfoComponent]
 })
 export class InfoModule {}

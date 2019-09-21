@@ -21,12 +21,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { routes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner.component';
+import { HeaderComponent } from './shared/layouts/header.component';
+import { FooterComponent } from './shared/layouts/footer.component';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
 import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
 
@@ -41,13 +42,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   declarations: [
     AppComponent,
     SpinnerComponent,
+    HeaderComponent,
+    FooterComponent,
     // FullComponent,
     // BlankComponent,
     // NavigationComponent,
     // BreadcrumbComponent,
     // SidebarComponent,
     HomeComponent,
-    AboutComponent,
     InfoComponent,
     ResultComponent
   ],
@@ -60,7 +62,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     NgbModule,
     RouterModule.forRoot(routes),
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
   ],
   providers: [
     {
