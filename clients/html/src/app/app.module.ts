@@ -11,12 +11,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-// import { FullComponent } from './layouts/full/full.component';
-// import { BlankComponent } from './layouts/blank/blank.component';
+import { FullComponent } from './layouts/full/full.component';
+import { BlankComponent } from './layouts/blank/blank.component';
 
-// import { NavigationComponent } from './shared/header-navigation/navigation.component';
-// import { SidebarComponent } from './shared/sidebar/sidebar.component';
-// import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+import { NavigationComponent } from './shared/header-navigation/navigation.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 
 import { routes } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,11 +44,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SpinnerComponent,
     HeaderComponent,
     FooterComponent,
-    // FullComponent,
-    // BlankComponent,
-    // NavigationComponent,
-    // BreadcrumbComponent,
-    // SidebarComponent,
+    FullComponent,
+    BlankComponent,
+    NavigationComponent,
+    BreadcrumbComponent,
+    SidebarComponent,
     HomeComponent,
     InfoComponent,
     ResultComponent
