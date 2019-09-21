@@ -1,14 +1,19 @@
 namespace :load_service_reference do
 
   task :run_all_service_areas => :environment do
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/service_areas", "**", "*.xlsx"))
+    include ::SettingsHelper
+
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/service_areas", "**", "*.xlsx"))
     puts "*"*80 unless Rails.env.test?
-    files.sort.each do |file|
-      puts "processing file #{file}" unless Rails.env.test?
-      # new model
-      Rake::Task['load_service_reference:update_service_areas_new_model'].invoke(file)
-      Rake::Task['load_service_reference:update_service_areas_new_model'].reenable
-      # end new model
+
+    if offerings_constrained_to_service_areas
+      files.sort.each do |file|
+        puts "processing file #{file}" unless Rails.env.test?
+        Rake::Task['load_service_reference:update_service_areas_new_model'].invoke(file)
+        Rake::Task['load_service_reference:update_service_areas_new_model'].reenable
+      end
+    else
+      Rake::Task['load_service_reference:default_service_area'].invoke
     end
     puts "*"*80 unless Rails.env.test?
   end
@@ -93,7 +98,21 @@ namespace :load_service_reference do
       puts " --------- " unless Rails.env.test?
       puts e.backtrace unless Rails.env.test?
     end
+  end
 
+  desc "Default service area"
+  task :default_service_area => :environment do
+    include ::SettingsHelper
+
+    year = Date.today.year
+    puts "Creating Default service area for #{year}" unless Rails.env.test?
+    ::Locations::ServiceArea.create!(
+      {active_year: year,
+       covered_states: [state_abbreviation],
+       county_zip_ids: [],
+       issuer_hios_id: nil,
+       issuer_provided_title: 'Default Service Area'}
+      )
   end
 
   private

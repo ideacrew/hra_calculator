@@ -10,6 +10,7 @@ class QhpRateBuilder
     @results_array = []
     @rating_area_id_cache = {}
     @rating_area_cache = {}
+    @rating_area_enabled = Registry['enterprise.dchbx.primary.production.offerings_constrained_to_rating_areas']
     @premium_table_cache = Hash.new {|h, k| h[k] = Hash.new}
     @action = "new"
     FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
@@ -17,9 +18,16 @@ class QhpRateBuilder
   end
 
   def set_rating_area_cache
-    ::Locations::RatingArea.all.each do |ra|
-      @rating_area_id_cache[[ra.active_year, ra.exchange_provided_code]] = ra.id
-      @rating_area_cache[ra.id] = ra
+    if @rating_area_enabled
+      ::Locations::RatingArea.all.each do |ra|
+        @rating_area_id_cache[[ra.active_year, ra.exchange_provided_code]] = ra.id
+        @rating_area_cache[ra.id] = ra
+      end
+    else
+      ::Locations::RatingArea.all.each do |ra|
+        @rating_area_id_cache[[ra.active_year]] = ra.id
+        @rating_area_cache[ra.id] = ra
+      end
     end
   end
 
@@ -140,7 +148,11 @@ class QhpRateBuilder
     active_year = @rate[:effective_date].to_date.year
     applicable_range = @rate[:effective_date].to_date..@rate[:expiration_date].to_date
     rating_area = @rate[:rate_area_id].gsub("Rating Area ", "R-MA00")
-    rating_area_id = @rating_area_id_cache[[active_year, rating_area]]
+    rating_area_id = if @rating_area_enabled
+                       @rating_area_id_cache[[active_year, rating_area]]
+                     else
+                       @rating_area_id_cache[[active_year]]
+                     end
     @premium_table_cache[[@rate[:plan_id], rating_area_id, applicable_range]][assign_age] = @rate[:primary_enrollee]
     @results_array << "#{@rate[:plan_id]},#{active_year}"
   end

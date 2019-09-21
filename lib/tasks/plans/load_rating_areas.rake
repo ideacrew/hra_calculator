@@ -3,16 +3,37 @@
 namespace :load_rate_reference do
 
   task :run_all_rating_areas => :environment do
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/rating_areas", "**", "*.xlsx"))
+    include ::SettingsHelper
+
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/rating_areas", "**", "*.xlsx"))
 
     puts "*"*80 unless Rails.env.test?
-    files.each do |file|
-      puts "processing file #{file}" unless Rails.env.test?
-      Rake::Task['load_rate_reference:update_rating_areas'].invoke(file)
-      Rake::Task['load_rate_reference:update_rating_areas'].reenable
-      puts "created #{::Locations::RatingArea.all.size} rating areas in new model for all years" unless Rails.env.test?
+
+    if offerings_constrained_to_rating_areas
+      files.each do |file|
+        puts "processing file #{file}" unless Rails.env.test?
+        Rake::Task['load_rate_reference:update_rating_areas'].invoke(file)
+        Rake::Task['load_rate_reference:update_rating_areas'].reenable
+        puts "created #{::Locations::RatingArea.all.size} rating areas in new model for all years" unless Rails.env.test?
+      end
+    else
+      Rake::Task['load_rate_reference:default_rating_area'].invoke
     end
     puts "*"*80 unless Rails.env.test?
+  end
+
+  desc "Default rating area"
+  task :default_rating_area => :environment do
+    include ::SettingsHelper
+
+    year = Date.today.year
+    puts "Creating default Rating area for #{year}" unless Rails.env.test?
+    ::Locations::RatingArea.create!(
+      {active_year: year,
+       exchange_provided_code: '',
+       county_zip_ids: [],
+       covered_states: [state_abbreviation]}
+     )
   end
 
   desc "load rating regions from xlsx file"

@@ -1,7 +1,8 @@
 namespace :import do
   task :county_zips, [:file] => :environment do |task, args|
+    include ::SettingsHelper
 
-    files = Rails.env.test? ? [args[:file]] : Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/", "SHOP_ZipCode_CY2017_FINAL.xlsx"))
+    files = Rails.env.test? ? [args[:file]] : Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/", "SHOP_ZipCode_CY2017_FINAL.xlsx"))
     count = 0
     files.each do |file|
       year = 2019
@@ -19,7 +20,7 @@ namespace :import do
           ::Locations::CountyZip.find_or_create_by!({
             county_name: row_info[@headers["county"]].squish!,
             zip: row_info[@headers["zip"]].squish!,
-            state: "MA" # TODO: fetch short name of the state
+            state: state_abbreviation
           })
           count+=1
         end
