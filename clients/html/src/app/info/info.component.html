@@ -1,4 +1,3 @@
-
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -47,7 +46,7 @@
                     State
                     <ng-template #popContentState>
                       <div style="min-width: 200px;">
-                        If you are not a resident of this state, please visit [hyperlink] to find the Marketplace in your state.
+                        If you are not a resident of this state, please visit <a href="https://www.healthcare.gov/get-coverage/" target="_blank">https://www.healthcare.gov/get-coverage/</a> to find the Marketplace in your state.
                       </div>
                     </ng-template>
                     <sup [ngbPopover]="popContentState" >
@@ -336,13 +335,16 @@
             </div>  
             <div style="overflow:auto;">
               <div style="float:left;">
-                <button type="button" class="btn btn-info" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><- About You</button>
+                <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)" routerLink="/home"><- Previous</button>
+              </div>
+              <div style="float:left;">
+                <button type="button" class="btn btn-info" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><- <- Previous</button>
               </div>
               <div style="float:right;">
                 <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)"
                 [disabled]="hraForm.controls['state'].invalid || hraForm.controls['zipcode'].invalid || hraForm.controls['county'].invalid || hraForm.controls['dob'].invalid || hraForm.controls['household_frequency'].invalid || hraForm.controls['household_amount'].invalid" 
-                (click)="showTab(currentTab+1)">About Your HRA -></button>
-                <button type="submit" class="btn btn-info" [hidden]="(currentTab != 1)" [disabled]="hraForm.pristine || hraForm.invalid">Your Results -></button>
+                (click)="showTab(currentTab+1)">Next -></button>
+                <button type="submit" class="btn btn-info" [hidden]="(currentTab != 1)" [disabled]="hraForm.pristine || hraForm.invalid">Next -></button>
               </div>
             </div>
             <!-- Circles which indicates the steps of the form: -->

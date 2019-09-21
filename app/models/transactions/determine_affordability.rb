@@ -11,15 +11,16 @@ module Transactions
     def validate(params)
       output = ::Validations::HraContract.new.call(params)
       if output.failure?
-        Failure(output)
+        result = output.to_h
+        result[:errors] = output.errors.to_h.values.flatten
+        Failure(result)
       else
         Success(output)
       end
     end
 
     def init_hra_object(input)
-      params = input.to_h
-      hra_obj = ::Operations::InitializeHra.new.call(params).success
+      hra_obj = ::Operations::InitializeHra.new.call(input.to_h).success
       Success(hra_obj)
     end
 
