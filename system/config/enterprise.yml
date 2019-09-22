@@ -40,7 +40,7 @@ namespaces:
                                 - key: validate_county
                                   type: :boolean
                                   default: true
-                                - key: validate_zipcode
+                                - key: offerings_constrained_to_zip_codes
                                   type: :boolean
                                   default: true
                                 - key: state_full_name

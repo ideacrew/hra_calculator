@@ -11,8 +11,8 @@ module SettingsHelper
     Registry['enterprise.dchbx.primary.production.validate_county']
   end
 
-  def validate_zipcode
-    Registry['enterprise.dchbx.primary.production.validate_zipcode']
+  def offerings_constrained_to_zip_codes
+    Registry['enterprise.dchbx.primary.production.offerings_constrained_to_zip_codes']
   end
 
   def state_full_name
