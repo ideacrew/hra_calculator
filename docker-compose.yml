@@ -52,7 +52,7 @@ services:
 
   rails:
     <<: *backend
-    command: bash -c "rm -f tmp/pids/server.pid && bundle &&  bundle exec rails server -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle && yarn install --check-files && bundle exec rails server -p 3000 -b '0.0.0.0'"
     ports:
       - '3000:3000'
 
