@@ -20,6 +20,8 @@ export class ResultComponent implements OnInit {
   hra_amount: Number;
   hra_type: String;
   hra_determination: String;
+  taxCredit: String;
+  marketPlace: String;
 
   showUnaffordableQsehraText: boolean = false;
   showAffordableQsehraText: boolean = false;
@@ -40,6 +42,8 @@ export class ResultComponent implements OnInit {
     this.end_month = this.result.data.end_month;
     this.hra_frequency = this.result.data.hra_frequency;
     this.hra_amount = this.result.data.hra_amount;
+    this.marketPlace = this.result.market_place
+    this.taxCredit = this.result.tax_credit
     this.hra_type = this.result.data.hra_type;
     this.hra_determination = this.result.data.hra_determination;
     if(this.hra_type == "qsehra") {
