@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@rails/actiontext": "^6.0.0",
+    "@rails/webpacker": "^4.0.7",
+    "actiontext": "https://github.com/rails/actiontext#archive",
+    "trix": "^1.2.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.8.1"
+  }
+}
