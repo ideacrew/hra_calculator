@@ -19,6 +19,8 @@ namespace :load_service_reference do
   end
 
   task :update_service_areas_new_model, [:file] => :environment do |t,args|
+    include ::SettingsHelper
+
     row_data_begin = 13
     total = 0
     begin
@@ -35,7 +37,7 @@ namespace :load_service_reference do
           sa = ::Locations::ServiceArea.where(
             active_year: @year,
             issuer_provided_code: sheet.cell(i,1),
-            covered_states: ["MA"],
+            covered_states: [state_abbreviation],
             issuer_provided_title: sheet.cell(i,2)
           ).first
           if sa.present?
@@ -45,7 +47,7 @@ namespace :load_service_reference do
             ::Locations::ServiceArea.create(
               active_year: @year,
               issuer_provided_code: sheet.cell(i,1),
-              covered_states: ["MA"],
+              covered_states: [state_abbreviation],
               issuer_hios_id: issuer_hios_id,
               issuer_provided_title: sheet.cell(i,2)
             )
@@ -57,7 +59,7 @@ namespace :load_service_reference do
             # issuer_hios_id: issuer_hios_id,
             # covered_states: nil
           )
-          if existing_state_wide_areas.count > 0 && existing_state_wide_areas.first.covered_states.present? && existing_state_wide_areas.first.covered_states.include?("MA")
+          if existing_state_wide_areas.count > 0 && existing_state_wide_areas.first.covered_states.present? && existing_state_wide_areas.first.covered_states.include?(state_abbreviation)
             v = existing_state_wide_areas.first
             v.issuer_hios_id = issuer_hios_id
             v.save
