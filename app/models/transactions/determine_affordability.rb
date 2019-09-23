@@ -25,8 +25,13 @@ module Transactions
     end
 
     def find_member_premium(hra_obj)
-      hra_obj.member_premium = ::Operations::MemberPremium.new.call(hra_obj).success
-      Success(hra_obj)
+      member_premium_result = ::Operations::MemberPremium.new.call(hra_obj)
+      if member_premium_result.success?
+        hra_obj.member_premium = member_premium_result.success
+        Success(hra_obj)
+      else
+        Failure(hra_obj)
+      end
     end
 
     def calculate_hra_cost(hra_object)
