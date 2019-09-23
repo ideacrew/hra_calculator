@@ -3,14 +3,24 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'activerecord'
+gem 'sqlite3', '~> 1.4'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
 gem 'activemodel', '~> 6.0.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5'
+
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks', '~> 5'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -25,6 +35,7 @@ gem 'rack-cors'
 gem 'mongoid',  git: 'https://github.com/mongodb/mongoid.git', branch: 'master'
 gem 'mongoid-locker'
 
+gem 'actiontext', '~> 6.0.0.rc1'
 # Settings, validation and dependency injection
 gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'master'
 gem 'fast_jsonapi'
