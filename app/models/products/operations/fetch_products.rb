@@ -14,7 +14,7 @@ module Products::Operations
 
       return Success(products) if products.present?
 
-      hra_object.errors << 'Could Not find any Products for the given data'
+      hra_object.errors += ['Could Not find any Products for the given data']
       Failure(hra_object)
     end
   end

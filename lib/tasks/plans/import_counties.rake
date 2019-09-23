@@ -17,7 +17,7 @@ namespace :import do
         last_row = sheet_data.last_row
         (2..last_row).each do |row_number| # data starts from row 2, row 1 has headers
           row_info = sheet_data.row(row_number)
-          if false && offerings_constrained_to_zip_codes
+          if offerings_constrained_to_zip_codes
             ::Locations::CountyZip.find_or_create_by!({
               county_name: row_info[@headers["county"]].squish!,
               zip: row_info[@headers["zip"]].squish!,

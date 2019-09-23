@@ -35,7 +35,7 @@ module Transactions
       hra_object.hra = begin
                          ((hra_object.member_premium * 12) - annual_hra_amount)/annual_household_income
                        rescue => e
-                         hra_object.errors << 'Could Not calculate hra for the given data'
+                         hra_object.errors += ['Could Not calculate hra for the given data']
                          return Failure(hra_object)
                        end
       Success(hra_object)

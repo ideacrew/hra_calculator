@@ -24,7 +24,7 @@ module Products::Operations
       end
 
       if member_premiums.empty?
-        hra_object.errors << 'Could Not find any member premiums for the given data'
+        hra_object.errors += ['Could Not find any member premiums for the given data']
         Failure(hra_object)
       else
         final_premium_set = member_premiums.sort

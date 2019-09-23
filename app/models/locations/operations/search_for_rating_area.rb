@@ -26,7 +26,7 @@ module Locations::Operations
 
       return Success(rating_area) if rating_area.present?
 
-      hra_object.errors << 'Could Not find Rating Area for the given data'
+      hra_object.errors += ['Could Not find Rating Area for the given data']
       Failure(hra_object)
     end
   end
