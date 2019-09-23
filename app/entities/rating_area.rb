@@ -2,11 +2,11 @@
 class RatingArea < Dry::Struct
   transform_keys(&:to_sym)
 
-  attribute :rating_area_id
+  attribute :rating_area_id, Types::String
 
-  attribute :benefit_year_id
-  attribute :service_area_id
-  attribute :county_ids
-  attribute :zip_code_ids
+  attribute :benefit_year_id, Types::String
+  attribute :service_area_id, Types::String
+  attribute :county_ids, Types::String
+  attribute :zip_code_ids, Types::Array.of(Types::String)
 
 end

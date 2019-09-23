@@ -1,8 +1,8 @@
 class Employer < Dry::Struct
   transform_keys(&:to_sym)
 
-  attribute :county
-  attribute :state
-  attribute :zip_code
+  attribute :county, Types::String
+  attribute :state, Types::String
+  attribute :zip_code, Types::String
 
 end
