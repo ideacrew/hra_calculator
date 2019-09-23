@@ -1,0 +1,38 @@
+---
+key: :features
+namespaces:
+  - key: :premium_determination
+    settings:
+      - key: is_required
+        description: Feature must be enabled if true
+        default: false
+      - key: is_enabled
+        description: Feature must be enabled if true
+        default: false
+      - key: alt_key
+        description: Shortened Key reference to be used in Registry
+        default: shop
+      - key: :title
+        description: Name for this setting that will appear in the UI
+        default: ACA SHOP Market
+      - key: :description
+        description: Help text that will appear in the UI
+        default: ACA Small Business Health Options (SHOP) Portal
+    namespaces:
+      - key: :options 
+        namespaces:
+          - key: :settings
+            settings:
+              - key: :use_age_ratings
+                type: boolean
+                description: Choose whether your organization uses the member's age to determine health insurance premium rates.  If Yes, the Tool will collect the users date-of-birth to calculate premiums.
+                default: true
+
+  - key: :use_ehb
+    type: boolean
+
+
+  - key: :geographic_rating_area_model
+    type: :enumerated
+
+  - key: :tool_ui_pages

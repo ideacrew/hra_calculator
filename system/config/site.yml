@@ -1,0 +1,43 @@
+---
+key: :sites
+namespaces:
+  - key: :primary
+    settings:
+      - key: :marketplace_website_url
+        default: https://openhbx.org
+        description: The Marketplace Website URL will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_website_url%
+        type: url
+      - key: :call_center_phone
+        default: 1-800-555-1212
+        description: The Call Center Phone will appear on the Tool header and embedded in text wherever the following token is entered: %call_center_phone%
+        type: phone
+      - key: :title
+        type: string
+        default: HRA Affordability Tool
+      - key: :description
+        type: string
+        default: A tool to determine HRA Affordability
+    namespaces:
+      - key: :environments
+        namespaces:
+        - key: :production
+          namespaces:
+            - key: :options
+              namespaces:
+                - key: :settings
+                  settings:
+                    - key: offerings_constrained_to_service_areas
+                      type: :boolean
+                      default: true
+                    - key: validate_county
+                      type: :boolean
+                      default: true
+                    - key: validate_zipcode
+                      type: :boolean
+                      default: true
+                    - key: state_full_name
+                      type: :string
+                      default: 'Massachusetts'
+                    - key: state_abbr
+                      type: :string
+                      default: 'MA'
