@@ -26,7 +26,7 @@ module Validations
       county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
       if validate_county && county_zips.blank?
         key.failure('Entered county is invalid')
-      elsif validate_zipcode && county_zips.where(zip: values[:zipcode]).blank?
+      elsif offerings_constrained_to_zip_codes && county_zips.where(zip: values[:zipcode]).blank?
         key.failure('Entered zip and county combination does not exist for zipcode')
       end
     end

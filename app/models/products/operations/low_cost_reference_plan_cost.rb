@@ -11,8 +11,11 @@ module Products::Operations
 
       member_premiums = products.inject([]) do |premiums, product|
         begin
-          pt = product.premium_tables.where(:rating_area_id => hra_object.rating_area_id, :"effective_period.min".lte => date).first
-          premiums << pt.premium_tuples.where(age: age).first.cost
+          premium_tables = product.premium_tables.where(:rating_area_id => hra_object.rating_area_id).effective_period_cover(date)
+          premium_tables.each do |premium_table|
+            premiums << premium_table.premium_tuples.where(age: age).first.cost
+            premiums
+          end
           premiums
         rescue
           premiums
@@ -22,12 +25,12 @@ module Products::Operations
 
       if member_premiums.empty?
         hra_object.errors << 'Could Not find any member premiums for the given data'
-        return Failure(hra_object)
+        Failure(hra_object)
+      else
+        final_premium_set = member_premiums.sort
+        cost = hra_type.to_s.downcase == 'ichra' ? final_premium_set.first : final_premium_set.second
+        Success(cost)
       end
-
-      final_premium_set = member_premiums.sort
-      cost = hra_type.to_s.downcase == 'ichra' ? final_premium_set.first : final_premium_set.second
-      Success(cost)
     end
   end
 end
