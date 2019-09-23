@@ -26,7 +26,7 @@ gem 'mongoid',  git: 'https://github.com/mongodb/mongoid.git', branch: 'master'
 gem 'mongoid-locker'
 
 # Settings, validation and dependency injection
-gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'master'
+gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'branch_0.3.2'
 gem 'fast_jsonapi'
 gem 'roo', '~> 2.1.0'
 gem 'dry-monads',               '~> 1.2'
