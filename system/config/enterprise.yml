@@ -49,3 +49,33 @@ namespaces:
                                 - key: state_abbr
                                   type: :string
                                   default: 'MA'
+                                - key: tax_credit
+                                  type: :string
+                                  default: 'a tax credit'
+                                - key: market_place
+                                  type: :string
+                                  default: 'MARKETPLACE'
+                                - key: help_text_1
+                                  type: :string
+                                  default: "Answer 'no' when asked if you're offered health insurance by an employer (unless you are separately offered health insurance by another employer)."
+                                - key: help_text_2
+                                  type: :string
+                                  default: "When you're asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time."
+                                - key: short_term_plan
+                                  type: :string
+                                  default: 'such as a short-term plan'
+                                - key: minimum_essential_coverage
+                                  type: :string
+                                  default: 'minimum essential coverage'
+                                - key: minimum_essential_coverage_link
+                                  type: :string
+                                  default: "https://www.healthcare.gov/fees/plans-that-count-as-coverage/"
+                                - key: enroll_without_aptc
+                                  type: :string
+                                  default: 'HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC'
+                                - key: help_text_3
+                                  type: :string
+                                  default: 'similar coverage off Marketplace.'
+                                - key: help_text_4
+                                  type: :string
+                                  default: 'an ACA-compliant plan off Marketplace. Ask your employer about your options.'
