@@ -8,6 +8,5 @@ module Locations
     field :exchange_provided_code, type: String
     field :active_year, type: Integer
     field :covered_states, type: Array
-
   end
 end

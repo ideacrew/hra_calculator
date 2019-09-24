@@ -3,7 +3,7 @@ namespace :load_service_reference do
   task :run_all_service_areas => :environment do
     include ::SettingsHelper
 
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/service_areas", "**", "*.xlsx"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/service_areas", "**", "*.xlsx"))
     puts "*"*80 unless Rails.env.test?
 
     if offerings_constrained_to_service_areas
@@ -107,14 +107,16 @@ namespace :load_service_reference do
     include ::SettingsHelper
 
     year = Date.today.year
-    puts "Creating Default service area for #{year}" unless Rails.env.test?
-    ::Locations::ServiceArea.create!(
-      {active_year: year,
-       covered_states: [state_abbreviation],
-       county_zip_ids: [],
-       issuer_hios_id: nil,
-       issuer_provided_title: 'Default Service Area'}
-      )
+    (year..(year + 1)).each do |year|
+      puts "Creating Default service area for #{year}" unless Rails.env.test?
+      ::Locations::ServiceArea.find_or_create_by!(
+        {active_year: year,
+         covered_states: [state_abbreviation],
+         county_zip_ids: [],
+         issuer_hios_id: nil,
+         issuer_provided_title: 'Default Service Area'}
+        )
+    end
   end
 
   private

@@ -1,11 +1,13 @@
 module Validations
   class HraContract < Dry::Validation::Contract
     include ::SettingsHelper
+    extend ::SettingsHelper
 
     params do
       required(:state).filled(:string)
-      required(:zipcode).filled(:string)
-      required(:county).value(:string)
+      # TODO: read the Registries from Settings helper.
+      required(:zipcode).filled(:string) if Registry['enterprise.dchbx.primary.production.offerings_constrained_to_zip_codes']
+      required(:county).value(:string) if Registry['enterprise.dchbx.primary.production.validate_county']
       required(:dob).value(:date)
       required(:household_frequency).filled(:string)
       required(:household_amount).filled(:float)
@@ -20,12 +22,21 @@ module Validations
       key.failure("State must be #{state_full_name}") if value != state_full_name
     end
 
-    rule(:county, :zipcode) do
-      county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
-      if validate_county && county_zips.blank?
-        key.failure('Entered county is invalid')
-      elsif offerings_constrained_to_zip_codes && county_zips.where(zip: values[:zipcode]).blank?
-        key.failure('Entered zip and county combination does not exist for zipcode')
+    if validate_county && !offerings_constrained_to_zip_codes
+      rule(:county) do
+        county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
+        key.failure('Entered county is invalid') if county_zips.blank?
+      end
+    end
+
+    if validate_county && offerings_constrained_to_zip_codes
+      rule(:county, :zipcode) do
+        county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
+        if county_zips.blank?
+          key.failure('Entered county is invalid')
+        elsif county_zips.where(zip: values[:zipcode]).blank?
+          key.failure('Entered zip and county combination does not exist for zipcode')
+        end
       end
     end
 

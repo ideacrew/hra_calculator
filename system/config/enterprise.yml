@@ -33,22 +33,22 @@ namespaces:
                               settings:
                                 - key: offerings_constrained_to_service_areas
                                   type: :boolean
-                                  default: true
+                                  default: false
                                 - key: offerings_constrained_to_rating_areas
                                   type: :boolean
-                                  default: true
+                                  default: false
                                 - key: validate_county
                                   type: :boolean
-                                  default: true
+                                  default: false
                                 - key: offerings_constrained_to_zip_codes
                                   type: :boolean
-                                  default: true
+                                  default: false
                                 - key: state_full_name
                                   type: :string
-                                  default: 'Massachusetts'
+                                  default: 'District of Columbia'
                                 - key: state_abbr
                                   type: :string
-                                  default: 'MA'
+                                  default: 'DC'
                                 - key: tax_credit
                                   type: :string
                                   default: 'a tax credit'

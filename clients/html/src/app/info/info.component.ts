@@ -39,8 +39,8 @@ export class InfoComponent implements OnInit {
   createForm() {
     this.hraForm = this.fb.group({
       state: ['', Validators.required ],
-      zipcode: ['', Validators.required ],
-      county: ['', Validators.required ],
+      zipcode: [''],
+      county: [''],
       dob: ['', [Validators.required, validateDate]],
       household_frequency: ['', Validators.required ],
       household_amount: ['', Validators.required ],
