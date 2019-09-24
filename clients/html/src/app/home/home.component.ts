@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
       (res) => {
         console.log(res)
         this.marketPlace = res.data.market_place;
-        this.taxCredit = res.tax_credit;
+        this.taxCredit = res.data.tax_credit;
       },
       (err) => {
         console.log(err)
