@@ -31,10 +31,10 @@ export class ResultComponent implements OnInit {
   help_text_3: String;
   help_text_4: String;
   help_text_5: String;
-  showUnaffordableQsehraText: boolean = true;
-  showAffordableQsehraText: boolean = true;
-  showUnaffordableIchraText: boolean = true;
-  showAffordableIchraText: boolean = true;
+  showUnaffordableQsehraText: boolean = false;
+  showAffordableQsehraText: boolean = false;
+  showUnaffordableIchraText: boolean = false;
+  showAffordableIchraText: boolean = false;
   constructor(private resultService: ResultService) {       
   }
 
