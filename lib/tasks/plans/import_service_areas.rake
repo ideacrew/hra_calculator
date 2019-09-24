@@ -1,19 +1,26 @@
 namespace :load_service_reference do
 
   task :run_all_service_areas => :environment do
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/service_areas", "**", "*.xlsx"))
+    include ::SettingsHelper
+
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/service_areas", "**", "*.xlsx"))
     puts "*"*80 unless Rails.env.test?
-    files.sort.each do |file|
-      puts "processing file #{file}" unless Rails.env.test?
-      # new model
-      Rake::Task['load_service_reference:update_service_areas_new_model'].invoke(file)
-      Rake::Task['load_service_reference:update_service_areas_new_model'].reenable
-      # end new model
+
+    if offerings_constrained_to_service_areas
+      files.sort.each do |file|
+        puts "processing file #{file}" unless Rails.env.test?
+        Rake::Task['load_service_reference:update_service_areas_new_model'].invoke(file)
+        Rake::Task['load_service_reference:update_service_areas_new_model'].reenable
+      end
+    else
+      Rake::Task['load_service_reference:default_service_area'].invoke
     end
     puts "*"*80 unless Rails.env.test?
   end
 
   task :update_service_areas_new_model, [:file] => :environment do |t,args|
+    include ::SettingsHelper
+
     row_data_begin = 13
     total = 0
     begin
@@ -30,7 +37,7 @@ namespace :load_service_reference do
           sa = ::Locations::ServiceArea.where(
             active_year: @year,
             issuer_provided_code: sheet.cell(i,1),
-            covered_states: ["MA"],
+            covered_states: [state_abbreviation],
             issuer_provided_title: sheet.cell(i,2)
           ).first
           if sa.present?
@@ -40,7 +47,7 @@ namespace :load_service_reference do
             ::Locations::ServiceArea.create(
               active_year: @year,
               issuer_provided_code: sheet.cell(i,1),
-              covered_states: ["MA"],
+              covered_states: [state_abbreviation],
               issuer_hios_id: issuer_hios_id,
               issuer_provided_title: sheet.cell(i,2)
             )
@@ -52,7 +59,7 @@ namespace :load_service_reference do
             # issuer_hios_id: issuer_hios_id,
             # covered_states: nil
           )
-          if existing_state_wide_areas.count > 0 && existing_state_wide_areas.first.covered_states.present? && existing_state_wide_areas.first.covered_states.include?("MA")
+          if existing_state_wide_areas.count > 0 && existing_state_wide_areas.first.covered_states.present? && existing_state_wide_areas.first.covered_states.include?(state_abbreviation)
             v = existing_state_wide_areas.first
             v.issuer_hios_id = issuer_hios_id
             v.save
@@ -93,7 +100,23 @@ namespace :load_service_reference do
       puts " --------- " unless Rails.env.test?
       puts e.backtrace unless Rails.env.test?
     end
+  end
 
+  desc "Default service area"
+  task :default_service_area => :environment do
+    include ::SettingsHelper
+
+    year = Date.today.year
+    (year..(year + 1)).each do |year|
+      puts "Creating Default service area for #{year}" unless Rails.env.test?
+      ::Locations::ServiceArea.find_or_create_by!(
+        {active_year: year,
+         covered_states: [state_abbreviation],
+         county_zip_ids: [],
+         issuer_hios_id: nil,
+         issuer_provided_title: 'Default Service Area'}
+        )
+    end
   end
 
   private

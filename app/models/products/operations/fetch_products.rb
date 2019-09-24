@@ -10,11 +10,12 @@ module Products::Operations
         :"service_area_id".in => hra_object.service_area_ids,
         :"premium_tables.rating_area_id" => BSON::ObjectId.from_string(hra_object.rating_area_id),
         :"premium_tables.effective_period.min".lte => hra_object.start_month,
+        :"premium_tables.effective_period.max".gte => hra_object.start_month,
         :"premium_tables.premium_tuples.age" => age)
 
       return Success(products) if products.present?
 
-      hra_object.errors << 'Could Not find any Products for the given data'
+      hra_object.errors += ['Could Not find any Products for the given data']
       Failure(hra_object)
     end
   end

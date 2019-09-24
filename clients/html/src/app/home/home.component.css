@@ -1,0 +1,25 @@
+.main-content {
+  margin-top: 80px;
+  margin-bottom: 75px;
+  
+}
+
+.card-color {
+	font-size: 18px;
+	text-align: center;
+  color: white;
+	background-color: #3498DB;
+}
+
+.border-color{
+  border: 2px solid ##3498DB;
+}
+
+.margin-bottom {
+	margin-bottom: 20px;
+}
+
+.center-italic {
+	text-align: center;
+	font-style: italic;
+}
