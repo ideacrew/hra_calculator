@@ -4,15 +4,15 @@ require 'rails_helper'
 require Rails.root.join('lib', 'object_builders', 'product_builder')
 require Rails.root.join('lib', 'tasks', 'parsers', 'plan_benefit_template_parser')
 
-describe "qhp builder" do
+describe "qhp builder", dbclean: :after_each do
   before :all do
     FactoryBot.create(:locations_service_area, issuer_provided_code: "MAS001", active_year: 2019, issuer_hios_id: "42690")
     FactoryBot.create(:locations_service_area, issuer_provided_code: "MAS002", active_year: 2019, issuer_hios_id: "42690")
-    @files = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/*.xml'))
   end
 
-  context "new model having product without qhp" do
+  context 'product loading non-silver plan' do
     before :all do
+      @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_gold_pb_bcbs.xml')).first
       @product = FactoryBot.create(:products_health_product, hios_id: "42690MA1234502-01", hios_base_id: "42690MA1234502", csr_variant_id: "01", application_period: Date.new(2019, 1, 1)..Date.new(2019, 12, 31))
     end
 
@@ -20,92 +20,68 @@ describe "qhp builder" do
       expect(::Products::Product.all.count).to eq 1
     end
 
-    it "should not have any qhp data" do
-      expect(Products::Qhp.all.count).to eq 0
-      expect(Products::Qhp.all.where(:"qhp_cost_share_variances.hios_plan_and_variant_id" => @product.hios_id).count).to eq 0
-    end
-
-    context "when new product is imported" do
+    context "when product loader is called with a file" do
       before(:all) do
-        xml = Nokogiri::XML(File.open(@files.first))
+        xml = Nokogiri::XML(File.open(@file))
         product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
         product = ProductBuilder.new({})
         product.add(product_parser.to_hash)
         product.run
       end
 
-      it "should load/update 2 aca_shop products from file" do
-        expect(::Products::Product.aca_shop_market.count).to eq 2
-      end
-
-      it "should load/update 1 congressional_market products from file" do
-        expect(::Products::Product.congressional_market.count).to eq 1
-      end
-
-      it "should load 2 QHP records from the file" do
-        expect(Products::Qhp.all.count).to eq 2
-      end
-
-      it "should assign qhp_cost_share_variances from file to the existing products" do
-        expect(Products::Qhp.all.where(:"qhp_cost_share_variances.hios_plan_and_variant_id" => @product.hios_id).count).to eq 1
-      end
-
-      it "should have all qhp_cost_share_variances for all the products" do
-        ::Products::Product.all.each do |product|
-          expect(Products::Qhp.all.where(:"qhp_cost_share_variances.hios_plan_and_variant_id" => product.hios_id).count).to eq 1
-        end
+      it "should not load ivl product from file" do
+        expect(::Products::Product.all.count).to eq 1
       end
     end
   end
 
-  context "new model having product with qhp" do
+
+  context 'product loading with invalid xml' do
     before :all do
-      ::Products::Product.all.delete
-      Products::Qhp.all.delete
-
-      @product2 = FactoryBot.create(:products_health_product, hios_id: "42690MA1234502-01", hios_base_id: "42690MA1234502", csr_variant_id: "01", application_period: Date.new(2019, 1, 1)..Date.new(2019, 12, 31))
-      products_qhp = FactoryBot.create(:products_qhp, issuer_id: "42690", standard_component_id: "42690MA1234502", plan_marketing_name: "Test Blue Premium", hios_product_id: "42690MA234", network_id: "MAN001", service_area_id: "MAS001", active_year: 2019)
-      products_qhp.qhp_cost_share_variances.create(hios_plan_and_variant_id: "42690MA1234502-01", plan_marketing_name: "Test Blue Premium", metal_level: "Platinum", csr_variation_type: "Standard Platinum On Exchange Plan", product_id: @product2.id)
+      @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_invalid.xml')).first
+      @product = FactoryBot.create(:products_health_product, hios_id: "42690MA1234502-01", hios_base_id: "42690MA1234502", csr_variant_id: "01", application_period: Date.new(2019, 1, 1)..Date.new(2019, 12, 31))
     end
 
-    it "should have 1 existing products" do
-      expect(::Products::Product.all.count).to eq 1
+    it "should have 2 existing products" do
+      expect(::Products::Product.all.count).to eq 2
     end
 
-    it "should have 1 qhp record" do
-      expect(Products::Qhp.all.count).to eq 1
-      expect(Products::Qhp.all.where(:"qhp_cost_share_variances.hios_plan_and_variant_id" => @product2.hios_id).count).to eq 1
-    end
-
-    context "when new product is imported" do
+    context "when product loader is called with a file" do
       before(:all) do
-        xml = Nokogiri::XML(File.open(@files.first))
+        xml = Nokogiri::XML(File.open(@file))
         product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
         product = ProductBuilder.new({})
         product.add(product_parser.to_hash)
         product.run
       end
 
-      it "should load/update 2 aca_shop products from file" do
-        expect(::Products::Product.aca_shop_market.count).to eq 2
+      it "should load ivl product from file" do
+        expect(::Products::Product.all.count).to eq 2
+      end
+    end
+  end
+
+  context 'product loading silver plan' do
+    before :all do
+      @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_silver_pb_bcbs.xml')).first
+      @product = FactoryBot.create(:products_health_product, hios_id: "42690MA1234502-01", hios_base_id: "42690MA1234502", csr_variant_id: "01", application_period: Date.new(2019, 1, 1)..Date.new(2019, 12, 31))
+    end
+
+    it "should have 2 existing products" do
+      expect(::Products::Product.all.count).to eq 3
+    end
+
+    context "when product loader is called with a file" do
+      before(:all) do
+        xml = Nokogiri::XML(File.open(@file))
+        product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
+        product = ProductBuilder.new({})
+        product.add(product_parser.to_hash)
+        product.run
       end
 
-      it "should load/update 1 congressional_market products from file" do
-        expect(::Products::Product.congressional_market.count).to eq 1
-      end
-
-      it "should load 2 QHP records from the file" do
-        expect(Products::Qhp.all.count).to eq 2
-      end
-
-      it "should not create new qhp_cost_share_variances, but update from file to the existing one" do
-        expect(Products::Qhp.all.where(:"qhp_cost_share_variances.hios_plan_and_variant_id" => @product2.hios_id).count).to eq 1
-      end
-
-      it "should have all qhp_cost_share_variances for all the products" do
-        ::Products::Product.all.each do |product|
-          expect(Products::Qhp.all.where(:"qhp_cost_share_variances.hios_plan_and_variant_id" => product.hios_id).count).to eq 1
-        end
+      it "should load ivl product from file" do
+        expect(::Products::Product.all.count).to eq 4
       end
     end
   end
@@ -113,8 +89,4 @@ describe "qhp builder" do
   after :all do
     DatabaseCleaner.clean
   end
-end
-
-def invoke_tasks(file)
-  Rake::Task["xml:plans"].invoke(file)
 end
