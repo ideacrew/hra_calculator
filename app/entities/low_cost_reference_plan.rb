@@ -7,7 +7,7 @@ class LowCostReferencePlan < Dry::Struct
   # Make an enumerated Type
   attribute :kind, Types::LowCostPlan
 
-  attribute :service_area_ids
-  attribute :rating_area_ids
+  attribute :service_area_ids, Types::Array.of(Types::String)
+  attribute :rating_area_ids, Types::Array.of(Types::String)
 
 end

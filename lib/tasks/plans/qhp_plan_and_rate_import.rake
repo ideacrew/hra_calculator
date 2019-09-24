@@ -10,7 +10,7 @@ namespace :xml do
   task :plans, [:file] => :environment do |task, args|
     # TODO: Get the state_abbreviation to look for specific states folder
 
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'ma', "plans", "**", "*.xml"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'dc', "plans", "**", "*.xml"))
     qhp_import_product_hash = files.inject(ProductBuilder.new({})) do |qhp_product_hash, file|
       puts file
       xml = Nokogiri::XML(File.open(file))
@@ -32,15 +32,12 @@ namespace :xml do
   end
 end
 
-
 namespace :xml do
   desc "Import qhp rates from xml files"
   task :rates, [:action] => :environment do |task, args|
     # TODO: Get the state_abbreviation to look for specific states folder
 
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'ma', "rates", "**", "*.xml"))
-    # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/rates/2017/Health/United (Shop Only)", "UHIC", "**", "*.xml"))
-    # files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/rates/2017/Health/United (Shop Only)/UHIC/UHIC_SHOP_Rate_Tables_2017_v.1.xml"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'dc', "rates", "**", "*.xml"))
     rate_import_hash = files.inject(QhpRateBuilder.new()) do |rate_hash, file|
       action = args[:action] == "update" ? "update" : "new"
       puts file

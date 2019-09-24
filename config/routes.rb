@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :hra_results, :defaults => { :format => 'json' } do
     collection do
+      get :hra_information
+      get :hra_counties
       post :hra_payload
     end
   end

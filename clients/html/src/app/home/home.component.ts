@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FullComponent } from '../layouts/full/full.component';
 import { BlankComponent } from '../layouts/blank/blank.component';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +13,25 @@ import { BlankComponent } from '../layouts/blank/blank.component';
   ]
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  marketPlace: string;
+  taxCredit: string;
+  constructor(private httpClient: HttpClient,) { }
 
   ngOnInit() {
+    this.getInitialInfo();
+  }
+
+  getInitialInfo() {
+    this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_information").subscribe(
+      (res) => {
+        console.log(res)
+        this.marketPlace = res.data.market_place;
+        this.taxCredit = res.tax_credit;
+      },
+      (err) => {
+        console.log(err)
+      }
+    );
   }
 
 }

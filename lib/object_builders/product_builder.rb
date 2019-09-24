@@ -7,6 +7,7 @@ class ProductBuilder
     @log_path = LOG_PATH
     @qhp_hash = qhp_hash
     @qhp_array = []
+    @service_area_enabled = Registry['enterprise.dchbx.primary.production.offerings_constrained_to_service_areas']
     set_service_areas
     FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
     @logger = Logger.new(@log_path)
@@ -114,13 +115,14 @@ class ProductBuilder
           @existing_qhp_counter += 1
           product.update_attributes(all_attributes)
         else
-          new_product = if is_health_product? && retrieve_metal_level == 'silver'
+          new_product = if is_health_product?
             result = validate_health_product(all_attributes)
             ::Products::HealthProduct.new(result.to_h)
           else
             ::Products::DentalProduct.new(all_attributes)
           end
-          if new_product.valid?
+
+          if retrieve_metal_level.to_s == 'silver' && new_product.valid?
             new_product.save!
             create_congressional_products(new_product)
             @success_plan_counter += 1
@@ -157,13 +159,21 @@ class ProductBuilder
   end
 
   def mapped_service_area_id
-    @service_area_map[[@qhp.issuer_id,@qhp.service_area_id,@qhp.active_year]]
+    if @service_area_enabled
+      @service_area_map[[@qhp.issuer_id, @qhp.service_area_id,@qhp.active_year]]
+    else
+      @service_area_map[[@qhp.active_year]]
+    end
   end
 
   def set_service_areas
     @service_area_map = {}
     ::Locations::ServiceArea.all.map do |sa|
-      @service_area_map[[sa.issuer_hios_id,sa.issuer_provided_code,sa.active_year]] = sa.id
+      if @service_area_enabled
+        @service_area_map[[sa.issuer_hios_id, sa.issuer_provided_code,sa.active_year]] = sa.id
+      else
+        @service_area_map[[sa.active_year]] = sa.id
+      end
     end
   end
 

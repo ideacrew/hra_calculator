@@ -26,7 +26,7 @@ module Locations::Operations
 
       return Success(service_areas) if service_areas.present?
 
-      hra_object.errors << 'Could Not find Service Areas for the given data'
+      hra_object.errors += ['Could Not find Service Areas for the given data']
       Failure(hra_object)
     end
   end

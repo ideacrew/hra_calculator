@@ -10,9 +10,11 @@ module Operations
         state_name: state_full_name,
         counties: counties,
         display_county: validate_county,
-        display_zipcode: validate_zipcode,
+        display_zipcode: offerings_constrained_to_zip_codes,
         start_month_dates: (Date.new(year).beginning_of_year..Date.new(year).end_of_year).map(&:to_s),
-        end_month_dates: (Date.new(year).beginning_of_year..Date.new(year).end_of_year.prev_month).map(&:to_s)
+        end_month_dates: (Date.new(year).beginning_of_year..Date.new(year).end_of_year.prev_month).map(&:to_s),
+        tax_credit: tax_credit,
+        market_place: market_place
       })
 
       Success(hra_defaulter)
