@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { ResultService } from '../result.service'
+import { validateDate } from './date.validator'
 
 @Component({
   templateUrl: './info.component.html',
@@ -23,6 +24,7 @@ export class InfoComponent implements OnInit {
   showZipcode: boolean = true;
   showCounty: boolean = true;
   showDob: boolean = true;
+  today: any = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -37,9 +39,9 @@ export class InfoComponent implements OnInit {
   createForm() {
     this.hraForm = this.fb.group({
       state: ['', Validators.required ],
-      zipcode: ['', Validators.required ],
-      county: ['', Validators.required ],
-      dob: ['', Validators.required ],
+      zipcode: [''],
+      county: [''],
+      dob: ['', [Validators.required, validateDate]],
       household_frequency: ['', Validators.required ],
       household_amount: ['', Validators.required ],
       hra_type: ['', Validators.required ],
@@ -75,6 +77,8 @@ export class InfoComponent implements OnInit {
     this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_information").subscribe(
       (res) => {
         console.log(res)
+         this.countyOptions = res.data.counties;
+         this.getDisplayInfo(res);
          this.hraForm.patchValue({
           state: res.data.state_name
         });
@@ -85,13 +89,18 @@ export class InfoComponent implements OnInit {
     );
   }
 
+  getDisplayInfo(res) {
+    this.showZipcode = res.data.display_zipcode;
+    this.showCounty = res.data.display_county;
+    // this.showDob = res.data.display_dob;
+  }
+
   getCountyInfo() {
     let params = new HttpParams().set('hra_state', this.hraForm.value.state);
     params = params.append('hra_zipcode', this.hraForm.value.zipcode);
     this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_counties", {params: params}).subscribe(
       (res) => {
         console.log(res)
-        debugger;
         this.countyOptions = res.data.counties
       },
       (err) => {
@@ -129,5 +138,13 @@ export class InfoComponent implements OnInit {
 
   onHraFrequencyChange(entry: string){
     this.selectedHraFrequency = entry;
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
   }
 }

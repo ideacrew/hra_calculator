@@ -5,7 +5,7 @@ namespace :load_rate_reference do
   task :run_all_rating_areas => :environment do
     include ::SettingsHelper
 
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/rating_areas", "**", "*.xlsx"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/rating_areas", "**", "*.xlsx"))
 
     puts "*"*80 unless Rails.env.test?
 
@@ -27,13 +27,15 @@ namespace :load_rate_reference do
     include ::SettingsHelper
 
     year = Date.today.year
-    puts "Creating default Rating area for #{year}" unless Rails.env.test?
-    ::Locations::RatingArea.create!(
-      {active_year: year,
-       exchange_provided_code: '',
-       county_zip_ids: [],
-       covered_states: [state_abbreviation]}
-     )
+    (year..(year + 1)).each do |year|
+      puts "Creating default Rating area for #{year}" unless Rails.env.test?
+      ::Locations::RatingArea.find_or_create_by!(
+        {active_year: year,
+         exchange_provided_code: '',
+         county_zip_ids: [],
+         covered_states: [state_abbreviation]}
+       )
+    end
   end
 
   desc "load rating regions from xlsx file"

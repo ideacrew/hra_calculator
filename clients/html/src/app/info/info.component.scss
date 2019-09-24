@@ -1,6 +1,17 @@
 .main-content {
   margin-top: 80px;
   margin-bottom: 75px;
+  p {
+    font-size: 18px;
+  }
+  label {
+    font-weight: 400;
+    font-size: 16px;
+  }
+}
+
+.step-desription{
+  font-size: 26px;
 }
 
 .step {

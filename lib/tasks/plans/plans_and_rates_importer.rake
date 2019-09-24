@@ -8,7 +8,7 @@ require Rails.root.join('lib', 'object_builders', 'qhp_rate_builder.rb')
 namespace :xml do
   desc "Import qhp plans from xml files"
   task :plans, [:file] => :environment do |task, args|
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'ma', "plans", "**", "*.xml"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'dc', "plans", "**", "*.xml"))
 
     qhp_import_product_hash = files.inject(ProductBuilder.new({})) do |qhp_product_hash, file|
       puts file
@@ -25,7 +25,7 @@ end
 namespace :xml do
   desc "Import qhp rates from xml files"
   task :rates, [:action] => :environment do |task, args|
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'ma', "rates", "**", "*.xml"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls", 'dc', "rates", "**", "*.xml"))
 
     rate_import_hash = files.inject(QhpRateBuilder.new()) do |rate_hash, file|
       action = args[:action] == "update" ? "update" : "new"

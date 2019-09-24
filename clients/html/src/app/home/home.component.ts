@@ -22,11 +22,11 @@ export class HomeComponent implements OnInit {
   }
 
   getInitialInfo() {
-    this.httpClient.get<any>(environment.apiUrl+"/hra_results/plan_details").subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_information").subscribe(
       (res) => {
         console.log(res)
-        this.marketPlace = res.market_place;
-        this.taxCredit = res.tax_credit;
+        this.marketPlace = res.data.market_place;
+        this.taxCredit = res.data.tax_credit;
       },
       (err) => {
         console.log(err)
