@@ -23,7 +23,7 @@ export class ResultComponent implements OnInit {
   taxCredit: String;
   marketPlace: String;
 
-  showUnaffordableQsehraText: boolean = false;
+  showUnaffordableQsehraText: boolean = true;
   showAffordableQsehraText: boolean = false;
   showUnaffordableIchraText: boolean = false;
   showAffordableIchraText: boolean = false;

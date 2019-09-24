@@ -1,6 +1,7 @@
 .main-content {
   margin-top: 80px;
   margin-bottom: 75px;
+  
 }
 
 .card-color {
@@ -16,4 +17,9 @@
 
 .margin-bottom {
 	margin-bottom: 20px;
+}
+
+.center-italic {
+	text-align: center;
+	font-style: italic;
 }
