@@ -2,18 +2,19 @@ module ApplicationHelper
 
   def select_dropdown(input_id, list)
     return unless list.is_a? Array
-    content_tag(:select, class: "form-control", id: input_id) do
+    content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']') do
       concat(content_tag :option, "Select", value: "")
       list.each do |item|
         if item.is_a? Array
           concat(content_tag :option, item[0], value: item[1])
+        elsif item.is_a? Hash
+          concat(content_tag :option, item.first[1], value: item.first[0])
         else
           concat(content_tag :option, item.humanize, value: item)
         end
       end
     end
   end
-
 
   def build_form_group(setting, input_group)
     id        = setting[:key].to_s
