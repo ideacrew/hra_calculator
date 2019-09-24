@@ -14,7 +14,8 @@ module Operations
         minimum_essential_coverage_link: minimum_essential_coverage_link,
         enroll_without_aptc: enroll_without_aptc,
         help_text_3: help_text_3,
-        help_text_4: help_text_4
+        help_text_4: help_text_4,
+        help_text_5: help_text_5
       })
 
       Success(hra_results)

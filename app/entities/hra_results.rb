@@ -11,4 +11,5 @@ class HraResults < Dry::Struct
   attribute :enroll_without_aptc, Types::String
   attribute :help_text_3, Types::String
   attribute :help_text_4, Types::String
+  attribute :help_text_5, Types::String
 end
