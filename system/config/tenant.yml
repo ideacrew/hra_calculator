@@ -27,15 +27,15 @@ namespaces:
                         settings:
                           - key: :marketplace_name
                             default: My Health Connector
-                            description: The Marketplace Name will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_name%
+                            description: "The Marketplace Name will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_name%"
                             type: string
                           - key: :marketplace_website_url
                             default: https://openhbx.org
-                            description: The Marketplace Website URL will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_website_url%
+                            description: "The Marketplace Website URL will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_website_url%"
                             type: :url
                           - key: :call_center_phone
                             default: 1-800-555-1212
-                            description: The Call Center Phone will appear on the Tool header and embedded in text wherever the following token is entered: %call_center_phone%
+                            description: "The Call Center Phone will appear on the Tool header and embedded in text wherever the following token is entered: %call_center_phone%"
                             type: phone
                       - key: :branding
                         settings:
@@ -76,6 +76,4 @@ namespaces:
                               default: #17a2b8
                   - key: :environments
                     namespaces:
-                    - key: :production          
-
-  
+                    - key: :production
