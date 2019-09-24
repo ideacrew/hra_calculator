@@ -1,38 +1,61 @@
 ---
-key: :features
+key: :enterprise
 namespaces:
-  - key: :premium_determination
-    settings:
-      - key: is_required
-        description: Feature must be enabled if true
-        default: false
-      - key: is_enabled
-        description: Feature must be enabled if true
-        default: false
-      - key: alt_key
-        description: Shortened Key reference to be used in Registry
-        default: shop
-      - key: :title
-        description: Name for this setting that will appear in the UI
-        default: ACA SHOP Market
-      - key: :description
-        description: Help text that will appear in the UI
-        default: ACA Small Business Health Options (SHOP) Portal
+  - key: :tenants
     namespaces:
-      - key: :options 
+      - key: :ic
         namespaces:
-          - key: :settings
-            settings:
-              - key: :use_age_ratings
-                type: boolean
-                description: Choose whether your organization uses the member's age to determine health insurance premium rates.  If Yes, the Tool will collect the users date-of-birth to calculate premiums.
-                default: true
+          - key: :sites
+            namespaces:
+              - key: :primary
+                namespaces:
+                  - key: :environments
+                    namespaces:
+                    - key: :production
+                      namespaces:
+                        - key: :features
+                          namespaces:
+                          - key: :hra_affordability_tool
+                            settings:
+                              - key: is_required
+                                description: Feature must be enabled if true
+                                type: :boolean
+                                default: true
+                              - key: is_enabled
+                                description: Feature is available in the application (must be enabled if feature is required).
+                                type: :boolean
+                                default: true
+                              - key: :title
+                                description: Name for this setting that will appear in the UI
+                                type: :string
+                                default: Silver Plan Criteria
+                              - key: :description
+                                description: Help text that will appear in the UI
+                                type: :string
+                                default: Settings used to select and rate QHPs
+                            namespaces:
+                              - key: :options
+                                namespaces:
+                                  - key: :silver_plan_criteria
+                                      settings:
+                                        - key: :use_age_ratings
+                                          title: Use Age Ratings?
+                                          type: :radio_select
+                                          description: Choose whether your organization uses the member's age to determine health insurance premium rates.  If Yes, the Tool will collect the users date-of-birth to calculate premiums.
+                                          default: :yes
+                                        - key: :qsehra_premium_factor
+                                          title: Premium Value Used for QSEHRA Comparison
+                                          options: [ { full: "Full Premium"}, { ehb: "EHB Premium"}]
+                                          description: QSEHRA determinations can use either the Second Lowest Cost Silver Plan's full premium or Essential Health Benefits value 
+                                          default: :full
+                                          type: :radio_select
+                                        - key: :rating_area_model
+                                          title: Geographic Rating Area Model
+                                          default: nil
+                                          type: :radio_select
+                                          options: [ { single: "Single Rating Area" }, { county: "County-based Rating Area" }, { zipcode: "Zipcode-based Rating Area"} ]
+                                          description: Choose boundaries that your organization uses to determine health insurance premium rates.  Single Rating Area requires SERFF template uploads only and will not ask the user for home residence information.  County- and Zipcode-based Rating Areas require SERFF templates plus County/Zip lookup table uploads and request the user enter county name and zip code as appropriate to calculate premiums.  
+                                  - key: :ichra_determination
+                                  - key: :qsehra_determination 
+                          - key: :tool_ui_pages
 
-  - key: :use_ehb
-    type: boolean
-
-
-  - key: :geographic_rating_area_model
-    type: :enumerated
-
-  - key: :tool_ui_pages

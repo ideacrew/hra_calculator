@@ -1,0 +1,81 @@
+---
+key: :enterprise
+namespaces:
+  - key: :tenants
+    namespaces:
+      - key: :ic
+        settings:
+        - key: owner_account_name
+          default: admin@openhbx.org
+          description: The Marketplace owner's email login account name
+          type: email_account
+        namespaces:
+          - key: :sites
+            namespaces:
+              - key: :primary
+                settings:
+                  - key: :title
+                    default: HRA Affordability Tool
+                    type: :string
+                  - key: :description
+                    type: :string
+                    default: This tool will help you determine how an HRA you're offered affects your eligibility for a tax credit and what to do next
+                namespaces:
+                  - key: :options
+                    namespaces:
+                      - key: :settings
+                        settings:
+                          - key: :marketplace_name
+                            default: My Health Connector
+                            description: The Marketplace Name will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_name%
+                            type: string
+                          - key: :marketplace_website_url
+                            default: https://openhbx.org
+                            description: The Marketplace Website URL will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_website_url%
+                            type: :url
+                          - key: :call_center_phone
+                            default: 1-800-555-1212
+                            description: The Call Center Phone will appear on the Tool header and embedded in text wherever the following token is entered: %call_center_phone%
+                            type: phone
+                      - key: :branding
+                        settings:
+                          - key: :site_logo
+                            description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
+                            type: :base_64
+                            default: nil
+                          - key: :fav_icon
+                            description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
+                            type: :base_64
+                            default: nil
+                      - key: :ui_theme
+                        settings:
+                          - key: typefaces
+                            description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
+                            type: :array # of uRLs
+                            default: ["https://fonts.googleapis.com/css?family=Lato:400,700,400italic"]
+                        namespaces:
+                          - key: :bootstrap_pallette
+                            settings:
+                            - key: :primary_color
+                              type: :swatch
+                              default: #007bff
+                            - key: :secondary_color
+                              type: :swatch
+                              default: #6c757d
+                            - key: :success_color
+                              type: :swatch
+                              default: #28a745
+                            - key: :danger_color
+                              type: :swatch
+                              default: #dc3545
+                            - key: :warning_color
+                              type: :swatch
+                              default: #ffc107
+                            - key: :info_color
+                              type: :swatch
+                              default: #17a2b8
+                  - key: :environments
+                    namespaces:
+                    - key: :production          
+
+  

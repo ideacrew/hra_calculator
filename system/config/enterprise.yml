@@ -9,18 +9,5 @@ settings:
     default: admin
     description: The Enterprise owner's login account name
     type: string
-namespaces:
-  - key: :tenants
-    namespaces:
-      - key: :ic
-        settings:
-        - key: :marketplace_name
-          default: My Health Connector
-          description: The Marketplace Name will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_name%
-          type: string
-        - key: owner_account_name
-          default: admin@openhbx.org
-          description: The Marketplace owner's email login account name
-          type: email_account
 
-  
+
