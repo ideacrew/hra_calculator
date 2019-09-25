@@ -6,3 +6,10 @@
 .card-border {
 	border: 1px solid grey;
 }
+
+.result-box {
+	font-weight:bold;
+	background-color:#cae7fb;
+	text-align: center;
+}
+

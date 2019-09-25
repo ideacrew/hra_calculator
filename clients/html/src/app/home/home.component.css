@@ -23,3 +23,13 @@
 	text-align: center;
 	font-style: italic;
 }
+
+.check-color {
+	float: left;
+	color: #68d034;
+}
+
+.times-circle-color {
+	float: left;
+	color: #ff0000;
+}
