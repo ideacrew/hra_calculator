@@ -39,7 +39,7 @@ export class ResultComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.result = this.resultService.results;    
+    this.result = this.resultService.results;
     this.state = this.result.data.state;
     this.zipcode = this.result.data.zipcode;
     this.county = this.result.data.county;
@@ -61,7 +61,7 @@ export class ResultComponent implements OnInit {
     this.help_text_3 = this.result.data.help_text_3;
     this.help_text_4 = this.result.data.help_text_4;
     this.help_text_5 = this.result.data.help_text_5;
-    this.hra_type = this.result.data.data.hra_type;
+    this.hra_type = this.result.data.hra_type;
     this.hra_determination = this.result.data.hra_determination;
     if(this.hra_type == "qsehra") {
       if (this.hra_determination == 'unaffordable'){
