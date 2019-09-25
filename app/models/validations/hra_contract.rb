@@ -5,8 +5,11 @@ module Validations
 
     params do
       required(:state).filled(:string)
-      optional(:zipcode).filled(:string) if Registry['enterprise.dchbx.primary.production.offerings_constrained_to_zip_codes']
-      optional(:county).value(:string) if Registry['enterprise.dchbx.primary.production.validate_county']
+      # optional(:zipcode).filled(:string) if Registry['enterprise.dchbx.primary.production.offerings_constrained_to_zip_codes']
+      # optional(:county).value(:string) if Registry['enterprise.dchbx.primary.production.validate_county']
+      # TODO: read the settings from Registries
+      optional(:zipcode).filled(:string) if false
+      optional(:county).value(:string) if false
       required(:dob).value(:date)
       required(:household_frequency).filled(:string)
       required(:household_amount).filled(:float)

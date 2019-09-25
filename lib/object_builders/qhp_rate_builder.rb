@@ -10,7 +10,7 @@ class QhpRateBuilder
     @results_array = []
     @rating_area_id_cache = {}
     @rating_area_cache = {}
-    @rating_area_enabled = Registry['enterprise.dchbx.primary.production.offerings_constrained_to_rating_areas']
+    @rating_area_enabled = false #Registry['enterprise.dchbx.primary.production.offerings_constrained_to_rating_areas']
     @premium_table_cache = Hash.new {|h, k| h[k] = Hash.new}
     @action = "new"
     FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))

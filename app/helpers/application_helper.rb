@@ -16,6 +16,22 @@ module ApplicationHelper
     end
   end
 
+  def build_radio_input(setting)
+    aria_label  = setting[:aria_label] || "Radio button for following text input"
+    input_value = setting[:value] || setting[:default]
+
+    input_group = tag.div(
+      tag.div(
+        tag.div((radio_button_tag setting.first[0].to_s, false),
+          class: 'input-group-text'
+        ),
+        class: 'input-group-prepend'
+      ) + tag.div(setting.first[1], class: 'form-control') ,
+      class: 'input-group'
+    )
+    # build_form_group(setting, input_group)
+  end
+
   def build_form_group(setting, input_group)
     id        = setting[:key].to_s
     label     = setting[:title] || id.titleize
