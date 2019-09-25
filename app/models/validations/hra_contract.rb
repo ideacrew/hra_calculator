@@ -11,8 +11,8 @@ module Validations
       required(:household_frequency).filled(:string)
       required(:household_amount).filled(:float)
       required(:hra_type).value(:string)
-      required(:start_month).value(:string)
-      required(:end_month).value(:string)
+      required(:start_month).value(:date)
+      required(:end_month).value(:date)
       required(:hra_frequency).value(:string)
       required(:hra_amount).value(:float)
     end
@@ -40,12 +40,7 @@ module Validations
     end
 
     rule(:dob) do
-      begin
-        values.data[:dob] = Date.strptime(value.to_s, '%Y-%m-%d')
-        key.failure('DOB cannot today or in the future') if value >= Date.today
-      rescue
-        key.failure('DOB is not in a valid format')
-      end
+      key.failure('DOB cannot today or in the future') if value >= Date.today
     end
 
     rule(:household_frequency) do
@@ -63,16 +58,10 @@ module Validations
     end
 
     rule(:end_month, :start_month) do
-      begin
-        values.data[:end_month] = Date.strptime(values[:end_month], '%Y-%m-%d')
-        values.data[:start_month] = Date.strptime(values[:start_month], '%Y-%m-%d')
-        if values[:end_month] < values[:start_month]
-          key.failure('end month must be after start month')
-        elsif (((values.data[:end_month].to_time - values.data[:start_month].to_time)/1.month.second).to_i > 12)
-          key.failure('Please enter a valid end month, the effective period cannot be greater than 12 months')
-        end
-      rescue
-        key.failure('End Month or Start Month is not in a valid format')
+      if values[:end_month] < values[:start_month]
+        key.failure('end month must be after start month')
+      elsif (((values.data[:end_month].to_time - values.data[:start_month].to_time)/1.month.second).to_i > 12)
+        key.failure('Please enter a valid end month, the effective period cannot be greater than 12 months')
       end
     end
 
