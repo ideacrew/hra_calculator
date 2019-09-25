@@ -7,7 +7,7 @@ class ProductBuilder
     @log_path = LOG_PATH
     @qhp_hash = qhp_hash
     @qhp_array = []
-    @service_area_enabled = Registry['enterprise.dchbx.primary.production.offerings_constrained_to_service_areas']
+    @service_area_enabled = false #Registry['enterprise.dchbx.primary.production.offerings_constrained_to_service_areas']
     set_service_areas
     FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
     @logger = Logger.new(@log_path)
