@@ -87,6 +87,6 @@ export class ResultComponent implements OnInit {
   }
 
   clearResultForm() {
-    this.resultService._formData = null;
+    this.resultService.setFormData(null);
   }
 }
