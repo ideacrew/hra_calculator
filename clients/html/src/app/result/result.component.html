@@ -192,7 +192,7 @@
             <br><br>
             <div style="overflow:auto;">
               <div style="float:left;">
-                <button type="button" class="btn btn-info" routerLink="/home"> Start Over </button>
+                <button type="button" class="btn btn-info" (click)="clearResultForm()" routerLink="/home"> Start Over </button>
               </div>
               <div style="float:right;">
                 <button type="button" class="btn btn-info" onclick="document.title='HRA Determination Results'; window.print(); return false;">Print Your Results</button>

@@ -75,15 +75,18 @@ export class ResultComponent implements OnInit {
       if (this.hra_determination == 'unaffordable'){
         this.showUnaffordableQsehraText = true;
       } else if (this.hra_determination == 'affordable'){
-        this.showAffordableQsehraText == true;
+        this.showAffordableQsehraText = true;
       }
     } else if(this.hra_type == "ichra"){
       if (this.hra_determination == 'unaffordable'){
         this.showUnaffordableIchraText = true;
       } else if (this.hra_determination == 'affordable') {
-        this.showAffordableIchraText == true;
+        this.showAffordableIchraText = true;
       }
     }
   }
 
+  clearResultForm() {
+    this.resultService._formData = null;
+  }
 }

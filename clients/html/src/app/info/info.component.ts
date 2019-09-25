@@ -45,6 +45,7 @@ export class InfoComponent implements OnInit {
   }
 
   setEffectiveEndOptions(val) {
+    this.effectiveEndOptions = []
     var date = new Date(Date.parse(val.split(" 00:00:00")[0]))
     for (var _i = 0; _i < 12; _i++) {
       var next_date = new Date(date.getFullYear(), date.getMonth()+_i, 1);

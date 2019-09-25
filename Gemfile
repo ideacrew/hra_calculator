@@ -38,6 +38,7 @@ gem 'nokogiri',                 '~> 1.10'
 gem 'nokogiri-happymapper',     '~> 0.8.0', :require => 'happymapper'
 gem 'money-rails',              '~> 1.13'
 gem 'devise_token_auth'
+gem 'database_cleaner',       '~> 1.7'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

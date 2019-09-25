@@ -48,8 +48,8 @@ module Transactions
     end
 
     def determine_affordability(hra_object)
-      expected_contribution = 0.0986 # TODO: read this from the DB/Settings
-      hra_object.hra_determination = expected_contribution >= hra_object.hra ? :unaffordable : :affordable
+      expected_contribution = 0.0978 # TODO: read this from the DB/Settings
+      hra_object.hra_determination = expected_contribution >= hra_object.hra ? :affordable : :unaffordable
       Success(hra_object)
     end
 

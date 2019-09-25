@@ -6,6 +6,7 @@ require Rails.root.join('lib', 'tasks', 'parsers', 'plan_benefit_template_parser
 
 describe "qhp builder", dbclean: :after_each do
   before :all do
+    DatabaseCleaner.clean
     FactoryBot.create(:locations_service_area, issuer_provided_code: "MAS001", active_year: 2019, issuer_hios_id: "42690")
     FactoryBot.create(:locations_service_area, issuer_provided_code: "MAS002", active_year: 2019, issuer_hios_id: "42690")
   end

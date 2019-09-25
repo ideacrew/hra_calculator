@@ -1,7 +1,7 @@
 class HraResultsController < ApplicationController
 
   def hra_counties
-    counties_lookup = Operations::CountiesLookup.new.call(params.permit!['hra_zipcode'])
+    counties_lookup = Operations::CountiesLookup.new.call(params.permit!['hra_zipcode'] || '')
     render plain: {status: "success", data: counties_lookup.success.to_h}.to_json, content_type: 'application/json'
   end
 
