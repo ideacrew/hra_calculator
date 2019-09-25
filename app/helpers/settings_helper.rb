@@ -62,4 +62,8 @@ module SettingsHelper
   def help_text_4
     Registry['enterprise.dchbx.primary.production.help_text_4']
   end
+
+  def help_text_5
+    Registry['enterprise.dchbx.primary.production.help_text_5']
+  end
 end
