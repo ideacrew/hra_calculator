@@ -4,17 +4,17 @@ title: Release 1.0
 permalink: /Release 1.0/
 ---
 
-# **Delivery Goal**
+**Delivery Goal**
 The task taken on by IdeaCrew and State Health and Value Strategies (SHVS) was to produce and release a decision support tool within 45-60 days following a notice to proceed with development. 
 The goal in this short timeline is to deliver a fully functional consumer facing tool designed to be adopted and utilized by as many SBEs as possible. 
 
 
-Task | Deadline | Description
------------- | ------------- | -------------
-Project Kickoff Meeting | 8/30/19 | SHVS and IdeaCrew team meeting to officially kick off the project.
-MVP UX/Functionality Confirmation | 9/12/19 | SHVS and IdeaCrew expected to confirm minimal viable product for user experience and functional components critical for release of development. 
-MVP Language Confirmation  | 9/19/19 | SHVS and IdeaCrew expected to confirm minimal viable product for base static language critical for release of development. 
-UAT Testing Start | 9/26/19 | The beginning of User Acceptance Testing in a dedicated IdeaCrew hosted test environment which will be made available to a limited group of SHVS & SBE stakeholders.
-Delivery of MVP Installation Guidelines | 9/26/19 | Delivery of technical specs and instructions to the SBE community that will be the foundation of the process for states to adopt the HRA Affordability Tool. This will be in the format of a publicly available community website.
-UAT Acceptance  | 10/2/19 | SHVS confirms successful delivery and acceptance of MVP requirements. 
-MVP Release | 10/3/19 | Confirmation from SHVS and IdeaCrew that the HRA Affortability Tool code base has met MVP requirements and is publicly available and accessible to SBEs to begin the process of adoption.
+**Task**                                | **Deadline** | **Description**
+----------------------------------------| -----------  | -------------
+Project Kickoff Meeting                 | 8/30/19      | SHVS and IdeaCrew team meeting to officially kick off the project.
+MVP UX/Functionality Confirmation       | 9/12/19      | SHVS and IdeaCrew expected to confirm minimal viable product for user experience and functional components critical for release of development. 
+MVP Language Confirmation               | 9/19/19      | SHVS and IdeaCrew expected to confirm minimal viable product for base static language critical for release of development. 
+UAT Testing Start                       | 9/26/19      | The beginning of User Acceptance Testing in a dedicated IdeaCrew hosted test environment which will be made available to a limited group of SHVS & SBE stakeholders.
+Delivery of MVP Installation Guidelines | 9/26/19      | Delivery of technical specs and instructions to the SBE community that will be the foundation of the process for states to adopt the HRA Affordability Tool. This will be in the format of a publicly available community website.
+UAT Acceptance                          | 10/2/19      | SHVS confirms successful delivery and acceptance of MVP requirements. 
+MVP Release                             | 10/3/19      | Confirmation from SHVS and IdeaCrew that the HRA Affortability Tool code base has met MVP requirements and is publicly available and accessible to SBEs to begin the process of adoption.
