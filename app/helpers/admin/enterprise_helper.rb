@@ -1,0 +1,2 @@
+module Admin::EnterpriseHelper
+end
