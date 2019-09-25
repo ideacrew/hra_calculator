@@ -50,7 +50,7 @@ gem 'nokogiri-happymapper',     '~> 0.8.0', :require => 'happymapper'
 gem 'money-rails',              '~> 1.13'
 gem 'devise_token_auth'
 gem 'webpacker',                '~> 4.0.2'
-
+gem 'deep_merge',               '~> 1.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
