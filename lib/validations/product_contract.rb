@@ -9,5 +9,9 @@ module Validations
       required(:application_period).value(type?: Range)
       required(:service_area_id).value(type?: BSON::ObjectId)
     end
+
+    rule(:metal_level_kind) do
+      key.failure("Metal Level Kind cannot be empty") if value.blank?
+    end
   end
 end

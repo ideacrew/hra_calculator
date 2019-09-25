@@ -9,4 +9,3 @@ settings:
     default: admin
     description: The Enterprise owner's login account name
     type: string
-

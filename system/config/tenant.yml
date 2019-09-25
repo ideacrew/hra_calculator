@@ -58,22 +58,22 @@ namespaces:
                             settings:
                             - key: :primary_color
                               type: :swatch
-                              default: #007bff
+                              default: '#007bff'
                             - key: :secondary_color
                               type: :swatch
-                              default: #6c757d
+                              default: '#6c757d'
                             - key: :success_color
                               type: :swatch
-                              default: #28a745
+                              default: '#28a745'
                             - key: :danger_color
                               type: :swatch
-                              default: #dc3545
+                              default: '#dc3545'
                             - key: :warning_color
                               type: :swatch
-                              default: #ffc107
+                              default: '#ffc107'
                             - key: :info_color
                               type: :swatch
-                              default: #17a2b8
+                              default: '#17a2b8'
                   - key: :environments
                     namespaces:
                     - key: :production

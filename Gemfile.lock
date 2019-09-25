@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/ideacrew/resource_registry.git
-  revision: a62fbdf9f5d96ad70af6d69b85d4a269827a3a59
-  branch: master
+  revision: 569c05fdeb4b97cf0da03813db40b0955765e8b3
+  branch: branch_0.3.2
   specs:
-    resource_registry (0.3.0)
+    resource_registry (0.3.1)
       bootsnap (~> 1.0)
       dry-auto_inject (~> 0.6)
       dry-container (~> 0.7)
