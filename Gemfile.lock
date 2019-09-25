@@ -98,7 +98,6 @@ GEM
     builder (3.2.3)
     byebug (11.0.1)
     climate_control (0.2.0)
-    coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     devise (4.7.1)
@@ -238,12 +237,6 @@ GEM
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
-    pry (0.12.2)
-      coderay (~> 1.1.0)
-      method_source (~> 0.9.0)
-    pry-byebug (3.7.0)
-      byebug (~> 11.0)
-      pry (~> 0.10)
     puma (3.12.1)
     rack (2.0.7)
     rack-cors (1.0.3)
@@ -368,7 +361,6 @@ DEPENDENCIES
   mongoid-locker
   nokogiri (~> 1.10)
   nokogiri-happymapper (~> 0.8.0)
-  pry-byebug
   puma (~> 3.11)
   rack-cors
   rails (~> 6.0.0)

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { FormGroup,  FormBuilder,  Validators, FormControl } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
@@ -25,6 +25,9 @@ export class InfoComponent implements OnInit {
   showCounty: boolean = true;
   showDob: boolean = true;
   today: any = new Date();
+  effectiveStartOptions: any =[];
+  effectiveEndOptions: any =[];
+  currentDate = new Date("2020-01-1");
 
   constructor(
     private fb: FormBuilder,
@@ -32,15 +35,28 @@ export class InfoComponent implements OnInit {
     private router: Router,
     private resultService: ResultService
   ) {
+
+    for (var _i = 0; _i < 12; _i++) {
+      let next_date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+_i, 1);
+      this.effectiveStartOptions.push(next_date)
+    }
     this.subtitle = 'This is some text within a card block.';
     this.createForm();
+  }
+
+  setEffectiveEndOptions(val) {
+    var date = new Date(Date.parse(val.split(" 00:00:00")[0]))
+    for (var _i = 0; _i < 12; _i++) {
+      var next_date = new Date(date.getFullYear(), date.getMonth()+_i, 1);
+      this.effectiveEndOptions.push(next_date)
+    }
   }
 
   createForm() {
     this.hraForm = this.fb.group({
       state: ['', Validators.required ],
-      zipcode: [''],
-      county: [''],
+      zipcode: ['', Validators.required],
+      county: ['', Validators.required],
       dob: ['', [Validators.required, validateDate]],
       household_frequency: ['', Validators.required ],
       household_amount: ['', Validators.required ],
@@ -82,6 +98,31 @@ export class InfoComponent implements OnInit {
          this.hraForm.patchValue({
           state: res.data.state_name
         });
+        if(!this.showZipcode){
+          this.hraForm.removeControl('zipcode');
+        }
+        if(!this.showCounty){
+          this.hraForm.removeControl('county');
+        }
+        if(this.resultService.formData){
+          this.hraForm.patchValue({
+            state: this.resultService.formData.state,
+            zipcode: this.resultService.formData.zipcode,
+            county: this.resultService.formData.county,
+            dob: this.resultService.formData.dob,
+            household_frequency: this.resultService.formData.household_frequency,
+            household_amount: this.resultService.formData.household_amount,
+            hra_type: this.resultService.formData.hra_type,
+            start_month: this.resultService.formData.start_month,
+            end_month: this.resultService.formData.end_month,
+            hra_frequency: this.resultService.formData.hra_frequency,
+            hra_amount: this.resultService.formData.hra_amount,
+          });
+          this.effectiveEndOptions = [this.resultService.formData.end_month]
+          this.selectedHouseholdFrequency = this.resultService.formData.household_frequency;
+          this.selectedHraFrequency = this.resultService.formData.hra_frequency;
+          this.selectedHraType = this.resultService.formData.hra_type;
+        }
       },
       (err) => {
         console.log(err)
@@ -114,6 +155,7 @@ export class InfoComponent implements OnInit {
     console.log(this.hraForm.value)
     if (this.hraForm.valid) {
       console.log(this.hraForm.value)
+      this.resultService.setFormData(this.hraForm.value);
       this.httpClient.post<any>(environment.apiUrl+"/hra_results/hra_payload", this.hraForm.value).subscribe(
         (res) => {
           console.log(res)
