@@ -4,12 +4,12 @@ module Operations
 
     def call(age)
       # TODO: read the lowest and highest ages from Settings/DB.
-      lowest_age_for_premium_lookup = 19
-      highest_age_for_premium_lookup = 66
+      lowest_age_for_premium_lookup = 14
+      highest_age_for_premium_lookup = 64
 
       output = if age <= lowest_age_for_premium_lookup
                  lowest_age_for_premium_lookup
-               elsif highest_age_for_premium_lookup >= age
+               elsif age >= highest_age_for_premium_lookup
                  highest_age_for_premium_lookup
                else
                 age
