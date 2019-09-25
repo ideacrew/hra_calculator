@@ -34,8 +34,21 @@ module ApplicationHelper
 
     input_group = tag.div(
                     tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
-                    tag.input(nil, value: input_value, type: "text", class: "form-control", "aria-label": aria_label) +
+                    tag.input(nil, type: "text", value: input_value, class: "form-control", "aria-label": aria_label) +
                     tag.div(tag.span('.00', class: "input-group-text"), class: "input-group-append"),
+                  class: "input-group"
+                )
+    build_form_group(setting, input_group)
+  end
+
+  def build_radio_input_group(setting)
+    aria_label  = setting[:aria_label] || "Radio button for following text input"
+    input_value = setting[:value] || setting[:default]
+
+    input_group = tag.div(
+                    tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
+                    tag.input(nil, type: "radio", value: input_value, "aria-label": aria_label) +
+                    tag.input(nil, type: "text", class: "form-control", value: input_value, "aria-label": aria_label), 
                   class: "input-group"
                 )
     build_form_group(setting, input_group)
