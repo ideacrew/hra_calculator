@@ -118,6 +118,7 @@ export class InfoComponent implements OnInit {
             hra_frequency: this.resultService.formData.hra_frequency,
             hra_amount: this.resultService.formData.hra_amount,
           });
+          this.effectiveEndOptions = [this.resultService.formData.end_month]
           this.selectedHouseholdFrequency = this.resultService.formData.household_frequency;
           this.selectedHraFrequency = this.resultService.formData.hra_frequency;
           this.selectedHraType = this.resultService.formData.hra_type;

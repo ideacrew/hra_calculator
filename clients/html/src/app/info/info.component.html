@@ -364,7 +364,7 @@
                   <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)"
                   [disabled]="hraForm.controls['state'].invalid || hraForm.controls['dob'].invalid || hraForm.controls['household_frequency'].invalid || hraForm.controls['household_amount'].invalid"
                   (click)="showTab(currentTab+1)">Next -></button>
-                  <button type="submit" class="btn btn-info" [hidden]="(currentTab != 1)" [disabled]="hraForm.pristine || hraForm.invalid">Next -></button>
+                  <button type="submit" class="btn btn-info" [hidden]="(currentTab != 1)" [disabled]="hraForm.invalid">Next -></button>
                 </div>
               </div>
               <!-- Circles which indicates the steps of the form: -->
