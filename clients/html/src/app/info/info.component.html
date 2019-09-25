@@ -249,19 +249,8 @@
                       Start Month
                     </label>
                     <div class="col-sm-4">
-                      <select class="form-control form-control-sm" id="start_month" formControlName="start_month" ngModel required>
-                        <option value="2020-1-1">Januray 2020</option>
-                        <option value="2020-2-1">February 2020</option>
-                        <option value="2020-3-1">March 2020</option>
-                        <option value="2020-4-1">April 2020</option>
-                        <option value="2020-5-1">May 2020</option>
-                        <option value="2020-6-1">June 2020</option>
-                        <option value="2020-7-1">July 2020</option>
-                        <option value="2020-8-1">August 2020</option>
-                        <option value="2020-9-1">September 2020</option>
-                        <option value="2020-10-1">October 2020</option>
-                        <option value="2020-11-1">November 2020</option>
-                        <option value="2020-12-1">December 2020</option>
+                      <select (change)="setEffectiveEndOptions($event.target.value)" class="form-control form-control-sm" id="start_month" formControlName="start_month" ngModel required>
+                        <option *ngFor="let option of effectiveStartOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger">
                         <div *ngIf="hraForm.controls['start_month'].errors.required">
@@ -285,29 +274,7 @@
                     </label>
                     <div class="col-sm-4">
                       <select class="form-control form-control-sm" id="end_month" formControlName="end_month" ngModel required>
-                        <option value="2020-1-1">Januray 2020</option>
-                        <option value="2020-2-1">February 2020</option>
-                        <option value="2020-3-1">March 2020</option>
-                        <option value="2020-4-1">April 2020</option>
-                        <option value="2020-5-1">May 2020</option>
-                        <option value="2020-6-1">June 2020</option>
-                        <option value="2020-7-1">July 2020</option>
-                        <option value="2020-8-1">August 2020</option>
-                        <option value="2020-9-1">September 2020</option>
-                        <option value="2020-10-1">October 2020</option>
-                        <option value="2020-11-1">November 2020</option>
-                        <option value="2020-12-1">December 2020</option>
-                        <option value="2021-1-1">Januray 2021</option>
-                        <option value="2021-2-1">February 2021</option>
-                        <option value="2021-3-1">March 2021</option>
-                        <option value="2021-4-1">April 2021</option>
-                        <option value="2021-5-1">May 2021</option>
-                        <option value="2021-6-1">June 2021</option>
-                        <option value="2021-7-1">July 2021</option>
-                        <option value="2021-8-1">August 2021</option>
-                        <option value="2021-9-1">September 2021</option>
-                        <option value="2021-10-1">October 2021</option>
-                        <option value="2021-11-1">November 2021</option>
+                        <option *ngFor="let option of effectiveEndOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger">
                         <div *ngIf="hraForm.controls['end_month'].errors.required">
@@ -347,7 +314,7 @@
                         </span>
                         <span [ngClass]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
                             <input type="radio" class="form-control form-control-sm" id="hra_frequency"
-                            formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> Annually
+                            formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> Total
                         </span>
                       </div>
                       <div *ngIf="hraForm.controls['hra_frequency'].invalid && (hraForm.controls['hra_frequency'].dirty || hraForm.controls['hra_frequency'].touched)" class="alert alert-danger">
