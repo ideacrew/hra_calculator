@@ -42,6 +42,9 @@ class Account
   ## Tokens
   field :tokens, type: Hash, default: {}
 
+  belongs_to :enterprise, class_name: 'Enterprises::Enterprise'
+  belongs_to :tenant, class_name: 'Tenants::Tenant'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

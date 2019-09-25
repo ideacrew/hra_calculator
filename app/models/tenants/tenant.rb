@@ -4,6 +4,7 @@ class Tenants::Tenant
 
   field :key, type: Symbol
   field :owner_organization_kind, type: String, default: 'Marketplace'
+  field :owner_organization_name, type: String
 
   belongs_to :enterprise,
              class_name: 'Enterprises::Enterprise'

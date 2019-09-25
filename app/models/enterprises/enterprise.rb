@@ -10,9 +10,15 @@ class Enterprises::Enterprise
   has_many  :tenants,
             class_name: 'Tenants::Tenant'
 
+  has_many  :benefit_years
+
+
   embeds_many :options, as: :configurable,
               class_name: 'Options::Option'
 
   accepts_nested_attributes_for :tenants, :options
 
+  def owner_account_name
+    owner_account.email
+  end
 end

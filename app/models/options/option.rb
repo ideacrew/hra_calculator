@@ -10,6 +10,7 @@ class Options::Option
   field :type, type: Symbol
   field :default, type: String
   field :value, type: String
+  field :choices, type: Array
 
   field :aria_label, type: String
 
@@ -33,4 +34,7 @@ class Options::Option
     }
   end
 
+  def settings=(params)
+    self.assign_attributes(params)
+  end
 end

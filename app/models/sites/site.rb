@@ -6,10 +6,6 @@ class Sites::Site
   field :title,       type: String
   field :description, type: String
 
-  field :marketplace_name, type: String
-  field :marketplace_website_url, type: String
-  field :call_center_phone, type: String
-
   belongs_to  :tenant,
               class_name: 'Tenants::Tenant'
 
@@ -23,4 +19,13 @@ class Sites::Site
 
   accepts_nested_attributes_for :features, :options
 
+
+  def environments
+  end
+
+  def environments=()
+  end
+
+  def to_h
+  end
 end
