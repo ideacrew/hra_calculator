@@ -31,3 +31,5 @@ RUN mkdir -p /app
 WORKDIR /app
 
 COPY . .
+
+RUN rm -f /app/config/master.key && rm -f /app/config/credentials.yml.enc
