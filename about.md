@@ -1,8 +1,6 @@
 ---
 layout: page
 title: About
-- Test 1
-- Test 2
 permalink: /about/
 ---
 
