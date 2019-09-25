@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResultComponent } from './result.component';
 import { ResultService }   from '../result.service';
+import { Router } from '@angular/router';
 
 describe('ResultComponent', () => {
   let component: ResultComponent;
   let fixture: ComponentFixture<ResultComponent>;
+  let routerStub: Partial<Router>;
   let resultServiceStub: Partial<ResultService>;
   resultServiceStub = {
     results: {
@@ -15,6 +17,7 @@ describe('ResultComponent', () => {
         household_amount: "60000",
         household_frequency: "annually",
         hra_amount: "5000",
+        hra_determination: "affordable",
         hra_frequency: "annually",
         hra_type: "ichra",
         marketPlace: "MARKETPLACE",
@@ -31,7 +34,10 @@ describe('ResultComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ResultComponent ],
-      providers: [ { provide: ResultService, useValue: resultServiceStub } ]
+      providers: [
+        { provide: ResultService, useValue: resultServiceStub },
+        { provide: Router, useValue: routerStub }
+      ]
     })
     .compileComponents();
   }));
@@ -46,4 +52,53 @@ describe('ResultComponent', () => {
     expect(component).toBeDefined();
   });
 
+  it('should show the information the user entered', () => {
+    let userInfo = "";
+    fixture.nativeElement.querySelectorAll("div.content td").forEach((el) => {
+      userInfo += el.textContent;
+    });
+    let results = resultServiceStub["results"]["data"]
+    fixture.detectChanges();
+
+    expect(userInfo).toContain(results["state"]);
+    if (component.county != "") {
+      expect(userInfo).toContain(results["county"]);
+    }
+    if (component.zipcode != "") {
+      expect(userInfo).toContain(results["zipcode"]);
+    }
+    expect(userInfo).toContain(results["dob"]);
+    expect(userInfo).toContain(results["household_amount"]);
+    expect(userInfo).toContain(results["household_frequency"]);
+    expect(userInfo).toContain(results["hra_type"]);
+    expect(userInfo).toContain(results["start_month"]);
+    expect(userInfo).toContain(results["end_month"]);
+  });
+
+  it('should show affordable ICHRA text', () => {
+    let p = fixture.nativeElement.querySelector('#ichra-affordable');
+    expect(p.textContent).toContain("is large enough");
+  });
+
+  it('should show unaffordable ICHRA text', () => {
+    component.hra_determination = "unaffordable";
+    fixture.detectChanges();
+    let p = fixture.nativeElement.querySelector('#ichra-unaffordable');
+    expect(p.textContent).toContain("is not large enough");
+  });
+
+  it('should show affordable QSEHRA text', () => {
+    component.hra_type = "qsehra";
+    fixture.detectChanges();
+    let p = fixture.nativeElement.querySelector('#qsehra-affordable');
+    expect(p.textContent).toContain("is large enough");
+  });
+
+  it('should show unaffordable QSEHRA text', () => {
+    component.hra_determination = "unaffordable";
+    component.hra_type = "qsehra";
+    fixture.detectChanges();
+    let p = fixture.nativeElement.querySelector('#qsehra-unaffordable');
+    expect(p.textContent).toContain("is not large enough");
+  });
 });
