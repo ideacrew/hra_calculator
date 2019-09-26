@@ -2,6 +2,9 @@
 layout: page
 title: Get Started
 permalink: /Get Started/
+nav_order: 1
+has_children: true
+has_toc: false
 ---
 
 # **Get Started**
