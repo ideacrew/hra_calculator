@@ -40,7 +40,7 @@ module Validations
     end
 
     rule(:dob) do
-      key.failure('DOB must be in the past') if value >= Date.today
+      key.failure('DOB cannot be in the future') if value > Date.today
     end
 
     rule(:household_frequency) do
