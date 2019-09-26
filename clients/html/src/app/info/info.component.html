@@ -227,12 +227,12 @@
                             <input type="radio" class="form-control form-control-sm" id="hra_type"
                             formControlName="hra_type" value="qsehra" ngModel required (click)="onHraTypeChange('qsehra')"/> Qualified Small Employer HRA (QSEHRA)
                         </span>
-                        <ng-template #popContentState>
+                        <ng-template #popHraType>
                           <div class="tooltip-italic">
                             The type of HRA will appear prominently on the notice from the employer.
                           </div>
                         </ng-template>
-                        <sup [ngbPopover]="popContentState" >
+                        <sup [ngbPopover]="popHraType" >
                           <i class="fas fa-question-circle fa-2x"></i>
                         </sup>
                       </div>
