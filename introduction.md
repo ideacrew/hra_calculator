@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Introduction
-permalink: /Introduction/
+permalink: /introduction/
 parent: Get Started
 nav_order: 1
 ---
