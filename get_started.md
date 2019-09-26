@@ -1,13 +1,13 @@
 ---
 layout: page
-title: Get Started
-permalink: /get_started/
+title: Getting Started
+permalink: /getting_started/
 nav_order: 1
 has_children: true
 has_toc: false
 ---
 
-# **Get Started**
+# **Getting Started**
 
 As the health care needs of everyday Americans continues to evolve, so too must our State Based Exchanges (SBEs) and the solutions they provide. Organizations like State Health & Value Strategies, a program of the Robert Wood Johnson Foundation, and IdeaCrew, Inc encourage the growth of communities where technology and people meet in service of others. 
 
