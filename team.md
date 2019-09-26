@@ -17,24 +17,25 @@ Software Design, Development, Project Management and Cloud Infrastructure servic
 
 Requirements engagement, feedback and testing assistance was provided by SBE representatives from the following states:
 
-[New York](https://nystateofhealth.ny.gov/)
 
 [California](https://www.coveredca.com/)
-
-[District of Columbia](https://dchealthlink.com/) 
-
-[Massachusetts](https://www.mahealthconnector.org/connectorcare)
-
-[Rhode Island](https://healthsourceri.com/)
-
-[Vermont](https://portal.healthconnect.vermont.gov/)
 
 [Colorado](https://connectforhealthco.com/)
 
 [Connecticut](https://www.accesshealthct.com/)
 
+[District of Columbia](https://dchealthlink.com/) 
+
 [Idaho](https://www.yourhealthidaho.org/)
+
+[Massachusetts](https://www.mahealthconnector.org/connectorcare)
+
+[Minnesota](https://www.mnsure.org/)
 
 [New Mexico](https://www.bewellnm.com/)
 
-[Minnesota](https://www.mnsure.org/)
+[New York](https://nystateofhealth.ny.gov/)
+
+[Rhode Island](https://healthsourceri.com/)
+
+[Vermont](https://portal.healthconnect.vermont.gov/)
