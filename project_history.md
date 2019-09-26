@@ -1,9 +1,11 @@
+---
 layout: page
 title: Project History
 permalink: /project_history/
 parent: About
 nav_order: 5
 ---
+
 ##Project History##
 
 The Individual Coverage Health Reimbursement Arrangement (ICHRA) is a new program for which regulations were finalized in June 2019. ICHRA enables employers to establish a company-funded, tax-advantaged benefit to reimburse employees for personal health care expenses.
