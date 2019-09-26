@@ -363,16 +363,16 @@
 
               <div style="overflow:auto;">
                 <div style="float:left;">
-                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)" routerLink="/home"> <i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
+                  <button type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)" routerLink="/home"> <i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
                 </div>
                 <div style="float:left;">
-                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
+                  <button type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
                 </div>
                 <div style="float:right;">
-                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)"
+                  <button type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)"
                   [disabled]="hraForm.controls['state'].invalid || hraForm.controls['dob'].invalid || hraForm.controls['household_frequency'].invalid || hraForm.controls['household_amount'].invalid"
                   (click)="showTab(currentTab+1)">Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
-                  <button type="submit" class="btn btn-info" [hidden]="(currentTab != 1)" [disabled]="hraForm.pristine || hraForm.invalid">Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
+                  <button type="submit" class="btn btn btn-md button-style card-color" [hidden]="(currentTab != 1)" [disabled]="hraForm.invalid">Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
                 </div>
               </div>
               <!-- Circles which indicates the steps of the form: -->
