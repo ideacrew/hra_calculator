@@ -26,11 +26,11 @@ There is a separate **docker-compose.yml** for [development](docker-compose.yml)
 
 To start up the application in your local Docker environment:
 
-```bash
-git clone https://github.com/ideacrew/hra_calculator.git
-cd hra_calculator
-docker-compose build
-docker-compose up
+```
+$ git clone https://github.com/ideacrew/hra_calculator.git
+$ cd hra_calculator
+$ docker-compose build
+$ docker-compose up
 ```
 
 
