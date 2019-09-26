@@ -13,7 +13,7 @@ New federal rules on HRAs were adopted too late to be fully integrated into Stat
 # **Objective**
 
 IdeaCrew and State Health & Value Strategies (SHVS) have developed a web-based decision support tool that will calculate employee costs based on employer’s monthly contribution amount. The tool will help consumers understand options for obtaining health coverage and affordability based on employer-offered benefit type and contribution amount.  The tool will also provide consumers with educational material, resources, and web links. 
-For State-based Exchanges (SBEs) and other hosting agencies, the HRA Affordability Tool offers simple setup with tenant-based site branding and configuration with state-level information so that it may be used across the country. 
+For State-based Exchanges (SBEs) and other hosting agencies, the HRA Tool offers simple setup with tenant-based site branding and configuration with state-level information so that it may be used across the country. 
 
 # **Background**
 
@@ -25,4 +25,4 @@ At present, consumers have limited information available to compare and support 
 
 # **Open Source Approach**
 
-The objective of this project is to deliver software which will be published to Github. The open source code base for the HRA Affordability Tool will be available for any hosting agency or individual to download a copy and utilize how they see fit. The first release of tool will be provide a fully functional external user facing anonymous experience available to any hosting agency designed to be a stand alone feature or integrated into a software suite as needed.  
+The objective of this project is to deliver software which will be published to Github. The open source code base for the HRA  Tool will be available for any hosting agency or individual to download a copy and utilize how they see fit. The first release of tool will be provide a fully functional external user facing anonymous experience available to any hosting agency designed to be a stand alone feature or integrated into a software suite as needed.  
