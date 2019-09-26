@@ -2,7 +2,7 @@
 layout: page
 title: Release v1.0
 permalink: /release_v1.0/
-parent: Get Started
+parent: Getting Started
 nav_order: 2
 ---
 
