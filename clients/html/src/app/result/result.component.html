@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <div class="container hra_results border">
+          <div class="container hra_results">
             <div class="content">
               <h1> Your Information and Results </h1>
               <hr>
@@ -13,11 +13,11 @@
                 <table style="width:80%">
                   <tr>
                     <td>Residence</td>
-                    <td style="font-weight:bold">{{ state }} / {{zipcode}} / {{county}}</td>
+                    <td style="font-weight:bold">{{ residence }}</td>
                   </tr>
                   <tr>
                     <td>Date of Birth</td>
-                    <td style="font-weight:bold">{{dob}}</td>
+                    <td style="font-weight:bold">{{dob | date: 'MM/dd/yyyy'}}</td>
                   </tr>
                   <tr>
                     <td>2020 Household Income</td>
@@ -25,15 +25,15 @@
                   </tr>
                   <tr>
                     <td>HRA Type</td>
-                    <td style="font-weight:bold">{{hra_type}}</td>
+                    <td style="font-weight:bold">{{hra_type | uppercase }}</td>
                   </tr>
                   <tr>
                     <td>Start Date</td>
-                    <td style="font-weight:bold">{{start_month}}</td>
+                    <td style="font-weight:bold">{{start_month | date: 'MMMM y'}}</td>
                   </tr>
                   <tr>
                     <td>End Date</td>
-                    <td style="font-weight:bold">{{end_month}}</td>
+                    <td style="font-weight:bold">{{end_month | date: 'MMMM y'}}</td>
                   </tr>
                   <tr>
                     <td>Employer Contribution</td>

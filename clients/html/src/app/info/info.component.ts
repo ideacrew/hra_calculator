@@ -28,6 +28,8 @@ export class InfoComponent implements OnInit {
   effectiveStartOptions: any =[];
   effectiveEndOptions: any =[];
   currentDate = new Date("2020-01-1");
+  showErrors: boolean = false;
+  errors: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -160,8 +162,13 @@ export class InfoComponent implements OnInit {
       this.httpClient.post<any>(environment.apiUrl+"/hra_results/hra_payload", this.hraForm.value).subscribe(
         (res) => {
           console.log(res)
-          this.resultService.setResults(res);
-          this.router.navigateByUrl('/result');
+          if(res.status == 'success'){
+            this.resultService.setResults(res);
+            this.router.navigateByUrl('/result');
+          }else{
+            this.errors = res.errors;
+            this.showErrors = true;
+          }
         },
         (err) => {
           console.log(err)
@@ -189,5 +196,10 @@ export class InfoComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  closeAlert() {
+    this.showErrors = false;
+    this.errors = []
   }
 }

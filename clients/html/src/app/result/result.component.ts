@@ -36,6 +36,7 @@ export class ResultComponent implements OnInit {
   showAffordableQsehraText: boolean = false;
   showUnaffordableIchraText: boolean = false;
   showAffordableIchraText: boolean = false;
+  residence: String;
   constructor(
     private resultService: ResultService,
     private router: Router,
@@ -68,6 +69,7 @@ export class ResultComponent implements OnInit {
       this.help_text_5 = this.result.data.help_text_5;
       this.hra_type = this.result.data.hra_type;
       this.hra_determination = this.result.data.hra_determination;
+      this.residence = [this.state, this.zipcode, this.county].filter(function(val) { return (val !== null && val !== ""); }).join(" / ")
     }else{
       this.router.navigateByUrl('/home');
     }
