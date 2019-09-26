@@ -3,7 +3,7 @@ layout: page
 title: Licensing
 permalink: /Licensing/
 parent: About
-nav_order: 5
+nav_order: 7
 ---
 
 
