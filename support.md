@@ -6,7 +6,7 @@ parent: About
 nav_order: 8
 ---
 
-## Support
+## Community Support
 
 If you are an SBE currently using the HRA Calculator Tool and would like to provide feature suggestions, feedback or report a bug, [please raise an item for consideration](https://github.com/ideacrew/hra_calculator/issues/new). 
 
