@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ResultService } from '../result.service'
 import { validateDate } from './date.validator'
 import { NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import {NgxMaskModule} from 'ngx-mask'
 
 @Component({
   templateUrl: './info.component.html',
@@ -28,7 +29,7 @@ export class InfoComponent implements OnInit {
   today: any = new Date();
   effectiveStartOptions: any =[];
   effectiveEndOptions: any =[];
-  currentDate = new Date("2020-01-1");
+  currentDate = new Date(2019,12,1);
   showErrors: boolean = false;
   errors: any = [];
 
