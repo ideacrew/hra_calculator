@@ -26,4 +26,4 @@ Each machine is created with a public dynamic IP address for external connectivi
 Once the machine is created, you can modify [Network Security Group](https://azure.microsoft.com/en-us/documentation/articles/virtual-networks-nsg/) rules and open ports of the machine from the [Azure Portal](https://portal.azure.com/).
 
 ### Certificates
-
+Traffic to the application should be protected using HTTPS (TLS) and thus SSL certificates should be purchased or otherwise obtained (e.g. via Let's Encrypt).  Using the deployment instructions provided, certificates are securely copied to the server at deployment time and thus should never reside in a code repository.  The assumption is that the SBEs will be reponsible for procuring their own certificates.
