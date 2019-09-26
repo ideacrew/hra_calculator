@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Get Started
-permalink: /Get Started/
+permalink: /get_started/
 nav_order: 1
 has_children: true
 has_toc: false
