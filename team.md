@@ -14,7 +14,7 @@ Funding for the HRA Tool was provided by the [Robert Wood Johnson Foundation](ht
 Project leadership, requirements and coordination with State Based Exchanges was executed by [State Health and Value Strategies](https://www.shvs.org/about/).
 
 Software Design, Development, Project Management and Cloud Infrastructure services were delivered by [IdeaCrew, Inc](https://ideacrew.com/).
-tates
+
 Requirements engagement, feedback and testing assistance was provided by SBE representatives from the following states:
 
 [New York](https://nystateofhealth.ny.gov/)
