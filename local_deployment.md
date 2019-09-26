@@ -7,6 +7,8 @@ nav_order: 1
 ---
 
 ## Local Deployment
+When deploying the application locally, you have a couple of different options.  The first option is to start the application in development mode.  In development mode, the application is provisioned to allow for a faster development cycle.  In production mode, the application is provisioned to mimic how it will be deployed on the server.
+
 ### Development Mode 
 To start up the application in your local Docker environment in development mode:
 
