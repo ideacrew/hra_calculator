@@ -28,7 +28,7 @@ export class InfoComponent implements OnInit {
   today: any = new Date();
   effectiveStartOptions: any =[];
   effectiveEndOptions: any =[];
-  currentDate = new Date("2020-01-1");
+  currentDate = new Date(2019,12,1);
   showErrors: boolean = false;
   errors: any = [];
 
