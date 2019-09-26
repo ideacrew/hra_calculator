@@ -22,8 +22,8 @@ export class InfoComponent implements OnInit {
   selectedHouseholdFrequency: string;
   selectedHraType: string;
   selectedHraFrequency: string;
-  showZipcode: boolean = true;
-  showCounty: boolean = true;
+  showZipcode: boolean = false;
+  showCounty: boolean = false;
   showDob: boolean = true;
   today: any = new Date();
   effectiveStartOptions: any =[];
