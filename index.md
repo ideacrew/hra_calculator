@@ -3,9 +3,9 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
+title: Home
 ---
 
-# HRA Tool
 
 The HRA Tool is an open source project delivering a standalone consumer decision support experience. A collaborative effort between State Health & Value Strategies (SHVS) and IdeaCrew, Inc with support from the Robert Wood Johnson Foundation. 
 
