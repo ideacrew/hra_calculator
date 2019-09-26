@@ -14,18 +14,15 @@ In order to deploy to a Docker swarm, you have to provision one or more physical
 
 
 ### Provision an Azure Docker Instance
-Run the command below to create a Docker instance in AWS.  The various parameters associated with the AWS EC2 driver can be found [here](https://docs.docker.com/machine/drivers/aws/). 
+Run the command below to create a Docker instance in Azure.  The various parameters associated with the Azure driver can be found [here](https://docs.docker.com/machine/drivers/azure/). 
 
-```
-docker-machine create --driver amazonec2 \
-                      --amazonec2-access-key ********4321 \
-                      --amazonec2-secret-key *********lkjhg \
-                      --amazonec2-vpc-id vpc-abcd123 \
-                      --amazonec2-zone b \
-                      --amazonec2-subnet-id subnet-1234567 \
-                      --amazonec2-instance-type m5.large \
-                      --amazonec2-keypair-name mykey \
-                      --amazonec2-ssh-keypath ~/.ssh/id_rsa hradocker01
+```                     
+docker-machine create --driver azure \
+                      --azure-size Standard_D2a_v3
+                      --azure-subscription-id ********4321 hradocker01
+Running pre-create checks...
+Microsoft Azure: To sign in, use a web browser to open the page https://aka.ms/devicelogin.
+Enter the code [...] to authenticate.
 ```
 
 ### List the VM and Get the IP Address
@@ -39,7 +36,7 @@ Here is example output from this command.
 ```
 $ docker-machine ls
 NAME             ACTIVE   DRIVER       STATE     URL                        SWARM   DOCKER     ERRORS
-hradocker01      -        amazonec2    Running   tcp://3.92.89.201:2376             v19.03.2
+hradocker01      -        azure        Running   tcp://3.94.87.202:2376             v19.03.2
 ```
 
 ### Initialize the Swarm 
@@ -48,12 +45,12 @@ This machine will act as the manager, which executes management commands and aut
 
 You can send commands to the VM using `docker-machine ssh`. Instruct `hradocker01` to become a swarm manager with `docker swarm init --advertise-addr <hradocker01 ip>` and you’ll see output like this:
 ```
-$ docker-machine ssh hradocker01 "docker swarm init --advertise-addr 3.92.89.201"
+$ docker-machine ssh hradocker01 "docker swarm init --advertise-addr 3.94.87.20"
 Swarm initialized: current node (q99**************bjj) is now a manager.
 
 To add a worker to this swarm, run the following command:
 
-    docker swarm join --token SWMTKN-1-***************************-********fny1g 3.92.89.201:2377
+    docker swarm join --token SWMTKN-1-***************************-********fny1g 3.94.87.20:2377
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
