@@ -6,7 +6,7 @@ parent: About
 nav_order: 8
 ---
 
-Community Involvement
+# **Community Involvement**
 
 If you’re an SBE currently using the HRA Calculator Tool and would like to provide feature suggestions, feedback or report a bug, please raise an item for consideration via the Github issue process. 
 
