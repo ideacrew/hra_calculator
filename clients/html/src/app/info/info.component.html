@@ -14,6 +14,7 @@
             <form [formGroup]="hraForm" (ngSubmit)="onSubmit()">
               <div class="tab" [hidden]="!(currentTab === 0)">
                 <h1>About You</h1>
+                <hr>
                 <div class="d-inline-flex">
                   <div class="col-md-2">
                     <img src="../../assets/images/about_you.png" alt="about you picture" height="100"/>
@@ -54,6 +55,10 @@
                   <div class="input-group">
                     <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="state">
                       State
+                    </label>
+                    <div class="col-sm-4 state-align">
+                      <input type="hidden" formControlName="state" id="state">
+                      {{ this.hraForm.value.state }}
                       <ng-template #popContentState>
                         <div class="tooltip-italic">
                           If you are not a resident of this state, please visit <a href="https://www.healthcare.gov/get-coverage/" target="_blank">https://www.healthcare.gov/get-coverage/</a> to find the Marketplace in your state.
@@ -62,10 +67,6 @@
                       <sup [ngbPopover]="popContentState" >
                         <i class="fas fa-question-circle fa-lg"></i>
                       </sup>
-                    </label>
-                    <div class="col-sm-4">
-                      <input type="hidden" formControlName="state" id="state">
-                      {{ this.hraForm.value.state }}
                       <div *ngIf="hraForm.controls['state'].invalid && (hraForm.controls['state'].dirty || hraForm.controls['state'].touched)" class="alert alert-danger">
                         <div *ngIf="hraForm.controls['state'].errors.required">
                           State is required.
@@ -217,7 +218,7 @@
                   </div>
                   <div class="input-group">
                     <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="hra_type">Choose One</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                       <div class="btn-group hra-type-group" data-toggle="buttons">
                         <span [ngClass]="(selectedHraType=='ichra')?'btn btn-outline-info active':'btn btn-outline-info'">
                             <input type="radio" class="form-control form-control-sm" id="hra_type"
@@ -359,18 +360,19 @@
                   </div>
                 </div>
               </div>  
+
               <div style="overflow:auto;">
                 <div style="float:left;">
-                  <button type="button" class="fas fa-arrow-circle-left fa-3x" style="color:#009efb; background:transparent;" [hidden]="(currentTab === 1)" routerLink="/home"></button>
-                </div> 
+                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)" routerLink="/home"> <i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
+                </div>
                 <div style="float:left;">
-                  <button type="button" class="fas fa-arrow-circle-left fa-3x" style="color:#009efb; background:transparent;" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"></button>
+                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
                 </div>
                 <div style="float:right;">
-                  <button type="button" class="fas fa-arrow-circle-right fa-3x" style="color:#009efb; background:transparent;" [hidden]="(currentTab === 1)"
+                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)"
                   [disabled]="hraForm.controls['state'].invalid || hraForm.controls['dob'].invalid || hraForm.controls['household_frequency'].invalid || hraForm.controls['household_amount'].invalid"
-                  (click)="showTab(currentTab+1)"></button>
-                  <button type="submit" class="fas fa-arrow-circle-right fa-3x" style="color:#009efb; background:transparent;" [hidden]="(currentTab != 1)" [disabled]="hraForm.invalid"></button>
+                  (click)="showTab(currentTab+1)">Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
+                  <button type="submit" class="btn btn-info" [hidden]="(currentTab != 1)" [disabled]="hraForm.pristine || hraForm.invalid">Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
                 </div>
               </div>
               <!-- Circles which indicates the steps of the form: -->
