@@ -18,13 +18,23 @@ tates
 Requirements engagement, feedback and testing assistance was provided by SBE representatives from the following states:
 
 [New York](https://nystateofhealth.ny.gov/)
+
 [California](https://www.coveredca.com/)
+
 [District of Columbia](https://dchealthlink.com/) 
+
 [Massachusetts](https://www.mahealthconnector.org/connectorcare)
+
 [Rhode Island](https://healthsourceri.com/)
+
 [Vermont](https://portal.healthconnect.vermont.gov/)
+
 [Colorado](https://connectforhealthco.com/)
+
 [Connecticut](https://www.accesshealthct.com/)
+
 [Idaho](https://www.yourhealthidaho.org/)
+
 [New Mexico](https://www.bewellnm.com/)
+
 [Minnesota](https://www.mnsure.org/)
