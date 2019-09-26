@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About This Project
+title: About
 permalink: /about/
 nav_order: 3
 has_children: true
