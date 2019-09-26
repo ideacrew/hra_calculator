@@ -19,7 +19,7 @@ The application stack is divided into multiple different containers:
 - **redis:** In-memory key/value store 
 
 
-There is a separate **docker-compose.yml** for [development](docker-compose.yml) and [production](docker-compose.prod.yml).  The development compose file will bring up the application locally in development mode, while the production compose file will deploy a production-like application.
+There is a separate **docker-compose.yml** for [development](docker-compose.yml) and [production](docker-compose.prod.yml).  The development compose file will bring up the application locally in development mode, while the production compose file will deploy a production-like application locally.
 
 
 ## Local Deployment
