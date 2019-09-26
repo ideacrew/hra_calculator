@@ -2,6 +2,8 @@
 layout: page
 title: Introduction
 permalink: /Introduction/
+parent: Get Started
+nav_order: 1
 ---
 
 # **Objective**
