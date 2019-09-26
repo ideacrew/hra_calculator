@@ -2,9 +2,11 @@
 layout: page
 title: Release v1.0
 permalink: /Release v1.0/
+parent: Get Started
+nav_order: 2
 ---
 
-**Delivery Goal**
+# **Delivery Goal**
 The task taken on by IdeaCrew and State Health and Value Strategies (SHVS) was to produce and release a decision support tool within 45-60 days following a notice to proceed with development. 
 The goal in this short timeline is to deliver a fully functional consumer facing tool designed to be adopted and utilized by as many SBEs as possible. 
 
