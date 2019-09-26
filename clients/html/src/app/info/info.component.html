@@ -3,11 +3,17 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <div class="container hra_results border">
+          <div class="container hra_results">
+            <div *ngIf="showErrors">
+            <ngb-alert type="danger" (close)="closeAlert()">
+              <p *ngFor="let error of errors">
+                {{ error }}
+              </p>
+            </ngb-alert>
+            </div>
             <form [formGroup]="hraForm" (ngSubmit)="onSubmit()">
               <div class="tab" [hidden]="!(currentTab === 0)">
                 <h1>About You</h1>
-                <hr/>
                 <div class="d-inline-flex">
                   <div class="col-md-2">
                     <img src="../../assets/images/about_you.png" alt="about you picture" height="100"/>
@@ -22,7 +28,7 @@
                             This is the family member whose employer or former employer (if family member is a retiree) is offering the HRA.
                           </div>
                         </ng-template>
-                        <sup [ngbPopover]="popContentFamily" [autoClose]="false">
+                        <sup [ngbPopover]="popContentFamily">
                           <i class="fas fa-question-circle fa-lg"></i>
                         </sup>
                       </strong>
@@ -38,7 +44,7 @@
                         <div class="tooltip-italic">Enter the family member’s place of residence, even if the employer is located somewhere else.
                         </div>
                       </ng-template>
-                      <sup [ngbPopover]="popContentResidence" [autoClose]="false">
+                      <sup [ngbPopover]="popContentResidence">
                         <i class="fas fa-question-circle fa-lg"></i>
                       </sup>
                     </strong>
@@ -153,7 +159,7 @@
                           </span>
                           <span [ngClass]="(selectedHouseholdFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
                               <input type="radio" class="form-control form-control-sm" id="household_frequency"
-                              formControlName="household_frequency" value="annually" ngModel required (click)="onHouseholdChange('annually')"/> Annually
+                              formControlName="household_frequency" value="annually" ngModel required (click)="onHouseholdChange('annually')"/> Annual
                           </span>
                         </div>
                         <div *ngIf="hraForm.controls['household_frequency'].invalid && (hraForm.controls['household_frequency'].dirty || hraForm.controls['household_frequency'].touched)" class="alert alert-danger">
@@ -191,7 +197,7 @@
                 <hr/>
                 <div class="d-inline-flex">
                   <div>
-                    <img src="../../assets/images/about_your_hra.png" alt="Profile picture" height="100"/>
+                    <img src="../../assets/images/about_hra.png" alt="Profile picture" height="100"/>
                   </div>
                   <div class="col-md-9">
                     <p>
@@ -248,9 +254,9 @@
                     <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="start_month">
                       Start Month
                     </label>
-                    <div class="col-sm-4">
+                    <div ngbDropdown class="col-sm-4">
                       <select (change)="setEffectiveEndOptions($event.target.value)" class="form-control form-control-sm" id="start_month" formControlName="start_month" ngModel required>
-                        <option *ngFor="let option of effectiveStartOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
+                        <option ngbDropdownToggle *ngFor="let option of effectiveStartOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger">
                         <div *ngIf="hraForm.controls['start_month'].errors.required">
@@ -355,16 +361,16 @@
               </div>  
               <div style="overflow:auto;">
                 <div style="float:left;">
-                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)" routerLink="/home"><- Previous</button>
+                  <button type="button" class="fas fa-arrow-circle-left fa-3x" style="color:#009efb; background:transparent;" [hidden]="(currentTab === 1)" routerLink="/home"></button>
                 </div> 
                 <div style="float:left;">
-                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><- Previous</button>
+                  <button type="button" class="fas fa-arrow-circle-left fa-3x" style="color:#009efb; background:transparent;" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"></button>
                 </div>
                 <div style="float:right;">
-                  <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)"
+                  <button type="button" class="fas fa-arrow-circle-right fa-3x" style="color:#009efb; background:transparent;" [hidden]="(currentTab === 1)"
                   [disabled]="hraForm.controls['state'].invalid || hraForm.controls['dob'].invalid || hraForm.controls['household_frequency'].invalid || hraForm.controls['household_amount'].invalid"
-                  (click)="showTab(currentTab+1)">Next -></button>
-                  <button type="submit" class="btn btn-info" [hidden]="(currentTab != 1)" [disabled]="hraForm.invalid">Next -></button>
+                  (click)="showTab(currentTab+1)"></button>
+                  <button type="submit" class="fas fa-arrow-circle-right fa-3x" style="color:#009efb; background:transparent;" [hidden]="(currentTab != 1)" [disabled]="hraForm.invalid"></button>
                 </div>
               </div>
               <!-- Circles which indicates the steps of the form: -->
