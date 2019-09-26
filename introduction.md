@@ -2,7 +2,7 @@
 layout: page
 title: Introduction
 permalink: /introduction/
-parent: Get Started
+parent: Getting Started
 nav_order: 1
 ---
 
