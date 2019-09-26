@@ -6,13 +6,13 @@ parent: Get Started
 nav_order: 1
 ---
 
-# **Problem**
+# **Challenge**
 
 New federal rules on HRAs were adopted too late to be fully integrated into State Based Exchange (SBE) application systems, creating the risk of consumer errors that could result in large tax bills. 
 
 # **Objective**
 
-IdeaCrew and State Health & Value Strategies (SHVS) have developed a web-based decision support tool that will calculate employee costs based on employer’s monthly contribution amount. The tool will help consumers understand options for obtaining health coverage and affordability based on employer-offered benefit type and contribution amount.  The tool will also provide consumers with educational material, resources, and web links. 
+State Health & Value Strategies (SHVS) and IdeaCrew have developed a web-based decision support tool that will calculate employee costs based on employer’s monthly contribution amount. The tool will help consumers understand options for obtaining health coverage and affordability based on employer-offered benefit type and contribution amount.  The tool will also provide consumers with educational material, resources, and web links. 
 For State-based Exchanges (SBEs) and other hosting agencies, the HRA Tool offers simple setup with tenant-based site branding and configuration with state-level information so that it may be used across the country. 
 
 # **Background**
