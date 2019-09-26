@@ -9,6 +9,8 @@ has_toc: false
 
 # **About**
 
-State Health & Value Strategies (SHVS) and IdeaCrew have developed a web-based decision support tool that will calculate employee costs based on employer’s monthly contribution amount. The tool will help consumers understand their options for obtaining health coverage and affordability based on employer-offered HRA type and contribution amount. The tool will also provide consumers with educational material, resources, and web links. For State-based Exchanges (SBEs) and other hosting agencies, the HRA Tool offers simple setup with tenant-based site branding and configuration with state-level information so that it may be used across the country.
+Learn more about the [team](https://ideacrew.github.io/hra_calculator/team/) 
+that developed the HRA Tool, how and why the [project started](https://ideacrew.github.io/hra_calculator/project_history/), and how to [get involved](https://ideacrew.github.io/hra_calculator/support/).
+
 
 
