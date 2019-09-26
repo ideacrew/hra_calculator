@@ -5,7 +5,7 @@ permalink: /team/
 parent: About
 nav_order: 6
 ---
-# **Team**
+## Team
 
 The HRA Tool team is made up of members from a number of organizations.
 
