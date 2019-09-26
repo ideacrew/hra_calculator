@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ResultService } from '../result.service'
 import { validateDate } from './date.validator'
 import { NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import {NgxMaskModule} from 'ngx-mask'
 
 @Component({
   templateUrl: './info.component.html',
