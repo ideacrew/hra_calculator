@@ -21,7 +21,9 @@ If a security group is not specified when running the `docker-machine create` co
 If you specify a security group yourself using the `--amazonec2-security-group` flag, the above ports are checked and opened and the security group is modified. If you want more ports to be opened such as application-specific ports, use the `--amazonec2-open-port` or open the AWS console and modify the security group manually.
 
 ### Azure Security and Network Security Groups
-Each machine is created with a public dynamic IP address for external connectivity. All its ports (except Docker and SSH) are closed by default. You can use --azure-open-port argument to specify multiple port numbers to be accessible from Internet.
+Each machine is created with a public dynamic IP address for external connectivity. All its ports (except Docker and SSH) are closed by default. You can use `--azure-open-port` argument to specify multiple port numbers to be accessible from Internet.
 
-Once the machine is created, you can modify Network Security Group rules and open ports of the machine from the Azure Portal.
+Once the machine is created, you can modify [Network Security Group](https://azure.microsoft.com/en-us/documentation/articles/virtual-networks-nsg/) rules and open ports of the machine from the [Azure Portal](https://portal.azure.com/).
+
+### Certificates
 
