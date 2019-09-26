@@ -75,16 +75,14 @@ hradocker01      -        amazonec2    Running   tcp://3.89.92.200:2376         
 
 This machine will act as the manager, which executes management commands and authenticates workers to join the swarm.
 
-You can send commands to the VM using `docker-machine ssh`. Instruct `hradocker01` to become a swarm manager with `docker swarm init` and you’ll see output like this:
+You can send commands to the VM using `docker-machine ssh`. Instruct `hradocker01` to become a swarm manager with `docker swarm init --advertise-addr <hradocker01 ip>` and you’ll see output like this:
 ```
-$ docker-machine ssh hradocker01 "docker swarm init --advertise-addr <hradocker01 ip>"
-Swarm initialized: current node <node ID> is now a manager.
+$ docker-machine ssh hradocker01 "docker swarm init --advertise-addr 3.89.92.200"
+Swarm initialized: current node (q99**************bjj) is now a manager.
 
 To add a worker to this swarm, run the following command:
 
-  docker swarm join \
-  --token <token> \
-  <myvm ip>:<port>
+    docker swarm join --token SWMTKN-1-***************************-********fny1g 3.89.92.200:2377
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
