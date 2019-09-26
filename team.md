@@ -17,24 +17,24 @@ The HRA Tool team is made up of members from a number of organizations:
 
 * Requirements engagement, feedback and testing assistance was provided by SBE representatives from the following states:
 
-[California](https://www.coveredca.com/)
+  [California](https://www.coveredca.com/)
 
-[Colorado](https://connectforhealthco.com/)
+  [Colorado](https://connectforhealthco.com/)
 
-[Connecticut](https://www.accesshealthct.com/)
+  [Connecticut](https://www.accesshealthct.com/)
 
-[District of Columbia](https://dchealthlink.com/) 
+  [District of Columbia](https://dchealthlink.com/) 
 
-[Idaho](https://www.yourhealthidaho.org/)
+  [Idaho](https://www.yourhealthidaho.org/)
 
-[Massachusetts](https://www.mahealthconnector.org/connectorcare)
+  [Massachusetts](https://www.mahealthconnector.org/connectorcare)
 
-[Minnesota](https://www.mnsure.org/)
+  [Minnesota](https://www.mnsure.org/)
 
-[New Mexico](https://www.bewellnm.com/)
+  [New Mexico](https://www.bewellnm.com/)
 
-[New York](https://nystateofhealth.ny.gov/)
+  [New York](https://nystateofhealth.ny.gov/)
 
-[Rhode Island](https://healthsourceri.com/)
+  [Rhode Island](https://healthsourceri.com/)
 
-[Vermont](https://portal.healthconnect.vermont.gov/)
+  [Vermont](https://portal.healthconnect.vermont.gov/)
