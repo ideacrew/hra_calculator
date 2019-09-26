@@ -16,4 +16,4 @@ shvsemail.com
 
 ## Community Involvement in Development
 
-The HRA Tool is released under the MIT License, and is able to be cloned, edited and extended by the community as needed. 
+The HRA Tool is released under the [MIT License](https://ideacrew.github.io/hra_calculator/Licensing/), and is able to be cloned, edited and extended by the community as needed. 
