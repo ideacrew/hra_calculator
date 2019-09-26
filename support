@@ -6,12 +6,14 @@ parent: About
 nav_order: 8
 ---
 
-## Community Involvement
+## Support
 
-If you’re an SBE currently using the HRA Calculator Tool and would like to provide feature suggestions, feedback or report a bug, please raise an item for consideration via the Github issue process. 
+If you are an SBE currently using the HRA Calculator Tool and would like to provide feature suggestions, feedback or report a bug, please raise an item for consideration via the Github issue process. 
 
-If you’re an SBE not currently using the HRA Calculator Tool and have questions or need assistance with setup, please get in contact via email:
+If you are an SBE not currently using the HRA Calculator Tool and have questions or need assistance with setup, please get in contact via email:
 
-<shvsemail.com>
+shvsemail.com
 
-The HRA Tool is open source software released under the MIT license.
+## Community Involvement in Development
+
+The HRA Tool is released under the MIT License, and is able to be cloned, edited and extended by the community as needed. 
