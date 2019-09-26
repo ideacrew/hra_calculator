@@ -6,7 +6,7 @@ parent: Getting Started
 nav_order: 2
 ---
 
-# **Scope Overview**
+## Scope Overview
 
 Anonymous consumer experience designed to be a 3-5 page workflow based on the following key information from the user:
 * Age & Location (Zip and or County depending on state based configuration)
@@ -20,9 +20,9 @@ System admin experience designed to allow an SBE admin to configure key informat
 * Plan & Benefit Data Loading
 * Key customizable text 
 
-#### The functionality mentioned above is the Minimum Viable Product (MVP) solution allowing the HRA Tool to be adopted by as many SBEs as possible in the timeline available. 
+#### *The functionality mentioned above is the Minimum Viable Product (MVP) solution allowing the HRA Tool to be adopted by as many SBEs as possible in the timeline available.* 
 
-# **Delivery Goal**
+## Delivery Goal
 The task taken on by IdeaCrew and State Health and Value Strategies (SHVS) was to produce and release a decision support tool within 45-60 days following a notice to proceed with development. 
 The goal in this short timeline is to deliver a fully functional consumer facing tool designed to be adopted and utilized by as many SBEs as possible. 
 
