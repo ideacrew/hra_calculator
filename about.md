@@ -7,17 +7,6 @@ has_children: true
 has_toc: false
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Project Overview
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
-
-
+IdeaCrew and State Health & Value Strategies (SHVS) have developed a web-based decision support tool that will calculate employee costs based on employer’s monthly contribution amount. The tool will help employees understand options for obtaining health coverage and affordability based on employer-offered benefit type and contribution amount. For State-based Exchanges (SBEs) and other hosting agencies, the HRA Affordability Tool offers simple setup with tenant-based site branding and configuration with state-level information so that it may be used across the country.
