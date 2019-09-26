@@ -5,6 +5,7 @@ import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { ResultService } from '../result.service'
 import { validateDate } from './date.validator'
+import { NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   templateUrl: './info.component.html',
@@ -35,7 +36,8 @@ export class InfoComponent implements OnInit {
     private fb: FormBuilder,
     private httpClient: HttpClient,
     private router: Router,
-    private resultService: ResultService
+    private resultService: ResultService,
+    private config: NgbDatepickerConfig
   ) {
 
     for (var _i = 0; _i < 12; _i++) {

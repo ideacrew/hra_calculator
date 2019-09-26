@@ -20,6 +20,7 @@ export class ResultComponent implements OnInit {
   hra_frequency: String;
   hra_amount: Number;
   hra_type: String;
+  full_hra_type: String;
   hra_determination: String;
   taxCredit: String;
   marketPlace: String;
@@ -74,12 +75,14 @@ export class ResultComponent implements OnInit {
       this.router.navigateByUrl('/home');
     }
     if(this.hra_type == "qsehra") {
+      this.full_hra_type = 'Qualified Small Employer HRA'
       if (this.hra_determination == 'unaffordable'){
         this.showUnaffordableQsehraText = true;
       } else if (this.hra_determination == 'affordable'){
         this.showAffordableQsehraText = true;
       }
     } else if(this.hra_type == "ichra"){
+      this.full_hra_type = 'Individual Coverage HRA'
       if (this.hra_determination == 'unaffordable'){
         this.showUnaffordableIchraText = true;
       } else if (this.hra_determination == 'affordable') {

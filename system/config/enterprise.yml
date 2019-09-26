@@ -54,7 +54,7 @@ namespaces:
                                   default: 'a tax credit'
                                 - key: market_place
                                   type: :string
-                                  default: 'MARKETPLACE'
+                                  default: 'DC Health Link'
                                 - key: help_text_1
                                   type: :string
                                   default: "Answer 'no' when asked if you're offered health insurance by an employer (unless you are separately offered health insurance by another employer)."
