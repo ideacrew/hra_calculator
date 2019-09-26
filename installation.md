@@ -7,7 +7,7 @@ has_children: true
 ---
 
 ## Introduction
-Given variation in SBE technical practices, the HRA Tool has been designed so that SBEs can easily deploy the application on a number of different platforms.  Instructions are provided below for each of these approaches:
+Given variation in SBE technical practices, the HRA Tool has been designed so that SBEs can easily deploy the application on a number of different platforms.  Instructions are provided for each of the platforms below:
 - **Local Deployment:**  Deployment to a local Docker Desktop environment for development and testing
 -	**AWS Deployment:**  Production-like deployment to an AWS cloud account
 -	**Azure Deployment:**  Production-like deployment to an Azure cloud account
