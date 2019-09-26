@@ -42,11 +42,26 @@ For production deployments, Docker Swarm will be used.  Swarm is a Docker-native
 In order to deploy to a Docker swarm, you have to provision one or more physical or virtual machines.  To help us do that, we are going to leverage Docker Machine.  It's a tool that lets you install Docker Engine on virtual hosts, and manage the hosts with docker-machine commands. You can use Machine to create Docker hosts on your local Mac or Windows box, on your company network, in your data center, or on cloud providers like Azure, AWS, or DigitalOcean.  
 
 #### Provision an AWS Docker Instance
+Run the command below to create a Docker instance in AWS.  It assumes you have an AWS Access Key ID and an AWS Secret Access Key.  
 ```
-git clone https://github.com/ideacrew/hra_calculator.git
-cd hra_calculator
-docker-compose build
-docker-compose up
+docker-machine create --driver amazonec2 \
+                      --amazonec2-access-key ********4321 \
+                      --amazonec2-secret-key *********lkjhg \
+                      --amazonec2-vpc-id vpc-abcd123 \
+                      --amazonec2-zone b \
+                      --amazonec2-subnet-id subnet-1234567 \
+                      --amazonec2-instance-type m5.large \
+                      --amazonec2-keypair-name mykey \
+                      --amazonec2-ssh-keypath ~/.ssh/id_rsa hradocker01
 ```
-This starts the application on port 8080.  Simply go to `http://localhost:8080` to test the application.
-
+#### List the VM and Get the IP Address
+Use this command to list the machines and get the IP address.   
+```
+docker-machine ls
+```
+Here is example output from this command.
+```
+$ docker-machine ls
+NAME             ACTIVE   DRIVER       STATE     URL                        SWARM   DOCKER     ERRORS
+hradocker01      -        amazonec2    Running   tcp://3.89.92.200:2376             v19.03.2
+```
