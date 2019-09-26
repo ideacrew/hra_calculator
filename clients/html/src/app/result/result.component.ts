@@ -14,10 +14,12 @@ export class ResultComponent implements OnInit {
   county: String;
   dob: Date;
   household_frequency: String;
+  household_frequency_text: String;
   household_amount: Number;
   start_month: Date;
   end_month: Date;
   hra_frequency: String;
+  hra_frequency_text: String;
   hra_amount: Number;
   hra_type: String;
   full_hra_type: String;
@@ -74,6 +76,19 @@ export class ResultComponent implements OnInit {
     }else{
       this.router.navigateByUrl('/home');
     }
+
+    if (this.household_frequency == 'annually') {
+      this.household_frequency_text = 'Annual';
+    }else if (this.household_frequency == 'monthly') {
+      this.household_frequency_text = 'Monthly';
+    }
+
+    if (this.hra_frequency == 'annually') {
+      this.hra_frequency_text = 'Total';
+    }else if (this.hra_frequency == 'monthly') {
+      this.hra_frequency_text = 'Monthly';
+    }
+
     if(this.hra_type == "qsehra") {
       this.full_hra_type = 'Qualified Small Employer HRA'
       if (this.hra_determination == 'unaffordable'){
