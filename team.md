@@ -5,11 +5,11 @@ permalink: /team/
 parent: About
 nav_order: 6
 ---
-Team
+# **Team**
 
 The HRA Tool team is made up of members from a number of organizations.
 
-Funding for the HRA Tool was provided by the Robert Wood Johnson Foundation.
+Funding for the HRA Tool was provided by the [Robert Wood Johnson Foundation](https://www.rwjf.org/).
 
 Project leadership, requirements and coordination with State Based Exchanges was executed by State Health and Value Strategies.
 
