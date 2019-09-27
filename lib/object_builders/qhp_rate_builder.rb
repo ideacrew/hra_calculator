@@ -132,6 +132,7 @@ class QhpRateBuilder
         rating_area_id: rating_area_id,
         premium_tuples: premium_tuples_params
       }
+
       result = validate_premium_tables_and_premium_tuples(product_hios_id, premium_tables_params)
       active_year = applicable_range.first.year
       products = ::Products::Product.where(hios_id: /#{product_hios_id}/).select{|a| a.active_year == active_year}
@@ -147,7 +148,7 @@ class QhpRateBuilder
   def build_product_premium_tables
     active_year = @rate[:effective_date].to_date.year
     applicable_range = @rate[:effective_date].to_date..@rate[:expiration_date].to_date
-    rating_area = @rate[:rate_area_id].gsub("Rating Area ", "R-MA00")
+    rating_area = @rate[:rate_area_id]#.gsub("Rating Area ", "R-MA00")
     rating_area_id = if @rating_area_enabled
                        @rating_area_id_cache[[active_year, rating_area]]
                      else

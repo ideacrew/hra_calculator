@@ -5,7 +5,7 @@ namespace :load_rate_reference do
   task :run_all_rating_areas => :environment do
     include ::SettingsHelper
 
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/rating_areas", "**", "*.xlsx"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/rating_areas", "**", "*.xlsx"))
 
     puts "*"*80 unless Rails.env.test?
 
@@ -40,9 +40,11 @@ namespace :load_rate_reference do
 
   desc "load rating regions from xlsx file"
   task :update_rating_areas, [:file] => :environment do |t, args|
+    include ::SettingsHelper
+
     begin
       file = args[:file]
-      file_year = 2019
+      file_year = 2020
       xlsx = Roo::Spreadsheet.open(file)
       sheet = xlsx.sheet(0)
 
@@ -56,6 +58,7 @@ namespace :load_rate_reference do
       end
 
       @result_hash.each do |rating_area_id, locations|
+        next if rating_area_id.nil?
 
         location_ids = locations.map do |loc_record|
           county_zip = ::Locations::CountyZip.where(
@@ -64,6 +67,7 @@ namespace :load_rate_reference do
               county_name: loc_record['county_name']
             }
           ).first
+          next if county_zip.nil?
           county_zip._id
         end
 
@@ -81,7 +85,8 @@ namespace :load_rate_reference do
             {
               active_year: file_year,
               exchange_provided_code: rating_area_id,
-              county_zip_ids: location_ids
+              county_zip_ids: location_ids,
+              covered_states: [state_abbreviation]
             }
           )
         end
