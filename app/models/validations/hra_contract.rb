@@ -18,13 +18,13 @@ module Validations
     end
 
     rule(:state) do
-      key.failure("State must be #{state_full_name}") if value != state_full_name
+      key.failure("must be #{state_full_name}") if value != state_full_name
     end
 
     if validate_county && !offerings_constrained_to_zip_codes
       rule(:county) do
         county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
-        key.failure('Entered county is invalid') if county_zips.blank?
+        key.failure('is invalid') if county_zips.blank?
       end
     end
 
@@ -32,34 +32,34 @@ module Validations
       rule(:county, :zipcode) do
         county_zips = ::Locations::CountyZip.where(county_name: values[:county].titleize)
         if county_zips.blank?
-          key.failure('Entered county is invalid')
+          key.failure('is invalid')
         elsif county_zips.where(zip: values[:zipcode]).blank?
-          key.failure('Entered zip and county combination does not exist for zipcode')
+          key.failure('does not exist for zipcode')
         end
       end
     end
 
     rule(:dob) do
-      key.failure('DOB cannot be in the future') if value > Date.today
+      key.failure('cannot be in the future') if value > Date.today
     end
 
     rule(:household_frequency) do
       frequencies = ['monthly', 'annually']
-      key.failure('Enter a value which is monthly or annually') unless frequencies.include?(value)
+      key.failure('should be either monthly or annually') unless frequencies.include?(value)
     end
 
     rule(:household_amount) do
-      key.failure('Enter a value which is valid and positive') if value.negative?
+      key.failure('should be valid and positive') if value.negative?
     end
 
     rule(:hra_type) do
       hra_types = ['ichra', 'qsehra']
-      key.failure('Hra type must be ichra/qsehra') unless hra_types.include?(value.downcase)
+      key.failure('must be ichra/qsehra') unless hra_types.include?(value.downcase)
     end
 
     rule(:end_month, :start_month) do
       if values[:end_month] < values[:start_month]
-        key.failure('end month must be after start month')
+        key.failure('must be after start_month')
       elsif (((values.data[:end_month].to_time - values.data[:start_month].to_time)/1.month.second).to_i > 12)
         key.failure('Please enter a valid end month, the effective period cannot be greater than 12 months')
       end
@@ -67,11 +67,11 @@ module Validations
 
     rule(:hra_frequency) do
       frequencies = ['monthly', 'annually']
-      key.failure('Enter a value which is monthly or annually') unless frequencies.include?(value)
+      key.failure('should be either monthly or annually') unless frequencies.include?(value)
     end
 
     rule(:hra_amount) do
-      key.failure('Enter a value which is valid and positive') if value.negative?
+      key.failure('should be valid and positive') if value.negative?
     end
   end
 end
