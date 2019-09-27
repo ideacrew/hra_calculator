@@ -13,7 +13,10 @@ module Transactions
       output = ::Validations::HraContract.new.call(params)
       if output.failure?
         result = output.to_h
-        result[:errors] = output.errors.to_h.values.flatten
+        result[:errors] = []
+        output.errors.to_h.each_pair do |keyy, val|
+          result[:errors] << "#{keyy.to_s} #{val.first}"
+        end
         Failure(result)
       else
         Success(output)
