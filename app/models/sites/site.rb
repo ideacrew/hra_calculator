@@ -23,8 +23,8 @@ class Sites::Site
   def environments
     [
       {
-        'key': :production,
-        'features': features.map(&:to_h)
+        key: :production,
+        features: features.map(&:to_h)
       }
     ]
   end
@@ -32,7 +32,7 @@ class Sites::Site
   # Following method needs to be updated if multi environment params passed.
   def environments=(env_params)
     env_params.each do |env_hash|
-      env_hash['features'].each do |feature_hash|
+      env_hash[:features].each do |feature_hash|
         self.features.build(feature_hash)
       end
     end
