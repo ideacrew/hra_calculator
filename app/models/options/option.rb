@@ -3,7 +3,7 @@ class Options::Option
   include Mongoid::Timestamps
 
   field :key, type: Symbol
-  field :namespace, type: Symbol
+  field :namespace, type: Boolean, default: false
 
   field :title, type: String
   field :description, type: String
@@ -18,11 +18,19 @@ class Options::Option
 
   embedded_in :configurable, polymorphic: true
 
+  def options
+    child_options
+  end
+
   def namespaces
-    child_options.reduce([]) { |list, option| list << option.namespace }
+    child_options.select(&:namespace)
   end
 
   def settings
+    child_options.collect(&:setting_hash)
+  end
+
+  def setting_hash
     {
       key: key,
       title: title,
@@ -35,6 +43,14 @@ class Options::Option
   end
 
   def settings=(params)
-    self.assign_attributes(params)
+    params.each do |param_hash|
+      self.child_options.build(param_hash)
+    end
+  end
+
+  def namespaces=(params)
+    params.each do |param_hash|
+      self.child_options.build(param_hash.merge(namespace: true))
+    end
   end
 end
