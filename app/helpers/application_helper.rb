@@ -47,6 +47,12 @@ module ApplicationHelper
     # build_form_group(setting, input_group)
   end
 
+  def base64
+  end
+
+
+  def 
+
   # Wrap any input group in <div> tag
   def input_group
     tag.div(yield, class: "input-group")
@@ -55,8 +61,22 @@ module ApplicationHelper
   def input_text_control(setting)
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
+    aria_describedby = id
 
-    tag.input(nil, type: "text", value: input_value, id: id, class: "form-control")
+    tag.input(nil, type: "text", value: input_value, id: id, class: "form-control", aria: { describedby: aria_describedby })
+  end
+
+  def input_file_control(setting)
+    id = setting[:key].to_sz
+    aria_describedby = id
+    label = setting[:title] || id.titleize
+
+    tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
+    tag.div(
+      tag.input(nil, type: "file", value: input_value, id: id, class: "custom-file-input", aria: { describedby: aria_describedby }) +
+      tag.label(for: id, value: label, class: "custom-file-label", aria: { label: aria_label }),
+      class: "custom-file")
+    tag.div(tag.span('Choose File', class: "input-group-text"), class: "input-group-append")
   end
 
   def input_color_control(setting)
@@ -65,10 +85,13 @@ module ApplicationHelper
 
     tag.input(nil, type: "color", value: input_value, id: id)
   end
-
+ 
   def input_swatch_control(setting)
-    text_input_control(setting) + 
-    tag.div(color_input_control(setting), class: "input-group-append")
+    id = setting[:key].to_s
+    color = setting[:value] || setting[:default]
+
+    input_text_control(setting) +
+    tag.div(tag.button(type: "button", id: id, class: "btn btn-outline-secondary", value: ""), class: "input-group-append")
   end
 
   def input_currency_control(setting)
@@ -77,7 +100,7 @@ module ApplicationHelper
     aria_map    = { label: "Amount (to the nearest dollar)"}
 
     tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
-    tag.input(nil, type: "text", value: input_value, id: id, class: "form-control", aria: aria_map) +
+    tag.input(nil, type: "text", value: input_value, id: id, class: "form-control", aria: { map: aria_map }) +
     tag.div(tag.span('.00', class: "input-group-text"), class: "input-group-append")
   end
 
@@ -86,8 +109,8 @@ module ApplicationHelper
     aria_label  = setting[:aria_label] || "Radio button for following text input"
 
     tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
-    tag.input(nil, type: "radio", "aria-label": aria_label) +
-    tag.input(input_value, type: "text", class: "form-control", "aria-label": aria_label)
+    tag.input(nil, type: "radio") +
+    tag.input(input_value, type: "text", class: "form-control", aria: {label: aria_label })
   end
 
   def build_form_group(controls)
@@ -95,7 +118,7 @@ module ApplicationHelper
   end
 
   # Build a general-purpose form group wrapper around the supplied input control
-  def form_group(setting, input_control)
+  def form_group(setting, control)
     id          = setting[:key].to_s
     label       = setting[:title] || id.titleize
     help_id     = id + 'HelpBlock'
@@ -104,13 +127,13 @@ module ApplicationHelper
 
     tag.div(class: "form-group") do
       tag.label(for: id, value: label, aria: { label: aria_label }) +
-      input_control +
+      control +
       tag.small(help_text, id: help_id, class: %w(form-text text-muted))
     end
   end
 
 
-  def radio_form_group(setting, controls)
+  def radio_form_group(setting, control)
     id          = setting[:key].to_s
     label       = setting[:title] || id.titleize
     help_id     = id + 'HelpBlock'
@@ -119,7 +142,7 @@ module ApplicationHelper
 
     tag.div(class: "form-group") do
       tag.label(for: id, value: label, aria: { label: aria_label }) +
-      input_control + 
+      control + 
       tag.small(help_text, id: help_id, class: %w(form-text text-muted))
     end
   end
