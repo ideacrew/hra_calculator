@@ -3,7 +3,7 @@ namespace :load_service_reference do
   task :run_all_service_areas => :environment do
     include ::SettingsHelper
 
-    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/dc/xls_templates/service_areas", "**", "*.xlsx"))
+    files = Dir.glob(File.join(Rails.root, "db/seedfiles/plan_xmls/ma/xls_templates/service_areas", "**", "*.xlsx"))
     puts "*"*80 unless Rails.env.test?
 
     if offerings_constrained_to_service_areas
@@ -25,13 +25,15 @@ namespace :load_service_reference do
     total = 0
     begin
       file = args[:file]
-      @year = 2019
-
+      @year = 2020
       xlsx = Roo::Spreadsheet.open(file)
-      sheet = xlsx.sheet(0)
+      sheet = xlsx.sheet(1)
       issuer_hios_id = sheet.cell(6,2).to_i.to_s
       (row_data_begin..sheet.last_row).each do |i|
-        serves_entire_state = to_boolean(sheet.cell(i,3))
+        serves_state = sheet.cell(i,3)
+        next if serves_state.nil?
+
+        serves_entire_state = to_boolean(serves_state)
         serves_partial_county = serves_entire_state ? nil : to_boolean(to_boolean(sheet.cell(i,5)))
         if serves_entire_state
           sa = ::Locations::ServiceArea.where(
@@ -88,7 +90,8 @@ namespace :load_service_reference do
                 issuer_provided_code: sheet.cell(i,1),
                 issuer_hios_id: issuer_hios_id,
                 issuer_provided_title: sheet.cell(i,2),
-                county_zip_ids: location_ids
+                county_zip_ids: location_ids,
+                covered_states: [state_abbreviation]
               })
             end
           end
