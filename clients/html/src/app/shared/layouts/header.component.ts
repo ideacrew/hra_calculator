@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
     this.httpClient.get<any>(environment.apiUrl+"/hra_results/header_footer_config").subscribe(
       (res) => {
         console.log(res)
-        debugger
         this.tenant_logo_file = res.data.tenant_logo_file;
         this.tenant_url = res.data.tenant_url;
       },
