@@ -54,7 +54,7 @@ namespaces:
                                   default: 'a tax credit'
                                 - key: market_place
                                   type: :string
-                                  default: 'MA Health Link'
+                                  default: 'Massachusetts Health Connector'
                                 - key: help_text_1
                                   type: :string
                                   default: "Answer 'no' when asked if you're offered health insurance by an employer (unless you are separately offered health insurance by another employer)"
@@ -84,11 +84,11 @@ namespaces:
                                   default: '[The results above are based on the information provided, which has not been independently verified. This is not a determination that you are eligible for a tax credit]'
                                 - key: tenant_logo_file
                                   type: :string
-                                  default: "dc_logo.jpg"
+                                  default: "ma_logo.png"
                                 - key: tenant_url
                                   type: URL
-                                  default: https://www.dchealthlink.com
+                                  default: https://business.mahealthconnector.org/
                                 - key: customer_support_number
                                   type: :string
-                                  default: "1-800-555-5555  TTY: 711"
+                                  default: "1-888-813-9220"
 
