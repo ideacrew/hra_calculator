@@ -1,0 +1,86 @@
+version: '3.4'
+
+services:
+  app: &app
+    image: hra_calculator_app:0.1.0
+    tmpfs:
+      - /tmp
+
+  web: &web
+    image: hra_calculator_web:0.1.0
+    tmpfs:
+      - /tmp
+
+  backend: &backend
+    <<: *app
+    volumes:
+      - rails_cache:/app/tmp/cache
+      - bundle:/bundle
+      - node_modules:/app/node_modules
+
+    environment:
+      - NODE_ENV=production
+      - RAILS_ENV=${RAILS_ENV:-production}
+      - REDIS_URL=redis://redis:6379/
+      - BOOTSNAP_CACHE_DIR=/bundle/bootsnap
+      - WEB_CONCURRENCY=1
+      - HISTFILE=/app/log/.bash_history
+      - EDITOR=vi
+
+    depends_on:
+      - mongo
+      - redis
+
+  frontend: &frontend
+    <<: *web
+    volumes:
+      - node_modules:/app/node_modules
+
+    environment:
+      - NODE_ENV=production
+      - WEB_CONCURRENCY=1
+      - HISTFILE=/app/log/.bash_history
+      - EDITOR=vi
+
+  angular:
+    <<: *frontend
+    ports:
+      - '8080:80'
+
+  rails:
+    <<: *backend
+    command: bash -c "rm -f tmp/pids/server.pid && mkdir -p tmp/pids/ && cat /run/secrets/master_key > /app/config/master.key && cat /run/secrets/credentials > /app/config/credentials.yml.enc && bundle && bundle exec puma -C config/puma.rb"
+    secrets:
+      - master_key
+      - credentials
+    ports:
+      - '3000:3000'
+
+  mongo:
+    image: mongo:4.2
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - 27017:27017
+
+  redis:
+    image: redis:3.2-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+
+volumes:
+  redis:
+  bundle:
+  node_modules:
+  rails_cache:
+  mongodb:
+  mongodb_config:
+
+secrets: 
+  master_key:
+    file: ./config/master.key
+  credentials:
+    file: ./config/credentials.yml.enc
