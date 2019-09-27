@@ -66,4 +66,16 @@ module SettingsHelper
   def help_text_5
     Registry['enterprise.dchbx.primary.production.help_text_5']
   end
+
+  def tenant_logo_file
+    Registry['enterprise.dchbx.primary.production.tenant_logo_file']
+  end
+
+  def tenant_url
+    Registry['enterprise.dchbx.primary.production.tenant_url']
+  end
+
+  def customer_support_number
+    Registry['enterprise.dchbx.primary.production.customer_support_number']
+  end
 end

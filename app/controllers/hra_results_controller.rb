@@ -21,6 +21,11 @@ class HraResultsController < ApplicationController
     end
   end
 
+  def header_footer_config
+    hf_setter = ::Operations::HeaderFooterConfigurationSetter.new.call
+    render plain: {status: "success", data: hf_setter.success.to_h}.to_json, content_type: 'application/json'
+  end
+
   private
 
   def formatted_params
