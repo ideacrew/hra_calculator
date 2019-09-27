@@ -3,7 +3,7 @@ class Options::Option
   include Mongoid::Timestamps
 
   field :key, type: Symbol
-  field :namespace, type: Boolean, default: false
+  field :namespace, type: Boolean, default: true
 
   field :title, type: String
   field :description, type: String
@@ -43,14 +43,10 @@ class Options::Option
   end
 
   def settings=(params)
-    params.each do |param_hash|
-      self.child_options.build(param_hash)
-    end
+    params.each {|param_hash| child_options.build(param_hash.merge(namespace: false)) }
   end
 
   def namespaces=(params)
-    params.each do |param_hash|
-      self.child_options.build(param_hash.merge(namespace: true))
-    end
+    params.each {|param_hash| child_options.build(param_hash) }
   end
 end

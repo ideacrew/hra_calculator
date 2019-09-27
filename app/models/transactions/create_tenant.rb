@@ -25,7 +25,7 @@ module Transactions
       end
     end
 
-    def persist(input, enterprise_id)
+    def persist(input, enterprise_id:)
       tenant = Tenants::Tenant.new(input.to_h)
       tenant.enterprise_id = enterprise_id
       
