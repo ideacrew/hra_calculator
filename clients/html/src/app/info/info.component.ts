@@ -32,6 +32,7 @@ export class InfoComponent implements OnInit {
   currentDate = new Date(2019,12,1);
   showErrors: boolean = false;
   errors: any = [];
+  isCountyDisabled: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -143,6 +144,7 @@ export class InfoComponent implements OnInit {
             hra_frequency: this.resultService.formData.hra_frequency,
             hra_amount: this.resultService.formData.hra_amount,
           });
+          this.countyOptions = [this.resultService.formData.county]
           this.effectiveEndOptions = [this.resultService.formData.end_month]
           this.selectedHouseholdFrequency = this.resultService.formData.household_frequency;
           this.selectedHraFrequency = this.resultService.formData.hra_frequency;
@@ -167,7 +169,19 @@ export class InfoComponent implements OnInit {
     this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_counties", {params: params}).subscribe(
       (res) => {
         console.log(res)
-        this.countyOptions = res.data.counties
+        if (res.data.counties.length == 0) {
+          this.countyOptions = ["Zipcode is ouside state"];
+          this.isCountyDisabled = true
+        } else if (res.data.counties.length == 1) {
+          this.hraForm.patchValue({
+            county: res.data.counties[0]
+          })
+          this.isCountyDisabled = true
+        } else {
+          this.countyOptions = res.data.counties;
+          this.countyOptions.unshift("Select County")
+          this.isCountyDisabled = false
+        }
       },
       (err) => {
         console.log(err)
