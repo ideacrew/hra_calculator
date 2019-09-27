@@ -2,42 +2,25 @@ version: '3.4'
 
 services:
   app: &app
-    build:
-      context: .
-      dockerfile: ./.docker/development/app/Dockerfile
-      args:
-        RUBY_VERSION: '2.6.3'
-        BUNDLER_VERSION: '2.0.2'
-        NODE_MAJOR: '11'
-        YARN_VERSION: '1.17.3'
-    image: hra_calculator_app:dev-0.1.0
+    image: hra_calculator_app:0.1.0
     tmpfs:
       - /tmp
-    networks:
-      - local
 
   web: &web
-    build:
-      context: .
-      dockerfile: ./.docker/development/web/Dockerfile
-    image: hra_calculator_web:dev-0.1.0
+    image: hra_calculator_web:0.1.0
     tmpfs:
       - /tmp
-    networks:
-      - local
 
   backend: &backend
     <<: *app
-    stdin_open: true
-    tty: true
     volumes:
-      - .:/app:cached
       - rails_cache:/app/tmp/cache
       - bundle:/bundle
       - node_modules:/app/node_modules
 
     environment:
-      - RAILS_ENV=${RAILS_ENV:-development}
+      - NODE_ENV=production
+      - RAILS_ENV=${RAILS_ENV:-production}
       - REDIS_URL=redis://redis:6379/
       - BOOTSNAP_CACHE_DIR=/bundle/bootsnap
       - WEB_CONCURRENCY=1
@@ -48,20 +31,13 @@ services:
       - mongo
       - redis
 
-  runner:
-    <<: *backend
-    command: /bin/bash
-    ports:
-      - '3002:3002'
-
   frontend: &frontend
     <<: *web
-    command: bash -c "npm install  && ng serve --host 0.0.0.0 --port 4200"
     volumes:
       - node_modules:/app/node_modules
 
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - WEB_CONCURRENCY=1
       - HISTFILE=/app/log/.bash_history
       - EDITOR=vi
@@ -69,25 +45,24 @@ services:
   angular:
     <<: *frontend
     ports:
-      - '4200:4200'
+      - '8080:80'
 
   rails:
     <<: *backend
-    stdin_open: true
-    tty: true
-    command: bash -c "rm -f tmp/pids/server.pid && bundle && bundle exec puma -C config/puma.rb"
+    command: bash -c "rm -f tmp/pids/server.pid && mkdir -p tmp/pids/ && cat /run/secrets/master_key > /app/config/master.key && cat /run/secrets/credentials > /app/config/credentials.yml.enc && bundle && bundle exec puma -C config/puma.rb"
+    secrets:
+      - master_key
+      - credentials
     ports:
       - '3000:3000'
 
   mongo:
-    image: mongo:latest
+    image: mongo:4.2
     volumes:
       - mongodb:/data/db
       - mongodb_config:/data/configdb
     ports:
-      - 27017
-    networks:
-      - local
+      - 27017:27017
 
   redis:
     image: redis:3.2-alpine
@@ -95,16 +70,18 @@ services:
       - redis:/data
     ports:
       - 6379
-    networks:
-      - local
 
 volumes:
   redis:
   bundle:
   node_modules:
   rails_cache:
-  mongodb: 
+  mongodb:
   mongodb_config:
 
-networks:
-  local:
+secrets: 
+  master_key:
+    file: ./config/master.key
+  credentials:
+    file: ./config/credentials.yml.enc
+
