@@ -4,15 +4,27 @@ services:
   app: &app
     build:
       context: .
-      dockerfile: ./.dockerdev/Dockerfile
+      dockerfile: ./.docker/development/app/Dockerfile
       args:
         RUBY_VERSION: '2.6.3'
         BUNDLER_VERSION: '2.0.2'
         NODE_MAJOR: '11'
         YARN_VERSION: '1.17.3'
-    image: hra_calculator-dev:0.1.0
+    image: hra_calculator_app:dev-0.1.0
     tmpfs:
       - /tmp
+    networks:
+      - local
+
+  web: &web
+    build:
+      context: .
+      dockerfile: ./.docker/development/web/Dockerfile
+    image: hra_calculator_web:dev-0.1.0
+    tmpfs:
+      - /tmp
+    networks:
+      - local
 
   backend: &backend
     <<: *app
@@ -23,10 +35,8 @@ services:
       - rails_cache:/app/tmp/cache
       - bundle:/bundle
       - node_modules:/app/node_modules
-      - packs:/app/public/packs
 
     environment:
-      - NODE_ENV=development
       - RAILS_ENV=${RAILS_ENV:-development}
       - REDIS_URL=redis://redis:6379/
       - BOOTSNAP_CACHE_DIR=/bundle/bootsnap
@@ -44,25 +54,40 @@ services:
     ports:
       - '3002:3002'
 
+  frontend: &frontend
+    <<: *web
+    command: bash -c "npm install  && ng serve --host 0.0.0.0 --port 4200"
+    volumes:
+      - node_modules:/app/node_modules
+
+    environment:
+      - NODE_ENV=development
+      - WEB_CONCURRENCY=1
+      - HISTFILE=/app/log/.bash_history
+      - EDITOR=vi
+
   angular:
-    <<: *backend
-    command: bash -c "cd clients/html && rm -rf node_modules && NG_CLI_ANALYTICS=false npm install -g @angular/cli && NG_CLI_ANALYTICS=false npm install  && ng serve --host 0.0.0.0 --port 4200"
+    <<: *frontend
     ports:
       - '4200:4200'
 
   rails:
     <<: *backend
-    command: bash -c "rm -f tmp/pids/server.pid && bundle &&  bundle exec rails server -p 3000 -b '0.0.0.0'"
+    stdin_open: true
+    tty: true
+    command: bash -c "rm -f tmp/pids/server.pid && bundle && bundle exec puma -C config/puma.rb"
     ports:
       - '3000:3000'
 
-    stdin_open: true
-    tty: true
-
   mongo:
     image: mongo:latest
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
     ports:
-      - 27017:27017
+      - 27017
+    networks:
+      - local
 
   redis:
     image: redis:3.2-alpine
@@ -70,10 +95,16 @@ services:
       - redis:/data
     ports:
       - 6379
+    networks:
+      - local
 
 volumes:
   redis:
   bundle:
   node_modules:
   rails_cache:
-  packs:
+  mongodb: 
+  mongodb_config:
+
+networks:
+  local:
