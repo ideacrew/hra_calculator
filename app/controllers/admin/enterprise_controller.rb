@@ -7,13 +7,10 @@ class Admin::EnterpriseController < ApplicationController
   end
 
   def tenant_create
-    result = Transactions::CreateTenant.new.call(tenant_params)
-
-    redirect_to :show
-  end
-  
-  def tenant_update
-    result = Transactions::UpdateTenant.new.call(tenant_params)
+    create_tenant = Transactions::CreateTenant.new
+    result = create_tenant
+                .with_step_args(persist: [enterprise_id: Enterprises::Enterprise.first.id])
+                .call(key: :dc, owner_organization_name: 'DC Marketplace')
 
     redirect_to :show
   end

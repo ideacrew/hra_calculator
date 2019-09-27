@@ -8,13 +8,23 @@ module Transactions
 
     private
 
-    def fetch(input, tenant_id:)
-      @tenant = Tenants::Tenant.find(tenant_id)
+    def fetch(input)
+      @tenant = Tenants::Tenant.find(input[:id])
 
       if @tenant.blank?
-        Failure({errors: {tenant_id: "Unabled to find tenant record with id #{tenant_id}"}})
+        Failure({errors: {tenant_id: "Unabled to find tenant record with id #{input[:id]}"}})
       else
         Success(input)
+      end
+    end
+
+    def validate(input)
+      result = super(input)
+
+      if result.success?
+        Success(result)
+      else
+        Failure(result.errors)
       end
     end
 
