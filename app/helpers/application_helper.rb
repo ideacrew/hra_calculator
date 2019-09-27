@@ -53,7 +53,7 @@ module ApplicationHelper
   def input_text_control(setting, form)
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
-
+    aria_describedby = id
     tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
   end
 
@@ -77,7 +77,7 @@ module ApplicationHelper
     aria_map    = { label: "Amount (to the nearest dollar)"}
 
     tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
-    tag.input(nil, type: "text", value: input_value, id: id, class: "form-control", aria: aria_map) +
+    tag.input(nil, type: "text", value: input_value, id: id, class: "form-control", aria: { map: aria_map }) +
     tag.div(tag.span('.00', class: "input-group-text"), class: "input-group-append")
   end
 
@@ -86,8 +86,8 @@ module ApplicationHelper
     aria_label  = setting[:aria_label] || "Radio button for following text input"
 
     tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
-    tag.input(nil, type: "radio", "aria-label": aria_label) +
-    tag.input(input_value, type: "text", class: "form-control", "aria-label": aria_label)
+    tag.input(nil, type: "radio") +
+    tag.input(input_value, type: "text", class: "form-control", aria: {label: aria_label })
   end
 
   def build_attribute_field(form, attribute)
@@ -114,7 +114,7 @@ module ApplicationHelper
   end
 
   # Build a general-purpose form group wrapper around the supplied input control
-  def form_group(setting, input_control)
+  def form_group(setting, control)
     id          = setting[:key].to_s
     label       = setting[:title] || id.titleize
     help_id     = id + 'HelpBlock'
@@ -125,25 +125,23 @@ module ApplicationHelper
       tag.label(for: id, value: label, aria: { label: aria_label }) do
         label
       end +
-      input_group { input_control } +
+      input_group { control } +
       tag.small(help_text, id: help_id, class: %w(form-text text-muted))
     end
   end
 
-  def radio_form_group(setting, input_control)
+  def radio_form_group(setting, control)
     id          = setting[:key].to_s
     label       = setting[:title] || id.titleize
     help_id     = id + 'HelpBlock'
     help_text   = setting[:description]
     aria_label  = setting[:aria_label] || "Radio button for following text input"
-    
-    tag.div(
-      tag.div(class: "input-group") do
-        tag.label(for: id, value: label, aria: { label: aria_label }) +
-        input_control + 
-        tag.small(help_text, id: help_id, class: %w(form-text text-muted))
-      end, class: 'form-group'
-    )
+
+    tag.div(class: "form-group") do
+      tag.label(for: id, value: label, aria: { label: aria_label }) +
+      control + 
+      tag.small(help_text, id: help_id, class: %w(form-text text-muted))
+    end
   end
 end
 
