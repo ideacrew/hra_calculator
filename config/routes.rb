@@ -1,25 +1,25 @@
 Rails.application.routes.draw do
   
   namespace :admin do
-    get  'tenants/show'
-    put  'tenants/update'
-    post 'tenants/upload_logo'
-    get  'tenants/features_show'
-    put  'tenants/features_update'
-    get  'tenants/ui_pages_show'
-    get  'tenants/ui_element_update'
-    get  'tenants/plan_index'
-    post 'tenants/upload_plan_data'
-    post 'tenants/zip_county_data'
+    resources :tenants, only: [:show, :update] do
+      post :upload_logo
+      get  :features_show
+      put  :features_update
+      get  :ui_pages_show
+      get  :ui_element_update
+      get  :plan_index
+      post :upload_plan_data
+      post :zip_county_data
+    end
   end
   
   namespace :admin do
-    get  'enterprise/show'
-    post 'enterprise/account_create'
-    post 'enterprise/tenant_create'
-    post 'enterprise/tenant_update'
-    post 'enterprise/benefit_year_create'
-    post 'enterprise/benefit_year_update'
+    resources :enterprise, only: [:show] do 
+      post :account_create
+      post :tenant_create
+      post :benefit_year_create
+      post :benefit_year_update
+    end
   end
 
 	mount_devise_token_auth_for 'Account', at: 'auth'

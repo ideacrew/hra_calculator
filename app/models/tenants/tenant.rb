@@ -19,4 +19,11 @@ class Tenants::Tenant
               class_name: 'Options::Option'
 
   accepts_nested_attributes_for :sites, :options
+
+
+  def sites=(site_params)
+    site_params.each do |site_hash|
+      sites.build(site_hash)
+    end
+  end
 end

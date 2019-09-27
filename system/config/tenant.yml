@@ -5,10 +5,10 @@ namespaces:
     namespaces:
       - key: :ic
         settings:
-        - key: owner_account_name
-          default: admin@openhbx.org
-          description: The Marketplace owner's email login account name
-          type: email_account
+        - key: owner_organization_name
+          default: Ideacrew
+          description: The Marketplace owner organization name
+          type: :string
         namespaces:
           - key: :sites
             namespaces:
