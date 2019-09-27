@@ -1,2 +1,33 @@
-<h1>Admin::Tenants#show</h1>
-<p>Find me in app/views/admin/tenants/show.html.erb</p>
+
+<%= form_for(@tenant, url: admin_tenant_path) do |tenant_form| %>
+
+  <%= build_attribute_field(tenant_form, :owner_organization_name) %>
+
+  <p class="h3">Site</p>
+   
+  <%= tenant_form.fields_for :sites do |site_form| %>
+    <%= site_form.fields_for :options do |option_form| %>
+       <p class="h5"><%= option_form.object.key.to_s.titleize %></p>
+
+       <% option_form.object.options.each do |option| %>
+         <% if option.namespace %>
+           <%= option_form.fields_for :child_options do |child_option_form| %>
+             <% option.child_options.each do |child_option| %>
+               <%= build_option_field child_option_form, child_option %>
+             <% end %>
+           <% end %>
+         <% else %>
+           <%= build_option_field option_form, option %>
+         <% end %>
+       <% end %>
+   
+    <% end %>
+  <% end %>
+<% end %>
+
+<script>
+
+$(document).ready(function () {
+  bsCustomFileInput.init()
+})
+</script>

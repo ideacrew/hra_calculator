@@ -1,4 +1,5 @@
 class Admin::EnterpriseController < ApplicationController
+  layout 'admin'
   
   def show
   end

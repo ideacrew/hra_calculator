@@ -1,6 +1,8 @@
 class Admin::TenantsController < ApplicationController
+  layout 'admin'
 
   def show
+    @tenant = Tenants::Tenant.find(params[:id])
   end
 
   def update

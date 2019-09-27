@@ -43,10 +43,10 @@ namespaces:
                             description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
                             type: :base_64
                             default: nil
-                          - key: :fav_icon
-                            description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
-                            type: :base_64
-                            default: nil
+                          # - key: :fav_icon
+                          #   description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
+                          #   type: :base_64
+                          #   default: nil
                       - key: :ui_theme
                         settings:
                           - key: typefaces
