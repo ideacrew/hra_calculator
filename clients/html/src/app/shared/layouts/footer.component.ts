@@ -23,7 +23,6 @@ export class FooterComponent implements OnInit{
     this.httpClient.get<any>(environment.apiUrl+"/hra_results/header_footer_config").subscribe(
       (res) => {
         console.log(res)
-        debugger
         this.customer_support_number = res.data.customer_support_number;
         this.benefit_year = res.data.benefit_year;
       },
