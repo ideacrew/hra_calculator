@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :hra_information
       get :hra_counties
       post :hra_payload
+      get :header_footer_config
     end
   end
 end
