@@ -81,7 +81,26 @@ export class InfoComponent implements OnInit {
   }
 
   showTab(n) {
-    // ... and fix the Previous/Next buttons:
+    if(n === 1){
+      if(!(this.hraForm.controls['dob'].valid) ||
+         !(this.hraForm.controls['household_frequency'].valid) ||
+         !(this.hraForm.controls['household_amount'].valid)
+         ){
+          this.hraForm.controls['dob'].markAsTouched();
+          this.hraForm.controls['household_frequency'].markAsTouched();
+          this.hraForm.controls['household_amount'].markAsTouched();
+          return null;
+         }
+
+      if(this.hraForm.controls['zipcode'] && !(this.hraForm.controls['zipcode'].valid)){
+        this.hraForm.controls['zipcode'].markAsTouched()
+        return null;
+      }
+      if(this.hraForm.controls['county'] && !(this.hraForm.controls['county'].valid)){
+        this.hraForm.controls['county'].markAsTouched()
+        return null;
+      }
+    }
     this.currentTab = n;
     if (n === 0) {
       this.showPrevBtn = false;
@@ -158,9 +177,7 @@ export class InfoComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.hraForm.value)
     if (this.hraForm.valid) {
-      console.log(this.hraForm.value)
       this.resultService.setFormData(this.hraForm.value);
       this.httpClient.post<any>(environment.apiUrl+"/hra_results/hra_payload", this.hraForm.value).subscribe(
         (res) => {
@@ -171,12 +188,16 @@ export class InfoComponent implements OnInit {
           }else{
             this.errors = res.errors;
             this.showErrors = true;
+            window.scroll(0,0);
           }
         },
         (err) => {
           console.log(err)
         }
       );
+    }else{
+      this.hraForm.markAllAsTouched();
+      window.scroll(0,0);
     }
   }
 
