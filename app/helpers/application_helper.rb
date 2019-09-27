@@ -16,6 +16,25 @@ module ApplicationHelper
     end
   end
 
+
+
+  def build_select_group(setting)
+    tag.select()
+  # <div class="form-group">
+  #   <label for="exampleFormControlSelect1">Example select</label>
+  #   <select class="form-control" id="exampleFormControlSelect1">
+  #     <option>1</option>
+  #     <option>2</option>
+  #     <option>3</option>
+  #     <option>4</option>
+  #     <option>5</option>
+  #   </select>
+  # </div>
+
+  end
+
+
+
   def build_radio_input(setting)
     aria_label  = setting[:aria_label] || "Radio button for following text input"
     input_value = setting[:value] || setting[:default]
@@ -32,43 +51,77 @@ module ApplicationHelper
     # build_form_group(setting, input_group)
   end
 
-  def build_form_group(setting, input_group)
-    id        = setting[:key].to_s
-    label     = setting[:title] || id.titleize
-    help_id   = id + 'HelpBlock'
-    help_text = setting[:description]
+  def color_input_control(setting)
+    id = setting[:key].to_s
+    input_value = setting[:value] || setting[:default]
+
+    tag.input(nil, type: "color", value: input_value, id: id)
+  end
+
+  def text_input_control(setting)
+    id = setting[:key].to_s
+    input_value = setting[:value] || setting[:default]
+
+    tag.input(nil, type: "text", value: input_value, id: id, class: "form-control")
+  end
+
+  def swatch_input_control(setting)
+    text_input_control(setting) + 
+    tag.div(color_input_control(setting), class: "input-group-append")
+  end
+
+  def currency_input_control(setting)
+    id          = setting[:key].to_s
+    input_value = setting[:value] || setting[:default]
+    aria_map    = { label: "Amount (to the nearest dollar)"}
+
+    tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
+    tag.input(nil, type: "text", value: input_value, id: id, class: "form-control", aria: aria_map) +
+    tag.div(tag.span('.00', class: "input-group-text"), class: "input-group-append")
+  end
+
+  def radio_input_control(setting, input)
+    input_value = setting[:value] || setting[:default]
+    aria_label  = setting[:aria_label] || "Radio button for following text input"
+
+    tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
+    tag.input(nil, type: "radio", "aria-label": aria_label) +
+    tag.input(input_value, type: "text", class: "form-control", "aria-label": aria_label)
+  end
+
+
+  def input_group
+    tag.div(yield, class: "input-group")
+  end
+
+  # Build a general-purpose form group wrapper around the supplied input control
+  def form_group(setting, input_control)
+    id          = setting[:key].to_s
+    label       = setting[:title] || id.titleize
+    help_id     = id + 'HelpBlock'
+    help_text   = setting[:description]
+    aria_label  = setting[:aria_label] || "Radio button for following text input"
 
     tag.div(class: "form-group") do
-      tag.label(for: id, value: label) +
-      input_group +
+      tag.label(for: id, value: label, aria: { label: aria_label }) +
+      input_control +
       tag.small(help_text, id: help_id, class: %w(form-text text-muted))
     end
   end
 
-  def build_currency_input_group(setting)
-    aria_label  = setting[:aria_label] || "Amount (to the nearest dollar)"
-    input_value = setting[:value] || setting[:default]
 
-    input_group = tag.div(
-                    tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
-                    tag.input(nil, type: "text", value: input_value, class: "form-control", "aria-label": aria_label) +
-                    tag.div(tag.span('.00', class: "input-group-text"), class: "input-group-append"),
-                  class: "input-group"
-                )
-    build_form_group(setting, input_group)
-  end
-
-  def build_radio_input_group(setting)
+  def radio_form_group(setting, controls)
+    id          = setting[:key].to_s
+    label       = setting[:title] || id.titleize
+    help_id     = id + 'HelpBlock'
+    help_text   = setting[:description]
     aria_label  = setting[:aria_label] || "Radio button for following text input"
-    input_value = setting[:value] || setting[:default]
 
-    input_group = tag.div(
-                    tag.div(tag.span('$', class: "input-group-text"), class: "input-group-prepend") +
-                    tag.input(nil, type: "radio", value: input_value, "aria-label": aria_label) +
-                    tag.input(nil, type: "text", class: "form-control", value: input_value, "aria-label": aria_label), 
-                  class: "input-group"
-                )
-    build_form_group(setting, input_group)
+    tag.div(class: "form-group") do
+      tag.label(for: id, value: label, aria: { label: aria_label }) +
+      input_control + 
+      tag.small(help_text, id: help_id, class: %w(form-text text-muted))
+    end
   end
 
 end
