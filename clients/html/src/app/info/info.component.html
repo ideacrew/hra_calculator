@@ -30,7 +30,7 @@
                           </div>
                         </ng-template>
                         <sup [ngbPopover]="popContentFamily">
-                          <i class="fas fa-question-circle fa-lg"></i>
+                          <i class="fas fa-question-circle "></i>
                         </sup>
                       </strong>
                     </p>
@@ -46,14 +46,14 @@
                         </div>
                       </ng-template>
                       <sup [ngbPopover]="popContentResidence">
-                        <i class="fas fa-question-circle fa-lg"></i>
+                        <i class="fas fa-question-circle"></i>
                       </sup>
                     </strong>
                   </p>
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="state">
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="state">
                       State
                     </label>
                     <div class="col-sm-4 state-align">
@@ -65,7 +65,7 @@
                         </div>
                       </ng-template>
                       <sup [ngbPopover]="popContentState" >
-                        <i class="fas fa-question-circle fa-lg"></i>
+                        <i class="fas fa-question-circle"></i>
                       </sup>
                       <div *ngIf="hraForm.controls['state'].invalid && (hraForm.controls['state'].dirty || hraForm.controls['state'].touched)" class="alert alert-danger">
                         <div *ngIf="hraForm.controls['state'].errors.required">
@@ -78,7 +78,7 @@
                 <div *ngIf="showZipcode">
                   <div class="form-group">
                     <div class="input-group">
-                      <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="zipcode">Zip Code</label>
+                      <label class="col-sm-3 col-form-label col-form-label-sm" for="zipcode">Zip Code</label>
                       <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" (keypress)="numberOnly($event)" formControlName="zipcode" id="zipcode" pattern="[0-9]{5}" minlength="5" maxlength="5" (blur)="getCountyInfo()"/>
                         <div *ngIf="hraForm.controls['zipcode'].invalid && (hraForm.controls['zipcode'].dirty || hraForm.controls['zipcode'].touched)" class="alert alert-danger">
@@ -96,7 +96,7 @@
                 <div *ngIf="showCounty">
                   <div class="form-group">
                     <div class="input-group">
-                      <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="county">County</label>
+                      <label class="col-sm-3 col-form-label col-form-label-sm" for="county">County</label>
                       <div class="col-sm-4">
                         <select class="form-control form-control-sm" id="county" formControlName="county" ngModel rquired>
                           <option *ngFor="let option of countyOptions" [value]="option">
@@ -120,7 +120,7 @@
                   </div>
                   <div class="form-group">
                     <div class="input-group">
-                      <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="dob">MM/DD/YYYY</label>
+                      <label class="col-sm-3 col-form-label col-form-label-sm" for="dob">MM/DD/YYYY</label>
                       <div class="col-sm-4">
                         <input type="date" class="form-control form-control-sm" id="dob" min='1900-01-01' max="{{today | date:'yyyy-MM-dd'}}" formControlName="dob" ngModel required validateDate />
                         <div *ngIf="hraForm.controls['dob'].invalid && (hraForm.controls['dob'].dirty || hraForm.controls['dob'].touched)" class="alert alert-danger">
@@ -144,14 +144,14 @@
                         </div>
                       </ng-template>
                       <sup [ngbPopover]="popContentHouseholdIncome">
-                        <i class="fas fa-question-circle fa-lg"></i>
+                        <i class="fas fa-question-circle"></i>
                       </sup>
                     </strong>
                   </p>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                      <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="household_frequency">Frequency</label>
+                      <label class="col-sm-3 col-form-label col-form-label-sm" for="household_frequency">Frequency</label>
                       <div class="col-sm-4">
                         <div class="btn-group" data-toggle="buttons">
                           <span [ngClass]="(selectedHouseholdFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'">
@@ -173,7 +173,7 @@
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="household_amount">Amount</label>
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="household_amount">Amount</label>
                     <div class="col-sm-4">
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -217,7 +217,7 @@
                     </p>
                   </div>
                   <div class="input-group">
-                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="hra_type">Choose One</label>
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_type">Choose One</label>
                     <div class="col-sm-8">
                       <div class="btn-group hra-type-group" data-toggle="buttons">
                         <span [ngClass]="(selectedHraType=='ichra')?'btn btn-outline-info active':'btn btn-outline-info'">
@@ -234,7 +234,7 @@
                           </div>
                         </ng-template>
                         <sup [ngbPopover]="popHraType" >
-                          <i class="fas fa-question-circle fa-2x"></i>
+                          <i class="fas fa-question-circle"></i>
                         </sup>
                       </div>
                       <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger">
@@ -252,7 +252,7 @@
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="start_month">
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="start_month">
                       Start Month
                     </label>
                     <div ngbDropdown class="col-sm-4">
@@ -270,13 +270,13 @@
                       </div>
                     </ng-template>
                     <sup [ngbPopover]="popContentStartMonth">
-                      <i class="fas fa-question-circle fa-2x"></i>
+                      <i class="fas fa-question-circle"></i>
                     </sup>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="end_month">
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="end_month">
                       End Month
                     </label>
                     <div class="col-sm-4">
@@ -293,7 +293,7 @@
                       <div class="tooltip-italic">This is the last month of the HRA plan year.</div>
                     </ng-template>
                     <sup [ngbPopover]="popContentEndMonth">
-                      <i class="fas fa-question-circle fa-2x"></i>
+                      <i class="fas fa-question-circle"></i>
                     </sup>
                   </div>
                 </div>
@@ -305,14 +305,14 @@
                         <div class="tooltip-italic">This is the amount the employer has offered to contribute to the HRA if you purchase health insurance for only the employee (not including other family members). Some employers provide one amount if only the employee enrolls in coverage (sometimes referred to as “self-only” coverage), and a larger amount if the employee plus other family members enroll in coverage. Enter the amount of the HRA if only the employee enrolls, even if you plan to enroll in family coverage.</div>
                       </ng-template>
                       <sup [ngbPopover]="popContentHraAmount">
-                        <i class="fas fa-question-circle fa-lg"></i>
+                        <i class="fas fa-question-circle"></i>
                       </sup>
                     </strong>
                   </p>
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="hra_frequency">Frequency</label>
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_frequency">Frequency</label>
                     <div class="col-sm-4">
                       <div class="btn-group" data-toggle="buttons">
                         <span [ngClass]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'">
@@ -333,14 +333,14 @@
                         <div class="tooltip-italic">Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month.</div>
                       </ng-template>
                       <sup [ngbPopover]="popContentHraFrequency">
-                        <i class="fas fa-question-circle fa-2x"></i>
+                        <i class="fas fa-question-circle"></i>
                       </sup>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="mx-5 col-sm-2 col-form-label col-form-label-sm" for="hra_amount">Amount</label>
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_amount">Amount</label>
                     <div class="col-sm-4">
                       <div class="input-group">
                         <div class="input-group-prepend">
