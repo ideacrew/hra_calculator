@@ -31,6 +31,7 @@
     "c3": "^0.4.23",
     "chart.js": "^2.8.0",
     "chartist": "^0.11.2",
+    "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.9",
     "d3": "^4.8.0",
     "datatables.net": "^1.10.19",
@@ -55,6 +56,7 @@
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",
     "sass": "^1.22.1",
+    "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

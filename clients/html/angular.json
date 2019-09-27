@@ -42,6 +42,9 @@
                         "scripts": []
                     },
                     "configurations": {
+                        "es5": {
+                          "tsConfig": "./src/tsconfig-es5.app.json"
+                        },
                         "production": {
                             "fileReplacements": [
                                 {
@@ -69,6 +72,9 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "hra-calculator:build:production"
+                        },
+                        "es5": {
+                          "browserTarget": "hra-calculator:build:es5"
                         }
                     }
                 },
