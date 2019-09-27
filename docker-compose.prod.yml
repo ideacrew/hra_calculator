@@ -62,10 +62,7 @@ services:
 
   rails:
     <<: *backend
-    command: bash -c "rm -f tmp/pids/server.pid && mkdir -p tmp/pids/ && cat /run/secrets/master_key > /app/config/master.key && cat /run/secrets/credentials > /app/config/credentials.yml.enc && bundle && bundle exec puma -C config/puma.rb"
-    secrets:
-      - master_key
-      - credentials
+    command: bash -c "rm -f tmp/pids/server.pid && mkdir -p tmp/pids/ && bundle && bundle exec puma -C config/puma.rb"
     ports:
       - '3000:3000'
 
@@ -91,10 +88,4 @@ volumes:
   rails_cache:
   mongodb:
   mongodb_config:
-
-secrets: 
-  master_key:
-    file: ./config/master.key
-  credentials:
-    file: ./config/credentials.yml.enc
 
