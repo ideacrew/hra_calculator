@@ -10,14 +10,24 @@ module Transactions
     private
 
     def construct_attributes(input)
-      # binding.pry
       tenant_attributes = tenant_configurations.merge(input)
-
+      
       Success(tenant_attributes)
     end
 
-    def persist(input)
+    def validate(input)
+      result = super(input)
+
+      if result.success?
+        Success(result)
+      else
+        Failure(result.errors)
+      end
+    end
+
+    def persist(input, enterprise_id)
       tenant = Tenants::Tenant.new(input.to_h)
+      tenant.enterprise_id = enterprise_id
       
       if tenant.save
         Success(tenant)
@@ -27,7 +37,7 @@ module Transactions
     end
 
     def tenant_configurations
-
+      ResourceRegistry::AppSettings[:tenants].first
     end
   end
 end
