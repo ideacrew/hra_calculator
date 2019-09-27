@@ -16,8 +16,6 @@ module ApplicationHelper
     end
   end
 
-
-
   def build_select_group(setting)
     tag.select()
   # <div class="form-group">
@@ -32,8 +30,6 @@ module ApplicationHelper
   # </div>
 
   end
-
-
 
   def build_radio_input(setting)
     aria_label  = setting[:aria_label] || "Radio button for following text input"
@@ -51,26 +47,31 @@ module ApplicationHelper
     # build_form_group(setting, input_group)
   end
 
-  def color_input_control(setting)
-    id = setting[:key].to_s
-    input_value = setting[:value] || setting[:default]
-
-    tag.input(nil, type: "color", value: input_value, id: id)
+  # Wrap any input group in <div> tag
+  def input_group
+    tag.div(yield, class: "input-group")
   end
 
-  def text_input_control(setting)
+  def input_text_control(setting)
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
 
     tag.input(nil, type: "text", value: input_value, id: id, class: "form-control")
   end
 
-  def swatch_input_control(setting)
+  def input_color_control(setting)
+    id = setting[:key].to_s
+    input_value = setting[:value] || setting[:default]
+
+    tag.input(nil, type: "color", value: input_value, id: id)
+  end
+
+  def input_swatch_control(setting)
     text_input_control(setting) + 
     tag.div(color_input_control(setting), class: "input-group-append")
   end
 
-  def currency_input_control(setting)
+  def input_currency_control(setting)
     id          = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
     aria_map    = { label: "Amount (to the nearest dollar)"}
@@ -80,7 +81,7 @@ module ApplicationHelper
     tag.div(tag.span('.00', class: "input-group-text"), class: "input-group-append")
   end
 
-  def radio_input_control(setting, input)
+  def input_radio_control(setting, input)
     input_value = setting[:value] || setting[:default]
     aria_label  = setting[:aria_label] || "Radio button for following text input"
 
@@ -89,9 +90,8 @@ module ApplicationHelper
     tag.input(input_value, type: "text", class: "form-control", "aria-label": aria_label)
   end
 
+  def build_form_group(controls)
 
-  def input_group
-    tag.div(yield, class: "input-group")
   end
 
   # Build a general-purpose form group wrapper around the supplied input control
