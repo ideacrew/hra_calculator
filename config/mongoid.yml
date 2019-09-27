@@ -168,3 +168,13 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+production:
+  clients:
+    default:
+      database: hra_calculator_prod
+      hosts:
+        - mongo:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
