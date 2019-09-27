@@ -87,8 +87,8 @@ namespaces:
                                   default: "ma_logo.png"
                                 - key: tenant_url
                                   type: URL
-                                  default: https://business.mahealthconnector.org/
+                                  default: https://www.mahealthconnector.org/
                                 - key: customer_support_number
                                   type: :string
-                                  default: "1-888-813-9220"
+                                  default: "1-877-623-6765  TTY 1-877-623-7773"
 
