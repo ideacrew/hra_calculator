@@ -1,5 +1,20 @@
 module ApplicationHelper  
 
+  def select_control(setting)
+    id = setting[:key].to_s
+    selected_option = "Choose..."
+    options = setting[:options]
+    aria_describedby = id
+
+    option_list = tag.option(selected_option, selected: true)
+    options.each do |option|
+      option_list += '\n ' + tag.option(option.values.first)
+    end
+
+    tag.select(option_list, id: id, class: "form-control")
+  end
+
+
   def select_dropdown(input_id, list)
     return unless list.is_a? Array
     content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']') do
