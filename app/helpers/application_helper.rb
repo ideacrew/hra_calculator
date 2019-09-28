@@ -54,7 +54,12 @@ module ApplicationHelper
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
     aria_describedby = id
-    tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
+    
+    if setting[:attribute]
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
+    else
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[value]",class: "form-control")
+    end
   end
 
   def input_color_control(setting)
@@ -94,7 +99,8 @@ module ApplicationHelper
     setting = {
       key: attribute,
       default: form.object.send(attribute),
-      type: :string
+      type: :string,
+      attribute: true
     }
 
     input_control = input_text_control(setting, form)

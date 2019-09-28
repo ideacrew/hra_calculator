@@ -37,16 +37,6 @@ namespaces:
                             default: 1-800-555-1212
                             description: "The Call Center Phone will appear on the Tool header and embedded in text wherever the following token is entered: %call_center_phone%"
                             type: phone
-                      - key: :branding
-                        settings:
-                          - key: :site_logo
-                            description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
-                            type: :base_64
-                            default: nil
-                          # - key: :fav_icon
-                          #   description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
-                          #   type: :base_64
-                          #   default: nil
                       - key: :ui_theme
                         settings:
                           - key: typefaces
@@ -74,6 +64,12 @@ namespaces:
                             - key: :info_color
                               type: :swatch
                               default: '#17a2b8'
+                      - key: :branding
+                        settings:
+                          - key: :site_logo
+                            description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
+                            type: :base_64
+                            default: nil
                   - key: :environments
                     namespaces:
                     - key: :production
