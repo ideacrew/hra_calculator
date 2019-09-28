@@ -14,7 +14,12 @@ class Admin::EnterpriseController < ApplicationController
     create_tenant = Transactions::CreateAccount.new
     result = create_tenant.call(account_create_params)
 
-    redirect_to :show
+    if result.success?
+      redirect_to :show
+    else
+      result.failure
+      # display errors on the same page
+    end
   end
 
   def tenant_create
@@ -26,24 +31,47 @@ class Admin::EnterpriseController < ApplicationController
 
   def benefit_year_create
     create_benefit_year = Transactions::CreateBenefitYear.new
-    result = create_benefit_year.with_step_args(fetch: [enterprise_id: benefit_year_params[:id]]).call(benefit_year_params)
+    result = create_benefit_year.with_step_args(fetch: [enterprise_id: by_create_params[:id]]).call(by_create_params)
+
+    if result.success?
+      redirect_to :show
+    else
+      result.failure
+      # display errors on the same page
+    end
   end
 
   def benefit_year_update
+    update_benefit_year = Transactions::UpdateBenefitYear.new
+    result = update_benefit_year.call(by_update_params)
+
+    if result.success?
+      redirect_to :show
+    else
+      result.failure
+      # display errors on the same page
+    end
   end
 
   private
 
-  def benefit_year_params
-    # benefit_year_params = {expected_contribution: 0.0974, calendar_year: 2022, id: ::Enterprises::Enterprise.first.id}
+  # TODO: refactor all the below methods accordingly.
+  def by_update_params
+    # by_update_params = {expected_contribution: 0.0922, calendar_year: 2021, benefit_year_id: ::Enterprises::BenefitYear.first.id}
+    params.permit!
+    params.to_h
+  end
+
+  def by_create_params
+    # by_create_params = {expected_contribution: 0.0974, calendar_year: 2022, id: ::Enterprises::Enterprise.first.id}
     params.permit!
     params.to_h
   end
 
   def account_create_params
+    # account_create_params = {:email=>"asjdb@jhbs.com"}
     params.permit!
     params.to_h
-    # {:email=>"asjdb@jhbs.com"}
   end
 
   # filter tenant params
