@@ -4,6 +4,8 @@ class Admin::EnterpriseController < ApplicationController
   def show
     @enterprise = ::Enterprises::Enterprise.first
     @accounts = Account.all
+    @states = Locations::UsState::NAME_IDS.map(&:first)
+    # @benefit_years = @enterprise.benefit_years
     # @tenants = @enterprise.tenants
   end
 
