@@ -84,64 +84,9 @@
     <div class="wrapper"> <!-- Added with Sidebar menu -->
       <div class="container-fluid">
         <div class="row">
-          <div class="wrapper"> <!-- Added with Sidebar menu -->
-
-            <!-- For Sidebar defininton see: https://bootstrapious.com/p/bootstrap-sidebar -->
-            <!-- Sidebar -->
-            <nav id="sidebar">
-              <ul class="list-unstyled components">
-                <li> <a href="#">Enterprise</a> </li>
-
-                <li><h5>Marketplaces</h5></li>
-
-                <li>
-                  <a href="#dcSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">DC HealthLink</a>
-                  <ul class="collapse list-unstyled" id="dcSubmenu">
-                    <li><a class="nav-link" href="#">Profile</a></li>
-                    <li><a class="nav-link" href="#">Features</a></li>
-                    <li><a class="nav-link" href="#">Health Plans</a></li>
-                    <li>
-                      <a href="#dcUiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tool UI Pages</a>
-                      <ul class="collapse list-unstyled" id="dcUiSubmenu">
-                        <li><a class="nav-link" href="#">HRA Affordability Tool</a></li>
-                        <li><a class="nav-link" href="#">About You</a></li>
-                        <li><a class="nav-link" href="#">About the HRA You've Been Offered</a></li>
-                        <li><a class="nav-link" href="#">QSEHRA Not Affordable Results Page</a></li>
-                        <li><a class="nav-link" href="#">QSEHRA Affordable Results Page</a></li>
-                        <li><a class="nav-link" href="#">ICHRA Not Affordable Results Page</a></li>
-                        <li><a class="nav-link" href="#">ICHRA Affordable Results Page</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-
-                <li>
-                  <a href="#maSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">MA Health Connector</a>
-                  <ul class="collapse list-unstyled" id="maSubmenu">
-                    <li><a class="nav-link" href="#">Profile</a></li>
-                    <li><a class="nav-link" href="#">Features</a></li>
-                    <li><a class="nav-link" href="#">Health Plans</a></li>
-                    <li>
-                      <a href="#maUiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tool UI Pages</a>
-                      <ul class="collapse list-unstyled" id="maUiSubmenu">
-                        <li><a class="nav-link" href="#">HRA Affordability Tool</a></li>
-                        <li><a class="nav-link" href="#">About You</a></li>
-                        <li><a class="nav-link" href="#">About the HRA You've Been Offered</a></li>
-                        <li><a class="nav-link" href="#">QSEHRA Not Affordable Results Page</a></li>
-                        <li><a class="nav-link" href="#">QSEHRA Affordable Results Page</a></li>
-                        <li><a class="nav-link" href="#">ICHRA Not Affordable Results Page</a></li>
-                        <li><a class="nav-link" href="#">ICHRA Affordable Results Page</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-
-
-              </ul>
-            </nav>
-          </div>
+          <%= render partial: 'admin/shared/admin_nav' %>
           <!-- Page Content -->
-          <main role="main" class="col-md-7 ml-sm-auto col-lg-7 pt-3 px-4" >
+<!--           <main role="main" class="col-md-10 ml-sm-auto col-lg-9 pt-3 px-4" >
             <h1 class="h2">Main - Second Column (h1 w/h2 class?)</h1>
             <h2>Feather Icon List</h2>
             <span data-feather="help-circle"></span>
@@ -187,8 +132,8 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
               <p>Inside a crazy div that justifies content</p>
             </div>
-          </main>
-          <div class="col-md-3 ml-sm-auto col-lg-2 pt-3 px-4">
+          </main> -->
+<!--           <div class="col-md-3 ml-sm-auto col-lg-2 pt-3 px-4">
             <h1>Right Column</h1>
             <div class="input-group mb-3">
               <div class="custom-file">
@@ -199,7 +144,10 @@
                 <span class="input-group-text" id="inputGroupFile">Upload</span>
               </div>
             </div>
-          </div>
+          </div> -->
+        <main role="main" class="col-md-10 ml-sm-auto col-lg-9 pt-3 px-4" >
+          <%= yield %>
+        </main>
           <!-- End of Right Column -->
         </div>
       </div>

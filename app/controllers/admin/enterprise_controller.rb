@@ -1,4 +1,5 @@
 class Admin::EnterpriseController < ApplicationController
+  layout 'admin'
   
   def show
   end
@@ -9,7 +10,7 @@ class Admin::EnterpriseController < ApplicationController
   def tenant_create
     create_tenant = Transactions::CreateTenant.new
     result = create_tenant
-                .with_step_args(persist: [enterprise_id: Enterprises::Enterprise.first.id])
+                .with_step_args(fetch: [enterprise_id: Enterprises::Enterprise.first.id])
                 .call(key: :dc, owner_organization_name: 'DC Marketplace')
 
     redirect_to :show

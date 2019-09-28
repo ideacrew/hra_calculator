@@ -14,25 +14,15 @@ module Transactions
       if @tenant.blank?
         Failure({errors: {tenant_id: "Unabled to find tenant record with id #{input[:id]}"}})
       else
-        Success(input)
+        Success(input[:tenant])
       end
     end
 
-    def validate(input)
-      result = super(input)
-
-      if result.success?
-        Success(result)
-      else
-        Failure(result.errors)
-      end
-    end
-
-    def persist(input)      
+    def persist(input)
       if @tenant.update_attributes(input.to_h)
-        Success(tenant)
+        Success(@tenant)
       else
-        Failure(tenant)
+        Failure(@tenant)
       end
     end
   end

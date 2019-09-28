@@ -2,7 +2,7 @@ class Enterprises::BenefitYear
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :expected_contribution # .0986 in 2020
+  field :expected_contribution, type: Float # .0986 in 2020
   field :calendar_year, type: Integer
 
   has_many   :products,      class_name: 'Products::Product'
