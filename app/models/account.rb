@@ -30,6 +30,7 @@ class Account
   field :confirmation_sent_at, type: Time
   field :unconfirmed_email,    type: String # Only if using reconfirmable
 
+  field :role, type: String
   ## Lockable
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
@@ -42,8 +43,8 @@ class Account
   ## Tokens
   field :tokens, type: Hash, default: {}
 
-  belongs_to :enterprise, class_name: 'Enterprises::Enterprise'
-  belongs_to :tenant, class_name: 'Tenants::Tenant'
+  belongs_to :enterprise, class_name: 'Enterprises::Enterprise', optional: true
+  belongs_to :tenant, class_name: 'Tenants::Tenant', optional: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -54,6 +55,6 @@ class Account
   index({ email: 1 }, { name: 'email_index', unique: true, background: true })
   index({ reset_password_token: 1 }, { name: 'reset_password_token_index', unique: true, sparse: true, background: true })
   index({ confirmation_token: 1 }, { name: 'confirmation_token_index', unique: true, sparse: true, background: true })
-  index({ uid: 1, provider: 1}, { name: 'uid_provider_index', unique: true, background: true })
+  # index({ uid: 1, provider: 1}, { name: 'uid_provider_index', unique: true, background: true })
   # index({ unlock_token: 1 }, { name: 'unlock_token_index', unique: true, sparse: true, background: true })
 end

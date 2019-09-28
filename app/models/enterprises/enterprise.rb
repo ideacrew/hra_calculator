@@ -12,7 +12,6 @@ class Enterprises::Enterprise
 
   has_many  :benefit_years
 
-
   embeds_many :options, as: :configurable,
               class_name: 'Options::Option'
 
