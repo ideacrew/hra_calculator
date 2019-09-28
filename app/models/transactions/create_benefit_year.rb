@@ -19,7 +19,7 @@ module Transactions
     end
 
     def validate(input)
-      output = ::Validations::BenefitYearContract.new.call(input)
+      output = ::Validations::BenefitYearCreateContract.new.call(input)
 
       if output.failure?
         result = output.to_h
