@@ -6,8 +6,16 @@ class Admin::TenantsController < ApplicationController
   end
 
   def update
-    result = Transactions::UpdateTenant.new.call(tenant_params)
-    redirect_to :show
+    result = Transactions::UpdateTenant.new.call({id: params[:id], tenant: tenant_params})
+    tenant = result.value!
+
+    if result.success?
+      flash[:notice] = 'Successfully updated marketplace settings'
+    else
+      flash[:error]  = 'Something went wrong.'
+    end
+
+    redirect_to action: :show, id: tenant.id
   end
 
   def upload_logo
@@ -52,5 +60,26 @@ class Admin::TenantsController < ApplicationController
       result.failure
       # display errors on the same page
     end
+  end
+
+  def tenant_params
+    params.require(:tenants_tenant).permit(
+      :owner_organization_name,
+      sites_attributes: [
+        :id,
+        options_attributes: [
+          :id,
+          :value,
+          child_options_attributes: [
+            :id,
+            :value,
+            child_options_attributes: [
+              :id,
+              :value
+            ]
+          ]
+        ]
+      ]
+    )
   end
 end

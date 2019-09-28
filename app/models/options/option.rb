@@ -16,6 +16,8 @@ class Options::Option
 
   recursively_embeds_many
 
+  accepts_nested_attributes_for :child_options
+
   embedded_in :configurable, polymorphic: true
 
   def options

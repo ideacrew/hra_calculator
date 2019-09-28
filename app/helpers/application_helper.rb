@@ -1,5 +1,20 @@
 module ApplicationHelper  
 
+  def select_control(setting)
+    id = setting[:key].to_s
+    selected_option = "Choose..."
+    options = setting[:options]
+    aria_describedby = id
+
+    option_list = tag.option(selected_option, selected: true)
+    options.each do |option|
+      option_list += '\n ' + tag.option(option.values.first)
+    end
+
+    tag.select(option_list, id: id, class: "form-control")
+  end
+
+
   def select_dropdown(input_id, list)
     return unless list.is_a? Array
     content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']') do
@@ -54,7 +69,12 @@ module ApplicationHelper
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
     aria_describedby = id
-    tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
+    
+    if setting[:attribute]
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
+    else
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[value]",class: "form-control")
+    end
   end
 
   def input_color_control(setting)
@@ -94,7 +114,8 @@ module ApplicationHelper
     setting = {
       key: attribute,
       default: form.object.send(attribute),
-      type: :string
+      type: :string,
+      attribute: true
     }
 
     input_control = input_text_control(setting, form)
