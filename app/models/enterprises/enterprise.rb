@@ -10,7 +10,7 @@ class Enterprises::Enterprise
   has_many  :tenants,
             class_name: 'Tenants::Tenant'
 
-  has_many  :benefit_years
+  has_many  :benefit_years, class_name: 'Enterprises::BenefitYear'
 
   embeds_many :options, as: :configurable,
               class_name: 'Options::Option'
