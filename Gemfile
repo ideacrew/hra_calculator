@@ -59,6 +59,7 @@ group :development, :test do
   gem 'climate_control' #
   gem 'factory_bot_rails',      '~> 4.11'
   gem 'pry-byebug'
+  gem 'capybara'
 end
 
 group :development do
