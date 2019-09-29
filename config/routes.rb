@@ -17,15 +17,15 @@ Rails.application.routes.draw do
     end
 
     resources :tenants, only: [:show, :update] do
-      post :upload_logo
-      get  :features_show
-      put  :features_update
-      get  :ui_pages_show
+      post  :upload_logo
+      get   :features_show
+      put   :features_update
+      get   :ui_pages_show
       patch :ui_element_update
-      get  :plan_index
-      post :upload_plan_data
-      post :zip_county_data
-      get :plans_destroy
+      get   :plan_index
+      post  :upload_plan_data
+      post  :zip_county_data
+      get   :plans_destroy
     end
   end
 
