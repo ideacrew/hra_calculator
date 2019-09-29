@@ -11,6 +11,7 @@ class Options::Option
   field :default, type: String
   field :value, type: String
   field :choices, type: Array
+  field :content_type, type: String
 
   field :aria_label, type: String
 
@@ -50,5 +51,14 @@ class Options::Option
 
   def namespaces=(params)
     params.each {|param_hash| child_options.build(param_hash) }
+  end
+
+  def value=(assignment)
+    return super(assignment) unless type == :base_64
+
+    self.content_type = assignment.content_type
+    file = assignment.read.force_encoding(Encoding::UTF_8)
+
+    super(Base64.strict_encode64(file))
   end
 end

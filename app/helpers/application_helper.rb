@@ -1,4 +1,4 @@
-module ApplicationHelper  
+module ApplicationHelper
 
   def select_control(setting)
     id = setting[:key].to_s
@@ -35,12 +35,19 @@ module ApplicationHelper
     aria_describedby = id
     label = setting[:title] || id.titleize
 
-    tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
+    preview = if setting.value.present?
+      tag.img(class: 'w-100', src: "data:#{setting.content_type};base64,#{setting.value}")
+    else
+      tag.span('No logo')
+    end
+
+    input = tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
     tag.div(
-      tag.input(nil, type: "file", id: id, name: id,class: "custom-file-input", aria: { describedby: aria_describedby }) +
+      tag.input(nil, type: "file", id: id, name: form.object_name + "[value]", class: "custom-file-input", aria: { describedby: aria_describedby }) +
       tag.label('Choose File', for: id, value: label, class: "custom-file-label"),
       class: "custom-file")
       # tag.label('Choose File', class: "input-group-text")
+    tag.div(tag.div(preview, class: 'col-2') + tag.div(input, class: 'col'), class: 'row')
   end
 
   def build_radio_input(setting)
@@ -68,7 +75,7 @@ module ApplicationHelper
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
     aria_describedby = id
-    
+
     if setting[:attribute]
       tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
     else
@@ -159,7 +166,7 @@ module ApplicationHelper
 
     tag.div(class: "form-group") do
       tag.label(for: id, value: label, aria: { label: aria_label }) +
-      control + 
+      control +
       tag.small(help_text, id: help_id, class: %w(form-text text-muted))
     end
   end
