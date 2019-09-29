@@ -12,11 +12,13 @@ module Transactions
 
     def fetch(input, enterprise_id:)
       @enterprise = Enterprises::Enterprise.find(enterprise_id)
-      
+      @account = Account.where(email: input[:account_email]).first
       if @enterprise.blank?
         Failure({errors: {enterprise_id: "Unabled to find enterprise record with id #{enterprise_id}"}})
+      elsif @account.blank?
+        Failure({errors: {account_email: "Unabled to find account with id #{input[:account_email]}"}})
       else
-        Success(input)
+        Success(input.slice(:key, :owner_organization_name))
       end
     end
 
@@ -40,8 +42,8 @@ module Transactions
     def persist(input)
       tenant = Tenants::Tenant.new(input.to_h)
       tenant.enterprise_id = @enterprise.id
-      
       if tenant.save
+        @account.update_attributes!(tenant_id: tenant.id)
         Success(tenant)
       else
         Failure(tenant)

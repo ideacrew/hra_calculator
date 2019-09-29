@@ -3,7 +3,7 @@ class Admin::EnterpriseController < ApplicationController
 
   def show
     @enterprise = ::Enterprises::Enterprise.first
-    @accounts = Account.all
+    @accounts = Account.all.pluck(:email)
     @states = Locations::UsState::NAME_IDS.map(&:first)
     # @benefit_years = @enterprise.benefit_years
     # @tenants = @enterprise.tenants
@@ -25,8 +25,12 @@ class Admin::EnterpriseController < ApplicationController
   def tenant_create
     create_tenant = Transactions::CreateTenant.new
     result = create_tenant.with_step_args(fetch: [enterprise_id: ::Enterprises::Enterprise.all.first.id]).call(tenant_params)
-
-    redirect_to :show
+    if result.success?
+      flash[:notice] = "Successfully created #{result.success.owner_organization_name}"
+    else
+      flash[:error]  = 'Something went wrong.'
+    end
+    redirect_to action: :show, id: params[:enterprise_id]
   end
 
   def benefit_year_create
@@ -77,7 +81,11 @@ class Admin::EnterpriseController < ApplicationController
   # filter tenant params
   def tenant_params
     # tenant_params = {key: :dc, owner_organization_name: 'DC Marketplace'}
-    params.permit!
-    params.to_h
+    key = Locations::UsState::NAME_IDS.select { |v| v[0] == params[:admin][:state] }[0][1]
+    {
+      key: key.downcase,
+      owner_organization_name: params[:tenant][:value],
+      account_email: params[:admin][:account]
+    }
   end
 end

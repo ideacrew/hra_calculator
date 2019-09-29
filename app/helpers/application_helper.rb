@@ -72,7 +72,7 @@ module ApplicationHelper
     if setting[:attribute]
       tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
     else
-      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[value]",class: "form-control")
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control")
     end
   end
 
