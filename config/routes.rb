@@ -10,9 +10,10 @@ Rails.application.routes.draw do
       get  :plan_index
       post :upload_plan_data
       post :zip_county_data
+      get :plans_destroy
     end
   end
-  
+
   namespace :admin do
     resources :enterprise, only: [:show] do 
       post :account_create

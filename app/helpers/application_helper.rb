@@ -14,7 +14,6 @@ module ApplicationHelper
     tag.select(option_list, id: id, class: "form-control")
   end
 
-
   def select_dropdown(input_id, list)
     return unless list.is_a? Array
     content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']') do
@@ -25,7 +24,7 @@ module ApplicationHelper
         elsif item.is_a? Hash
           concat(content_tag :option, item.first[1], value: item.first[0])
         else
-          concat(content_tag :option, item.humanize, value: item)
+          concat(content_tag :option, item.to_s.humanize, value: item)
         end
       end
     end
@@ -38,7 +37,7 @@ module ApplicationHelper
 
     tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
     tag.div(
-      tag.input(nil, type: "file", id: id, class: "custom-file-input", aria: { describedby: aria_describedby }) +
+      tag.input(nil, type: "file", id: id, name: id,class: "custom-file-input", aria: { describedby: aria_describedby }) +
       tag.label('Choose File', for: id, value: label, class: "custom-file-label"),
       class: "custom-file")
       # tag.label('Choose File', class: "input-group-text")
