@@ -15,14 +15,17 @@ import { environment } from './../../environments/environment';
 export class HomeComponent implements OnInit {
   marketPlace: string;
   taxCredit: string;
-  constructor(private httpClient: HttpClient,) { }
+  hostName: string;
+  constructor(private httpClient: HttpClient,) { 
+    this.hostName = window.location.hostname;
+  }
 
   ngOnInit() {
     this.getInitialInfo();
   }
 
   getInitialInfo() {
-    this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_information").subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_information?domain="+this.hostName).subscribe(
       (res) => {
         console.log(res)
         this.marketPlace = res.data.market_place;

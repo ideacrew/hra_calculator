@@ -1,13 +1,12 @@
-<div class="container signin top-pd module">
-  <div class="col-md-3 col-sm-2 col-xs-12"></div>
-  <div class="col-md-6 col-sm-8 col-xs-12">
+<div class="container signin top-pd module text-center bg-light p-3" style="max-width: 700px;">
+  <div class="col-xs-12">
     <h1>HRA Affordability Tool</h1>
     <br/><br/>
     <p class="starter">
       A configurable, open source for State-based Exchanges, Grant funded by the Robert Wood Johnson Foundation, Produced by Princeton's State Health and Value Strategies, and Developed by IdeaCrew.
       <br/><br/><br/>
 
-    <div class="card" style="width: 30rem;">
+    <div class="card ml-sm-auto mr-sm-auto" style="width: 20rem;">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'sign-in', style: 'width: 100%; font-size: 80%; border-radius: 5rem; letter-spacing: .1rem; font-weight: bold;  padding: 1rem; transition: all 0.2s;'}) do |f| %>
 
         <div style="text-align: center;"> Account </div>

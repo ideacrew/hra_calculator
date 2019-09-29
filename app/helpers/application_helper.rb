@@ -61,7 +61,7 @@ module ApplicationHelper
     aria_describedby = id
 
     if setting[:attribute]
-      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control")
     else
       tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control")
     end
@@ -174,6 +174,24 @@ module ApplicationHelper
 
   def resource
     @resource ||= Account.new
+  end
+
+  def thead(headers, options={})
+     tag.thead(class: options[:class_name]) do
+      tag.tr do
+        headers.collect {|item| concat(tag.th(item))}
+      end
+    end
+  end
+
+  def trow(row, options={})
+    tag.tr do
+      row.collect {|item| concat(tag.td(item))}
+    end
+      # kollection.collect {|item| concat(tag.tr(item))}
+      # tag.tr  do
+      #   kollection.collect {|item| concat(tag.td(item))}
+      # end
   end
 end
 

@@ -3,10 +3,11 @@ class Admin::EnterpriseController < ApplicationController
 
   def show
     @enterprise = ::Enterprises::Enterprise.first
-    @accounts = Account.all.pluck(:email)
+    # @accounts = Account.all.pluck(:email)    
+    @accounts = Account.all
     @states = Locations::UsState::NAME_IDS.map(&:first)
     # @benefit_years = @enterprise.benefit_years
-    # @tenants = @enterprise.tenants
+    @tenants = @enterprise.tenants
   end
 
   def account_create
@@ -15,7 +16,7 @@ class Admin::EnterpriseController < ApplicationController
     result = create_tenant.call(account_create_params)
 
     if result.success?
-      redirect_to :show
+      redirect_to admin_enterprise_url(current_account)
     else
       result.failure
       # display errors on the same page
