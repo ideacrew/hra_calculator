@@ -5,9 +5,9 @@
 
   <nav id="sidebar">
     <ul class="list-unstyled components">
-      <li><%= link_to "Enterprise", admin_enterprise_path(@enterprise) %></li>
+      <li <%= menu_tab_class(tab_name, 'enterprise') %>><%= link_to "Enterprise", admin_enterprise_path(@enterprise, tab_name: 'enterprise') %></li>
       <li><div class='ml-2'><h5>Marketplaces</h5></div></li>
-      <%= render partial: "admin/shared/tenant", collection: @enterprise.tenants %>
+      <%= render partial: "admin/shared/tenant", collection: @enterprise.tenants, locals: {tab_name: tab_name} %>
     </ul>
   </nav>
 </div>

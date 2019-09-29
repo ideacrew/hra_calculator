@@ -82,7 +82,7 @@
     <div class="wrapper"> <!-- Added with Sidebar menu -->
       <div class="container-fluid">
         <div class="row">
-          <%= render partial: 'admin/shared/admin_nav' %>
+          <%= render partial: 'admin/shared/admin_nav', locals: { tab_name: params[:tab_name] || 'enterprise' } %>
           <!-- Page Content -->
           <main role="main" class="col-lg-10 col-md-10 ml-sm-auto pt-3 px-4" >
             <div class="col-xs-12 notice">

@@ -14,6 +14,10 @@ module ApplicationHelper
     rendered.join('').html_safe
   end
 
+  def menu_tab_class(a_tab, current_tab)
+    (a_tab == current_tab) ? raw(" class=\"active\"") : ""
+  end
+
   def select_control(setting)
     id = setting[:key].to_s
     selected_option = "Choose..."
@@ -87,9 +91,9 @@ module ApplicationHelper
     aria_describedby = id
 
     if setting[:attribute]
-      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control")
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true)
     else
-      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control")
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true)
     end
   end
 

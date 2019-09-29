@@ -1,11 +1,19 @@
 <div class='ml-2'>
   <li>
     <a href="#<%= tenant.key %>Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= tenant.owner_organization_name %></a>
-    <ul class="collapse list-unstyled" id="<%= tenant.key %>Submenu">
-      <li><%= link_to "Profile", admin_tenant_path(tenant), class: 'nav-link' %></li>
-      <li><%= link_to "Features", admin_tenant_features_show_path(tenant), class: 'nav-link' %></li>
-      <li><%= link_to "Tool UI Pages", admin_tenant_ui_pages_show_path(tenant), class: 'nav-link' %></li>
-      <li><%= link_to "Health Plans", admin_tenant_plan_index_path(tenant), class: 'nav-link' %></li>
+    <ul class="collapse list-unstyled <%= 'show' if tab_name.include?(tenant.id.to_s) %>" id="<%= tenant.key %>Submenu">
+      <li <%= menu_tab_class(tab_name, "#{tenant.id}_profile") %>>
+        <%= link_to "Profile", admin_tenant_path(tenant, tab_name: "#{tenant.id}_profile"), class: 'nav-link' %>
+      </li>
+      <li <%= menu_tab_class(tab_name, "#{tenant.id}_features") %>>
+        <%= link_to "Features", admin_tenant_features_show_path(tenant, tab_name: "#{tenant.id}_features"), class: 'nav-link' %>
+      </li>
+      <li <%= menu_tab_class(tab_name, "#{tenant.id}_ui_pages") %>>
+        <%= link_to "Tool UI Pages", admin_tenant_ui_pages_show_path(tenant, tab_name: "#{tenant.id}_ui_pages"), class: 'nav-link' %>
+      </li>
+      <li <%= menu_tab_class(tab_name, "#{tenant.id}_plans") %>>
+        <%= link_to "Health Plans", admin_tenant_plan_index_path(tenant, tab_name: "#{tenant.id}_plans"), class: 'nav-link' %>
+      </li>
     </ul>
   </li>
 </div>
