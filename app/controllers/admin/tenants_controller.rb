@@ -28,9 +28,20 @@ class Admin::TenantsController < ApplicationController
   end
 
   def ui_pages_show
+    @tenant = Tenants::Tenant.find(params[:tenant_id])
+    @page = @tenant.sites[0].options.where(key: :ui_tool_pages).first
   end
 
   def ui_element_update
+    result = Transactions::UpdateUiElement.new.call({tenant_id: params[:tenant_id], ui_element: ui_element_params})
+    ui_element = result.value!
+    if result.success?
+      flash[:notice] = 'Successfully updated page settings'
+    else
+      flash[:error]  = 'Something went wrong.'
+    end
+
+    redirect_to action: :show, id: params[:tenant_id]
   end
 
   def plan_index
@@ -81,5 +92,10 @@ class Admin::TenantsController < ApplicationController
         ]
       ]
     )
+  end
+
+  def ui_element_params
+    params.permit!
+    params.require(:options_option).to_h
   end
 end

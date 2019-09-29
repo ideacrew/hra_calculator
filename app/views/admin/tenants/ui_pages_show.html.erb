@@ -1,0 +1,20 @@
+<%= form_for(@page, url: admin_tenant_ui_element_update_path) do |page_form| %>
+  <%= page_form.fields_for :child_options do |child_option_1_form|%>
+    <% if child_option_1_form.object.namespace %>
+      <%= child_option_1_form.fields_for :child_options do |child_option_2_form|%>
+        <% unless child_option_2_form.object.namespace %>
+          <%= build_option_field child_option_2_form, child_option_2_form.object %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= build_option_field child_option_1_form, child_option_1_form.object %>
+    <% end %>
+  <% end %>
+  <%= submit_tag 'Update', class: "btn btn-primary" %>
+<% end %>
+
+<script>
+  $(document).ready(function () {
+    bsCustomFileInput.init()
+  })
+</script>
