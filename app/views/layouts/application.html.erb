@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>HRA Admin Portal</title>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <!-- Font Awesome JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+​
+  <style>
+    .wrapper {
+      display: flex;
+      align-items: stretch;
+    }
+    #sidebar {
+      min-width: 250px;
+      max-width: 250px;
+    }
+    #sidebar.active {
+      margin-left: -250px;
+    }
+    a[data-toggle="collapse"] {
+      position: relative;
+    }
+    .dropdown-toggle::after {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
+    #sidebar .sidebar-header {
+      padding: 20px;
+      /*background: #6d7fcc;*/
+    }
+    #sidebar ul.components {
+      padding: 20px 0;
+      border-bottom: 1px solid #47748b;
+    }
+    #sidebar ul p {
+      /*color: #fff;*/
+      padding: 10px;
+    }
+    #sidebar ul li a {
+      padding: 10px;
+      font-size: 1.1em;
+      display: block;
+    }
+​
+    #sidebar ul li a:hover {
+      color: #7386D5;
+      background: #fff;
+    }
+​
+    #sidebar ul li.active > a, a[aria-expanded="true"] {
+      color: #fff;
+      background: #6d7fcc;
+    }
+​
+    ul ul a {
+      font-size: 0.9em !important;
+      padding-left: 30px !important;
+      /*background: #6d7fcc;*/
+    }
+  </style>
+</head>
+<body>
+<!--<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">-->
+<!--  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">HRA Affordability Tool</a>-->
+<!--  <ul class="navbar-nav px-3">-->
+<!--    <li class="nav-item text-nowrap">-->
+<!--      <a class="nav-link" href="#">Sign out</a>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</nav>-->
+​
+​
+​
+<div class="wrapper"> <!-- Added with Sidebar menu -->
+  <div class="container-fluid">
+    <div class="row">
+      <%#= render partial: 'admin/shared/admin_nav' %>
+      <!-- Page Content -->
+      <!--           <main role="main" class="col-md-10 ml-sm-auto col-lg-9 pt-3 px-4" >
+                  <h1 class="h2">Main - Second Column (h1 w/h2 class?)</h1>
+                  <h2>Feather Icon List</h2>
+                  <span data-feather="help-circle"></span>
+                  <span data-feather="alert-octagon"></span>
+                  <span data-feather="alert-triangle"></span>
+                  <span data-feather="upload-cloud"></span>
+                  <span data-feather="layout"></span>
+                  <span data-feather="plus-circle"></span>
+                  <span data-feather="plus-square"></span>
+                  <span data-feather="file-plus"></span>
+                  <span data-feather="folder-plus"></span>
+                  <span data-feather="user-plus"></span>
+                  <span data-feather="upload-cloud"></span>
+                  <span data-feather="arrow-left"></span>
+                  <span data-feather="arrow-right"></span>
+                  <span data-feather="arrow-left-circle"></span>
+                  <span data-feather="arrow-right-circle"></span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <div class="input-group-append">
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="radio" aria-label="Radio button for following text input">
+                      </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with radio button">
+                  </div>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="radio" aria-label="Radio button for following text input">
+                      </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with radio button">
+                  </div>
+                  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <p>Inside a crazy div that justifies content</p>
+                  </div>
+                </main> -->
+      <!--           <div class="col-md-3 ml-sm-auto col-lg-2 pt-3 px-4">
+                  <h1>Right Column</h1>
+                  <div class="input-group mb-3">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile02">
+                      <label class="custom-file-label" for="inputGroupFile" aria-describedby="inputGroupFileUpload">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="inputGroupFile">Upload</span>
+                    </div>
+                  </div>
+                </div> -->
+      <main role="main" class="col-md-10 ml-sm-auto col-lg-9 pt-3 px-4" >
+        <%= yield %>
+      </main>
+      <!-- End of Right Column -->
+    </div>
+  </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
+</body>
+</html>
