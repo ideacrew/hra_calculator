@@ -1,5 +1,19 @@
 module ApplicationHelper
 
+  def render_flash
+    rendered = []
+    flash.each do |type, messages|
+      if messages.respond_to?(:each)
+        messages.each do |m|
+          rendered << render(:partial => 'layouts/flash', :locals => {:type => type, :message => m}) unless m.blank?
+        end
+      else
+        rendered << render(:partial => 'layouts/flash', :locals => {:type => type, :message => messages}) unless messages.blank?
+      end
+    end
+    rendered.join('').html_safe
+  end
+
   def select_control(setting)
     id = setting[:key].to_s
     selected_option = "Choose..."

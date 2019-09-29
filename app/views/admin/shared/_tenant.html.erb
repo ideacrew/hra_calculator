@@ -1,6 +1,6 @@
 <li>
-  <a href="#dcSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= tenant.owner_organization_name %></a>
-  <ul class="collapse list-unstyled" id="dcSubmenu">
+  <a href="#<%= tenant.key %>Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= tenant.owner_organization_name %></a>
+  <ul class="collapse list-unstyled" id="<%= tenant.key %>Submenu">
     <li><%= link_to "Profile", admin_tenant_path(tenant), class: 'nav-link' %></li>
     <li><%= link_to "Features", admin_tenant_features_show_path(tenant), class: 'nav-link' %></li>
     <li><%= link_to "Health Plans", admin_tenant_plan_index_path(tenant), class: 'nav-link' %></li>
