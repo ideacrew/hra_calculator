@@ -1,6 +1,8 @@
 class Admin::TenantsController < ApplicationController
   layout 'admin'
 
+  before_action :setup_enterprise
+
   def show
     @tenant = Tenants::Tenant.find(params[:id])
   end
@@ -128,5 +130,11 @@ class Admin::TenantsController < ApplicationController
   def ui_element_params
     params.permit!
     params.require(:options_option).to_h
+  end
+
+  def setup_enterprise
+    tenant_id = params[:tenant_id] || params[:id]
+    @tenant = Tenants::Tenant.find(tenant_id)
+    @enterprise = @tenant.enterprise
   end
 end

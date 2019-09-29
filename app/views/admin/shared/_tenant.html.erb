@@ -1,0 +1,20 @@
+<li>
+  <a href="#dcSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= tenant.owner_organization_name %></a>
+  <ul class="collapse list-unstyled" id="dcSubmenu">
+    <li><%= link_to "Profile", admin_tenant_path(tenant), class: 'nav-link' %></li>
+    <li><%= link_to "Features", admin_tenant_features_show_path(tenant), class: 'nav-link' %></li>
+    <li><%= link_to "Health Plans", admin_tenant_plan_index_path(tenant), class: 'nav-link' %></li>
+    <li>
+      <a href="#dcUiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tool UI Pages</a>
+      <ul class="collapse list-unstyled" id="dcUiSubmenu">
+        <li><a class="nav-link" href="#">HRA Affordability Tool</a></li>
+        <li><a class="nav-link" href="#">About You</a></li>
+        <li><a class="nav-link" href="#">About the HRA You've Been Offered</a></li>
+        <li><a class="nav-link" href="#">QSEHRA Not Affordable Results Page</a></li>
+        <li><a class="nav-link" href="#">QSEHRA Affordable Results Page</a></li>
+        <li><a class="nav-link" href="#">ICHRA Not Affordable Results Page</a></li>
+        <li><a class="nav-link" href="#">ICHRA Affordable Results Page</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
