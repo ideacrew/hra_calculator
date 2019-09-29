@@ -6,6 +6,8 @@ class Account
   include Mongoid::Locker
   include ::AuthorizationConcern
 
+  attr_accessor :login
+
   field :locker_locked_at, type: Time
   field :locker_locked_until, type: Time
 
@@ -32,4 +34,19 @@ class Account
 
   index({ email: 1 }, { name: 'email_index', unique: true, background: true })
   index({ reset_password_token: 1 }, { name: 'reset_password_token_index', unique: true, sparse: true, background: true })
+
+  class << self
+    def find_for_database_authentication(warden_conditions)
+      conditions = warden_conditions.dup
+      if login = conditions.delete(:login).downcase
+        where(conditions).where(email: /^#{::Regexp.escape(login)}$/i).first
+      else
+        where(conditions).first
+      end
+    end
+
+  def current_account=(account)
+    Thread.current[:current_account] = account
+    end
+  end
 end

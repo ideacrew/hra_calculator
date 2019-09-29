@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  devise_for :accounts, :controllers => { :sessions => "accounts/sessions"}
+
+  devise_scope :account do
+    root to: "accounts/sessions#new"
+  end
+
   namespace :admin do
     resources :tenants, only: [:show, :update] do
       post :upload_logo

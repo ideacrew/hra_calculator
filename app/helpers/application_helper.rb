@@ -170,5 +170,13 @@ module ApplicationHelper
       tag.small(help_text, id: help_id, class: %w(form-text text-muted))
     end
   end
+
+  def resource_name
+    :account
+  end
+
+  def resource
+    @resource ||= Account.new
+  end
 end
 
