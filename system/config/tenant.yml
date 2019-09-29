@@ -41,8 +41,8 @@ namespaces:
                         settings:
                           - key: typefaces
                             description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
-                            type: :array # of uRLs
-                            default: ["https://fonts.googleapis.com/css?family=Lato:400,700,400italic"]
+                            type: :url # of uRLs
+                            default: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
                         namespaces:
                           - key: :bootstrap_pallette
                             settings:

@@ -43,22 +43,6 @@ module ApplicationHelper
       # tag.label('Choose File', class: "input-group-text")
   end
 
-  def build_radio_input(setting)
-    aria_label  = setting[:aria_label] || "Radio button for following text input"
-    input_value = setting[:value] || setting[:default]
-
-    input_group = tag.div(
-      tag.div(
-        tag.div((radio_button_tag setting.first[0].to_s, false),
-          class: 'input-group-text'
-        ),
-        class: 'input-group-prepend'
-      ) + tag.div(setting.first[1], class: 'form-control') ,
-      class: 'input-group'
-    )
-    # build_form_group(setting, input_group)
-  end
-
   # Wrap any input group in <div> tag
   def input_group
     tag.div(yield, class: "input-group")
@@ -101,16 +85,17 @@ module ApplicationHelper
   end
 
   def input_radio_control(setting, form)
+    name        = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
     aria_label  = setting[:aria_label] || "Radio button for following text input"
 
     setting.choices.collect do |choice|
-      tag.div(tag.div(tag.input(nil, type: "radio"), class: "input-group-text"), class: "input-group-prepend") +
-      tag.input(nil, type: "text", name: setting[:key], placeholder: choice.first[1], class: "form-control", aria: {label: aria_label })
+      input_group do
+        tag.div(tag.div(tag.input(nil, type: "radio", name: form.object_name + "[value]", value: choice.first[0], checked: input_value == choice.first[0].to_s), class: "input-group-text"), class: "input-group-prepend") +
+        tag.input(nil, type: "text", placeholder: choice.first[1], class: "form-control", aria: {label: aria_label })
+      end
     end.join('').html_safe
   end
-
-  placeholder="Recipient's username" 
 
   def build_attribute_field(form, attribute)
     setting = {
@@ -136,7 +121,11 @@ module ApplicationHelper
       input_text_control(option, form)
     end
 
-    form_group(option, input_control)
+    if option.type == :radio_select
+      radio_form_group(option, input_control)
+    else
+      form_group(option, input_control)
+    end
   end
 
   # Build a general-purpose form group wrapper around the supplied input control
@@ -156,20 +145,20 @@ module ApplicationHelper
     end
   end
 
-  # def radio_form_group(setting, control)
-  #   id          = setting[:key].to_s
-  #   label       = setting[:title] || id.titleize
-  #   help_id     = id + 'HelpBlock'
-  #   help_text   = setting[:description]
-  #   aria_label  = setting[:aria_label] || "Radio button for following text input"
+  def radio_form_group(setting, control)
+    id          = setting[:key].to_s
+    label       = setting[:title] || id.titleize
+    help_id     = id + 'HelpBlock'
+    help_text   = setting[:description]
+    aria_label  = setting[:aria_label] || "Radio button for following text input"
 
-  #   tag.div(class: "form-group") do
-  #     tag.label(for: id, value: label, aria: { label: aria_label }) do
-  #       label
-  #     end +
-  #     input_group { control } + 
-  #     tag.small(help_text, id: help_id, class: %w(form-text text-muted))
-  #   end
-  # end
+    tag.div(class: "form-group") do
+      tag.label(for: id, value: label, aria: { label: aria_label }) do
+        label
+      end +
+      control + 
+      tag.small(help_text, id: help_id, class: %w(form-text text-muted))
+    end
+  end
 end
 

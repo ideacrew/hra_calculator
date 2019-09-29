@@ -26,6 +26,16 @@ class Admin::TenantsController < ApplicationController
   end
   
   def features_update
+    result = Transactions::UpdateTenant.new.call({id: params[:tenant_id], tenant: tenant_params})
+    tenant = result.value!
+
+    if result.success?
+      flash[:notice] = 'Successfully updated marketplace settings'
+    else
+      flash[:error]  = 'Something went wrong.'
+    end
+
+    redirect_to action: :features_show, id: tenant.id
   end
   
   def ui_pages_show
@@ -49,14 +59,19 @@ class Admin::TenantsController < ApplicationController
       sites_attributes: [
         :id,
         options_attributes: [
-          :id,
-          :value,
+          :id, :value,
           child_options_attributes: [
-            :id,
-            :value,
+            :id, :value,
+            child_options_attributes: [:id, :value]
+          ]
+        ],
+        features_attributes: [ 
+          :id,
+          options_attributes: [
+            :id, :value,
             child_options_attributes: [
-              :id,
-              :value
+              :id, :value,
+              child_options_attributes: [:id, :value]
             ]
           ]
         ]
