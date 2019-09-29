@@ -3,8 +3,9 @@
   <ul class="collapse list-unstyled" id="<%= tenant.key %>Submenu">
     <li><%= link_to "Profile", admin_tenant_path(tenant), class: 'nav-link' %></li>
     <li><%= link_to "Features", admin_tenant_features_show_path(tenant), class: 'nav-link' %></li>
+    <li><%= link_to "Tool UI Pages", admin_tenant_ui_pages_show_path(tenant), class: 'nav-link' %></li>
     <li><%= link_to "Health Plans", admin_tenant_plan_index_path(tenant), class: 'nav-link' %></li>
-    <li>
+ <!--    <li>
       <a href="#dcUiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tool UI Pages</a>
       <ul class="collapse list-unstyled" id="dcUiSubmenu">
         <li><a class="nav-link" href="#">HRA Affordability Tool</a></li>
@@ -15,6 +16,6 @@
         <li><a class="nav-link" href="#">ICHRA Not Affordable Results Page</a></li>
         <li><a class="nav-link" href="#">ICHRA Affordable Results Page</a></li>
       </ul>
-    </li>
+    </li> -->
   </ul>
 </li>
