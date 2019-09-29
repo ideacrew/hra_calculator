@@ -19,5 +19,6 @@ With [Release v1.0](https://ideacrew.github.io/hra_calculator/release_v1.0/) of 
 | Safari | 11 | Mac OS 10.12 |
 | Chrome | 62 | Windows 7 |
 | Firefox | 57 | Windows 10 |
+| Edge | 44 | Windows 10 |
 | Internet Explorer | 11 | Windows 8 |
 
