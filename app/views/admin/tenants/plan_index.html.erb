@@ -22,7 +22,7 @@
 
 <div>
   <h5>County/Zipcode Mapping File</h5>
-  <%= form_for(:tenant, url: admin_tenant_upload_plan_data_path(@tenant.id), :html => {:method => :post, :multipart => true}) do |tenant_form| %>
+  <%= form_for(:tenant, url: admin_tenant_zip_county_data_path(@tenant.id), :html => {:method => :post, :multipart => true}) do |tenant_form| %>
     <%= hidden_field_tag :year, nil %>
     <div class="input-group">
       <% option = ::Options::Option.new(key: 'county_zip') %>

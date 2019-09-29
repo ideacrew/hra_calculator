@@ -21,7 +21,19 @@ class Tenants::Tenant
   accepts_nested_attributes_for :sites, :options
 
   def has_service_area_constraints?
-    false
+    true
+  end
+
+  def has_rating_area_constraints?
+    true
+  end
+
+  def zipcode_constraints?
+    true
+  end
+
+  def countyzip_constraints?
+    true
   end
 
   def sites=(site_params)

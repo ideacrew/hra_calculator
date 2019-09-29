@@ -1,7 +1,6 @@
 module Api
   class HraResultsController < ApplicationController
     def hra_payload
-      binding.pry
       determine_affordability = ::Transactions::DetermineAffordability.new.call(formatted_params)
 
       if determine_affordability.success?

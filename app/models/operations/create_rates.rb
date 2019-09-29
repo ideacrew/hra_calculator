@@ -10,7 +10,8 @@ module Operations
         # TODO: Need file and year
         files = [rates_params[:rates_file]]
         year = rates_params[:year].to_i
-        rate_import_hash = files.inject(::ObjectBuilders::QhpRateBuilder.new()) do |rate_hash, file|
+        tenant = rates_params[:tenant]
+        rate_import_hash = files.inject(::ObjectBuilders::RateBuilder.new({tenant: tenant})) do |rate_hash, file|
           xml = Nokogiri::XML(File.open(file))
           rates = if year < 2018
             Parser::PlanRateGroupParser.parse(xml.root.canonicalize, :single => true)

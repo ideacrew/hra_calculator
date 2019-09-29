@@ -10,7 +10,7 @@ module Operations
         tenant = plan_params[:tenant]
         year = plan_params[:year]
 
-        qhp_import_product_hash = files.inject(::ObjectBuilders::ProductBuilder.new({})) do |qhp_product_hash, file|
+        qhp_import_product_hash = files.inject(::ObjectBuilders::PlanBuilder.new({tenant: tenant})) do |qhp_product_hash, file|
           xml = Nokogiri::XML(File.open(file))
           product = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           qhp_product_hash.add(product.to_hash)

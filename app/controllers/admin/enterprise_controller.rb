@@ -74,14 +74,14 @@ class Admin::EnterpriseController < ApplicationController
   end
 
   def account_create_params
-    # account_create_params = {:email=>"asjdb@jhbs.com"}
+    # account_create_params = {:email=>"asjdb@jhbs.com", password: "Abcd!1234"}
     params.permit!
     params.to_h
   end
 
   # filter tenant params
   def tenant_params
-    # tenant_params = {key: :dc, owner_organization_name: 'DC Marketplace'}
+    # tenant_params = {key: :ma, owner_organization_name: 'MA Marketplace', account_email: "asjdb@jhbs.com"}
     key = Locations::UsState::NAME_IDS.select { |v| v[0] == params[:admin][:state] }[0][1]
     {
       key: key.downcase,
