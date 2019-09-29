@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  devise_for :accounts, :controllers => { :sessions => "accounts/sessions"}
+
+  devise_scope :account do
+    root to: "accounts/sessions#new"
+  end
+
   namespace :admin do
     root 'enterprise#show'
     
@@ -15,14 +21,15 @@ Rails.application.routes.draw do
       get  :features_show
       put  :features_update
       get  :ui_pages_show
-      get  :ui_element_update
+      patch :ui_element_update
       get  :plan_index
       post :upload_plan_data
       post :zip_county_data
+      get :plans_destroy
     end
   end
 
-	mount_devise_token_auth_for 'Account', at: 'auth'
+	# mount_devise_token_auth_for 'Account', at: 'auth'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   namespace :api do

@@ -1,0 +1,71 @@
+<h3>Plans</h3>
+<br>
+<h4>Plan Import</h4>
+<br>
+<h5>Benfit Year</h5>
+<%= select_dropdown('benefit_year', @years) %>
+<br><br>
+
+<div>
+  <h5>SERFF Template</h5>
+  <%= form_for(:tenant, url: admin_tenant_upload_plan_data_path(@tenant.id), :html => {:method => :post}) do |tenant_form| %>
+    <%= hidden_field_tag :year, nil %>
+    <div class="input-group">
+      <%= input_file_control({key: 'serff'}, nil) %>
+    </div>
+    <br>
+    <%= submit_tag 'Submit', class: "btn btn-primary" %>
+  <% end %>
+</div>
+<br><br>
+
+<div>
+  <h5>County/Zipcode Mapping File</h5>
+  <%= form_for(:tenant, url: admin_tenant_upload_plan_data_path(@tenant.id), :html => {:method => :post}) do |tenant_form| %>
+    <%= hidden_field_tag :year, nil %>
+    <div class="input-group">
+      <%= input_file_control({key: 'county_zip'}, nil) %>
+    </div>
+    <br>
+    <%= submit_tag 'Submit', class: "btn btn-primary" %>
+  <% end %>
+</div>
+<br><br>
+
+<div>
+  <h5>Silver Plans</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= 'Marketplace' %></th>
+        <th><%= 'Carrier Name' %></th>
+        <th><%= 'Year' %></th>
+        <th><%= 'Plan Name' %></th>
+        <th><%= 'Uploaded at' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |pr| %>
+        <tr >
+          <td><%= pr.benefit_market_kind %></td>
+          <td><%= pr.benefit_market_kind %></td>
+          <td><%= pr.application_period.min.year %></td>
+          <td><%= pr.benefit_market_kind %></td>
+          <td><%= pr.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br><br>
+
+<%= link_to 'Delete All Plans', admin_tenant_plans_destroy_path(id: @tenant.id), method: :delete, class: "btn btn-danger" %>
+
+<script>
+  var selectElement = document.getElementById('benefit_year');
+
+  selectElement.addEventListener('change', (event) => {
+    var result = document.getElementById('year');
+    result.value = event.target.value;
+  });
+</script>

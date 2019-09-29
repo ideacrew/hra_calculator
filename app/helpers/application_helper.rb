@@ -1,4 +1,4 @@
-module ApplicationHelper  
+module ApplicationHelper
 
   def select_control(setting)
     id = setting[:key].to_s
@@ -24,7 +24,7 @@ module ApplicationHelper
         elsif item.is_a? Hash
           concat(content_tag :option, item.first[1], value: item.first[0])
         else
-          concat(content_tag :option, item.humanize, value: item)
+          concat(content_tag :option, item.to_s.humanize, value: item)
         end
       end
     end
@@ -35,12 +35,19 @@ module ApplicationHelper
     aria_describedby = id
     label = setting[:title] || id.titleize
 
-    tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
+    preview = if setting.value.present?
+      tag.img(class: 'w-100', src: "data:#{setting.content_type};base64,#{setting.value}")
+    else
+      tag.span('No logo')
+    end
+
+    input = tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
     tag.div(
-      tag.input(nil, type: "file", id: id, class: "custom-file-input", aria: { describedby: aria_describedby }) +
+      tag.input(nil, type: "file", id: id, name: form.object_name + "[value]", class: "custom-file-input", aria: { describedby: aria_describedby }) +
       tag.label('Choose File', for: id, value: label, class: "custom-file-label"),
       class: "custom-file")
       # tag.label('Choose File', class: "input-group-text")
+    tag.div(tag.div(preview, class: 'col-2') + tag.div(input, class: 'col'), class: 'row')
   end
 
   # Wrap any input group in <div> tag
@@ -52,11 +59,11 @@ module ApplicationHelper
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
     aria_describedby = id
-    
+
     if setting[:attribute]
       tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[#{id}]",class: "form-control")
     else
-      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name + "[value]",class: "form-control")
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control")
     end
   end
 
@@ -156,9 +163,17 @@ module ApplicationHelper
       tag.label(for: id, value: label, aria: { label: aria_label }) do
         label
       end +
-      control + 
+      control +
       tag.small(help_text, id: help_id, class: %w(form-text text-muted))
     end
+  end
+
+  def resource_name
+    :account
+  end
+
+  def resource
+    @resource ||= Account.new
   end
 end
 

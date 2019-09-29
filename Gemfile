@@ -48,7 +48,7 @@ gem 'dry-initializer',          '~> 3.0'
 gem 'nokogiri',                 '~> 1.10'
 gem 'nokogiri-happymapper',     '~> 0.8.0', :require => 'happymapper'
 gem 'money-rails',              '~> 1.13'
-gem 'devise_token_auth'
+gem 'devise'
 gem 'webpacker',                '~> 4.0.2'
 
 group :development, :test do
