@@ -22,6 +22,7 @@ class Admin::TenantsController < ApplicationController
   end
 
   def features_show
+    @tenant = Tenants::Tenant.find(params[:tenant_id])
   end
   
   def features_update

@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   
   namespace :admin do
+    root 'enterprise#show'
+    
+    resources :enterprise, only: [:show] do 
+      post :account_create
+      post :tenant_create
+      post :benefit_year_create
+      post :benefit_year_update
+    end
+
     resources :tenants, only: [:show, :update] do
       post :upload_logo
       get  :features_show
@@ -10,15 +19,6 @@ Rails.application.routes.draw do
       get  :plan_index
       post :upload_plan_data
       post :zip_county_data
-    end
-  end
-  
-  namespace :admin do
-    resources :enterprise, only: [:show] do 
-      post :account_create
-      post :tenant_create
-      post :benefit_year_create
-      post :benefit_year_update
     end
   end
 

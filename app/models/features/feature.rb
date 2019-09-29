@@ -2,8 +2,6 @@ class Features::Feature
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  recursively_embeds_many
-
   belongs_to :site, 
               class_name: 'Sites::Site'
 
@@ -17,6 +15,10 @@ class Features::Feature
   embeds_many :options, as: :configurable,
               class_name: 'Options::Option'
   
+  recursively_embeds_many
+
+  accepts_nested_attributes_for :child_features, :options
+
   def features=(feature_params)
     feature_params.each do |feature_hash|
       self.child_features.build(feature_hash)
