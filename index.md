@@ -13,7 +13,7 @@ The HRA Tool is an open source project delivering a standalone consumer decision
 
 [Installation](https://ideacrew.github.io/hra_calculator/installation/) 
 
-[Learn More](https://ideacrew.github.io/hra_calculator/about/)
+[About](https://ideacrew.github.io/hra_calculator/about/)
 
 
 
@@ -28,4 +28,4 @@ The HRA Tool is an open source project delivering a standalone consumer decision
 
 
 
-Support for this tool was provided by the Robert Wood Johnson Foundation. The views expressed here do not necessarily reflect the views of the Foundation.
+###### *Support for this tool was provided by the Robert Wood Johnson Foundation. The views expressed here do not necessarily reflect the views of the Foundation.*
