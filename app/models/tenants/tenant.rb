@@ -20,6 +20,9 @@ class Tenants::Tenant
 
   accepts_nested_attributes_for :sites, :options
 
+  def has_service_area_constraints?
+    false
+  end
 
   def sites=(site_params)
     site_params.each do |site_hash|

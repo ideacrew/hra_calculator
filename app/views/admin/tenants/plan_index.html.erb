@@ -8,10 +8,11 @@
 
 <div>
   <h5>SERFF Template</h5>
-  <%= form_for(:tenant, url: admin_tenant_upload_plan_data_path(@tenant.id), :html => {:method => :post}) do |tenant_form| %>
+  <%= form_for(:tenant, url: admin_tenant_upload_plan_data_path(@tenant.id), :html => {:method => :post, :multipart => true }) do |tenant_form| %>
     <%= hidden_field_tag :year, nil %>
     <div class="input-group">
-      <%= input_file_control({key: 'serff'}, nil) %>
+      <% option = ::Options::Option.new(key: 'serff_template') %>
+      <%= input_import_control(option, nil) %>
     </div>
     <br>
     <%= submit_tag 'Submit', class: "btn btn-primary" %>
@@ -21,10 +22,11 @@
 
 <div>
   <h5>County/Zipcode Mapping File</h5>
-  <%= form_for(:tenant, url: admin_tenant_upload_plan_data_path(@tenant.id), :html => {:method => :post}) do |tenant_form| %>
+  <%= form_for(:tenant, url: admin_tenant_upload_plan_data_path(@tenant.id), :html => {:method => :post, :multipart => true}) do |tenant_form| %>
     <%= hidden_field_tag :year, nil %>
     <div class="input-group">
-      <%= input_file_control({key: 'county_zip'}, nil) %>
+      <% option = ::Options::Option.new(key: 'county_zip') %>
+      <%= input_import_control(option, nil) %>
     </div>
     <br>
     <%= submit_tag 'Submit', class: "btn btn-primary" %>

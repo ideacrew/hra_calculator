@@ -44,6 +44,18 @@ module ApplicationHelper
     end
   end
 
+  def input_import_control(setting, form)
+    id = setting[:key].to_s
+    aria_describedby = id
+    label = setting[:title] || id.titleize
+
+    tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
+    tag.div(
+      tag.input(nil, type: "file", id: id, name: id + "[value]", class: "custom-file-input", aria: { describedby: aria_describedby }) +
+      tag.label('Choose File', for: id, value: label, class: "custom-file-label"),
+      class: "custom-file")
+  end
+
   def input_file_control(setting, form)
     id = setting[:key].to_s
     aria_describedby = id

@@ -69,7 +69,7 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::UploadSerffTemplate.new.call(params.to_h)
 
     if result.success?
-      redirect_to admin_tenant_plan_index_path(params[:id])
+      redirect_to admin_tenant_plan_index_path(params[:tenant_id])
     else
       result.failure
       # display errors on the same page
