@@ -1,12 +1,17 @@
 ---
 layout: page
-title: Browser Support
-permalink: /browser support/
+title: Browsers
+permalink: /browsers/
 parent: Getting Started
 nav_order: 4
 ---
 
-With [Release v1.0](https://ideacrew.github.io/hra_calculator/release_v1.0/) of the HRA Tool, the following browser versions are highest priority to be supported. 
+## Supported Browsers
+
+With [Release v1.0](https://ideacrew.github.io/hra_calculator/release_v1.0/) of the HRA Tool, the following browser versions are supported. 
+
+
+
 
 | **Browser** | **Version** | **Operating System** |
 | :-- | :-- | :-- |
