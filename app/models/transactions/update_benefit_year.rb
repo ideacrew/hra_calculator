@@ -8,22 +8,19 @@ module Transactions
     private
 
     def validate(input)
-      @benefit_year = ::Enterprises::BenefitYear.find(input[:benefit_year_id])
-
-      if @benefit_year.blank?
-        Failure({errors: ["Unable to find benefit year record with id: #{input[:benefit_year_id]}"]})
+      if input["enterprise"]["value"].blank? || input["admin"]["benefit_year"].blank?
+        Failure({errors: ["Missing Year/Value}"]})
       else
         Success(input)
       end
     end
 
     def persist(input)
-      @benefit_year.assign_attributes(input.to_h.except(:benefit_year_id))
-
-      if @benefit_year.save
+      @benefit_year = ::Enterprises::BenefitYear.where(calendar_year: input["admin"]["benefit_year"]).first || ::Enterprises::BenefitYear.new(calendar_year: input["admin"]["benefit_year"], enterprise_id:  input["enterprise_id"])
+      if @benefit_year.update_attributes(expected_contribution: input["enterprise"]["value"])
         Success(@benefit_year)
       else
-        Failure({errors: @benefit_year.errors.full_messages})
+        Failure({errors: "Failed to save benefit year"})
       end
     end
   end

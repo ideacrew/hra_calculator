@@ -219,10 +219,20 @@ module ApplicationHelper
     tag.tr do
       row.collect {|item| concat(tag.td(item))}
     end
-      # kollection.collect {|item| concat(tag.tr(item))}
-      # tag.tr  do
-      #   kollection.collect {|item| concat(tag.td(item))}
-      # end
+  end
+
+  def render_flash
+    rendered = []
+    flash.each do |type, messages|
+      if messages.respond_to?(:each)
+        messages.each do |m|
+          rendered << render(:partial => 'layouts/flash', :locals => {:type => type, :message => m}) unless m.blank?
+        end
+      else
+        rendered << render(:partial => 'layouts/flash', :locals => {:type => type, :message => messages}) unless messages.blank?
+      end
+    end
+    rendered.join('').html_safe
   end
 end
 

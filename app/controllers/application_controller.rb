@@ -27,6 +27,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     admin_enterprise_path(id: resource.id)
+    if resource.enterprise.present?
+      admin_enterprise_path(id: resource.enterprise.id)
+    elsif resource.tenant.present?
+      admin_tenant_path(id: resource.tenant.id)
+    end
   end
 
 end

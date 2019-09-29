@@ -2,12 +2,12 @@ class Admin::EnterpriseController < ApplicationController
   layout 'admin'
 
   def show
-    @enterprise = ::Enterprises::Enterprise.first
+    @enterprise = ::Enterprises::Enterprise.find(params[:id])
     # @accounts = Account.all.pluck(:email)    
     @accounts = Account.all
     @states = Locations::UsState::NAME_IDS.map(&:first)
-    # @benefit_years = @enterprise.benefit_years
     @tenants = @enterprise.tenants
+    @benefit_years = [Date.today.year, Date.today.next_year.year]
   end
 
   def account_create
@@ -16,11 +16,11 @@ class Admin::EnterpriseController < ApplicationController
     result = create_tenant.call(account_create_params)
 
     if result.success?
-      redirect_to admin_enterprise_url(current_account)
+      flash[:notice] = "Successfully created"
     else
-      result.failure
-      # display errors on the same page
+      flash[:error]  = result.failure[:errors]
     end
+    redirect_to admin_enterprise_url(current_account)
   end
 
   def tenant_create
@@ -49,13 +49,12 @@ class Admin::EnterpriseController < ApplicationController
   def benefit_year_update
     update_benefit_year = Transactions::UpdateBenefitYear.new
     result = update_benefit_year.call(by_update_params)
-
     if result.success?
-      redirect_to :show
+      flash[:notice] = "Successfully updated"
     else
-      result.failure
-      # display errors on the same page
+      flash[:error]  = result.failure[:errors]
     end
+    redirect_to admin_enterprise_path(params["enterprise_id"])
   end
 
   private
