@@ -56,7 +56,7 @@ namespaces:
                           - key: short_term_plan
                             type: string
                             default: such as a short-term plan
-                      - key: :settings
+                      - key: :site
                         settings:
                           - key: :marketplace_name
                             default: My Health Connector
