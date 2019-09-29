@@ -107,7 +107,8 @@ module ApplicationHelper
   def input_swatch_control(setting, form)
     id = setting[:key].to_s
     color = setting[:value] || setting[:default]
-    input_text_control(setting, form) +
+
+    tag.input(nil, type: "text", value: color, id: id, name: form.object_name + "[value]",class: "js-color-swatch form-control") +
     tag.div(tag.button(type: "button", id: id, class: "btn", value: "", style: "background-color: #{color}"), class: "input-group-append")
   end
 
