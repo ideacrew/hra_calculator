@@ -34,6 +34,9 @@ class Admin::TenantsController < ApplicationController
   end
 
   def plan_index
+    @products = ::Products::HealthProduct.all
+    @tenant = ::Tenants::Tenant.find(params[:tenant_id])
+    @years = ::Enterprises::BenefitYear.all.pluck(:calendar_year)
   end
 
   def upload_plan_data
@@ -42,7 +45,7 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::UploadSerffTemplate.new.call(params.to_h)
 
     if result.success?
-      redirect_to :show
+      redirect_to admin_tenant_plan_index_path(params[:id])
     else
       result.failure
       # display errors on the same page
@@ -55,7 +58,19 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::CountyZipFile.new.call(params.to_h)
 
     if result.success?
-      redirect_to :show
+      redirect_to admin_tenant_plan_index_path(params[:id])
+    else
+      result.failure
+      # display errors on the same page
+    end
+  end
+
+  def plans_destroy
+    result = ::Transactions::PlansDestroy.new.call(params)
+
+    if result.success?
+      flash[:notice] = 'Successfully destroyed plans'
+      redirect_to admin_tenant_plan_index_path(params[:id])
     else
       result.failure
       # display errors on the same page
