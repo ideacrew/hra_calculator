@@ -46,4 +46,4 @@ COPY --from=build /app/dist /usr/share/nginx/html
 #EXPOSE 80
 
 # run nginx
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]

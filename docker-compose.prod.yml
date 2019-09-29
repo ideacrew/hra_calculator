@@ -44,8 +44,18 @@ services:
 
   angular:
     <<: *frontend
+    command: sh -c 'cat /run/secrets/ssl_cert > /etc/ssl/ssl_cert.pem && 
+                    cat /run/secrets/ssl_key > /etc/ssl/ssl_key.pem && 
+                    cat /run/secrets/nginx_conf > /etc/nginx/conf.d/nginx.conf &&
+                    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf-bkp && 
+                    nginx -g "daemon off;"'
+    secrets:
+      - ssl_cert
+      - ssl_key
+      - nginx_conf
     ports:
-      - '8080:80'
+      - '8080:8080'
+      - '443:443'
 
   rails:
     <<: *backend
@@ -84,3 +94,9 @@ secrets:
     file: ./config/master.key
   credentials:
     file: ./config/credentials.yml.enc
+  ssl_cert:
+    file: ../certs/fullchain.pem
+  ssl_key:
+    file: ../certs/privkey.pem
+  nginx_conf:
+    file: ./.docker/production/web/nginx.conf
