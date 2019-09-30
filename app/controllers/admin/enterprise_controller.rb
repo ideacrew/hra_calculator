@@ -2,7 +2,7 @@ class Admin::EnterpriseController < ApplicationController
   layout 'admin'
 
   def show
-    @enterprise = ::Enterprises::Enterprise.find(params[:id])
+    @enterprise = ::Enterprises::Enterprise.first
     # @accounts = Account.all.pluck(:email)    
     @accounts = Account.all
     @states = Locations::UsState::NAME_IDS.map(&:first)
