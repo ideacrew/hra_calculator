@@ -23,6 +23,21 @@ class Tenants::Tenant
 
   accepts_nested_attributes_for :sites, :options
 
+
+  def use_age_ratings
+    binding.pry
+    features[:use_age_ratings]
+  end
+
+  def geographic_rating_area_model
+    features[:rating_area_model]
+  end
+
+  def features
+    return @features if defined? @features
+    @features = Operations::TenantFeatures.new.call(self)
+  end
+
   def use_age_ratings?
     true
   end
