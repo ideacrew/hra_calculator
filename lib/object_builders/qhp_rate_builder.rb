@@ -135,6 +135,7 @@ class QhpRateBuilder
       result = validate_premium_tables_and_premium_tuples(product_hios_id, premium_tables_params)
       active_year = applicable_range.first.year
       products = ::Products::Product.where(hios_id: /#{product_hios_id}/).select{|a| a.active_year == active_year}
+
       products.each do |product|
         premium_table = Products::PremiumTable.new(result.to_h)
         product.premium_tables << premium_table

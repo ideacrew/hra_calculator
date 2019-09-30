@@ -1,5 +1,13 @@
 <%= form.fields_for :options do |option_form| %>
-  <p class="h5"><%= option_form.object.key.to_s.titleize %></p>
+  <% if option_form.object.key != :ui_tool_pages %>
+  <p class="h2">
+    <% if option_form.object.key == :ui_theme %>
+      UI Theme
+    <% else %>
+      <%= option_form.object.key.to_s.titleize %>
+    <% end %>
+  </p>
+  
   <% if option_form.object.namespace %>
    <%= option_form.fields_for :child_options do |child_option_1_form|%>
      <% if child_option_1_form.object.namespace %>
@@ -12,5 +20,6 @@
         <%= build_option_field child_option_1_form, child_option_1_form.object %>
      <% end %>
    <% end %>
+  <% end %>
   <% end %>
 <% end %>

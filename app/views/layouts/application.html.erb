@@ -67,6 +67,29 @@
       padding-left: 30px !important;
       /*background: #6d7fcc;*/
     }
+
+    .alert {
+      position: relative;
+      padding: .75rem 1.25rem;
+      margin-bottom: 1rem;
+      border: 1px solid transparent;
+      border-radius: .25rem;
+      margin-top: 10px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .alert-alert {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+
+    .alert-notice {
+      color: #004085;
+      background-color: #cce5ff;
+      border-color: #b8daff;
+    }
   </style>
 </head>
 <body>
@@ -146,6 +169,7 @@
                   </div>
                 </div> -->
       <main role="main" class="col-md-10 ml-sm-auto mr-sm-auto col-lg-9 pt-3 px-4" >
+        <%= render_flash %>
         <%= yield %>
       </main>
       <!-- End of Right Column -->

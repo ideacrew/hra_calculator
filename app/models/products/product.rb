@@ -49,6 +49,9 @@ module Products
     # embeds_one  :sbc_document, as: :documentable,
     #             :class_name => "::Document"
 
+    field :plan_name, type: String
+    field :carrier_name, type: String
+
     embeds_many :premium_tables,
                 class_name: "::Products::PremiumTable"
 

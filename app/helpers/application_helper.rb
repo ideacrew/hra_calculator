@@ -1,5 +1,23 @@
 module ApplicationHelper
 
+  def render_flash
+    rendered = []
+    flash.each do |type, messages|
+      if messages.respond_to?(:each)
+        messages.each do |m|
+          rendered << render(:partial => 'layouts/flash', :locals => {:type => type, :message => m}) unless m.blank?
+        end
+      else
+        rendered << render(:partial => 'layouts/flash', :locals => {:type => type, :message => messages}) unless messages.blank?
+      end
+    end
+    rendered.join('').html_safe
+  end
+
+  def menu_tab_class(a_tab, current_tab)
+    (a_tab == current_tab) ? raw(" class=\"active\"") : ""
+  end
+
   def select_control(setting)
     id = setting[:key].to_s
     selected_option = "Choose..."
@@ -28,6 +46,18 @@ module ApplicationHelper
         end
       end
     end
+  end
+
+  def input_import_control(setting, form)
+    id = setting[:key].to_s
+    aria_describedby = id
+    label = setting[:title] || id.titleize
+
+    tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
+    tag.div(
+      tag.input(nil, type: "file", id: id, name: id + "[value]", class: "custom-file-input", aria: { describedby: aria_describedby }) +
+      tag.label('Choose File', for: id, value: label, class: "custom-file-label"),
+      class: "custom-file")
   end
 
   def input_file_control(setting, form)
@@ -61,9 +91,9 @@ module ApplicationHelper
     aria_describedby = id
 
     if setting[:attribute]
-      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control")
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true)
     else
-      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control")
+      tag.input(nil, type: "text", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true)
     end
   end
 
@@ -77,7 +107,8 @@ module ApplicationHelper
   def input_swatch_control(setting, form)
     id = setting[:key].to_s
     color = setting[:value] || setting[:default]
-    input_text_control(setting, form) +
+
+    tag.input(nil, type: "text", value: color, id: id, name: form.object_name + "[value]",class: "js-color-swatch form-control") +
     tag.div(tag.button(type: "button", id: id, class: "btn", value: "", style: "background-color: #{color}"), class: "input-group-append")
   end
 
@@ -188,10 +219,20 @@ module ApplicationHelper
     tag.tr do
       row.collect {|item| concat(tag.td(item))}
     end
-      # kollection.collect {|item| concat(tag.tr(item))}
-      # tag.tr  do
-      #   kollection.collect {|item| concat(tag.td(item))}
-      # end
+  end
+
+  def render_flash
+    rendered = []
+    flash.each do |type, messages|
+      if messages.respond_to?(:each)
+        messages.each do |m|
+          rendered << render(:partial => 'layouts/flash', :locals => {:type => type, :message => m}) unless m.blank?
+        end
+      else
+        rendered << render(:partial => 'layouts/flash', :locals => {:type => type, :message => messages}) unless messages.blank?
+      end
+    end
+    rendered.join('').html_safe
   end
 end
 

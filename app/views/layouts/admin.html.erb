@@ -81,75 +81,19 @@
       </ul>
     </nav>
 
-
-
     <div class="wrapper"> <!-- Added with Sidebar menu -->
       <div class="container-fluid">
         <div class="row">
-          <%= render partial: 'admin/shared/admin_nav' %>
+          <%= render partial: 'admin/shared/admin_nav', locals: { tab_name: params[:tab_name] || 'enterprise' } %>
           <!-- Page Content -->
-<!--           <main role="main" class="col-md-10 ml-sm-auto col-lg-9 pt-3 px-4" >
-            <h1 class="h2">Main - Second Column (h1 w/h2 class?)</h1>
-            <h2>Feather Icon List</h2>
-            <span data-feather="help-circle"></span>
-            <span data-feather="alert-octagon"></span>
-            <span data-feather="alert-triangle"></span>
-            <span data-feather="upload-cloud"></span>
-            <span data-feather="layout"></span>
-            <span data-feather="plus-circle"></span>
-            <span data-feather="plus-square"></span>
-            <span data-feather="file-plus"></span>
-            <span data-feather="folder-plus"></span>
-            <span data-feather="user-plus"></span>
-            <span data-feather="upload-cloud"></span>
-            <span data-feather="arrow-left"></span>
-            <span data-feather="arrow-right"></span>
-            <span data-feather="arrow-left-circle"></span>
-            <span data-feather="arrow-right-circle"></span>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-              <div class="input-group-append">
-                <span class="input-group-text">.00</span>
-              </div>
+          <main role="main" class="col-lg-9 col-md-10 pt-3 px-4" >
+            <div class="col-xs-12 notice">
+              <%= render_flash %>
             </div>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <input type="radio" aria-label="Radio button for following text input">
-                </div>
-              </div>
-              <input type="text" class="form-control" aria-label="Text input with radio button">
+            <div class="justify-content-start col-lg-12 col-xs-12">
+              <%= yield %>
             </div>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <input type="radio" aria-label="Radio button for following text input">
-                </div>
-              </div>
-              <input type="text" class="form-control" aria-label="Text input with radio button">
-            </div>
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-              <p>Inside a crazy div that justifies content</p>
-            </div>
-          </main> -->
-<!--           <div class="col-md-3 ml-sm-auto col-lg-2 pt-3 px-4">
-            <h1>Right Column</h1>
-            <div class="input-group mb-3">
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile02">
-                <label class="custom-file-label" for="inputGroupFile" aria-describedby="inputGroupFileUpload">Choose file</label>
-              </div>
-              <div class="input-group-append">
-                <span class="input-group-text" id="inputGroupFile">Upload</span>
-              </div>
-            </div>
-          </div> -->
-        <main role="main" class="col-md-10 ml-sm-auto col-lg-9 pt-3 px-4" >
-          <%= yield %>
-        </main>
+          </main>
           <!-- End of Right Column -->
         </div>
       </div>

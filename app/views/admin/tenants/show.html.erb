@@ -1,6 +1,6 @@
+<p class="h1">Profile</p>
 <%= form_for(@tenant, url: admin_tenant_path, :html => { :multipart => true }) do |tenant_form| %>
   <%= build_attribute_field(tenant_form, :owner_organization_name) %>
-  <p class="h3">Site</p>
   <%= tenant_form.fields_for :sites do |site_form| %>
     <%= render partial: 'admin/shared/options_form', locals: {form: site_form} %>
   <% end %>
@@ -12,3 +12,5 @@
     bsCustomFileInput.init()
   })
 </script>
+
+<%= javascript_pack_tag 'js-color-swatch' %>

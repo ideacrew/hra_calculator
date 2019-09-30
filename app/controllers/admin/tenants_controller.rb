@@ -1,8 +1,9 @@
 class Admin::TenantsController < ApplicationController
   layout 'admin'
 
+  before_action :find_tenant, only: [:show, :features_show, :ui_pages_show, :plan_index]
+
   def show
-    @tenant = Tenants::Tenant.find(params[:id])
   end
 
   def update
@@ -15,14 +16,13 @@ class Admin::TenantsController < ApplicationController
       flash[:error]  = 'Something went wrong.'
     end
 
-    redirect_to action: :show, id: tenant.id
+    redirect_to admin_tenant_path(id: tenant.id, tab_name: params[:id]+"_profile")
   end
 
   def upload_logo
   end
 
   def features_show
-    @tenant = Tenants::Tenant.find(params[:tenant_id])
   end
 
   def features_update
@@ -35,11 +35,10 @@ class Admin::TenantsController < ApplicationController
       flash[:error]  = 'Something went wrong.'
     end
 
-    redirect_to action: :features_show, id: tenant.id
+    redirect_to action: :features_show, id: params[:tenant_id], tab_name: params[:tenant_id]+"_features"
   end
 
   def ui_pages_show
-    @tenant = Tenants::Tenant.find(params[:tenant_id])
     @page = @tenant.sites[0].options.where(key: :ui_tool_pages).first
   end
 
@@ -58,11 +57,12 @@ class Admin::TenantsController < ApplicationController
   def ui_pages_edit
     @tenant = Tenants::Tenant.find(params[:tenant_id])
     @option = @tenant.sites[0].options.where(key: :ui_tool_pages).first.options.find(params[:option_id])
+
+    # redirect_to action: :ui_pages_show, id: params[:tenant_id], tab_name: params[:tenant_id]+"_ui_pages"
   end
 
   def plan_index
     @products = ::Products::HealthProduct.all
-    @tenant = ::Tenants::Tenant.find(params[:tenant_id])
     @years = ::Enterprises::BenefitYear.all.pluck(:calendar_year)
   end
 
@@ -72,8 +72,10 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::UploadSerffTemplate.new.call(params.to_h)
 
     if result.success?
-      redirect_to admin_tenant_plan_index_path(params[:id])
+      flash[:notice] = 'Successfully uploaded plans'
+      redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
     else
+      flash[:error] = 'Something went wrong'
       result.failure
       # display errors on the same page
     end
@@ -85,7 +87,7 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::CountyZipFile.new.call(params.to_h)
 
     if result.success?
-      redirect_to admin_tenant_plan_index_path(params[:id])
+      redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
     else
       result.failure
       # display errors on the same page
@@ -97,7 +99,7 @@ class Admin::TenantsController < ApplicationController
 
     if result.success?
       flash[:notice] = 'Successfully destroyed plans'
-      redirect_to admin_tenant_plan_index_path(params[:id])
+      redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
     else
       result.failure
       # display errors on the same page
@@ -133,5 +135,11 @@ class Admin::TenantsController < ApplicationController
   def ui_element_params
     params.permit!
     params.to_h
+  end
+
+  def find_tenant
+    tenant_id = params[:tenant_id] || params[:id]
+    @tenant = Tenants::Tenant.find(tenant_id)
+    @enterprise = @tenant.enterprise
   end
 end

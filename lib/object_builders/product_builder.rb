@@ -1,3 +1,4 @@
+
 class ProductBuilder
   INVALID_PLAN_IDS = ["88806MA0020005", "88806MA0040005", "88806MA0020051",
   "18076MA0010001", "80538MA0020001", "80538MA0020002", "11821MA0020001", "11821MA0040001"] # These plan ids are suppressed and we dont save these while importing.
@@ -7,7 +8,7 @@ class ProductBuilder
     @log_path = LOG_PATH
     @qhp_hash = qhp_hash
     @qhp_array = []
-    @service_area_enabled = false #Registry['enterprise.dchbx.primary.production.offerings_constrained_to_service_areas']
+    @service_area_enabled = false#qhp_hash[:service_area_enabled]
     set_service_areas
     FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
     @logger = Logger.new(@log_path)
@@ -124,7 +125,6 @@ class ProductBuilder
 
           if retrieve_metal_level.to_s == 'silver' && new_product.valid?
             new_product.save!
-            create_congressional_products(new_product)
             @success_plan_counter += 1
             cost_share_variance.product_id = new_product.id
           else
@@ -170,7 +170,7 @@ class ProductBuilder
     @service_area_map = {}
     ::Locations::ServiceArea.all.map do |sa|
       if @service_area_enabled
-        @service_area_map[[sa.issuer_hios_id, sa.issuer_provided_code,sa.active_year]] = sa.id
+        @service_area_map[[sa.issuer_hios_id, sa.issuer_provided_code, sa.active_year]] = sa.id
       else
         @service_area_map[[sa.active_year]] = sa.id
       end
