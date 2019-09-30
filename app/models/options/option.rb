@@ -21,6 +21,8 @@ class Options::Option
 
   embedded_in :configurable, polymorphic: true
 
+  scope :by_key, ->(key) { where(key: key) }
+
   def options
     child_options
   end
