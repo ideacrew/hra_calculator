@@ -41,4 +41,8 @@ class Tenants::Tenant
       sites.build(site_hash)
     end
   end
+
+  def self.find_by_key(key)
+    where(key: key).first
+  end
 end
