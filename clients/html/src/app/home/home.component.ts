@@ -15,9 +15,14 @@ import { environment } from './../../environments/environment';
 export class HomeComponent implements OnInit {
   marketPlace: string;
   taxCredit: string;
-  hostName: string;
-  constructor(private httpClient: HttpClient,) { 
-    this.hostName = window.location.hostname;
+  hostKey: string;
+
+  constructor(private httpClient: HttpClient,) {
+    if (environment.production) {
+      this.hostKey = window.location.host.split(".",1)[0];
+    } else {
+      this.hostKey = "dc";
+    }
   }
 
   ngOnInit() {
@@ -25,7 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   getInitialInfo() {
-    this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_information?domain="+this.hostName).subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/default_configuration?tenant="+this.hostKey).subscribe(
       (res) => {
         console.log(res)
         this.marketPlace = res.data.market_place;

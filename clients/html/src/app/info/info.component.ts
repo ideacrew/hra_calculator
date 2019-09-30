@@ -33,6 +33,7 @@ export class InfoComponent implements OnInit {
   showErrors: boolean = false;
   errors: any = [];
   isCountyDisabled: boolean = false;
+  hostKey: string;
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +49,12 @@ export class InfoComponent implements OnInit {
     }
     this.subtitle = 'This is some text within a card block.';
     this.createForm();
+
+    if (environment.production) {
+      this.hostKey = window.location.host.split(".",1)[0];
+    } else {
+      this.hostKey = "dc";
+    }
   }
 
   setEffectiveEndOptions(val) {
@@ -116,7 +123,7 @@ export class InfoComponent implements OnInit {
   }
 
   getInitialInfo() {
-    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/default_configuration").subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/default_configuration?tenant="+this.hostKey).subscribe(
       (res) => {
         console.log(res)
          this.countyOptions = res.data.counties;
@@ -166,7 +173,7 @@ export class InfoComponent implements OnInit {
   getCountyInfo() {
     let params = new HttpParams().set('hra_state', this.hraForm.value.state);
     params = params.append('hra_zipcode', this.hraForm.value.zipcode);
-    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/counties", {params: params}).subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/counties?tenant="+this.hostKey, {params: params}).subscribe(
       (res) => {
         console.log(res)
         if (res.data.counties.length == 0) {
@@ -193,7 +200,7 @@ export class InfoComponent implements OnInit {
   onSubmit() {
     if (this.hraForm.valid) {
       this.resultService.setFormData(this.hraForm.value);      
-      this.httpClient.post<any>(environment.apiUrl+"/api/hra_results/hra_payload", this.hraForm.value).subscribe(
+      this.httpClient.post<any>(environment.apiUrl+"/api/hra_results/hra_payload?tenant="+this.hostKey, this.hraForm.value).subscribe(
         (res) => {
           console.log(res)
           if(res.status == 'success'){

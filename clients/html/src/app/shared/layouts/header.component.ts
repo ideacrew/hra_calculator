@@ -10,14 +10,22 @@ import { environment } from './../../../environments/environment';
 export class HeaderComponent implements OnInit {
   tenant_logo_file: string;
   tenant_url: string;
-  constructor(private httpClient: HttpClient,) { }
+  hostKey: string;
+
+  constructor(private httpClient: HttpClient,) { 
+    if (environment.production) {
+      this.hostKey = window.location.host.split(".",1)[0];
+    } else {
+      this.hostKey = "dc";
+    }
+  }
 
   ngOnInit() {
     this.getInitialInfo();
   }
 
   getInitialInfo() {
-    this.httpClient.get<any>(environment.apiUrl+"/hra_results/header_footer_config").subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/header_footer_config?tenant="+this.hostKey).subscribe(
       (res) => {
         console.log(res)
         this.tenant_logo_file = res.data.tenant_logo_file;

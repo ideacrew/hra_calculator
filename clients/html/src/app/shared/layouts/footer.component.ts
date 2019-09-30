@@ -11,8 +11,15 @@ export class FooterComponent implements OnInit{
 	customer_support_number: String;
 	benefit_year: String;
 	today: number = Date.now();
+  hostKey: string;
 
-	constructor(private httpClient: HttpClient,) { }
+	constructor(private httpClient: HttpClient,) { 
+    if (environment.production) {
+      this.hostKey = window.location.host.split(".",1)[0];
+    } else {
+      this.hostKey = "dc";
+    }
+  }
 
 
   ngOnInit() {
@@ -20,7 +27,7 @@ export class FooterComponent implements OnInit{
   }
 
   getInitialInfo() {
-    this.httpClient.get<any>(environment.apiUrl+"/hra_results/header_footer_config").subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/header_footer_config?tenant="+this.hostKey).subscribe(
       (res) => {
         console.log(res)
         debugger
