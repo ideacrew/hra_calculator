@@ -22,6 +22,7 @@ export class InfoComponent implements OnInit {
   countyOptions: any = [];
   selectedHouseholdFrequency: string;
   selectedHraType: string;
+  primaryColorCode: string;
   selectedHraFrequency: string;
   showZipcode: boolean = false;
   showCounty: boolean = false;
@@ -126,9 +127,10 @@ export class InfoComponent implements OnInit {
     this.httpClient.get<any>(environment.apiUrl+"/api/configurations/default_configuration?tenant="+this.hostKey).subscribe(
       (res) => {
         console.log(res)
-         this.countyOptions = res.data.counties;
-         this.getDisplayInfo(res);
-         this.hraForm.patchValue({
+        this.primaryColorCode = res.data.colors.primary_color;
+        this.countyOptions = res.data.counties;
+        this.getDisplayInfo(res);
+        this.hraForm.patchValue({
           state: res.data.state_name
         });
         if(!this.showZipcode){

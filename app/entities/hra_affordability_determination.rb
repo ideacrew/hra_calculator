@@ -2,6 +2,7 @@ class HraAffordabilityDetermination < Dry::Struct
   include DryStructSetters
   transform_keys(&:to_sym)
 
+  attribute :tenant, Types::Symbol
   attribute :state, Types::String
   attribute :zipcode, Types::String.default(''.freeze)
   attribute :county, Types::String.default(''.freeze)

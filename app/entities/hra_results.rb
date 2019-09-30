@@ -6,6 +6,8 @@ class HraResults < Dry::Struct
   attribute :off_market, Types::String
   attribute :results_page_help_text_1, Types::String
   attribute :results_page_help_text_2, Types::String
+  attribute :market_place, Types::String
+  attribute :how_to_enroll, Types::String
   attribute :answer_no, Types::String
   attribute :aca_compliant, Types::String
   attribute :mininum_essential_coverage, Types::String

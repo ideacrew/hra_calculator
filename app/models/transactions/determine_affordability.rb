@@ -57,7 +57,7 @@ module Transactions
     end
 
     def load_results_defaulter(hra_object)
-      hra_results_setter = ::Operations::HraDefaultResultsSetter.new.call
+      hra_results_setter = ::Operations::HraDefaultResultsSetter.new.call(hra_object.tenant)
       result_hash = hra_object.to_h
       result_hash.merge!(hra_results_setter.success.to_h)
       Success(result_hash)

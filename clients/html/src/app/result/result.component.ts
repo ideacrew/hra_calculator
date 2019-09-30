@@ -28,6 +28,8 @@ export class ResultComponent implements OnInit {
   marketPlace: String;
   help_text_1: String;
   help_text_2: String;
+  secondaryColorCode: String;
+  primaryColorCode: String;
   short_term_plan_text: String;
   minimum_essential_coverage_text: String;
   minimum_essential_coverage_link: String;
@@ -49,6 +51,8 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
     this.result = this.resultService.results;
     if(this.result){
+      this.primaryColorCode = this.result.data.colors.primary_color;
+      this.secondaryColorCode = this.result.data.colors.secondary_color;
       this.state = this.result.data.state;
       this.zipcode = this.result.data.zipcode;
       this.county = this.result.data.county;
@@ -60,16 +64,16 @@ export class ResultComponent implements OnInit {
       this.hra_frequency = this.result.data.hra_frequency;
       this.hra_amount = this.result.data.hra_amount;
       this.marketPlace = this.result.data.market_place;
-      this.taxCredit = this.result.data.tax_credit;
-      this.help_text_1 = this.result.data.help_text_1;
-      this.help_text_2 = this.result.data.help_text_2;
+      this.taxCredit = this.result.data.a_tax_credit;
+      this.help_text_1 = this.result.data.answer_no;
+      this.help_text_2 = this.result.data.results_page_help_text_1;
       this.short_term_plan_text = this.result.data.short_term_plan;
       this.minimum_essential_coverage_text = this.result.data.minimum_essential_coverage;
       this.minimum_essential_coverage_link = this.result.data.minimum_essential_coverage_link;
       this.enroll_without_aptc_text = this.result.data.enroll_without_aptc;
-      this.help_text_3 = this.result.data.help_text_3;
-      this.help_text_4 = this.result.data.help_text_4;
-      this.help_text_5 = this.result.data.help_text_5;
+      this.help_text_3 = this.result.data.off_market;
+      this.help_text_4 = this.result.data.aca_compliant;
+      this.help_text_5 = this.result.data.results_page_help_text_2;
       this.hra_type = this.result.data.hra_type;
       this.hra_determination = this.result.data.hra_determination;
       this.residence = [this.state, this.zipcode, this.county].filter(function(val) { return (val !== null && val !== ""); }).join(" / ")

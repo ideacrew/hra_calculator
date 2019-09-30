@@ -9,9 +9,10 @@ import { environment } from './../../../environments/environment';
 })
 export class FooterComponent implements OnInit{
 	customer_support_number: String;
-	benefit_year: String;
+	benefit_year: number;
 	today: number = Date.now();
   hostKey: string;
+  primaryColorCode: string;
 
 	constructor(private httpClient: HttpClient,) { 
     if (environment.production) {
@@ -30,9 +31,9 @@ export class FooterComponent implements OnInit{
     this.httpClient.get<any>(environment.apiUrl+"/api/configurations/header_footer_config?tenant="+this.hostKey).subscribe(
       (res) => {
         console.log(res)
-        debugger
-        this.customer_support_number = res.data.customer_support_number;
-        this.benefit_year = res.data.benefit_year;
+        this.primaryColorCode = res.data.colors.primary_color;
+        this.customer_support_number = res.data.call_center_phone;
+        this.benefit_year = new Date().getFullYear() + 1;
       },
       (err) => {
         console.log(err)

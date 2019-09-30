@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   marketPlace: string;
   taxCredit: string;
   hostKey: string;
+  primaryColorCode: string;
 
   constructor(private httpClient: HttpClient,) {
     if (environment.production) {
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
     this.httpClient.get<any>(environment.apiUrl+"/api/configurations/default_configuration?tenant="+this.hostKey).subscribe(
       (res) => {
         console.log(res)
+        this.primaryColorCode = res.data.colors.primary_color;
         this.marketPlace = res.data.market_place;
         this.taxCredit = res.data.tax_credit;
       },

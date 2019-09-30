@@ -14,7 +14,7 @@
               <div class="d-flex justify-content-around ie-flex">
                 <div class="col-4 d-flex">
                   <div class="card border rounded">
-                    <div class="p-2 bd-highlight card-color">
+                    <div [ngStyle]="{'background-color': primaryColorCode}" class="p-2 bd-highlight card-color">
                       <i class="fas fa-check fa-2x check-color"></i> Use this tool if...
                     </div>
                     <div class="card-body">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-4 d-flex">
                   <div class="card border rounded">
-                    <div class="p-2 bd-highlight card-color " >
+                    <div [ngStyle]="{'background-color': primaryColorCode}" class="p-2 bd-highlight card-color " >
                      <i class="fas fa-times-circle fa-2x times-circle-color"></i>  Skip this tool if...
                     </div>
                     <div class="card-body">
@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class="text-center margin-bottom">
-              <a class="btn btn btn-md button-style card-color" routerLink="/info">Start</a>
+              <a [ngStyle]="{'background-color': primaryColorCode}" class="btn btn btn-md button-style card-color" routerLink="/info">Start</a>
             </div>
             <br/>
             <div>

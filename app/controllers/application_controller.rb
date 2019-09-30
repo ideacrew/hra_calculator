@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_me
-    return true if ['configurations' || 'hra_results'].include?(controller_name.downcase)
+    return true if ['configurations', 'hra_results'].include?(controller_name.downcase)
     authenticate_account!
   end
 

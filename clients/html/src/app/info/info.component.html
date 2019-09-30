@@ -155,11 +155,11 @@
                       <div class="col-sm-4">
                         <div class="btn-group" data-toggle="buttons">
                           <span [ngClass]="(selectedHouseholdFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'">
-                              <input type="radio" class="form-control form-control-sm" id="household_frequency"
+                              <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="household_frequency"
                               formControlName="household_frequency" value="monthly" ngModel required (click)="onHouseholdChange('monthly')"/> Monthly
                           </span>
                           <span [ngClass]="(selectedHouseholdFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
-                              <input type="radio" class="form-control form-control-sm" id="household_frequency"
+                              <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="household_frequency"
                               formControlName="household_frequency" value="annually" ngModel required (click)="onHouseholdChange('annually')"/> Annual
                           </span>
                         </div>
@@ -221,11 +221,11 @@
                     <div class="col-sm-8">
                       <div class="btn-group hra-type-group" data-toggle="buttons">
                         <span [ngClass]="(selectedHraType=='ichra')?'btn btn-outline-info active':'btn btn-outline-info'">
-                            <input type="radio" class="form-control form-control-sm" id="hra_type"
+                            <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="hra_type"
                             formControlName="hra_type" value="ichra" ngModel required (click)="onHraTypeChange('ichra')"/> Individual Coverage HRA
                         </span>
                         <span [ngClass]="(selectedHraType=='qsehra')?'btn btn-outline-info active':'btn btn-outline-info'">
-                            <input type="radio" class="form-control form-control-sm" id="hra_type"
+                            <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="hra_type"
                             formControlName="hra_type" value="qsehra" ngModel required (click)="onHraTypeChange('qsehra')"/> Qualified Small Employer HRA (QSEHRA)
                         </span>
                         <ng-template #popHraType>
@@ -315,11 +315,11 @@
                     <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_frequency">Frequency</label>
                     <div class="col-sm-4">
                       <div class="btn-group" data-toggle="buttons">
-                        <span [ngClass]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'">
+                        <span [ngStyle]="{'border-color': primaryColorCode}" [ngClass]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active' :'btn btn-outline-info'">
                             <input type="radio" class="form-control form-control-sm" id="hra_frequency"
                             formControlName="hra_frequency" value="monthly" ngModel required (click)="onHraFrequencyChange('monthly')"/> Monthly
                         </span>
-                        <span [ngClass]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
+                        <span [ngStyle]="{'background-color': primaryColorCode, 'border-color': primaryColorCode}" [ngClass]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
                             <input type="radio" class="form-control form-control-sm" id="hra_frequency"
                             formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> Total
                         </span>
@@ -363,15 +363,15 @@
 
               <div style="overflow:auto;">
                 <div style="float:left;">
-                  <button type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)" routerLink="/home"> <i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
+                  <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)" routerLink="/home"> <i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
                 </div>
                 <div style="float:left;">
-                  <button type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
+                  <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
                 </div>
                 <div style="float:right;">
-                  <button type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)"
+                  <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)"
                   (click)="showTab(currentTab+1)">Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
-                  <button type="submit" class="btn btn btn-md button-style card-color" [hidden]="(currentTab != 1)" >Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
+                  <button [ngStyle]="{'background-color': primaryColorCode}" type="submit" class="btn btn btn-md button-style card-color" [hidden]="(currentTab != 1)" >Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
                 </div>
               </div>
               <!-- Circles which indicates the steps of the form: -->

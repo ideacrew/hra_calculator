@@ -32,6 +32,12 @@ namespaces:
                           - key: :a_tax_credit
                             type: string
                             default: a tax credit
+                          - key: :market_place
+                            type: string
+                            default: MARKETPLACE
+                          - key: :how_to_enroll
+                            type: string
+                            default: HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC
                           - key: :off_market
                             type: string
                             default: similar coverage off Marketplace

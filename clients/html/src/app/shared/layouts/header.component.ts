@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   tenant_logo_file: string;
   tenant_url: string;
   hostKey: string;
+  primaryColorCode: string;
 
   constructor(private httpClient: HttpClient,) { 
     if (environment.production) {
@@ -28,8 +29,9 @@ export class HeaderComponent implements OnInit {
     this.httpClient.get<any>(environment.apiUrl+"/api/configurations/header_footer_config?tenant="+this.hostKey).subscribe(
       (res) => {
         console.log(res)
-        this.tenant_logo_file = res.data.tenant_logo_file;
-        this.tenant_url = res.data.tenant_url;
+        this.primaryColorCode = res.data.colors.primary_color
+        this.tenant_logo_file = res.data.site_logo;
+        this.tenant_url = res.data.marketplace_website_url;
       },
       (err) => {
         console.log(err)

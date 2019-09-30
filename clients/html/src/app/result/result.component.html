@@ -44,7 +44,7 @@
             <br/>
             <div style="overflow:auto;">
               <div style="float:left;">
-                <button type="button" class="btn btn btn-md button-style card-color" routerLink="/info">Edit Info</button>
+                <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" routerLink="/info">Edit Info</button>
               </div>
             </div>
             <br/>
@@ -108,7 +108,7 @@
                   </li>
                 </ul> 
               </div>
-              <div class="p-2 bd-highlight card-border result-box">
+              <div [ngStyle]="{'background-color': secondaryColorCode}" class="p-2 bd-highlight card-border result-box">
                 <p><i class="fas fa-exclamation-triangle"></i> Based on the information you entered, you should not accept {{taxCredit}} to purchase health insurance through {{marketPlace}}. </p>
               </div>
             </div>
@@ -150,7 +150,7 @@
                   </li>
                 </ul> 
               </div>
-              <div class="p-2 bd-highlight card-border result-box">
+              <div [ngStyle]="{'background-color': secondaryColorCode}" class="p-2 bd-highlight card-border result-box">
                 <p><i class="fas fa-exclamation-triangle"></i>If you receive {{taxCredit}} from {{marketPlace}}, you must notify your employer that you are opting out of the HRA.</p>
               </div>
             </div>
@@ -185,17 +185,17 @@
                   </li>
                 </ul> 
               </div>
-              <div class="p-2 bd-highlight card-border result-box" >
+              <div [ngStyle]="{'background-color': secondaryColorCode}" class="p-2 bd-highlight card-border result-box" >
                 <p><i class="fas fa-exclamation-triangle"></i> Based on the information you entered, you should not accept {{taxCredit}} to purchase health insurance through {{marketPlace}}.</p>
               </div>
             </div>
             <br><br>
             <div style="overflow:auto;">
               <div style="float:left;">
-                <button type="button" class="btn btn btn-md button-style card-color" (click)="clearResultForm()" routerLink="/home"> Start Over </button>
+                <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" (click)="clearResultForm()" routerLink="/home"> Start Over </button>
               </div>
               <div style="float:right;">
-                <button type="button" class="btn btn btn-md button-style card-color" onclick="document.title='HRA Determination Results'; window.print(); return false;">Print Your Results</button>
+                <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" onclick="document.title='HRA Determination Results'; window.print(); return false;">Print Your Results</button>
               </div>
             </div>
             <br><br>
