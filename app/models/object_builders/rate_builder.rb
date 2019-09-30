@@ -12,7 +12,7 @@ module ObjectBuilders
       @rating_area_id_cache = {}
       @rating_area_cache = {}
       @tenant = rate_hash[:tenant]
-      @rating_area_id_required = (@tenant.geographic_rating_model == :zipcode_based_rating_area)
+      @rating_area_id_required = (@tenant.geographic_rating_area_model == 'zipcode')
       @premium_table_cache = Hash.new {|h, k| h[k] = Hash.new}
       @action = "new"
       FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))

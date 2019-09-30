@@ -11,7 +11,7 @@ module ObjectBuilders
       @tenant = @qhp_hash[:tenant]
       @import_timestamp = @qhp_hash[:import_timestamp]
       @carrier_name = @qhp_hash[:carrier_name]
-      @service_area_enabled = (@tenant.geographic_rating_model != :single_rating_area)
+      @service_area_enabled = (@tenant.geographic_rating_area_model != 'single')
       set_service_areas
       FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
       @logger = Logger.new(@log_path)

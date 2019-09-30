@@ -9,99 +9,83 @@ module Operations
       year = sa_params[:year]
       state_abbreviation = tenant.key.to_s.upcase
 
-      if tenant.has_service_area_constraints?
-        row_data_begin = 13
-        total = 0
-        begin
-          xlsx = ::Roo::Spreadsheet.open(sa_file)
-          sheet = xlsx.sheet(xlsx.sheets.index('Service Areas'))
-          issuer_hios_id = sheet.cell(6,2).to_i.to_s
-          (row_data_begin..sheet.last_row).each do |i|
-            serves_state = sheet.cell(i,3)
-            next if serves_state.nil?
+      row_data_begin = 13
+      total = 0
+      begin
+        xlsx = ::Roo::Spreadsheet.open(sa_file)
+        sheet = xlsx.sheet(xlsx.sheets.index('Service Areas'))
+        issuer_hios_id = sheet.cell(6,2).to_i.to_s
+        (row_data_begin..sheet.last_row).each do |i|
+          serves_state = sheet.cell(i,3)
+          next if serves_state.nil?
 
-            serves_entire_state = to_boolean(serves_state)
-            serves_partial_county = serves_entire_state ? nil : to_boolean(to_boolean(sheet.cell(i,5)))
-            if serves_entire_state
-              sa = ::Locations::ServiceArea.where(
+          serves_entire_state = to_boolean(serves_state)
+          serves_partial_county = serves_entire_state ? nil : to_boolean(to_boolean(sheet.cell(i,5)))
+          if serves_entire_state
+            sa = ::Locations::ServiceArea.where(
+              active_year: year,
+              issuer_provided_code: sheet.cell(i,1),
+              covered_states: [state_abbreviation],
+              issuer_provided_title: sheet.cell(i,2)
+            ).first
+            if sa.present?
+              sa.issuer_hios_id = issuer_hios_id
+              sa.save
+            else
+              ::Locations::ServiceArea.find_or_create_by!(
                 active_year: year,
                 issuer_provided_code: sheet.cell(i,1),
                 covered_states: [state_abbreviation],
+                issuer_hios_id: issuer_hios_id,
                 issuer_provided_title: sheet.cell(i,2)
-              ).first
-              if sa.present?
-                sa.issuer_hios_id = issuer_hios_id
-                sa.save
-              else
-                ::Locations::ServiceArea.find_or_create_by!(
-                  active_year: year,
-                  issuer_provided_code: sheet.cell(i,1),
-                  covered_states: [state_abbreviation],
-                  issuer_hios_id: issuer_hios_id,
-                  issuer_provided_title: sheet.cell(i,2)
-                )
-              end
-            elsif serves_entire_state == false
-              existing_state_wide_areas = ::Locations::ServiceArea.where(
-                active_year: year,
-                issuer_provided_code: sheet.cell(i,1),
-                # issuer_hios_id: issuer_hios_id,
-                # covered_states: nil
               )
-              if existing_state_wide_areas.count > 0 && existing_state_wide_areas.first.covered_states.present? && existing_state_wide_areas.first.covered_states.include?(state_abbreviation)
+            end
+          elsif serves_entire_state == false
+            existing_state_wide_areas = ::Locations::ServiceArea.where(
+              active_year: year,
+              issuer_provided_code: sheet.cell(i,1),
+              # issuer_hios_id: issuer_hios_id,
+              # covered_states: nil
+            )
+            if existing_state_wide_areas.count > 0 && existing_state_wide_areas.first.covered_states.present? && existing_state_wide_areas.first.covered_states.include?(state_abbreviation)
+              v = existing_state_wide_areas.first
+              v.issuer_hios_id = issuer_hios_id
+              v.save
+            else
+              county_name, state_code, county_code = extract_county_name_state_and_county_codes(sheet.cell(i,4))
+
+              records = ::Locations::CountyZip.where({county_name: county_name})
+
+              if sheet.cell(i,6).present?
+                extracted_zips = extracted_zip_codes(sheet.cell(i,6)).each {|t| t.squish!}
+                records = records.where(:zip.in => extracted_zips)
+              end
+
+              location_ids = records.map(&:_id).uniq.compact
+
+              if existing_state_wide_areas.count > 0
                 v = existing_state_wide_areas.first
+                v.county_zip_ids << location_ids
+                v.county_zip_ids = v.county_zip_ids.flatten.uniq
                 v.issuer_hios_id = issuer_hios_id
                 v.save
               else
-                county_name, state_code, county_code = extract_county_name_state_and_county_codes(sheet.cell(i,4))
-
-                records = ::Locations::CountyZip.where({county_name: county_name})
-
-                if sheet.cell(i,6).present?
-                  extracted_zips = extracted_zip_codes(sheet.cell(i,6)).each {|t| t.squish!}
-                  records = records.where(:zip.in => extracted_zips)
-                end
-
-                location_ids = records.map(&:_id).uniq.compact
-
-                if existing_state_wide_areas.count > 0
-                  v = existing_state_wide_areas.first
-                  v.county_zip_ids << location_ids
-                  v.county_zip_ids = v.county_zip_ids.flatten.uniq
-                  v.issuer_hios_id = issuer_hios_id
-                  v.save
-                else
-                  ::Locations::ServiceArea.find_or_create_by!({
-                    active_year: year,
-                    issuer_provided_code: sheet.cell(i,1),
-                    issuer_hios_id: issuer_hios_id,
-                    issuer_provided_title: sheet.cell(i,2),
-                    county_zip_ids: location_ids,
-                    covered_states: [state_abbreviation]
-                  })
-                end
+                ::Locations::ServiceArea.find_or_create_by!({
+                  active_year: year,
+                  issuer_provided_code: sheet.cell(i,1),
+                  issuer_hios_id: issuer_hios_id,
+                  issuer_provided_title: sheet.cell(i,2),
+                  county_zip_ids: location_ids,
+                  covered_states: [state_abbreviation]
+                })
               end
             end
           end
-
-          Success('Created Service Area')
-        rescue => e
-          puts e.inspect unless Rails.env.test?
-          puts " --------- " unless Rails.env.test?
-          puts e.backtrace unless Rails.env.test?
-
-          Failure('Failed to create service area')
         end
-      else
-        puts "Creating Default service area for #{year}" unless Rails.env.test?
-        ::Locations::ServiceArea.find_or_create_by!(
-          {active_year: year,
-           covered_states: [state_abbreviation],
-           county_zip_ids: [],
-           issuer_hios_id: nil,
-           issuer_provided_title: 'Default Service Area'}
-        )
+
         Success('Created Service Area')
+      rescue
+        Failure({errors: ["Unable to process file: #{sa_file}"]})
       end
     end
 

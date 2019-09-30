@@ -62,27 +62,24 @@ class Admin::TenantsController < ApplicationController
   end
 
   def plan_index
+    @tenant = ::Tenants::Tenant.find(params.permit!['tenant_id'])
     @products = ::Products::HealthProduct.all
     @years = [2020, 2021]
   end
 
   def upload_plan_data
-    # SERFF Template
     params.permit!
     result = Transactions::SerffTemplateUpload.new.call(params.to_h)
-
     if result.success?
-      # flash[:notice] = 'Successfully uploaded plans'
-      redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
+      flash[:notice] = 'Successfully uploaded plans'
     else
-      # flash[:error] = 'Something went wrong'
-      result.failure
-      # display errors on the same page
+      flash[:error] = result.failure[:errors].first
     end
+
+    redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
   end
 
   def zip_county_data
-    # County/Zipcode Mapping File
     params.permit!
     result = Transactions::CountyZipFile.new.call(params.to_h)
 

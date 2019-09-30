@@ -19,7 +19,7 @@ module Operations
 
         Success('Created Plan for given data')
       rescue => e
-        Failure('Unable to create Plan for given data')
+        Failure({errors: ["Failed to store data from file #{File.basename(files.first)}"]})
       end
     end
   end

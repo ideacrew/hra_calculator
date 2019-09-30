@@ -22,39 +22,46 @@ module Transactions
     end
 
     def process_service_area(input)
-      return Success(@plans_file) if (@tenant.geographic_rating_model == :single_rating_area)
+      return Success(@plans_file) if (@tenant.geographic_rating_area_model == 'single')
 
-      sa_params = { sa_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
-      import_sa = ::Operations::ImportServiceArea.new.call(sa_params)
+      begin
+        sa_params = { sa_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
+        import_sa = ::Operations::ImportServiceArea.new.call(sa_params)
+        return Failure("Failed to store data from file #{File.basename(sa_params[:sa_file])}") if import_sa.failure?
 
-      if import_sa.failure?
-        Failure("Failed to store data from file #{File.basename(sa_params[:sa_file])}")
-      else
-        Success(success_hash)
+        Success(@plans_file)
+      rescue
+        return Failure({errors: ["Failed to fetch service area data for carrier: #{@carrier_name}"]}) if input.nil?
+        Failure({errors: ["Failed to store data from file #{File.basename(input)}"]})
       end
     end
 
     def process_plans(input)
-      plan_params = { plans_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp, carrier_name: @carrier_name }
-      import_plans = ::Operations::CreatePlan.new.call(plan_params)
+      begin
+        plan_params = { plans_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp, carrier_name: @carrier_name }
+        import_plans = ::Operations::CreatePlan.new.call(plan_params)
+        return Failure("Failed to store data from file #{File.basename(input)}") if import_plans.failure?
 
-      if import_plans.failure?
-        Failure("Failed to store data from file #{File.basename(plan_params[:plans_file])}")
-      else
         Success(@rates_file)
+      rescue
+        return Failure({errors: ["Failed to fetch plans data for carrier: #{@carrier_name}"]}) if input.nil?
+        Failure({errors: ["Failed to store data from file #{File.basename(input)}"]})
       end
     end
 
     def process_rates(input)
-      return Success("Loaded Plans for tenant #{@tenant.key}") unless @tenant.use_age_ratings?
+      return Success("Loaded Plans for tenant #{@tenant.key}") if @tenant.use_age_ratings == 'non_age_rated'
 
-      rate_params = { rates_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
-      rates_result = ::Operations::CreateRates.new.call(rate_params)
+      begin
+        rate_params = { rates_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
+        rates_result = ::Operations::CreateRates.new.call(rate_params)
+        return Failure("Failed to store data from file #{File.basename(input)}") if rates_result.failure?
 
-      if rates_result.failure?
-        Failure("Failed to store data from file #{File.basename(input)}")
-      else
         Success("Imported rates for carrier #{@carrier_name}")
+      rescue
+
+        return Failure({errors: ["Failed to fetch rates data for carrier: #{@carrier_name}"]}) if input.nil?
+        Failure({errors: ["Failed to store data from file #{File.basename(input)}"]})
       end
     end
   end
