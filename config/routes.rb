@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       collection do
         get :default_configuration
         get :counties
+        get :header_footer_config
       end
     end
 
