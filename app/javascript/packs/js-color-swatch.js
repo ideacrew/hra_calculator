@@ -6,7 +6,7 @@ for (const selectElement of selectElements) {
     if (e.currentTarget.value.match(colorPattern)) {
       e.currentTarget.classList.remove('is-invalid')
 
-      var feedback = e.currentTarget.parentNode.querySelector('.invalid-feedback') !== null
+      var feedback = e.currentTarget.parentNode.querySelector('.invalid-feedback')
       if (feedback)
         feedback.remove()
 
