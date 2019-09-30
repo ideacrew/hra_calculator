@@ -2,6 +2,7 @@ module Transactions
   class UploadSerffTemplate
     include Dry::Transaction
 
+    step :check_for_zip
     step :fetch
     step :unzip_serff
     step :assign_paths
@@ -12,9 +13,17 @@ module Transactions
 
     private
 
+    def check_for_zip(input)
+      if File.extname(input['serff_template']['value'].original_filename) == ".zip"
+        Success(input)
+      else
+        Failure('Uploaded file is not in expected format')
+      end
+    end
+
     def fetch(input)
       @tenant = ::Tenants::Tenant.find(input['tenant_id'])
-      @year = input['year']
+      @year = input['serff_year']
 
       if @tenant.blank?
         Failure({errors: {tenant_id: "Unable to find tenant record with id #{input[:id]}"}})

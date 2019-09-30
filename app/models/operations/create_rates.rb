@@ -7,7 +7,6 @@ module Operations
 
     def call(rates_params)
       begin
-        # TODO: Need file and year
         files = [rates_params[:rates_file]]
         year = rates_params[:year].to_i
         tenant = rates_params[:tenant]

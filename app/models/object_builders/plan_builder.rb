@@ -124,9 +124,15 @@ module ObjectBuilders
             end
 
             if retrieve_metal_level.to_s == 'silver' && new_product.valid?
-              new_product.save!
-              @success_plan_counter += 1
-              cost_share_variance.product_id = new_product.id
+              create_params = result.to_h
+              existing_products = ::Products::HealthProduct.where(create_params.except(:application_period))
+              existing_product = existing_products.by_application_period(create_params[:application_period]).present?
+
+              unless existing_product
+                new_product.save!
+                @success_plan_counter += 1
+                cost_share_variance.product_id = new_product.id
+              end
             else
               @logger.error "\n Failed to create product: #{new_product.title}, \n hios product id: #{new_product.hios_id}\n Errors: #{new_product.errors.full_messages}\n ******************** \n"
             end

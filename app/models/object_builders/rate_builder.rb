@@ -149,7 +149,7 @@ module ObjectBuilders
     def build_product_premium_tables
       active_year = @rate[:effective_date].to_date.year
       applicable_range = @rate[:effective_date].to_date..@rate[:expiration_date].to_date
-      rating_area = @rate[:rate_area_id].gsub("Rating Area ", "R-MA00")
+      rating_area = @rate[:rate_area_id]
       rating_area_id = if @rating_area_enabled
                          @rating_area_id_cache[[active_year, rating_area]]
                        else

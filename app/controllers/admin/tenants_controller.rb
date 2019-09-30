@@ -63,7 +63,7 @@ class Admin::TenantsController < ApplicationController
 
   def plan_index
     @products = ::Products::HealthProduct.all
-    @years = ::Enterprises::BenefitYear.all.pluck(:calendar_year)
+    @years = [2020, 2021]
   end
 
   def upload_plan_data
@@ -72,10 +72,10 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::UploadSerffTemplate.new.call(params.to_h)
 
     if result.success?
-      flash[:notice] = 'Successfully uploaded plans'
+      # flash[:notice] = 'Successfully uploaded plans'
       redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
     else
-      flash[:error] = 'Something went wrong'
+      # flash[:error] = 'Something went wrong'
       result.failure
       # display errors on the same page
     end
@@ -87,7 +87,7 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::CountyZipFile.new.call(params.to_h)
 
     if result.success?
-      redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
+      redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
     else
       result.failure
       # display errors on the same page

@@ -33,7 +33,7 @@ module Operations
                 sa.issuer_hios_id = issuer_hios_id
                 sa.save
               else
-                ::Locations::ServiceArea.create(
+                ::Locations::ServiceArea.find_or_create_by!(
                   active_year: year,
                   issuer_provided_code: sheet.cell(i,1),
                   covered_states: [state_abbreviation],
@@ -71,7 +71,7 @@ module Operations
                   v.issuer_hios_id = issuer_hios_id
                   v.save
                 else
-                  ::Locations::ServiceArea.create({
+                  ::Locations::ServiceArea.find_or_create_by!({
                     active_year: year,
                     issuer_provided_code: sheet.cell(i,1),
                     issuer_hios_id: issuer_hios_id,
