@@ -4,21 +4,26 @@ module Operations
     include ::SettingsHelper
 
     def call
-      hra_results = ::HraResults.new({
-        tax_credit: tax_credit,
-        market_place: market_place,
-        help_text_1: help_text_1,
-        help_text_2: help_text_2,
-        short_term_plan: short_term_plan,
-        minimum_essential_coverage: minimum_essential_coverage,
-        minimum_essential_coverage_link: minimum_essential_coverage_link,
-        enroll_without_aptc: enroll_without_aptc,
-        help_text_3: help_text_3,
-        help_text_4: help_text_4,
-        help_text_5: help_text_5
-      })
+      tenant = Tenants::Tenant.first
+
+      site = tenant.sites.first
+      ui_tool_page_option    = site.options.by_key(:ui_tool_pages).first
+      page_options = ui_tool_page_option.options.pluck(:key, :value, :default)
+
+      ui_theme_option  = site.options.by_key(:ui_theme).first
+      bootstrap_pallette_option  = ui_theme_option.options.by_key(:bootstrap_pallette).first
+      color_options = bootstrap_pallette_option.options.pluck(:key, :value, :default)
+
+      hra_results = ::HraResults.new(option_array_to_hash(page_options).merge(colors: option_array_to_hash(color_options)))
 
       Success(hra_results)
+    end
+
+    def option_array_to_hash(options)
+      options.inject({}) do |data, element_array|
+        data[element_array[0]] = element_array[1] || element_array[2]
+        data
+      end
     end
   end
 end
