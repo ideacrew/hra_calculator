@@ -9,7 +9,7 @@ nav_order: 7
 
 ## Open Source Approach
 
-The objective of this project is to deliver software which will be published to Github. The open source code base for the HRA  Tool will be available for any hosting agency or individual to download a copy and utilize how they see fit. The first release of tool will be provide a fully functional external user facing anonymous experience available to any hosting agency designed to be a stand alone feature or integrated into a software suite as needed.
+The HRA Tool source code is available on [Github](https://github.com/ideacrew/hra_calculator/) .  It's published as open source software under the[MIT license](https://github.com/ideacrew/hra_calculator/tree/master/LICENSE.txt)
 
 ## FAQ
 
