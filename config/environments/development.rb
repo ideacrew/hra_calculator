@@ -39,6 +39,8 @@ Rails.application.configure do
 
   config.web_console.whitelisted_ips = '172.22.0.1'
 
+  config.webpacker.check_yarn_integrity = false
+
   # Raise an error on page load if there are pending migrations.
   # config.active_record.migration_error = :page_load
 

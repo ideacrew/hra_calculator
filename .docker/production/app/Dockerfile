@@ -2,11 +2,22 @@ ARG RUBY_VERSION
 FROM ruby:$RUBY_VERSION
 
 ARG BUNDLER_VERSION
+ARG NODE_MAJOR
+ARG YARN_VERSION
+
+# Add NodeJS to sources list
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash -
+
+# Add Yarn to the sources list
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
 
 # Install dependencies
 RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-    build-essential && \
+    build-essential \
+    nodejs \
+    yarn=$YARN_VERSION-1 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     truncate -s 0 /var/log/*log
@@ -27,9 +38,20 @@ RUN gem update --system && \
 
 # Create a directory for the app code
 RUN mkdir -p /app
-
 WORKDIR /app
 
+# Setting env up
+ENV RAILS_ENV='production'
+ENV NODE_ENV='production'
+
+# Adding gems
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+
+RUN bundle install --jobs 20 --retry 5 --without development test 
+
 COPY . .
+
+RUN yarn install && bundle exec rake assets:precompile
 
 RUN rm -f /app/config/master.key && rm -f /app/config/credentials.yml.enc

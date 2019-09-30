@@ -42,3 +42,13 @@ RUN gem update --system && \
 RUN mkdir -p /app
 
 WORKDIR /app
+
+# Setting env up
+ENV RAILS_ENV='development'
+ENV NODE_ENV='development'
+
+# Adding gems
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+
+RUN bundle install && yarn install --check-files
