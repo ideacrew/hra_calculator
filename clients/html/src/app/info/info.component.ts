@@ -116,7 +116,7 @@ export class InfoComponent implements OnInit {
   }
 
   getInitialInfo() {
-    this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_information").subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/default_configuration").subscribe(
       (res) => {
         console.log(res)
          this.countyOptions = res.data.counties;
@@ -166,7 +166,7 @@ export class InfoComponent implements OnInit {
   getCountyInfo() {
     let params = new HttpParams().set('hra_state', this.hraForm.value.state);
     params = params.append('hra_zipcode', this.hraForm.value.zipcode);
-    this.httpClient.get<any>(environment.apiUrl+"/hra_results/hra_counties", {params: params}).subscribe(
+    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/counties", {params: params}).subscribe(
       (res) => {
         console.log(res)
         if (res.data.counties.length == 0) {
@@ -192,8 +192,8 @@ export class InfoComponent implements OnInit {
 
   onSubmit() {
     if (this.hraForm.valid) {
-      this.resultService.setFormData(this.hraForm.value);
-      this.httpClient.post<any>(environment.apiUrl+"/hra_results/hra_payload", this.hraForm.value).subscribe(
+      this.resultService.setFormData(this.hraForm.value);      
+      this.httpClient.post<any>(environment.apiUrl+"/api/hra_results/hra_payload", this.hraForm.value).subscribe(
         (res) => {
           console.log(res)
           if(res.status == 'success'){

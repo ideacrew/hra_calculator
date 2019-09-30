@@ -10,7 +10,7 @@ class QhpRateBuilder
     @results_array = []
     @rating_area_id_cache = {}
     @rating_area_cache = {}
-    @rating_area_enabled = Registry['enterprise.dchbx.primary.production.offerings_constrained_to_rating_areas']
+    @rating_area_enabled = false #Registry['enterprise.dchbx.primary.production.offerings_constrained_to_rating_areas']
     @premium_table_cache = Hash.new {|h, k| h[k] = Hash.new}
     @action = "new"
     FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
@@ -135,6 +135,7 @@ class QhpRateBuilder
       result = validate_premium_tables_and_premium_tuples(product_hios_id, premium_tables_params)
       active_year = applicable_range.first.year
       products = ::Products::Product.where(hios_id: /#{product_hios_id}/).select{|a| a.active_year == active_year}
+
       products.each do |product|
         premium_table = Products::PremiumTable.new(result.to_h)
         product.premium_tables << premium_table

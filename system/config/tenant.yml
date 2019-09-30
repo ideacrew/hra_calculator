@@ -1,0 +1,108 @@
+---
+key: :enterprise
+namespaces:
+  - key: :tenants
+    namespaces:
+      - key: :ic
+        settings:
+        - key: owner_organization_name
+          default: Ideacrew
+          description: The Marketplace owner organization name
+          type: :string
+        namespaces:
+          - key: :sites
+            namespaces:
+              - key: :primary
+                settings:
+                  - key: :title
+                    default: HRA Affordability Tool
+                    type: :string
+                  - key: :description
+                    type: :string
+                    default: This tool will help you determine how an HRA you're offered affects your eligibility for a tax credit and what to do next
+                namespaces:
+                  - key: :options
+                    namespaces:
+                      - key: :ui_tool_pages
+                        settings:
+                          - key: :page_title
+                            default: HRA Affordability Tool
+                            type: :string
+                            description: The page title may not be changed
+                          - key: :a_tax_credit
+                            type: string
+                            default: a tax credit
+                          - key: :off_market
+                            type: string
+                            default: similar coverage off Marketplace
+                          - key: results_page_help_text_1
+                            type: string
+                            default: The results above are based on the information provided, which has not been independently verified. This is not a determination that you are eligible for a tax credit.
+                          - key: results_page_help_text_2
+                            type: string
+                            default: When you’re asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time
+                          - key: answer_no
+                            type: string
+                            default: Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer)
+                          - key: aca_compliant
+                            type: string
+                            default: an ACA-compliant plan off Marketplace. Ask your employer about your options
+                          - key: mininum_essential_coverage
+                            type: string
+                            default: mininum essential coverage
+                          - key: mininum_essential_coverage_link
+                            type: url
+                            default: https://www.healthcare.gov/fees/plans-that-count-as-coverage/
+                          - key: short_term_plan
+                            type: string
+                            default: such as a short-term plan
+                      - key: :site
+                        settings:
+                          - key: :marketplace_name
+                            default: My Health Connector
+                            description: "The Marketplace Name will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_name%"
+                            type: string
+                          - key: :marketplace_website_url
+                            default: https://openhbx.org
+                            description: "The Marketplace Website URL will appear on the Tool header and embedded in text wherever the following token is entered: %marketplace_website_url%"
+                            type: :url
+                          - key: :call_center_phone
+                            default: 1-800-555-1212
+                            description: "The Call Center Phone will appear on the Tool header and embedded in text wherever the following token is entered: %call_center_phone%"
+                            type: phone
+                      - key: :ui_theme
+                        settings:
+                          - key: typefaces
+                            description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
+                            type: :url # of uRLs
+                            default: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
+                        namespaces:
+                          - key: :bootstrap_pallette
+                            settings:
+                            - key: :primary_color
+                              type: :swatch
+                              default: '#007bff'
+                            - key: :secondary_color
+                              type: :swatch
+                              default: '#6c757d'
+                            - key: :success_color
+                              type: :swatch
+                              default: '#28a745'
+                            - key: :danger_color
+                              type: :swatch
+                              default: '#dc3545'
+                            - key: :warning_color
+                              type: :swatch
+                              default: '#ffc107'
+                            - key: :info_color
+                              type: :swatch
+                              default: '#17a2b8'
+                      - key: :branding
+                        settings:
+                          - key: :site_logo
+                            description: Google offers an extensive catalog of open source fonts that may be used with the Tool.  See https://fonts.google.com/
+                            type: :base_64
+                            default: nil
+                  - key: :environments
+                    namespaces:
+                    - key: :production

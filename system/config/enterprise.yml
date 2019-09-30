@@ -1,94 +1,11 @@
 key: :enterprise
-namespaces:
-  - key: :tenants
-    namespaces:
-      - key: :dchbx
-        settings:
-          - key: :organization_name
-            default: DC Health Benefit Exchange Authority
-          - key: :owner_account_name
-            default: admin@hbx_org.com
-        namespaces:
-          - key: :sites
-            namespaces:
-              - key: :primary
-                settings:
-                  - key: :url
-                    type: URL
-                    default: https://shop.openhbx.org
-                  - key: :title
-                    type: string
-                    default: HRA Calculator
-                  - key: :description
-                    type: string
-                    default: shop market
-                namespaces:
-                  - key: :environments
-                    namespaces:
-                    - key: :production
-                      namespaces:
-                        - key: :options
-                          namespaces:
-                            - key: :settings
-                              settings:
-                                - key: offerings_constrained_to_service_areas
-                                  type: :boolean
-                                  default: false
-                                - key: offerings_constrained_to_rating_areas
-                                  type: :boolean
-                                  default: false
-                                - key: validate_county
-                                  type: :boolean
-                                  default: false
-                                - key: offerings_constrained_to_zip_codes
-                                  type: :boolean
-                                  default: false
-                                - key: state_full_name
-                                  type: :string
-                                  default: 'District of Columbia'
-                                - key: state_abbr
-                                  type: :string
-                                  default: 'DC'
-                                - key: tax_credit
-                                  type: :string
-                                  default: 'a tax credit'
-                                - key: market_place
-                                  type: :string
-                                  default: 'DC Health Link'
-                                - key: help_text_1
-                                  type: :string
-                                  default: "Answer 'no' when asked if you're offered health insurance by an employer (unless you are separately offered health insurance by another employer)"
-                                - key: help_text_2
-                                  type: :string
-                                  default: "When you're asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time"
-                                - key: short_term_plan
-                                  type: :string
-                                  default: 'such as a short-term plan'
-                                - key: minimum_essential_coverage
-                                  type: :string
-                                  default: 'minimum essential coverage'
-                                - key: minimum_essential_coverage_link
-                                  type: :string
-                                  default: "https://www.healthcare.gov/fees/plans-that-count-as-coverage/"
-                                - key: enroll_without_aptc
-                                  type: :string
-                                  default: 'HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC'
-                                - key: help_text_3
-                                  type: :string
-                                  default: 'similar coverage off Marketplace'
-                                - key: help_text_4
-                                  type: :string
-                                  default: 'an ACA-compliant plan off Marketplace. Ask your employer about your options'
-                                - key: help_text_5
-                                  type: :string
-                                  default: '[The results above are based on the information provided, which has not been independently verified. This is not a determination that you are eligible for a tax credit]'
-                                - key: tenant_logo_file
-                                  type: :string
-                                  default: "dc_logo.jpg"
-                                - key: tenant_url
-                                  type: URL
-                                  default: https://www.dchealthlink.com
-                                - key: customer_support_number
-                                  type: :string
-                                  default: "1-800-555-5555  TTY: 711"
-
+settings:
+  - key: :owner_organization_name
+    default: My Organization
+    aria_label: 
+    description: Name of the organization that manages Marketplaces hosted on this site 
+    type: string
+  - key: owner_account_name
+    default: admin
+    description: The Enterprise owner's login account name
+    type: string

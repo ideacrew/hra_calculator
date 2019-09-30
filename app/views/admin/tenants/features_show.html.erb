@@ -1,0 +1,15 @@
+<%= form_for(@tenant, url: admin_tenant_features_update_path, method: :put) do |tenant_form| %>  
+  
+  <%= tenant_form.fields_for :sites do |site_form| %>
+    <p class="h1">Features</p>
+    
+    <%= site_form.fields_for :features do |feature_form| %>
+      <%= feature_form.fields_for :child_features do |child_feature_1_form|%>
+        <%= render partial: 'admin/shared/options_form', locals: {form: child_feature_1_form} %>
+      <% end %>
+      <%= render partial: 'admin/shared/options_form', locals: {form: feature_form} %>
+    <% end %>
+  <% end %>
+
+  <%= submit_tag 'Update Features', class: "btn btn-primary" %>
+<% end %>

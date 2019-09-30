@@ -1,0 +1,105 @@
+<div>
+  <h1>Enterprise</h1>
+  <p>Welcome to the HRA Affordability Tool. If this is the first time signing in, there are a couple simple steps necessary for the system to operate:</p>
+
+  <ol>
+    <li>Change password for the admin account</li>
+    <li>Create new account(s) that will become the owner for each Exchange Markletplace hosted on this system</li>
+    <li>Create Marketplace(s)</li>
+  </ol>
+</div>
+
+<div>
+  <h2>New Account</h2>
+  <%= form_for(Account.new,  url: admin_enterprise_account_create_path(@enterprise)) do |f| %>
+    <div class="form-group">
+      <%= f.label :fname, "Email:", class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= text_field_tag :email, '', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :fname, "Password:", class: "col-md-4 control-label" %>
+      <div class="col-md-4">
+        <%= password_field_tag :password, '', class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'Add Account', class: "btn btn-default btn-primary"  %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <h2>Accounts</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <%= thead(["Account Name", "Exchange Marketplace", "Role", "Last Sign On"], options={class_name: "thead-light"})%>
+      <%#= tbody(@accounts, options={class_name: "thead-light"})%>
+
+      <tbody>
+      <% @accounts.each do |account| %>
+       <%= trow([account.email, account.tenant&.owner_organization_name || 'N/A', account.role, account.last_sign_in_at || 'N/A'])%>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div>
+  <h2>New Market Place</h2>
+  <br/>
+  <%= form_for(:tenant, url: admin_enterprise_tenant_create_path(@enterprise), :html => {:method => :post}) do |tenant_form| %>
+
+    <div class="form-group col-md-4">
+      <h5>State</h5>
+      <%= select_dropdown('state', @states) %>
+    </div>
+
+    <div class="form-group col-md-4">
+      <h5><p>Marketplace Name</p></h5>
+      <%= input_text_control({value: ''}, tenant_form) %>
+    </div>
+
+    <div class="form-group col-md-4">
+      <h5><p>Owner Account</p></h5>
+      <%= select_dropdown('account', @accounts.map(&:email)) %>
+    </div>
+    <%= submit_tag 'Add Market Place', class: "btn btn-primary" %>
+  <% end %>
+</div>
+<br/>
+<div>
+  <h2>MarketPlaces</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <%= thead(["State", "Marketplace Place", "Owner Account", "Created at" ], options={class_name: "thead-light"})%>
+      <%#= tbody(@accounts, options={class_name: "thead-light"})%>
+
+      <tbody>
+      <% @tenants.each do |tenant| %>
+        <%= trow([tenant.key.upcase, tenant.owner_organization_name, tenant.owner_accounts[0].email, tenant.created_at])%>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br/>
+<div>
+  <h2>Benefit Year</h2>
+  <br/>
+  <%= form_for(:enterprise, url: admin_enterprise_benefit_year_update_path(@enterprise), :html => {:method => :post}) do |form| %>
+
+    <div class="form-group col-md-4">
+      <h5>Benefit Year</h5>
+      <%= select_dropdown('benefit_year', @benefit_years) %>
+    </div>
+
+    <div class="form-group col-md-4">
+      <h5><p>Expected Contribution Factor</p></h5>
+      <%= input_text_control({value: ''}, form) %>
+      <p> Enter the ?? factor value for the benefit plan year</p>
+    </div>
+    <%= submit_tag 'Update Benefit Year', class: "btn btn-primary" %>
+  <% end %>
+</div>

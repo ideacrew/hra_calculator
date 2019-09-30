@@ -17,7 +17,8 @@ ResourceRegistry.configure do
         site: :primary,
         env: :production,
         application: :enroll
-      }
+      },
+      load_application_settings: false
     }
     # ,
     # options: {

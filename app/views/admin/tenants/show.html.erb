@@ -1,0 +1,10 @@
+<p class="h1">Profile</p>
+<%= form_for(@tenant, url: admin_tenant_path, :html => { :multipart => true }) do |tenant_form| %>
+  <%= build_attribute_field(tenant_form, :owner_organization_name) %>
+  <%= tenant_form.fields_for :sites do |site_form| %>
+    <%= render partial: 'admin/shared/options_form', locals: {form: site_form} %>
+  <% end %>
+  <%= submit_tag 'Update Profile', class: "btn btn-primary" %>
+<% end %>
+
+<%= javascript_pack_tag 'js-color-swatch' %>

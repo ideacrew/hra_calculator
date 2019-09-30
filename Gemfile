@@ -3,14 +3,24 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'activerecord'
+gem 'sqlite3', '~> 1.4'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
 gem 'activemodel', '~> 6.0.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5'
+
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks', '~> 5'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -21,10 +31,11 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 
 # MongoDB NoSQL database ORM
-# gem 'mongoid',                  '~> 7.0'
+# gem 'mongoid',                  '~> 7.1'
 gem 'mongoid',  git: 'https://github.com/mongodb/mongoid.git', branch: 'master'
 gem 'mongoid-locker'
 
+gem 'actiontext', '~> 6.0.0.rc1'
 # Settings, validation and dependency injection
 gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'branch_0.3.2'
 gem 'fast_jsonapi'
@@ -37,8 +48,9 @@ gem 'dry-initializer',          '~> 3.0'
 gem 'nokogiri',                 '~> 1.10'
 gem 'nokogiri-happymapper',     '~> 0.8.0', :require => 'happymapper'
 gem 'money-rails',              '~> 1.13'
-gem 'devise_token_auth'
-gem 'database_cleaner',       '~> 1.7'
+gem 'database_cleaner',         '~> 1.7'
+gem 'devise'
+gem 'webpacker',                '~> 4.0.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -47,6 +59,8 @@ group :development, :test do
   gem 'yard' #,                   '~> 0.9.12',  require: false
   gem 'climate_control' #
   gem 'factory_bot_rails',      '~> 4.11'
+  gem 'pry-byebug'
+  gem 'capybara'
 end
 
 group :development do
