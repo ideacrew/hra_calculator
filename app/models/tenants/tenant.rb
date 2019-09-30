@@ -43,6 +43,6 @@ class Tenants::Tenant
   end
 
   def self.find_by_key(key)
-    where(key: key).first
+    where(key: key.to_sym).first
   end
 end
