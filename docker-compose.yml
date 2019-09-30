@@ -76,7 +76,7 @@ services:
     <<: *backend
     stdin_open: true
     tty: true
-    command: bash -c "rm -f tmp/pids/server.pid && bundle && bundle exec puma -C config/puma.rb"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle && yarn install --check-files && bundle exec puma -C config/puma.rb"
     ports:
       - '3000:3000'
 
