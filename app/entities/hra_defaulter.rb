@@ -6,6 +6,11 @@ class HraDefaulter < Dry::Struct
   attribute :counties, Types::Array.of(Types::String)
   attribute :display_county, Types::Bool
   attribute :display_zipcode, Types::Bool
+  attribute :start_month_dates, Types::Array.of(Types::String).meta(omittable: true)
+  attribute :end_month_dates, Types::Array.of(Types::String).meta(omittable: true)
   attribute :tax_credit, Types::String
   attribute :market_place, Types::String
+  attribute :ui_pages, Types::Array
+  attribute :colors,   Types::Array
+  attribute :features,   Types::Array
 end
