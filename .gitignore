@@ -50,6 +50,12 @@ node_modules/
 # rspec failure tracking
 .rspec_status
 
+# redmine IDE
+.idea/*
+
+#asdf
+.tool-versions
+
 # Make sure no PII is accidently commited
 # add w/ git add --force if actually docs
 *.csv
