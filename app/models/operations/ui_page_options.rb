@@ -12,8 +12,9 @@ module Operations
     end
 
     def option_array_to_hash(options)
+      re = /<("[^"]*"|'[^']*'|[^'">])*>/
       options.inject({}) do |data, element_array|
-        data[element_array[0]] = element_array[1] || element_array[2]
+        data[element_array[0]] = element_array[1]&.gsub!(re, '') || element_array[2]&.gsub!(re, '')
         data
       end
     end
