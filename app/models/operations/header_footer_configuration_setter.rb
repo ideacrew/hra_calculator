@@ -1,17 +1,22 @@
 module Operations
   class HeaderFooterConfigurationSetter
     include Dry::Transaction::Operation
-    include ::SettingsHelper
 
-    def call
-      hf_config = ::HeaderFooterConfiguration.new({
-        tenant_logo_file: tenant_logo_file,
-        tenant_url: tenant_url,
-        customer_support_number: customer_support_number,
-        benefit_year: 2020 # TODO: Fix the benefit year.
-      })
+    def call(key)
+      tenant = Tenants::Tenant.find_by_key(key)
+      site   = tenant.sites.first
 
-      Success(hf_config)
+      options = [:site, :branding].inject([])  do |data, key|
+        site_option  = site.options.by_key(key).first
+        data += site_option.options.pluck(:key, :value, :default)
+      end
+
+      option_hash = options.inject({}) do |data, element_array|
+        data[element_array[0]] = element_array[1] || element_array[2]
+        data
+      end
+
+      Success(option_hash)
     end
   end
 end
