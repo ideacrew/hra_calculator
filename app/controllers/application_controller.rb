@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   # include DeviseTokenAuth::Concerns::SetUserByToken
-  protect_from_forgery unless: -> { request.format.json? || request.format.xml? }
+  protect_from_forgery unless: -> { request.format.json? || request.format.xml? || request.format.js? }
 
   before_action :require_login, unless: :authentication_not_required?
   before_action :authenticate_me

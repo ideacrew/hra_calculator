@@ -1,17 +1,19 @@
 <%= form_for(@page, url: admin_tenant_ui_element_update_path) do |page_form| %>
-  <%= page_form.fields_for :child_options do |child_option_1_form|%>
-    <% if child_option_1_form.object.namespace %>
-      <%= child_option_1_form.fields_for :child_options do |child_option_2_form|%>
-        <% unless child_option_2_form.object.namespace %>
-          <%= build_option_field child_option_2_form, child_option_2_form.object %>
+  <div class="table-responsive">
+    <table class="table">
+      <%= thead(["Template Name", "Text", ""], options={class_name: "thead-light"})%>
+      <tbody>
+        <%= page_form.fields_for :child_options do |child_option_1_form|%>
+          <%= trow([child_option_1_form.object.key, child_option_1_form.object.default.html_safe, link_to('Edit', admin_tenant_ui_pages_edit_path(tenant_id: @tenant, option_id: child_option_1_form.object), remote: true)])%>
         <% end %>
-      <% end %>
-    <% else %>
-      <%= build_option_field child_option_1_form, child_option_1_form.object %>
-    <% end %>
-  <% end %>
-  <%= submit_tag 'Update', class: "btn btn-primary" %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
+
+<div class="editElement" id="editElement">
+
+</div>
 
 <script>
   $(document).ready(function () {

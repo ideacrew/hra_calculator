@@ -17,6 +17,7 @@
 
 import '../stylesheets/application'
 import './bootstrap_custom.js'
+import {} from 'jquery-ujs'
 
 // require("@rails/ujs").start()
 // require('rails-ujs').start()
@@ -30,3 +31,4 @@ require("trix")
 require("@rails/actiontext")
 
 import bsCustomFileInput from 'bs-custom-file-input'
+import 'trix/dist/trix.css'

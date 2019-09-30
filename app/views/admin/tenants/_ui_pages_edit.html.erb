@@ -1,0 +1,22 @@
+<h1>Edited Text</h1>
+
+<%= form_with url: admin_tenant_ui_element_update_path(tenant_id: @tenant, option_id: @option) do |form| %>
+  <%= form.label :body %>
+  <div class="card">
+    <div class="card-body">
+      <%= rich_text_area_tag 'option[default]', @option.default %>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="actions">
+      <button class="btn btn-primary" name="subject" type="submit">Update</button>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("trix-file-accept", function(event) {
+    event.preventDefault();
+  });
+</script>
+

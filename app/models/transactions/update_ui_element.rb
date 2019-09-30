@@ -19,7 +19,7 @@ module Transactions
     end
 
     def persist(input)
-      if @tenant.sites[0].options.where(key: :ui_tool_pages).first.update_attributes(input)
+      if @tenant.sites[0].options.where(key: :ui_tool_pages).first.child_options.find(input[:option_id]).update_attributes(input[:option])
         Success(@tenant)
       else
         Failure(@tenant)

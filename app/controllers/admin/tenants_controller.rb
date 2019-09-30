@@ -44,7 +44,7 @@ class Admin::TenantsController < ApplicationController
   end
 
   def ui_element_update
-    result = Transactions::UpdateUiElement.new.call({tenant_id: params[:tenant_id], ui_element: ui_element_params})
+    result = Transactions::UpdateUiElement.new.call({tenant_id: ui_element_params[:tenant_id], ui_element: ui_element_params.slice(:option_id, :option)})
     ui_element = result.value!
     if result.success?
       flash[:notice] = 'Successfully updated page settings'
@@ -52,7 +52,12 @@ class Admin::TenantsController < ApplicationController
       flash[:error]  = 'Something went wrong.'
     end
 
-    redirect_to action: :show, id: params[:tenant_id]
+    render :js => "window.location = #{admin_tenant_path(ui_element_params[:tenant_id]).to_json}"
+  end
+
+  def ui_pages_edit
+    @tenant = Tenants::Tenant.find(params[:tenant_id])
+    @option = @tenant.sites[0].options.where(key: :ui_tool_pages).first.options.find(params[:option_id])
   end
 
   def plan_index
@@ -127,6 +132,6 @@ class Admin::TenantsController < ApplicationController
 
   def ui_element_params
     params.permit!
-    params.require(:options_option).to_h
+    params.to_h
   end
 end
