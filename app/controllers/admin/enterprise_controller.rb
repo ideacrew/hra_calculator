@@ -20,7 +20,7 @@ class Admin::EnterpriseController < ApplicationController
     else
       flash[:error]  = result.failure[:errors]
     end
-    redirect_to admin_enterprise_url(current_account)
+    redirect_to admin_enterprise_url(current_account.enterprise)
   end
 
   def tenant_create
