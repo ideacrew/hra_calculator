@@ -12,6 +12,9 @@ class Tenants::Tenant
   has_many  :owner_accounts,
             class_name: 'Account'
 
+  has_many  :products,
+            class_name: 'Products::Product'
+
   has_many  :sites,
             class_name: 'Sites::Site'
 
@@ -20,20 +23,12 @@ class Tenants::Tenant
 
   accepts_nested_attributes_for :sites, :options
 
-  def has_service_area_constraints?
-    (key == :ma) ? true : false
+  def use_age_ratings?
+    true
   end
 
-  def has_rating_area_constraints?
-    (key == :ma) ? true : false
-  end
-
-  def zipcode_constraints?
-    (key == :ma) ? true : false
-  end
-
-  def countyzip_constraints?
-    (key == :ma) ? true : false
+  def geographic_rating_model
+    :single_rating_area || :county_based_rating_area || :zipcode_based_rating_area
   end
 
   def sites=(site_params)

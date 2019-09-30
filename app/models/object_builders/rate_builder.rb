@@ -11,7 +11,8 @@ module ObjectBuilders
       @results_array = []
       @rating_area_id_cache = {}
       @rating_area_cache = {}
-      @rating_area_enabled = rate_hash[:tenant].has_rating_area_constraints?
+      @tenant = rate_hash[:tenant]
+      @rating_area_id_required = (@tenant.geographic_rating_model == :zipcode_based_rating_area)
       @premium_table_cache = Hash.new {|h, k| h[k] = Hash.new}
       @action = "new"
       FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
@@ -19,16 +20,9 @@ module ObjectBuilders
     end
 
     def set_rating_area_cache
-      if @rating_area_enabled
-        ::Locations::RatingArea.all.each do |ra|
-          @rating_area_id_cache[[ra.active_year, ra.exchange_provided_code]] = ra.id
-          @rating_area_cache[ra.id] = ra
-        end
-      else
-        ::Locations::RatingArea.all.each do |ra|
-          @rating_area_id_cache[[ra.active_year]] = ra.id
-          @rating_area_cache[ra.id] = ra
-        end
+      ::Locations::RatingArea.all.each do |ra|
+        @rating_area_id_cache[[ra.active_year, ra.exchange_provided_code]] = ra.id
+        @rating_area_cache[ra.id] = ra
       end
     end
 
@@ -99,21 +93,29 @@ module ObjectBuilders
 
     def validate_premium_tables_and_premium_tuples(hios_id, premium_tables_params)
       premium_table_contract = Validations::PremiumTableContract.new
-      result = premium_table_contract.call(premium_tables_params)
+      result = if @rating_area_id_required
+                 premium_table_contract.call(premium_tables_params)
+               else
+                 premium_table_contract.call(premium_tables_params.except(:rating_area_id))
+               end
+
       if result.failure?
         result.errors.messages.each do |error|
-          @logger.error "\n Failed to create premium table for hios_id #{hios_id} for period #{premium_tables_params[:effective_period]} \n Attribute: #{error.path.join}, Error: #{error.text}, Value: #{error.input} \n ***************** \n"
+          raise "Failed to create premium table for hios_id #{hios_id} for period #{premium_tables_params[:effective_period]}"
         end
         nil
-      else
+      elsif (!@rating_area_id_required) || (@rating_area_id_required && premium_tables_params(:rating_area_id) && premium_tables_params(:rating_area_id).class == BSON::ObjectId)
         result
+      else
+        raise "Unable to find matching rating area for tenant: #{@tenant.key}"
+        nil
       end
     end
 
     def find_product_and_create_premium_tables
       @results_array.uniq.each do |value|
         hios_id, year = value.split(",")
-        products = ::Products::Product.where(hios_id: /#{hios_id}/).select{|a| a.active_year.to_s == year.to_s}
+        products = @tenant.products.where(hios_id: /#{hios_id}/).select{|a| a.active_year.to_s == year.to_s}
         products.each do |product|
           product.premium_tables = nil
           product.save
@@ -133,6 +135,7 @@ module ObjectBuilders
           rating_area_id: rating_area_id,
           premium_tuples: premium_tuples_params
         }
+
         result = validate_premium_tables_and_premium_tuples(product_hios_id, premium_tables_params)
         active_year = applicable_range.first.year
         products = ::Products::Product.where(hios_id: /#{product_hios_id}/).select{|a| a.active_year == active_year}
@@ -150,11 +153,8 @@ module ObjectBuilders
       active_year = @rate[:effective_date].to_date.year
       applicable_range = @rate[:effective_date].to_date..@rate[:expiration_date].to_date
       rating_area = @rate[:rate_area_id]
-      rating_area_id = if @rating_area_enabled
-                         @rating_area_id_cache[[active_year, rating_area]]
-                       else
-                         @rating_area_id_cache[[active_year]]
-                       end
+      rating_area_id = @rating_area_id_cache[[active_year, rating_area]]
+
       @premium_table_cache[[@rate[:plan_id], rating_area_id, applicable_range]][assign_age] = @rate[:primary_enrollee]
       @results_array << "#{@rate[:plan_id]},#{active_year}"
     end

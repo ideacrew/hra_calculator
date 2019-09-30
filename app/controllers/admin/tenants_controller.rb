@@ -69,7 +69,7 @@ class Admin::TenantsController < ApplicationController
   def upload_plan_data
     # SERFF Template
     params.permit!
-    result = Transactions::UploadSerffTemplate.new.call(params.to_h)
+    result = Transactions::SerffTemplateUpload.new.call(params.to_h)
 
     if result.success?
       # flash[:notice] = 'Successfully uploaded plans'

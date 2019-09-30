@@ -2,6 +2,7 @@ module Transactions
   class UploadSerffTemplate
     include Dry::Transaction
 
+    step :validate_settings
     step :check_for_zip
     step :fetch
     step :unzip_serff
@@ -13,15 +14,7 @@ module Transactions
 
     private
 
-    def check_for_zip(input)
-      if File.extname(input['serff_template']['value'].original_filename) == ".zip"
-        Success(input)
-      else
-        Failure('Uploaded file is not in expected format')
-      end
-    end
-
-    def fetch(input)
+    def validate(input)
       @tenant = ::Tenants::Tenant.find(input['tenant_id'])
       @year = input['serff_year']
 
@@ -32,6 +25,26 @@ module Transactions
       else
         Success(input)
       end
+    end
+
+    def validate_settings(input)
+      if @tenant.use_age_ratings? == nil
+        Failure({errors: ["Please correct values from Features page for Age Ratings"]})
+      elsif ![:single_rating_area || :county_based_rating_area || :zipcode_based_rating_area].include?(@tenant.geographic_rating_model)
+        Failure({errors: ["Please correct values from Features page for Geographical Ratings"]})
+      end
+    end
+
+    def check_for_zip(input)
+      if File.extname(input['serff_template']['value'].original_filename) == ".zip"
+        Success(input)
+      else
+        Failure('Uploaded file is not in expected format')
+      end
+    end
+
+    def fetch(input)
+      Success(input)
     end
 
     def unzip_serff(input)
