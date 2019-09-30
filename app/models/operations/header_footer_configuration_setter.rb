@@ -16,7 +16,9 @@ module Operations
         data
       end
 
-      Success(option_hash)
+      color_options = ::Operations::ColorOptions.new.call(tenant)
+
+      Success(option_hash.merge(colors: color_options.value!))
     end
   end
 end
