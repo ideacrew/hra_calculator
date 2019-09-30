@@ -42,6 +42,11 @@ FROM nginx:1.16.0-alpine
 # copy artifact build from the 'build environment'
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# copy nginx configuration
+ARG API_URL
+COPY ./.docker/production/web/nginx.conf /etc/nginx/conf.d/$API_URL.conf
+RUN sed -i -r "s/API_URL/$API_URL/g" /etc/nginx/conf.d/$API_URL.conf 
+
 # expose port 80
 #EXPOSE 80
 
