@@ -336,7 +336,7 @@
                           </div>
                           <div style="float:right;">
                               <button type="button" class="btn btn-info" [hidden]="(currentTab === 1)"
-                              [disabled]="hraForm.controls['state'].invalid || hraForm.controls['zipcode'].invalid || hraForm.controls['county'].invalid || hraForm.controls['dob'].invalid || hraForm.controls['household_frequency'].invalid || hraForm.controls['household_amount'].invalid" 
+                              [disabled]="hraForm.controls['state'].invalid || hraForm.controls['zipcode'].invalid || hraForm.controls['county'].invalid || hraForm.controls['dob'].invalid || hraForm.controls['household_frequency'].invalid || hraForm.controls['household_amount'].invalid"
                               (click)="showTab(currentTab+1)">About Your HRA -></button>
                               <button type="submit" class="btn btn-info" [hidden]="(currentTab != 1)" [disabled]="hraForm.pristine || hraForm.invalid">Your Results -></button>
                           </div>

@@ -122,7 +122,13 @@
                     <div class="input-group">
                       <label class="col-sm-3 col-form-label col-form-label-sm" for="dob">MM/DD/YYYY</label>
                       <div class="col-sm-4">
-                        <input type="date" class="form-control form-control-sm" id="dob" min='1900-01-01' max="{{today | date:'yyyy-MM-dd'}}" formControlName="dob" ngModel required validateDate />
+                        <input type="text" (click)="d.toggle(); d.navigateTo({year: 2000, month: 6})"
+                               class="form-control form-control-sm" id="dob"
+                               [minDate]="{year: 1900, month: 1, day: 1}"
+                               [maxDate]="{year: 2019, month: 10, day: 1}"
+                               ngbDatepicker #d="ngbDatepicker"
+                               formControlName="dob"
+                               ngModel required validateDate/>
                         <div *ngIf="hraForm.controls['dob'].invalid && (hraForm.controls['dob'].dirty || hraForm.controls['dob'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
                           <div *ngIf="hraForm.controls['dob'].errors.required">
                             Date of Birth is required.
