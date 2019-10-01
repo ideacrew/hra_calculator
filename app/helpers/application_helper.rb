@@ -34,7 +34,7 @@ module ApplicationHelper
 
   def select_dropdown(input_id, list)
     return unless list.is_a? Array
-    content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']') do
+    content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']', required: true) do
       concat(content_tag :option, "Select", value: "")
       list.each do |item|
         if item.is_a? Array
@@ -129,7 +129,7 @@ module ApplicationHelper
 
     setting.choices.collect do |choice|
       input_group do
-        tag.div(tag.div(tag.input(nil, type: "radio", name: form.object_name + "[value]", value: choice.first[0], checked: input_value == choice.first[0].to_s), class: "input-group-text"), class: "input-group-prepend") +
+        tag.div(tag.div(tag.input(nil, type: "radio", name: form.object_name + "[value]", value: choice.first[0], checked: input_value == choice.first[0].to_s, required: true), class: "input-group-text"), class: "input-group-prepend") +
         tag.input(nil, type: "text", placeholder: choice.first[1], class: "form-control", aria: {label: aria_label })
       end
     end.join('').html_safe

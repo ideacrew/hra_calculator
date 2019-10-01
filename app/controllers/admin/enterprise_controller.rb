@@ -7,7 +7,8 @@ class Admin::EnterpriseController < ApplicationController
     @accounts = Account.all
     @states = Locations::UsState::NAME_IDS.map(&:first)
     @tenants = @enterprise.tenants
-    @benefit_years = [Date.today.year, Date.today.next_year.year]
+    @benefit_years = [Date.today.year + 1, Date.today.year + 2]
+    @benefit_year_records = Enterprises::BenefitYear.all
   end
 
   def account_create

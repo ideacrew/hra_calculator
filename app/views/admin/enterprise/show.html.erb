@@ -73,7 +73,7 @@
   <h2>MarketPlaces</h2>
   <div class="table-responsive">
     <table class="table">
-      <%= thead(["State", "Marketplace Place", "Owner Account", "Created at" ], options={class_name: "thead-light"})%>
+      <%= thead(["State", "Marketplace Name", "Owner Account", "Created at" ], options={class_name: "thead-light"})%>
       <%#= tbody(@accounts, options={class_name: "thead-light"})%>
 
       <tbody>
@@ -102,4 +102,18 @@
     </div>
     <%= submit_tag 'Update Benefit Year', class: "btn btn-primary" %>
   <% end %>
+</div>
+<br/>
+<div>
+  <h2>Benefit Years</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <%= thead(["Benefit Year", "Expected Contribution Factor", "Created at" ], options={class_name: "thead-light"})%>
+      <tbody>
+      <% @benefit_year_records.each do |benefit_year| %>
+        <%= trow([benefit_year.calendar_year, benefit_year.expected_contribution, benefit_year.created_at])%>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
