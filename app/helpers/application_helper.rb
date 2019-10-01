@@ -71,11 +71,11 @@ module ApplicationHelper
       tag.span('No logo')
     end
 
-    input = tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
+    input = tag.div(tag.span('Upload', class: "input-group-text", id: id) +
     tag.div(
       tag.input(nil, type: "file", id: id, name: form.object_name + "[value]", class: "custom-file-input", aria: { describedby: aria_describedby }) +
       tag.label('Choose File', for: id, value: label, class: "custom-file-label"),
-      class: "custom-file")
+      class: "custom-file"),class: "input-group-prepend")
       # tag.label('Choose File', class: "input-group-text")
     tag.div(tag.div(preview, class: 'col-2') + tag.div(input, class: 'col'), class: 'row')
   end
