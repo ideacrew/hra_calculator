@@ -77,7 +77,7 @@
       <%#= tbody(@accounts, options={class_name: "thead-light"})%>
 
       <tbody>
-      <% @tenants.each do |tenant| %>
+      <% @enterprise.tenants.each do |tenant| %>
         <%= trow([tenant.key.upcase, tenant.owner_organization_name, tenant.owner_accounts[0].email, tenant.created_at])%>
       <% end %>
       </tbody>
@@ -92,7 +92,7 @@
 
     <div class="form-group col-md-4">
       <h5>Benefit Year</h5>
-      <%= select_dropdown('benefit_year', @benefit_years) %>
+      <%= select_dropdown('benefit_year', @enterprise.benefit_years.pluck(:calendar_year)) %>
     </div>
 
     <div class="form-group col-md-4">
@@ -110,7 +110,7 @@
     <table class="table">
       <%= thead(["Benefit Year", "Expected Contribution Factor", "Created at" ], options={class_name: "thead-light"})%>
       <tbody>
-      <% @benefit_year_records.each do |benefit_year| %>
+      <% @enterprise.benefit_years.each do |benefit_year| %>
         <%= trow([benefit_year.calendar_year, benefit_year.expected_contribution, benefit_year.created_at])%>
       <% end %>
       </tbody>

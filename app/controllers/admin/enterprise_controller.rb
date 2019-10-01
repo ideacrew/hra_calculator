@@ -3,12 +3,8 @@ class Admin::EnterpriseController < ApplicationController
 
   def show
     @enterprise = ::Enterprises::Enterprise.first
-    # @accounts = Account.all.pluck(:email)    
-    @accounts = Account.all
-    @states = Locations::UsState::NAME_IDS.map(&:first)
-    @tenants = @enterprise.tenants
-    @benefit_years = [Date.today.year + 1, Date.today.year + 2]
-    @benefit_year_records = Enterprises::BenefitYear.all
+    @states     = Locations::UsState::NAME_IDS.map(&:first)
+    @accounts   = Account.all
   end
 
   def account_create
