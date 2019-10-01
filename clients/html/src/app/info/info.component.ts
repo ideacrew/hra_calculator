@@ -91,11 +91,9 @@ export class InfoComponent implements OnInit {
 
   showTab(n) {
     if(n === 1){
-      if(!(this.hraForm.controls['dob'].valid) ||
-         !(this.hraForm.controls['household_frequency'].valid) ||
+      if(!(this.hraForm.controls['household_frequency'].valid) ||
          !(this.hraForm.controls['household_amount'].valid)
          ){
-          this.hraForm.controls['dob'].markAsTouched();
           this.hraForm.controls['household_frequency'].markAsTouched();
           this.hraForm.controls['household_amount'].markAsTouched();
           return null;
