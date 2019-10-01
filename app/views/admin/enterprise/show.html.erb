@@ -53,6 +53,7 @@
           account.role,
           account.last_sign_in_at || 'N/A',
           tag.a(tag.i(class: 'fas fa-unlock-alt'),
+                href: '#',
                 title: "Change password for #{account.email}",
                 class: 'js-change-password-link',
                 data: { account_id: account.id.to_s, account_email: account.email }),
