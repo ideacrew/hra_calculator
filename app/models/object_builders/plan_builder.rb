@@ -65,7 +65,7 @@ module ObjectBuilders
         end
         @logger.info "\nSaved Plan: #{@qhp.plan_marketing_name}, hios product id: #{@qhp.standard_component_id} \n"
       rescue Exception => e
-        @logger.error "\n Failed to create plan: #{@qhp.plan_marketing_name}, \n hios product id: #{@qhp.standard_component_id} \n Exception Message: #{e.message} \n\n Errors: #{@qhp.errors.full_messages} \n\n Backtrace: #{e.backtrace.join("\n            ")}\n ******************** \n"
+        return Failure({errors: ["Failed to import plans for carrier: #{@carrier_name}"]})
       end
     end
 
@@ -73,13 +73,13 @@ module ObjectBuilders
       effective_date = @qhp.plan_effective_date.to_date
       @qhp.plan_effective_date = effective_date.beginning_of_year
       @qhp.plan_expiration_date = effective_date.end_of_year
-
       create_product_from_serff_data
     end
 
     def create_product_from_serff_data
       @qhp.qhp_cost_share_variances.each do |cost_share_variance|
         hios_base_id, csr_variant_id = cost_share_variance.hios_plan_and_variant_id.split("-")
+
         if csr_variant_id != "00"
           csr_variant_id = retrieve_metal_level == "dental" ? "" : csr_variant_id
           product = ::Products::Product.where(
@@ -157,7 +157,7 @@ module ObjectBuilders
           raise "Failed to create product: #{attributes[:title]}, \n hios product id: #{attributes[:hios_id]}"
         end
         nil
-      elsif (!@service_area_enabled) || (@service_area_enabled && attributes(:service_area_id) && attributes(:service_area_id).class == BSON::ObjectId)
+      elsif (!@service_area_enabled) || (@service_area_enabled && attributes[:service_area_id] && attributes[:service_area_id].class == BSON::ObjectId)
         result
       else
         raise "Unable to find matching service area for tenant: #{@tenant.key}"

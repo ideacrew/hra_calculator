@@ -27,7 +27,7 @@ module Transactions
       begin
         sa_params = { sa_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
         import_sa = ::Operations::ImportServiceArea.new.call(sa_params)
-        return Failure("Failed to store data from file #{File.basename(sa_params[:sa_file])}") if import_sa.failure?
+        return Failure({errors: ["Failed to store data from file #{File.basename(sa_params[:sa_file])}"]}) if import_sa.failure?
 
         Success(@plans_file)
       rescue
@@ -50,16 +50,13 @@ module Transactions
     end
 
     def process_rates(input)
-      return Success("Loaded Plans for tenant #{@tenant.key}") if @tenant.use_age_ratings == 'non_age_rated'
-
       begin
         rate_params = { rates_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
         rates_result = ::Operations::CreateRates.new.call(rate_params)
-        return Failure("Failed to store data from file #{File.basename(input)}") if rates_result.failure?
+        return Failure({errors: ["Failed to store data from file #{File.basename(input)}"]}) if rates_result.failure?
 
         Success("Imported rates for carrier #{@carrier_name}")
       rescue
-
         return Failure({errors: ["Failed to fetch rates data for carrier: #{@carrier_name}"]}) if input.nil?
         Failure({errors: ["Failed to store data from file #{File.basename(input)}"]})
       end

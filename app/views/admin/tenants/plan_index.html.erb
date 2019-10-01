@@ -6,7 +6,7 @@
 <%= select_dropdown('benefit_year', @years) %>
 <br><br>
 
-<% if @tenant.use_age_ratings == "age_rated" %>
+<% if @tenant.geographic_rating_area_model == "zipcode" %>
   <div>
     <h5>County/Zipcode Mapping File</h5>
     <%= form_for(:tenant, url: admin_tenant_zip_county_data_path(@tenant.id), :html => {:method => :post, :multipart => true}) do |tenant_form| %>

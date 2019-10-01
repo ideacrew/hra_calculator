@@ -55,7 +55,7 @@ module Transactions
           return Success(path)
         end
       rescue
-        Failure(errors: ["Unable to unzip the give file"])
+        Failure({errors: ["Unable to unzip the given file"]})
       end
     end
 
@@ -68,14 +68,14 @@ module Transactions
           next if File.file?(carrier_directory)
 
           carrier_name = File.basename(carrier_directory)
-          xml_files = Dir.glob(File.join(carrier_directory, "*.xml"))
-          service_area_file = xml_files.select{|file| File.basename(file) == "service_areas.xml" }.first
+          xml_files = Dir.glob(File.join(carrier_directory, "*"))
+          service_area_file = xml_files.select{|file| File.basename(file) == "service_areas.xlsx" }.first
           plan_file = xml_files.select{|file| File.basename(file) == "plan_and_benefits.xml" }.first
           rates_file = xml_files.select{|file| File.basename(file) == "rates.xml" }.first
 
           errors = []
           errors << "Plan XML doesnot exist for carrier: #{carrier_name}" if !plan_file
-          errors << "Rates XML doesnot exist for carrier: #{carrier_name}" if @tenant.use_age_ratings == 'age_rated' && !rates_file
+          errors << "Rates XML doesnot exist for carrier: #{carrier_name}" if !rates_file
           errors << "Service Area file doesnot exist for carrier: #{carrier_name}" if !@tenant.geographic_rating_area_model == 'single' && !service_area_file
 
           return Failure({errors: errors}) if errors.present?
@@ -95,8 +95,8 @@ module Transactions
         next if File.file?(carrier_directory)
 
         @carrier_name = File.basename(carrier_directory)
-        xml_files = Dir.glob(File.join(carrier_directory, "*.xml"))
-        @service_area_file = xml_files.select{|file| File.basename(file) == "service_areas.xml" }.first
+        xml_files = Dir.glob(File.join(carrier_directory, "*"))
+        @service_area_file = xml_files.select{|file| File.basename(file) == "service_areas.xlsx" }.first
         @plan_file = xml_files.select{|file| File.basename(file) == "plan_and_benefits.xml" }.first
         @rates_file = xml_files.select{|file| File.basename(file) == "rates.xml" }.first
 

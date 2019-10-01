@@ -98,13 +98,12 @@ module ObjectBuilders
                else
                  premium_table_contract.call(premium_tables_params.except(:rating_area_id))
                end
-
       if result.failure?
         result.errors.messages.each do |error|
           raise "Failed to create premium table for hios_id #{hios_id} for period #{premium_tables_params[:effective_period]}"
         end
         nil
-      elsif (!@rating_area_id_required) || (@rating_area_id_required && premium_tables_params(:rating_area_id) && premium_tables_params(:rating_area_id).class == BSON::ObjectId)
+      elsif (!@rating_area_id_required) || (@rating_area_id_required && premium_tables_params[:rating_area_id] && premium_tables_params[:rating_area_id].class == BSON::ObjectId)
         result
       else
         raise "Unable to find matching rating area for tenant: #{@tenant.key}"
