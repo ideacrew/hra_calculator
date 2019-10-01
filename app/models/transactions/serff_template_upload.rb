@@ -17,7 +17,7 @@ module Transactions
 
       if @tenant.blank?
         Failure({errors: ["Unable to find tenant record with id #{input['tenant_id']}"]})
-      elsif @year.blank?
+      elsif !::Enterprises::BenefitYear.pluck(:calendar_year).map(&:to_s).include?(@year)
         Failure({errors: ["Please select a valid year"]})
       else
         Success(input)
@@ -56,15 +56,17 @@ module Transactions
             zip_file.extract(f, f_path) unless File.exist?(f_path)
           }
         }
-        path = "#{@destination}/serff_templates"
-
-        if Dir.empty?(path)
-          return Failure({errors: ["Uploaded folder if empty serff_template"]})
-        else
-          return Success(path)
-        end
       rescue
-        Failure({errors: ["Unable to unzip the given file"]})
+        return Failure({errors: ["Unable to unzip the given file"]})
+      end
+
+      path = "#{@destination}/serff_templates"
+      return Failure({errors: ["Uploaded zip file does not have serff_templates folder"]}) unless File.directory?(path)
+
+      if Dir.empty?(path)
+        return Failure({errors: ["serff_templates folder is empty"]})
+      else
+        return Success(path)
       end
     end
 
