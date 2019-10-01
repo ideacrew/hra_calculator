@@ -315,11 +315,11 @@
                     <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_frequency">Frequency</label>
                     <div class="col-sm-4">
                       <div class="btn-group" data-toggle="buttons">
-                        <span [ngStyle]="{'border-color': primaryColorCode}" [ngClass]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active' :'btn btn-outline-info'">
+                        <span [ngClass]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active' :'btn btn-outline-info'">
                             <input type="radio" class="form-control form-control-sm" id="hra_frequency"
                             formControlName="hra_frequency" value="monthly" ngModel required (click)="onHraFrequencyChange('monthly')"/> Monthly
                         </span>
-                        <span [ngStyle]="{'background-color': primaryColorCode, 'border-color': primaryColorCode}" [ngClass]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
+                        <span [ngClass]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
                             <input type="radio" class="form-control form-control-sm" id="hra_frequency"
                             formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> Total
                         </span>
