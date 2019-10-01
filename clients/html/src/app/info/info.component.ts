@@ -109,6 +109,10 @@ export class InfoComponent implements OnInit {
         this.hraForm.controls['county'].markAsTouched()
         return null;
       }
+      if(this.hraForm.controls['dob'] && !(this.hraForm.controls['dob'].valid)) {
+        this.hraForm.controls['dob'].markAsTouched()
+        return null;
+      }
     }
     this.currentTab = n;
     if (n === 0) {
@@ -138,6 +142,9 @@ export class InfoComponent implements OnInit {
         }
         if(!this.showCounty){
           this.hraForm.removeControl('county');
+        }
+        if(!this.showDob){
+          this.hraForm.removeControl('dob');
         }
         if(this.resultService.formData){
           this.hraForm.patchValue({
