@@ -3,6 +3,7 @@ module Transactions
     include Dry::Transaction
 
     step :fetch
+    step :feature_questions_answered
     step :validate
     step :persist
 
@@ -24,6 +25,12 @@ module Transactions
       else
         Success({county_zip_file: file})
       end
+    end
+
+    def feature_questions_answered(input)
+      Failure({errors: ["Please answer the questions in the features page"]}) if !@tenant.geographic_rating_area_model || !@tenant.use_age_ratings
+
+      Success(input)
     end
 
     def validate(input)

@@ -63,8 +63,8 @@ class Admin::TenantsController < ApplicationController
 
   def plan_index
     @tenant = ::Tenants::Tenant.find(params.permit!['tenant_id'])
-    @products = ::Products::HealthProduct.all
-    @years = [2020, 2021]
+    @products = @tenant.products.all
+    @years = ::Enterprises::BenefitYear.all.pluck(:calendar_year)
   end
 
   def upload_plan_data
