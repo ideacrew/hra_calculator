@@ -19,8 +19,7 @@ module Transactions
     end
 
     def persist(input)
-      re = /<("[^"]*"|'[^']*'|[^'">])*>/
-      if @tenant.sites[0].options.where(key: :ui_tool_pages).first.child_options.find(input[:option_id]).update_attributes(value: input[:option][:default].gsub(re, ''))
+      if @tenant.sites[0].options.where(key: :ui_tool_pages).first.child_options.find(input[:option_id]).update_attributes(value: input[:option][:default])
         Success(@tenant)
       else
         Failure(@tenant)

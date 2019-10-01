@@ -4,7 +4,7 @@
   <%= form.label :body %>
   <div class="card">
     <div class="card-body">
-      <%= rich_text_area_tag 'option[default]', @option.default %>
+      <%= rich_text_area_tag 'option[default]', (@option.value || @option.default).html_safe %>
     </div>
   </div>
   <div class="card-body">
