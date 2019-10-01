@@ -10,8 +10,8 @@ class HraResults < Dry::Struct
   attribute :how_to_enroll, Types::String
   attribute :answer_no, Types::String
   attribute :aca_compliant, Types::String
-  attribute :mininum_essential_coverage, Types::String
-  attribute :mininum_essential_coverage_link, Types::String
+  attribute :minimum_essential_coverage, Types::String
+  attribute :minimum_essential_coverage_link, Types::String
   attribute :short_term_plan, Types::String
   attribute :colors, Types::Array  
 end
