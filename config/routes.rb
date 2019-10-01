@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :accounts, :controllers => { :sessions => "accounts/sessions"}
 
   devise_scope :account do
@@ -8,8 +8,14 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'enterprise#show'
-    
-    resources :enterprise, only: [:show] do 
+    resources :accounts, only: [:destroy] do
+      member do
+        get :reset_password
+        patch :password_reset
+      end
+    end
+
+    resources :enterprise, only: [:show] do
       post :account_create
       post :tenant_create
       post :benefit_year_create
