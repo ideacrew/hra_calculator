@@ -23,6 +23,11 @@ export class InfoComponent implements OnInit {
   selectedHouseholdFrequency: string;
   selectedHraType: string;
   primaryColorCode: string;
+  secondaryColorCode: string;
+  dangerColorCode: string;
+  infoColorCode: string;
+  successColorCode: string;
+  warningColorCode: string;
   selectedHraFrequency: string;
   showZipcode: boolean = false;
   showCounty: boolean = false;
@@ -130,6 +135,11 @@ export class InfoComponent implements OnInit {
       (res) => {
         console.log(res)
         this.primaryColorCode = res.data.colors.primary_color;
+        this.secondaryColorCode = res.data.colors.secondary_color;
+        this.dangerColorCode = res.data.colors.danger_color;
+        this.infoColorCode = res.data.colors.info_color;
+        this.successColorCode = res.data.colors.success_color;
+        this.warningColorCode = res.data.colors.warning_color;
         this.countyOptions = res.data.counties;
         this.getDisplayInfo(res);
         this.hraForm.patchValue({

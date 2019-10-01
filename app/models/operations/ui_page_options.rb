@@ -13,7 +13,7 @@ module Operations
 
     def option_array_to_hash(options)
       options.inject({}) do |data, element_array|
-        data[element_array[0]] = element_array[1] || element_array[2]
+        data[element_array[0]] = element_array[1]&.gsub(/<div.*?>|<\/div>/, '') || element_array[2]&.gsub(/<div.*?>|<\/div>/, '')
         data
       end
     end
