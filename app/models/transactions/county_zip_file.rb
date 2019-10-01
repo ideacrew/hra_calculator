@@ -3,6 +3,7 @@ module Transactions
     include Dry::Transaction
 
     step :fetch
+    step :feature_questions_answered
     step :validate
     step :persist
 
@@ -11,17 +12,25 @@ module Transactions
     def fetch(input)
       @tenant = ::Tenants::Tenant.find(input['tenant_id'])
       @year = input['county_zip_year']
+      return Failure({errors: ['Please upload a file']}) if input['county_zip'].nil?
+
       action_dispatch = input['county_zip']['value']
-      return Failure('Uploaded file is not in expected naming') unless action_dispatch.original_filename.include?("_ZipCode_")
+      return Failure({errors: ['Uploaded file is not in the expected format']}) if File.extname(action_dispatch.original_filename) != ".xlsx"
 
       file = action_dispatch.tempfile.path
       if @tenant.blank?
         Failure({errors: {tenant_id: "Unable to find tenant record with id #{input[:id]}"}})
       elsif @year.blank?
-        Failure({errors: {year: "Unable to year"}})
+        Failure({errors: {year: "Please select a valid year"}})
       else
         Success({county_zip_file: file})
       end
+    end
+
+    def feature_questions_answered(input)
+      return Failure({errors: ["Please answer the questions in the features page"]}) if !@tenant.geographic_rating_area_model || !@tenant.use_age_ratings
+
+      Success(input)
     end
 
     def validate(input)
@@ -41,22 +50,18 @@ module Transactions
 
     def persist(input)
       params = { file: input.to_h[:county_zip_file], tenant: @tenant, year: @year }
-      success_result = if @tenant.has_rating_area_constraints?
-                         county_zip_result = ::Operations::ImportCountyZip.new.call(params)
-                         county_zip_result.success?
-                       else
-                         true
-                       end
+      return Success("CountyZips not needed") unless @tenant.geographic_rating_area_model == 'zipcode'
 
-      if success_result
+      county_zip_result = ::Operations::ImportCountyZip.new.call(params)
+      if county_zip_result.success?
         rating_area_result = ::Operations::ImportRatingArea.new.call(params)
         if rating_area_result.failure?
-          return Failure("Unable to create RatingArea")
+          return Failure({errors: ["#{rating_area_result.failure[:errors]}"]})
         else
           Success("created CountyZips/RatingArea")
         end
       else
-        Failure("Unable to create CountyZips")
+        Failure({errors: ["#{county_zip_result.failure[:errors]}"]})
       end
     end
   end

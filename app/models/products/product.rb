@@ -30,7 +30,7 @@ module Products
     field :application_period,    type: Range   # => Mon, 01 Jan 2018..Mon, 31 Dec 2018
 
     field :hbx_id,                type: String
-    field :title,                 type: String
+    field :title,                 type: String # Plan Name
     field :description,           type: String,         default: ""
     # field :issuer_profile_id,     type: BSON::ObjectId
     field :product_package_kinds, type: Array,          default: []
@@ -49,14 +49,16 @@ module Products
     # embeds_one  :sbc_document, as: :documentable,
     #             :class_name => "::Document"
 
-    field :plan_name, type: String
     field :carrier_name, type: String
+
+    belongs_to :tenant,
+               class_name: 'Tenants::Tenant'
 
     embeds_many :premium_tables,
                 class_name: "::Products::PremiumTable"
 
     # validates_presence_of :hbx_id
-    validates_presence_of :application_period, :benefit_market_kind, :title, :service_area
+    validates_presence_of :application_period, :benefit_market_kind, :title
 
     validates :benefit_market_kind,
               presence: true,

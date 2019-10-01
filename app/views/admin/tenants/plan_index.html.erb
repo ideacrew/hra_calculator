@@ -6,19 +6,21 @@
 <%= select_dropdown('benefit_year', @years) %>
 <br><br>
 
-<div>
-  <h5>County/Zipcode Mapping File</h5>
-  <%= form_for(:tenant, url: admin_tenant_zip_county_data_path(@tenant.id), :html => {:method => :post, :multipart => true}) do |tenant_form| %>
-    <%= hidden_field_tag :county_zip_year, nil %>
-    <div class="input-group">
-      <% option = ::Options::Option.new(key: 'county_zip') %>
-      <%= input_import_control(option, nil) %>
-    </div>
-    <br>
-    <%= submit_tag 'Submit', class: "btn btn-primary" %>
-  <% end %>
-</div>
-<br><br>
+<% if @tenant.geographic_rating_area_model == "zipcode" %>
+  <div>
+    <h5>County/Zipcode Mapping File</h5>
+    <%= form_for(:tenant, url: admin_tenant_zip_county_data_path(@tenant.id), :html => {:method => :post, :multipart => true}) do |tenant_form| %>
+      <%= hidden_field_tag :county_zip_year, nil %>
+      <div class="input-group">
+        <% option = ::Options::Option.new(key: 'county_zip') %>
+        <%= input_import_control(option, nil) %>
+      </div>
+      <br>
+      <%= submit_tag 'Submit', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <br><br>
+<% end %>
 
 <div>
   <h5>SERFF Template</h5>
@@ -49,10 +51,10 @@
     <tbody>
       <% @products.each do |pr| %>
         <tr >
-          <td><%= pr.benefit_market_kind %></td>
-          <td><%= pr.benefit_market_kind %></td>
+          <td><%= pr.tenant.owner_organization_name %></td>
+          <td><%= pr.carrier_name %></td>
           <td><%= pr.application_period.min.year %></td>
-          <td><%= pr.benefit_market_kind %></td>
+          <td><%= pr.title %></td>
           <td><%= pr.created_at %></td>
         </tr>
       <% end %>
@@ -61,16 +63,16 @@
 </div>
 <br><br>
 
-<%= link_to 'Delete All Plans', admin_tenant_plans_destroy_path(id: @tenant.id), method: :delete, class: "btn btn-danger" %>
+<%= link_to 'Delete All Plans', admin_tenant_plans_destroy_path(id: @tenant.id), class: "btn btn-danger" %>
 
 <script>
   var selectElement = document.getElementById('benefit_year');
 
   selectElement.addEventListener('change', (event) => {
-    var result = document.getElementById('county_zip_year');
-    result.value = event.target.value;
-
     var resultz = document.getElementById('serff_year');
     resultz.value = event.target.value;
+
+    var result = document.getElementById('county_zip_year');
+    result.value = event.target.value;
   });
 </script>

@@ -7,7 +7,7 @@ module Validations
       required(:hios_id).filled(:string)
       required(:health_plan_kind).filled(:symbol)
       required(:application_period).value(type?: Range)
-      required(:service_area_id).value(type?: BSON::ObjectId)
+      optional(:service_area_id).value(type?: BSON::ObjectId)
     end
 
     rule(:metal_level_kind) do

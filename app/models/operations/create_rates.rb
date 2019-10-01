@@ -24,7 +24,7 @@ module Operations
         rate_import_hash.run
         Success('Created Rates for given data')
       rescue
-        Failure('Unable to create rates for given data')
+        Failure({errors: ["Failed to store data from file #{File.basename(files.first)}"]})
       end
     end
   end
