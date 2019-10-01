@@ -15,13 +15,13 @@
     <div class="form-group">
       <%= f.label :fname, "Email:", class: "col-md-4 control-label" %>
       <div class="col-md-4">
-        <%= text_field_tag :email, '', class: "form-control" %>
+        <%= text_field_tag :email, '', class: "form-control", required: true %>
       </div>
     </div>
     <div class="form-group">
       <%= f.label :fname, "Password:", class: "col-md-4 control-label" %>
       <div class="col-md-4">
-        <%= password_field_tag :password, '', class: "form-control" %>
+        <%= password_field_tag :password, '', class: "form-control", required: true %>
       </div>
     </div>
     <div class="form-group">
@@ -81,7 +81,7 @@
         <%= trow([tenant.key.upcase, tenant.owner_organization_name, tenant.owner_accounts[0].email, tenant.created_at])%>
       <% end %>
       </tbody>
-    </table>
+    </table>x
   </div>
 </div>
 <br/>
@@ -97,7 +97,7 @@
 
     <div class="form-group col-md-4">
       <h5><p>Expected Contribution Factor</p></h5>
-      <%= input_text_control({value: ''}, form) %>
+      <%= input_number_control({value: ''}, form) %>
       <p> Enter the ?? factor value for the benefit plan year</p>
     </div>
     <%= submit_tag 'Update Benefit Year', class: "btn btn-primary" %>

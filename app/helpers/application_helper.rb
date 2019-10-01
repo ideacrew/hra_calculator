@@ -34,7 +34,7 @@ module ApplicationHelper
 
   def select_dropdown(input_id, list)
     return unless list.is_a? Array
-    content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']') do
+    content_tag(:select, class: "form-control", id: input_id, required: true, name: 'admin[' + input_id.to_s + ']') do
       concat(content_tag :option, "Select", value: "")
       list.each do |item|
         if item.is_a? Array
