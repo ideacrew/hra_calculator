@@ -8,7 +8,7 @@ module Validations
       required(:state).filled(:string)
       optional(:zipcode).filled(:string) if false
       optional(:county).value(:string) if false
-      required(:dob).value(:date)
+      optional(:dob).filled(:date)
       required(:household_frequency).filled(:string)
       required(:household_amount).filled(:float)
       required(:hra_type).value(:string)
@@ -40,9 +40,10 @@ module Validations
       end
     end
 
-    rule(:dob) do
-      key.failure('cannot be in the future') if value > Date.today
-    end
+    # Already have UI validations, also dob is optional
+    # rule(:dob) do
+    #   key.failure('cannot be in the future') if value > Date.today
+    # end
 
     rule(:household_frequency) do
       frequencies = ['monthly', 'annually']

@@ -7,13 +7,13 @@ module Products::Operations
       hra_object = hash_obj[:hra_object]
       hra_type = hra_object.hra_type
       date = hra_object.start_month
-      age = ::Operations::AgeLookup.new.call(hra_object.age).success
 
       member_premiums = products.inject([]) do |premiums, product|
         begin
           premium_tables = product.premium_tables.where(:rating_area_id => hra_object.rating_area_id).effective_period_cover(date)
           premium_tables.each do |premium_table|
             if product.tenant.use_age_ratings == "age_rated"
+              age = ::Operations::AgeLookup.new.call(hra_object.age).success
               premiums << premium_table.premium_tuples.where(age: age).first.cost
             elsif product.tenant.use_age_ratings == "non_age_rated"
               premiums << premium_table.premium_tuples.first.cost

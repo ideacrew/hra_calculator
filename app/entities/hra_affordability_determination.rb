@@ -6,7 +6,7 @@ class HraAffordabilityDetermination < Dry::Struct
   attribute :state, Types::String
   attribute :zipcode, Types::String.default(''.freeze)
   attribute :county, Types::String.default(''.freeze)
-  attribute :dob, Types::Date
+  attribute :dob, Types::Date.default(''.freeze)
   attribute :household_frequency, Types::String # 'monthly' or 'annually'
   attribute :household_amount, Types::Float
   attribute :hra_type, Types::String # :ichra or :qsehra

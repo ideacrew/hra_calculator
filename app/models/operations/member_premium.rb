@@ -3,7 +3,10 @@ module Operations
     include Dry::Transaction::Operation
 
     def call(hra_object)
-      hra_object.age = ::Operations::AgeOn.new.call(hra_object).success
+      tenant = Tenants::Tenant.find_by_key(hra_object.tenant)
+      if tenant.use_age_ratings == "age_rated"
+        hra_object.age = ::Operations::AgeOn.new.call(hra_object).success
+      end
 
       rating_area_result = ::Locations::Operations::SearchForRatingArea.new.call(hra_object)
       if rating_area_result.success?

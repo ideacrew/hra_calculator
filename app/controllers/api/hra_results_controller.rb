@@ -16,7 +16,7 @@ module Api
     def formatted_params
       params.permit!
       # TODO: refactor this once we fix the params issue.
-      params[:hra_result].to_h.merge({tenat: params[:tenant].to_sym})
+      params[:hra_result].to_h.merge({tenant: params[:tenant].to_sym})
     end
   end
 end
