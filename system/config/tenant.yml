@@ -53,10 +53,10 @@ namespaces:
                           - key: aca_compliant
                             type: string
                             default: an ACA-compliant plan off Marketplace. Ask your employer about your options
-                          - key: mininum_essential_coverage
+                          - key: minimum_essential_coverage
                             type: string
-                            default: mininum essential coverage
-                          - key: mininum_essential_coverage_link
+                            default: minimum essential coverage
+                          - key: minimum_essential_coverage_link
                             type: url
                             default: https://www.healthcare.gov/fees/plans-that-count-as-coverage/
                           - key: short_term_plan
