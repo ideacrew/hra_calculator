@@ -19,8 +19,8 @@ module Operations
       hra_defaulter = ::HraDefaulter.new({
         state_name: state[0],
         counties: counties,
-        display_county: validate_county,
-        display_zipcode: offerings_constrained_to_zip_codes,
+        display_county: validate_county, # not using this - refer to features
+        display_zipcode: offerings_constrained_to_zip_codes, # not using this - refer to features
         tax_credit: tax_credit,
         market_place: market_place,
         colors: color_options.value!,
