@@ -6,8 +6,8 @@ module Validations
     params do
       required(:tenant).filled(:symbol)
       required(:state).filled(:string)
-      optional(:zipcode).filled(:string) if false
-      optional(:county).value(:string) if false
+      optional(:zipcode).filled(:string)
+      optional(:county).value(:string)
       optional(:dob).filled(:date)
       required(:household_frequency).filled(:string)
       required(:household_amount).filled(:float)
