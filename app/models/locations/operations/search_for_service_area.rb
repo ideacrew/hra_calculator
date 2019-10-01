@@ -3,12 +3,12 @@
 module Locations::Operations
   class SearchForServiceArea
     include Dry::Transaction::Operation
-    include ::SettingsHelper
 
     def call(hra_object)
       county_name = hra_object.county.blank? ? "" : hra_object.county.titlecase
       zip_code = hra_object.zipcode
       year = hra_object.start_month.year
+      state_abbreviation = hra_object.tenant.to_s.upcase
 
       county_zip_ids = ::Locations::CountyZip.where(
         :county_name => county_name,

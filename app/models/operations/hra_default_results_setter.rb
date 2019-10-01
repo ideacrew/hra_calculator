@@ -1,7 +1,6 @@
 module Operations
   class HraDefaultResultsSetter
     include Dry::Transaction::Operation
-    include ::SettingsHelper
 
     def call(key)
       tenant = Tenants::Tenant.find_by_key(key)
