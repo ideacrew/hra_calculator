@@ -43,10 +43,10 @@ namespaces:
                                         choices: [ { age_rated: "Age Rating"}, { non_age_rated: "No Age Rating"}]
                                         type: :radio_select
                                         description: Choose whether your organization uses the member's age to determine health insurance premium rates.  If Yes, the Tool will collect the users date-of-birth to calculate premiums.
-                                        default: 'age_rated'
+                                        default:
                                       - key: :rating_area_model
                                         title: Geographic Rating Area Model
-                                        default: 'county'
+                                        default:
                                         type: :radio_select
                                         choices: [ { single: "Single Rating Area" }, { county: "County-based Rating Area" }, { zipcode: "Zipcode-based Rating Area"} ]
                                         description: Choose boundaries that your organization uses to determine health insurance premium rates.  Single Rating Area requires SERFF template uploads only and will not ask the user for home residence information.  County- and Zipcode-based Rating Areas require SERFF templates plus County/Zip lookup table uploads and request the user enter county name and zip code as appropriate to calculate premiums.  

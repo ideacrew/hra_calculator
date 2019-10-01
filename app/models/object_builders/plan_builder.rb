@@ -8,7 +8,10 @@ module ObjectBuilders
       @log_path = LOG_PATH
       @qhp_hash = qhp_hash
       @qhp_array = []
-      @service_area_enabled = @qhp_hash[:tenant].has_service_area_constraints?
+      @tenant = @qhp_hash[:tenant]
+      @import_timestamp = @qhp_hash[:import_timestamp]
+      @carrier_name = @qhp_hash[:carrier_name]
+      @service_area_enabled = (@tenant.geographic_rating_area_model != 'single')
       set_service_areas
       FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
       @logger = Logger.new(@log_path)
@@ -62,7 +65,7 @@ module ObjectBuilders
         end
         @logger.info "\nSaved Plan: #{@qhp.plan_marketing_name}, hios product id: #{@qhp.standard_component_id} \n"
       rescue Exception => e
-        @logger.error "\n Failed to create plan: #{@qhp.plan_marketing_name}, \n hios product id: #{@qhp.standard_component_id} \n Exception Message: #{e.message} \n\n Errors: #{@qhp.errors.full_messages} \n\n Backtrace: #{e.backtrace.join("\n            ")}\n ******************** \n"
+        return Failure({errors: ["Failed to import plans for carrier: #{@carrier_name}"]})
       end
     end
 
@@ -70,13 +73,13 @@ module ObjectBuilders
       effective_date = @qhp.plan_effective_date.to_date
       @qhp.plan_effective_date = effective_date.beginning_of_year
       @qhp.plan_expiration_date = effective_date.end_of_year
-
       create_product_from_serff_data
     end
 
     def create_product_from_serff_data
       @qhp.qhp_cost_share_variances.each do |cost_share_variance|
         hios_base_id, csr_variant_id = cost_share_variance.hios_plan_and_variant_id.split("-")
+
         if csr_variant_id != "00"
           csr_variant_id = retrieve_metal_level == "dental" ? "" : csr_variant_id
           product = ::Products::Product.where(
@@ -84,7 +87,7 @@ module ObjectBuilders
             csr_variant_id: csr_variant_id
           ).select{|a| a.active_year == @qhp.active_year}.first
 
-          shared_attributes ={
+          shared_attributes = {
             benefit_market_kind: "aca_#{parse_market}",
             title: cost_share_variance.plan_marketing_name.squish!,
             hios_id: is_health_product? ? cost_share_variance.hios_plan_and_variant_id : hios_base_id,
@@ -96,7 +99,8 @@ module ObjectBuilders
             family_deductible: cost_share_variance.qhp_deductable.in_network_tier_1_family,
             is_reference_plan_eligible: true,
             metal_level_kind: retrieve_metal_level.to_sym,
-            product_package_kinds: [:metal_level, :single_issuer, :single_product]
+            product_package_kinds: [:metal_level, :single_issuer, :single_product],
+            carrier_name: @carrier_name
           }
 
           all_attributes = if is_health_product?
@@ -123,13 +127,16 @@ module ObjectBuilders
               ::Products::DentalProduct.new(all_attributes)
             end
 
-            if retrieve_metal_level.to_s == 'silver' && new_product.valid?
+            if retrieve_metal_level.to_s == 'silver'
               create_params = result.to_h
-              existing_products = ::Products::HealthProduct.where(create_params.except(:application_period))
+              existing_products = @tenant.products.where(create_params.except(:application_period))
               existing_product = existing_products.by_application_period(create_params[:application_period]).present?
 
               unless existing_product
+                new_product.assign_attributes(all_attributes.merge({created_at: @import_timestamp}))
+                @tenant.products << new_product
                 new_product.save!
+                @tenant.save!
                 @success_plan_counter += 1
                 cost_share_variance.product_id = new_product.id
               end
@@ -143,43 +150,31 @@ module ObjectBuilders
 
     def validate_health_product(attributes)
       product_contract = Validations::ProductContract.new
-      result = product_contract.call(attributes.slice(:benefit_market_kind, :metal_level_kind, :title, :hios_id, :health_plan_kind, :application_period, :service_area_id))
+      result = product_contract.call(attributes.slice(:benefit_market_kind, :metal_level_kind, :title, :hios_id, :health_plan_kind, :application_period))
+
       if result.failure?
         result.errors.messages.each do |error|
-          @logger.error "\n Failed to create product: #{attributes[:title]}, \n hios product id: #{attributes[:hios_id]}\n Attribute: #{error.path.join}, Error: #{error.text}, Value: #{error.input} \n ******************** \n"
+          raise "Failed to create product: #{attributes[:title]}, \n hios product id: #{attributes[:hios_id]}"
         end
         nil
-      else
+      elsif (!@service_area_enabled) || (@service_area_enabled && attributes[:service_area_id] && attributes[:service_area_id].class == BSON::ObjectId)
         result
-      end
-    end
-
-    def create_congressional_products(new_product)
-      if new_product.benefit_market_kind == :aca_shop && new_product.metal_level_kind == :gold
-        congress_product = new_product.dup
-        congress_product.benefit_market_kind = "fehb".to_sym
-        congress_product.save!
       else
-        new_product
+        raise "Unable to find matching service area for tenant: #{@tenant.key}"
+        nil
       end
     end
 
     def mapped_service_area_id
-      if @service_area_enabled
-        @service_area_map[[@qhp.issuer_id, @qhp.service_area_id,@qhp.active_year]]
-      else
-        @service_area_map[[@qhp.active_year]]
-      end
+      @service_area_map[[@qhp.issuer_id, @qhp.service_area_id,@qhp.active_year]] if @service_area_enabled
     end
 
     def set_service_areas
       @service_area_map = {}
+      return unless @service_area_enabled
+
       ::Locations::ServiceArea.all.map do |sa|
-        if @service_area_enabled
-          @service_area_map[[sa.issuer_hios_id, sa.issuer_provided_code, sa.active_year]] = sa.id
-        else
-          @service_area_map[[sa.active_year]] = sa.id
-        end
+        @service_area_map[[sa.issuer_hios_id, sa.issuer_provided_code, sa.active_year]] = sa.id
       end
     end
 
