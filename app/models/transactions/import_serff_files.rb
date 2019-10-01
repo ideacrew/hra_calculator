@@ -40,7 +40,7 @@ module Transactions
       begin
         plan_params = { plans_file: input, tenant: @tenant, year: @year, import_timestamp: @import_timestamp, carrier_name: @carrier_name }
         import_plans = ::Operations::CreatePlan.new.call(plan_params)
-        return Failure("Failed to store data from file #{File.basename(input)}") if import_plans.failure?
+        return Failure({errors: ["Failed to store data from file #{File.basename(input)}"]}) if import_plans.failure?
 
         Success(@rates_file)
       rescue
