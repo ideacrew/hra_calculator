@@ -39,8 +39,8 @@ namespaces:
                                   - key: :silver_plan_criteria
                                     settings:
                                       - key: :use_age_ratings
-                                        title: Use Age Ratings?
-                                        choices: [ { age_rated: "Age Ratings"}, { non_age_rated: "No Age Ratings"}]
+                                        title: Use Age Rating?
+                                        choices: [ { age_rated: "Age Rating"}, { non_age_rated: "No Age Rating"}]
                                         type: :radio_select
                                         description: Choose whether your organization uses the member's age to determine health insurance premium rates.  If Yes, the Tool will collect the users date-of-birth to calculate premiums.
                                         default: 'age_rated'
