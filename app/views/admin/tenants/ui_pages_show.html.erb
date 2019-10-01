@@ -4,7 +4,7 @@
       <%= thead(["Template Name", "Text", ""], options={class_name: "thead-light"})%>
       <tbody>
         <%= page_form.fields_for :child_options do |child_option_1_form|%>
-          <%= trow([child_option_1_form.object.key, child_option_1_form.object.default.html_safe, link_to('Edit', admin_tenant_ui_pages_edit_path(tenant_id: @tenant, option_id: child_option_1_form.object), remote: true)])%>
+          <%= trow([child_option_1_form.object.key, child_option_1_form.object.value&.html_safe || child_option_1_form.object.default&.html_safe, link_to('Edit', admin_tenant_ui_pages_edit_path(tenant_id: @tenant, option_id: child_option_1_form.object), remote: true)])%>
         <% end %>
       </tbody>
     </table>
