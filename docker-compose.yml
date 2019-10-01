@@ -79,6 +79,8 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle && yarn install --check-files && bundle exec puma -C config/puma.rb"
     ports:
       - '3000:3000'
+    volumes:
+      - "./:/app"
 
   mongo:
     image: mongo:4.2
