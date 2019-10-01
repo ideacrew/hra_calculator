@@ -1,6 +1,7 @@
 module Operations
   class HraDefaultSetter
     include Dry::Transaction::Operation
+    include ::SettingsHelper
 
     def call(key)
       counties = ::Locations::CountyZip.all.where(state: key.to_s.upcase).pluck(:county_name).uniq
