@@ -51,7 +51,7 @@ class Admin::TenantsController < ApplicationController
       flash[:error]  = 'Something went wrong.'
     end
 
-    render :js => "window.location = #{admin_tenant_path(ui_element_params[:tenant_id]).to_json}"
+    render :js => "window.location = #{admin_tenant_ui_pages_show_path(ui_element_params[:tenant_id], tab_name: ui_element_params[:tenant_id]+"_ui_pages").to_json}"
   end
 
   def ui_pages_edit
