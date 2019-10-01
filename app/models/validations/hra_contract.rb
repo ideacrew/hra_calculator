@@ -19,7 +19,8 @@ module Validations
     end
 
     rule(:state) do
-      key.failure("must be #{state_full_name}") if value != state_full_name
+      state_name = ::Locations::UsState::NAME_IDS.detect {|obj| obj[1] == values[:tenant].to_s.upcase}.first
+      key.failure("must be #{state_name}") if value != state_name
     end
 
     if validate_county && !offerings_constrained_to_zip_codes
