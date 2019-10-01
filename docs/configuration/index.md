@@ -81,7 +81,7 @@ The HRA Tool accepts source data in one of two file formats, depending on the co
 
 | Source File Name | Description | File Type |
 | :---------- | :---------- | :-------- |
-| plan_and_benefit.xml | Individual Market Silver Plans in SERFF template XML output | XML |
+| plan_and_benefits.xml | Individual Market Silver Plans in SERFF template XML output | XML |
 | rates.xml | Premium rates in SERFF template XML output | XML |
 | service_areas.xslx | Plan Service Areas in SERFF Excel format | MS Excel Open XML | 
 | county_zipcode.xslx | Plan Service Areas in SERFF Excel format | MS Excel Open XML| 
@@ -92,11 +92,11 @@ The **Import SERFF Template** feature accepts plan data sets in zip file format 
 ```
 serff_templates.zip
   |- [first_carrier_name]
-  |    |- plan_and_benefit.xml
+  |    |- plan_and_benefits.xml
   |    |- rates.xml
   |    |- service_areas.xslx
   |- [second_carrier_name]
-       |- plan_and_benefit.xml
+       |- plan_and_benefits.xml
        |- rates.xml
        |- service_areas.xslx
 ```

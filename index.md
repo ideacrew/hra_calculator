@@ -16,7 +16,7 @@ The HRA Tool also provides a secure Administrator Portal where State-based Excha
 
 This site is set up for the Community of SBEs who use the HRA Tool.  It provides instruction on how to access the software, system requirements, installing and configuring the solution. 
 
-[Getting Started](https://ideacrew.github.io/hra_calculator/get_started/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Getting Started](https://ideacrew.github.io/hra_calculator/getting_started/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Installation](https://ideacrew.github.io/hra_calculator/installation/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 
