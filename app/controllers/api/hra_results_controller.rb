@@ -16,8 +16,7 @@ module Api
     def formatted_params
       params.permit!
       # TODO: refactor this once we fix the params issue.
-      # params.to_h.slice(:hra_result, :tenant)
-      params.to_h.slice(:state, :dob, :household_frequency, :household_amount, :hra_type, :start_month, :end_month, :hra_frequency, :hra_amount, :tenant)
+      params[:hra_result].to_h.merge({tenat: params[:tenant].to_sym})
     end
   end
 end

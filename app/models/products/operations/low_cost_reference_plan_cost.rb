@@ -13,7 +13,11 @@ module Products::Operations
         begin
           premium_tables = product.premium_tables.where(:rating_area_id => hra_object.rating_area_id).effective_period_cover(date)
           premium_tables.each do |premium_table|
-            premiums << premium_table.premium_tuples.where(age: age).first.cost
+            if product.tenant.use_age_ratings == "age_rated"
+              premiums << premium_table.premium_tuples.where(age: age).first.cost
+            elsif product.tenant.use_age_ratings == "non_age_rated"
+              premiums << premium_table.premium_tuples.first.cost
+            end
             premiums
           end
           premiums

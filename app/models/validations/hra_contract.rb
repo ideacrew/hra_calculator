@@ -6,9 +6,6 @@ module Validations
     params do
       required(:tenant).filled(:symbol)
       required(:state).filled(:string)
-      # optional(:zipcode).filled(:string) if Registry['enterprise.dchbx.primary.production.offerings_constrained_to_zip_codes']
-      # optional(:county).value(:string) if Registry['enterprise.dchbx.primary.production.validate_county']
-      # TODO: read the settings from Registries
       optional(:zipcode).filled(:string) if false
       optional(:county).value(:string) if false
       required(:dob).value(:date)
