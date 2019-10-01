@@ -167,9 +167,17 @@ export class InfoComponent implements OnInit {
   }
 
   getDisplayInfo(res) {
-    this.showZipcode = res.data.display_zipcode;
-    this.showCounty = res.data.display_county;
-    // this.showDob = res.data.display_dob;
+    if (res.data.features.rating_area_model === "zipcode") {
+      this.showZipcode = true;
+      this.showCounty = true;
+    } else if (res.data.features.rating_area_model === "county") {
+      this.showZipcode = false;
+      this.showCounty = true;
+    } else if (res.data.features.rating_area_model === "single"){
+      this.showZipcode = false;
+      this.showCounty = false;
+    }
+    this.showDob = res.data.features.use_age_ratings === "age_rated";
   }
 
   getCountyInfo() {
