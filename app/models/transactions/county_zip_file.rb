@@ -11,14 +11,16 @@ module Transactions
     def fetch(input)
       @tenant = ::Tenants::Tenant.find(input['tenant_id'])
       @year = input['county_zip_year']
+      return Failure({errors: ['Please upload a file']}) if input['county_zip'].nil?
+
       action_dispatch = input['county_zip']['value']
-      return Failure('Uploaded file is not in expected naming') unless action_dispatch.original_filename.include?("_ZipCode_")
+      return Failure({errors: ['Uploaded file is not in the expected format']}) if File.extname(action_dispatch.original_filename) != ".xlsx"
 
       file = action_dispatch.tempfile.path
       if @tenant.blank?
         Failure({errors: {tenant_id: "Unable to find tenant record with id #{input[:id]}"}})
       elsif @year.blank?
-        Failure({errors: {year: "Unable to year"}})
+        Failure({errors: {year: "Please select a valid year"}})
       else
         Success({county_zip_file: file})
       end

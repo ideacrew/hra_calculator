@@ -84,11 +84,12 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::CountyZipFile.new.call(params.to_h)
 
     if result.success?
-      redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
+      flash[:notice] = "Successfully uploaded CountyZips/RatingAreas"
     else
-      result.failure
-      # display errors on the same page
+      flash[:error] = result.failure[:errors].first
     end
+
+    redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
   end
 
   def plans_destroy

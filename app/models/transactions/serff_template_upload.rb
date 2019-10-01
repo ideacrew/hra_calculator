@@ -24,6 +24,8 @@ module Transactions
     end
 
     def check_for_zip(input)
+      return Failure({errors: ['Please upload a file']}) if input['serff_template'].nil?
+
       file_name = input['serff_template']['value'].original_filename
       if File.extname(file_name) == ".zip"
         Success(input)
