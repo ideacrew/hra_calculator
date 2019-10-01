@@ -1,16 +1,13 @@
 <div class="container signin top-pd module text-center bg-light p-3" style="max-width: 700px;">
   <div class="col-xs-12">
     <h1>HRA Affordability Tool</h1>
-    <br/><br/>
-    <p class="starter">
+    <p class="starter mt-5">
       A configurable, open source for State-based Exchanges, Grant funded by the Robert Wood Johnson Foundation, Produced by Princeton's State Health and Value Strategies, and Developed by IdeaCrew.
-      <br/><br/><br/>
 
-    <div class="card ml-sm-auto mr-sm-auto" style="width: 20rem;">
+    <div class="card ml-sm-auto mr-sm-auto mt-5 mb-5" style="width: 20rem;">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'sign-in', style: 'width: 100%; font-size: 80%; border-radius: 5rem; letter-spacing: .1rem; font-weight: bold;  padding: 1rem; transition: all 0.2s;'}) do |f| %>
 
-        <div style="text-align: center;"> Account </div>
-        <br/>
+        <div class="mb-3" style="text-align: center;"> Account </div>
 
         <div class="input-group mb-3 required" style="position: relative; margin-bottom: 1rem;">
           <div class="input-group-prepend">
@@ -25,11 +22,13 @@
           </div>
           <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password", required: true %>
         </div>
-        <br/>
-        <div class="actions">
+        <div class="actions mt-5">
           <%= f.submit "Sign in", class: "btn btn-success btn-lg btn-block" %>
-        </div><br>
+        </div>
       <% end %>
+    </div>
+    <div class="actions">
+      <a href="https://ideacrew.github.io/hra_calculator/" target="_blank">Community Site</a>
     </div>
   </div>
 </div>
