@@ -69,10 +69,10 @@
   var selectElement = document.getElementById('benefit_year');
 
   selectElement.addEventListener('change', (event) => {
-    var result = document.getElementById('county_zip_year');
-    result.value = event.target.value;
-
     var resultz = document.getElementById('serff_year');
     resultz.value = event.target.value;
+
+    var result = document.getElementById('county_zip_year');
+    result.value = event.target.value;
   });
 </script>

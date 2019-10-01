@@ -28,7 +28,7 @@ module Transactions
     end
 
     def feature_questions_answered(input)
-      Failure({errors: ["Please answer the questions in the features page"]}) if !@tenant.geographic_rating_area_model || !@tenant.use_age_ratings
+      return Failure({errors: ["Please answer the questions in the features page"]}) if !@tenant.geographic_rating_area_model || !@tenant.use_age_ratings
 
       Success(input)
     end
