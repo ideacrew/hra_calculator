@@ -11,11 +11,11 @@ class Admin::AccountsController < ApplicationController
     @enterprise = ::Enterprises::Enterprise.first
     @account = Account.find(params[:id])
     if @account.update_with_password(account_params)
-      flash[:notice] = "Changed password for #{@account.email}."
+      flash.now.notice = "Changed password for #{@account.email}."
 
-      redirect_to admin_enterprise_path(Enterprises::Enterprise.first)
+      render 'password_reset'
     else
-      flash[:error] = @account.errors.full_messages.join("\n")
+      flash[:errors] = @account.errors.full_messages
       render 'reset_password'
     end
   end

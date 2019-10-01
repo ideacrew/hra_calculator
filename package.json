@@ -3,14 +3,17 @@
     "@rails/actiontext": "^6.0.0",
     "@rails/webpacker": "^4.0.7",
     "actiontext": "https://github.com/rails/actiontext#archive",
-    "bootstrap": "4.3.1",
+    "bootstrap": "^4.3.1",
+    "bootstrap.native": "^2.0.27",
     "bs-custom-file-input": "^1.3.2",
     "jquery": "^3.4.1",
     "jquery-ujs": "^1.2.2",
     "popper.js": "^1.15.0",
-    "trix": "^1.2.0"
+    "trix": "^1.2.0",
+    "uglify-js": "^3.6.0"
   },
   "devDependencies": {
+    "bootstrap.native-loader": "^2.0.0",
     "webpack-dev-server": "^3.8.1"
   }
 }

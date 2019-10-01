@@ -1,8 +1,6 @@
 const { environment } = require('@rails/webpacker')
+const webpack = require("webpack")
 
-module.exports = environment
-
-const webpack = require('webpack')
 environment.plugins.append(
   'Provide',
   new webpack.ProvidePlugin({
@@ -11,3 +9,16 @@ environment.plugins.append(
     Popper: ['popper.js', 'default']
   })
 )
+
+environment.loaders.append("bootstrap.native", {
+  test: /bootstrap\.native/,
+  use: {
+    loader: "bootstrap.native-loader",
+    options: {
+      only: ["alert", "button", "dropdown", "modal", "tooltip"],
+      bsVersion: 4
+    }
+  }
+})
+
+module.exports = environment

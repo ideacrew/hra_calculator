@@ -31,6 +31,14 @@
 </div>
 
 <div>
+  <div id="passwordModal" class="modal fade" role="dialog" aria-labeled-by="passwordModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <%= render 'admin/accounts/reset_password' %>
+      </div>
+    </div>
+  </div>
+
   <h2>Accounts</h2>
   <div class="table-responsive">
     <table class="table">
@@ -44,7 +52,10 @@
           account.tenant&.owner_organization_name || 'N/A',
           account.role,
           account.last_sign_in_at || 'N/A',
-          link_to(tag.i(class: 'fas fa-unlock-alt'), reset_password_admin_account_path(account), title: "Change password for #{account.email}"),
+          tag.a(tag.i(class: 'fas fa-unlock-alt'),
+                title: "Change password for #{account.email}",
+                class: 'js-change-password-link',
+                data: { account_id: account.id.to_s, account_email: account.email }),
           link_to(tag.i(class: 'fas fa-trash'), admin_account_path(account), method: :delete, title: "Remove #{account.email}'s account", data: {confirm: "Are you sure you want to remove #{account.email}?"})
         ])%>
       <% end %>
@@ -124,3 +135,5 @@
     </table>
   </div>
 </div>
+
+<%= javascript_pack_tag 'password-modal' %>
