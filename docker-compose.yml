@@ -71,6 +71,8 @@ services:
     <<: *frontend
     ports:
       - '4200:4200'
+    volumes:
+      - "./clients/html:/app"
 
   rails:
     <<: *backend
