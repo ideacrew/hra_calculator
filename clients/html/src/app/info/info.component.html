@@ -5,7 +5,7 @@
         <div class="card-body">
           <div class="container hra_results">
             <div *ngIf="showErrors">
-            <ngb-alert type="danger" (close)="closeAlert()" [ngStyle]="{'background-color': 'dangerColorCode'}">
+            <ngb-alert type="danger" (close)="closeAlert()" [ngStyle]="{'background-color': dangerColorCode}">
               <p class="mb-0" *ngFor="let error of errors">
                 {{ error }}
               </p>
@@ -67,7 +67,7 @@
                       <sup [ngbPopover]="popContentState" >
                         <i class="fas fa-question-circle"></i>
                       </sup>
-                      <div *ngIf="hraForm.controls['state'].invalid && (hraForm.controls['state'].dirty || hraForm.controls['state'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                      <div *ngIf="hraForm.controls['state'].invalid && (hraForm.controls['state'].dirty || hraForm.controls['state'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['state'].errors.required">
                           State is required.
                         </div>
@@ -81,7 +81,7 @@
                       <label class="col-sm-3 col-form-label col-form-label-sm" for="zipcode">Zip Code</label>
                       <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" (keypress)="numberOnly($event)" formControlName="zipcode" id="zipcode" pattern="[0-9]{5}" minlength="5" maxlength="5" (blur)="getCountyInfo()"/>
-                        <div *ngIf="hraForm.controls['zipcode'].invalid && (hraForm.controls['zipcode'].dirty || hraForm.controls['zipcode'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                        <div *ngIf="hraForm.controls['zipcode'].invalid && (hraForm.controls['zipcode'].dirty || hraForm.controls['zipcode'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                           <div *ngIf="hraForm.controls['zipcode'].errors.required">
                             Zipcode is required.
                           </div>
@@ -103,7 +103,7 @@
                             {{option}}
                           </option>
                         </select>
-                        <div *ngIf="hraForm.controls['county'].invalid && (hraForm.controls['county'].dirty || hraForm.controls['county'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                        <div *ngIf="hraForm.controls['county'].invalid && (hraForm.controls['county'].dirty || hraForm.controls['county'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                           <div *ngIf="hraForm.controls['county'].errors.required">
                             County is required.
                           </div>
@@ -136,7 +136,7 @@
                           </button>
                         </div>
                       </div>
-                      <div *ngIf="hraForm.controls['dob'].invalid && (hraForm.controls['dob'].dirty || hraForm.controls['dob'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                      <div *ngIf="hraForm.controls['dob'].invalid && (hraForm.controls['dob'].dirty || hraForm.controls['dob'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['dob'].errors.required">
                           Date of Birth is required.
                         </div>
@@ -175,7 +175,7 @@
                               formControlName="household_frequency" value="annually" ngModel required (click)="onHouseholdChange('annually')"/> Annual
                           </span>
                         </div>
-                        <div *ngIf="hraForm.controls['household_frequency'].invalid && (hraForm.controls['household_frequency'].dirty || hraForm.controls['household_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                        <div *ngIf="hraForm.controls['household_frequency'].invalid && (hraForm.controls['household_frequency'].dirty || hraForm.controls['household_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                           <div *ngIf="hraForm.controls['household_frequency'].errors.required">
                             Frequency is required.
                           </div>
@@ -196,7 +196,7 @@
                           <span class="input-group-text">.00</span>
                         </div>
                       </div>
-                      <div *ngIf="hraForm.controls['household_amount'].invalid && (hraForm.controls['household_amount'].dirty || hraForm.controls['household_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                      <div *ngIf="hraForm.controls['household_amount'].invalid && (hraForm.controls['household_amount'].dirty || hraForm.controls['household_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['household_amount'].errors.required">
                           Amount is required.
                         </div>
@@ -249,7 +249,7 @@
                           <i class="fas fa-question-circle"></i>
                         </sup>
                       </div>
-                      <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                      <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['hra_type'].errors.required">
                           Type of HRA is required.
                         </div>
@@ -271,7 +271,7 @@
                       <select (change)="setEffectiveEndOptions($event.target.value)" class="form-control form-control-sm" id="start_month" formControlName="start_month" ngModel required>
                         <option ngbDropdownToggle *ngFor="let option of effectiveStartOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
-                      <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                      <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['start_month'].errors.required">
                           Start Month is required.
                         </div>
@@ -295,7 +295,7 @@
                       <select class="form-control form-control-sm" id="end_month" formControlName="end_month" ngModel required>
                         <option *ngFor="let option of effectiveEndOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
-                      <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                      <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['end_month'].errors.required">
                           End Month is required.
                         </div>
@@ -336,7 +336,7 @@
                             formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> Total
                         </span>
                       </div>
-                      <div *ngIf="hraForm.controls['hra_frequency'].invalid && (hraForm.controls['hra_frequency'].dirty || hraForm.controls['hra_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                      <div *ngIf="hraForm.controls['hra_frequency'].invalid && (hraForm.controls['hra_frequency'].dirty || hraForm.controls['hra_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['hra_frequency'].errors.required">
                           Frequency is required.
                         </div>
@@ -363,7 +363,7 @@
                           <span class="input-group-text">.00</span>
                         </div>
                       </div>
-                      <div *ngIf="hraForm.controls['hra_amount'].invalid && (hraForm.controls['hra_amount'].dirty || hraForm.controls['hra_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': 'dangerColorCode'}">
+                      <div *ngIf="hraForm.controls['hra_amount'].invalid && (hraForm.controls['hra_amount'].dirty || hraForm.controls['hra_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['hra_amount'].errors.required">
                           Amount is required.
                         </div>
