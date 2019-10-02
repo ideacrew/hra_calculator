@@ -32,7 +32,7 @@ export class InfoComponent implements OnInit {
   showZipcode: boolean = false;
   showCounty: boolean = false;
   showDob: boolean = true;
-  today: any = new Date();
+  today: any;
   effectiveStartOptions: any =[];
   effectiveEndOptions: any =[];
   currentDate = new Date(2019,12,1);
@@ -92,6 +92,10 @@ export class InfoComponent implements OnInit {
   ngOnInit() {
     this.showTab(0);
     this.getInitialInfo();
+    const today = new Date;
+    console.log(today)
+    this.today = { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDay() - 1 };
+    console.log(this.today)
   }
 
   showTab(n) {
@@ -227,6 +231,7 @@ export class InfoComponent implements OnInit {
   onSubmit() {
     if (this.hraForm.valid) {
       var params = this.hraForm.value
+      this.today
       if(this.showDob){
         params.dob = `${params.dob.year}-${params.dob.month}-${params.dob.day}`
       }

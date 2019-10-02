@@ -127,7 +127,7 @@
                           name="dp"
                           ngbDatepicker #d="ngbDatepicker"
                           [minDate]="{year: 1900, month: 1, day: 1}"
-                          [maxDate]="{year: 2019, month: 12, day: 12}"
+                          [maxDate]="today"
                           formControlName="dob"
                           required validateDate>
                         <div class="input-group-append">
