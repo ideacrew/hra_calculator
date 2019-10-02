@@ -18,11 +18,12 @@ This section explains how to use the Admin Portal to customize the HRA Tool for 
 5. [Tool UI Page - Customize Communication with Your Consumers](#tool-ui-page---customize-communication-with-your-consumers)
 
 
+
 ## Initial Sign In
 
 After verifying that the HRA Tool server and software is up and running, you may access the Admin Portal by pointing your Web browser to: my_hra_tool_server**/admin**.  This URL will route you to the Admin Portal's sign-in page.  
 
- <img src="../../assets/images/hra_admin_portal.png" width="400" align="center" >{: .pl-5 }
+ <img src="https://github.com/ideacrew/hra_calculator/tree/gh-pages/assets/images/Hra_Admin_Portal.png" width="400" align="center" >{: .pl-5 }
 
 Under the HRA Tool [installation][1] process, the system initializes an account with the role: Enterprise Owner.  This account manages all aspects of the HRA Tool system, including accounts with the role: Marketplace Owner.  Use the credentials below to initially sign into the system:
 
@@ -33,19 +34,26 @@ Password
 : ChangeMe!
 
 
->> Note that your computer must be on the same network as the server directly or via a VPN connection to access the HRA Tool Admin Portal.
+>> **Note:** your computer must be on the same network as the server directly or via a VPN connection to access the HRA Tool Admin Portal.
 
 ## Enterprise Page - Create Your Marketplace
 
-The first time you sign in, you will land on the Admin Portal's **Enterprise** page.  
+The first time you sign in, you will land on the Admin Portal's **Enterprise** page.  This is where you manage Marketplaces and accounts that may access their Administrator Portal.  
 
+The HRA Tool is designed as a multi-tenant application enabling one infrastructure to host multiple Marketplaces.  The Enterprise sits at the top level of this hierarchy with Marketplaces below.  The system initializes an Enterprise with an administrator account in the role of *Enterprise Owner*.  The Enterprise Owner has full read and write access to all parts of the system.  This is the only account that may take that role.
 
-2. On Enterprise page:
-2.1. Create account owner for Marketplace
-2.2. Create Marketplace
+The Enterprise Owner may create Marketplaces and assign accounts authorized to manage them. These accounts are assigned  *Marketplace Owner* role.  Marketplace Owners have full read and write access to their respective Marketplace only.  A Marketplace may have one or more Marketplace Owners.
+
+Create a Marketplace in two simple steps:
+
+1. Under New Account, create an account that will serve as the Marketplace Owner.  Enter an account name and password then click Add Account to create a new account.  
+1. Under New Marketplace, select the State, enter a Marketplace Name (this is name that will appear on Consumer Portal), pick the account you created in first step as the Owner Account and click Add Marketplace.
+
+The Navigation menu will update with the new Marketplace name along with access to the pages you will use to configure its appearance and behavior. 
 
 ## Profile Page - Add Your Brand
 
+The **Profile** page is where you manage the User Interface (UI) theme and other elements that affect a Marketplace's Consumer Portal look and feel.  
 
 
 
@@ -126,6 +134,11 @@ File data required for Geographic Rating Area:
 
 
 The **Import County/ZipCode Mapping File** feature supports loading of supplemental rating area information when the Geographic Rating Area Model option is set to: Zipcode-based Rating Areas.  Like the SERFF Templates, the import function expects a zip file.  In this case, it will include only one file named: **county_zipcode.xlsx**
+
+A template mapping file is available here:
+
+[Download County/Zipcode File Template](https://github.com/ideacrew/hra_calculator/tree/gh-pages/assets/documents/county_zipcode.xlsx){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+
 
 ## Tool UI Page - Customize Communication with Your Consumers
 
