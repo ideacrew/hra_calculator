@@ -15,7 +15,7 @@
                     <td>Residence</td>
                     <td style="font-weight:bold">{{ residence }}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="(dob)">
                     <td>Date of Birth</td>
                     <td style="font-weight:bold">{{dob | date: 'MM/dd/yyyy'}}</td>
                   </tr>

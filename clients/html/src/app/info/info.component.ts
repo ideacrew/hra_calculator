@@ -227,7 +227,9 @@ export class InfoComponent implements OnInit {
   onSubmit() {
     if (this.hraForm.valid) {
       var params = this.hraForm.value
-      params.dob = `${params.dob.year}-${params.dob.month}-${params.dob.day}`
+      if(this.showDob){
+        params.dob = `${params.dob.year}-${params.dob.month}-${params.dob.day}`
+      }
       this.resultService.setFormData(params);      
       this.httpClient.post<any>(environment.apiUrl+"/api/hra_results/hra_payload?tenant="+this.hostKey, this.hraForm.value).subscribe(
         (res) => {
