@@ -25,7 +25,8 @@ module Operations
             county_zip = ::Locations::CountyZip.where(
               {
                 zip: loc_record['zip'],
-                county_name: loc_record['county_name']
+                county_name: loc_record['county_name'],
+                state: state_abbreviation
               }
             ).first
             county_zip._id

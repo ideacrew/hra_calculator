@@ -82,7 +82,7 @@ module ObjectBuilders
 
         if csr_variant_id != "00"
           csr_variant_id = retrieve_metal_level == "dental" ? "" : csr_variant_id
-          product = ::Products::Product.where(
+          product = @tenant.products.where(
             hios_base_id: hios_base_id,
             csr_variant_id: csr_variant_id
           ).select{|a| a.active_year == @qhp.active_year}.first

@@ -1,14 +1,14 @@
 class Admin::EnterpriseController < ApplicationController
   layout 'admin'
 
+  before_action :find_enterprise, :authorized_user?
+
   def show
-    @enterprise = ::Enterprises::Enterprise.first
     @states     = Locations::UsState::NAME_IDS.map(&:first)
     @accounts   = Account.by_role("Marketplace Owner")
   end
 
   def account_create
-    # TODO: refactor to take enterprise id if needed.
     create_tenant = Transactions::CreateAccount.new
     result = create_tenant.call(account_create_params)
 
@@ -55,6 +55,14 @@ class Admin::EnterpriseController < ApplicationController
   end
 
   private
+
+  def find_enterprise
+    @enterprise = ::Enterprises::Enterprise.first
+  end
+
+  def authorized_user?
+    authorize @enterprise, :can_modify?
+  end
 
   # TODO: refactor all the below methods accordingly.
   def by_update_params

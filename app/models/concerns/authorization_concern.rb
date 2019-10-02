@@ -113,8 +113,8 @@ module AuthorizationConcern
 
     def password_invalid?(password)
       ## TODO: oim_id is an explicit dependency to the User class
-      resource = self.new(oim_id: 'example1', password: password)
-      !resource.valid_attribute?('password')
+      resource = self.new(password: password)
+      !resource.valid?('password')
     end
 
     def generate_valid_password
@@ -144,7 +144,7 @@ module AuthorizationConcern
 
     def login_captcha_required?(login)
       begin
-        logins_before_captcha <= self.or({oim_id: login}, {email: login}).first.failed_attempts
+        logins_before_captcha <= self.or({email: login}).first.failed_attempts
       rescue => e
         true
       end

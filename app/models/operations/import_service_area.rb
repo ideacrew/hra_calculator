@@ -54,7 +54,7 @@ module Operations
             else
               county_name, state_code, county_code = extract_county_name_state_and_county_codes(sheet.cell(i,4))
 
-              records = ::Locations::CountyZip.where({county_name: county_name})
+              records = ::Locations::CountyZip.where({county_name: county_name, state: state_abbreviation})
 
               if sheet.cell(i,6).present?
                 extracted_zips = extracted_zip_codes(sheet.cell(i,6)).each {|t| t.squish!}

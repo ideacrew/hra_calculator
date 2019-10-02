@@ -51,6 +51,7 @@ gem 'money-rails',              '~> 1.13'
 gem 'database_cleaner',         '~> 1.7'
 gem 'devise'
 gem 'webpacker',                '~> 4.0.2'
+gem 'pundit',                   '~> 2.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

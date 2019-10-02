@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   
   # include DeviseTokenAuth::Concerns::SetUserByToken
   protect_from_forgery unless: -> { request.format.json? || request.format.xml? || request.format.js? }
@@ -11,6 +12,8 @@ class ApplicationController < ActionController::Base
   rescue Exception => e
     Rails.logger.info { e.message }
   end
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   protected
 
@@ -30,11 +33,22 @@ class ApplicationController < ActionController::Base
     if resource.enterprise.present?
       admin_enterprise_path(id: resource.enterprise.id)
     elsif resource.tenant.present?
-      admin_tenant_path(id: resource.tenant.id)
+      admin_tenant_path(id: resource.tenant.id, tab_name: resource.tenant.id.to_s + "_profile")
     end
   end
 
   def after_sign_out_path_for(resource)
     new_account_session_path
+  end
+
+  def pundit_user
+    current_account
+  end
+
+  private
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(after_sign_in_path_for(pundit_user))
   end
 end
