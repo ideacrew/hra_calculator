@@ -1,15 +1,17 @@
 <h1>Edited Text</h1>
 
-<%= form_with url: admin_tenant_ui_element_update_path(tenant_id: @tenant, option_id: @option) do |form| %>
-  <%= form.label :body %>
+<%= form_for @option, url: admin_tenant_ui_element_update_path(tenant_id: @tenant, option_id: @option) do |form| %>
+  <div class="card-title">
+    <p><strong>Template Name:</strong> <%= form.object.key %></p>
+  </div>
   <div class="card">
     <div class="card-body">
-      <%= rich_text_area_tag 'option[default]', (@option.value || @option.default).html_safe %>
+      <%= rich_text_area_tag 'option[default]', (form.object.value || form.object.default).html_safe %>
     </div>
   </div>
   <div class="card-body">
     <div class="actions">
-      <button class="btn btn-primary" name="subject" type="submit">Update</button>
+      <%= form.submit 'Update', class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>
