@@ -1,7 +1,7 @@
 class Admin::TenantsController < ApplicationController
   layout 'admin'
 
-  before_action :find_tenant, only: [:show, :features_show, :ui_pages_show, :plan_index]
+  before_action :find_tenant, :authorized_user?
 
   def show
   end
@@ -104,6 +104,18 @@ class Admin::TenantsController < ApplicationController
     end
   end
 
+  private
+
+  def find_tenant
+    tenant_id = params[:tenant_id] || params[:id]
+    @tenant = Tenants::Tenant.find(tenant_id)
+    @enterprise = @tenant.enterprise
+  end
+
+  def authorized_user?
+    authorize @tenant, :can_modify?
+  end
+
   def tenant_params
     params.require(:tenants_tenant).permit(
       :owner_organization_name,
@@ -133,11 +145,5 @@ class Admin::TenantsController < ApplicationController
   def ui_element_params
     params.permit!
     params.to_h
-  end
-
-  def find_tenant
-    tenant_id = params[:tenant_id] || params[:id]
-    @tenant = Tenants::Tenant.find(tenant_id)
-    @enterprise = @tenant.enterprise
   end
 end

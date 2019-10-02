@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       put  :features_update
       get  :ui_pages_show
       get  :ui_pages_edit
-      post :ui_element_update
+      patch :ui_element_update
       get  :plan_index
       post :upload_plan_data
       post :zip_county_data
