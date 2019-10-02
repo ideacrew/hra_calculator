@@ -30,6 +30,8 @@ class Account
   belongs_to :enterprise, class_name: 'Enterprises::Enterprise', optional: true
   belongs_to :tenant, class_name: 'Tenants::Tenant', optional: true
 
+
+  scope :by_role, ->(role) { where(role: role) }
   # include DeviseTokenAuth::Concerns::User
 
   index({ email: 1 }, { name: 'email_index', unique: true, background: true })

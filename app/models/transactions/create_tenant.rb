@@ -14,9 +14,11 @@ module Transactions
       @enterprise = Enterprises::Enterprise.find(enterprise_id)
       @account = Account.where(email: input[:account_email]).first
       if @enterprise.blank?
-        Failure({errors: {enterprise_id: "Unabled to find enterprise record with id #{enterprise_id}"}})
+        Failure({errors: {enterprise_id: "Unable to find enterprise record with id #{enterprise_id}"}})
       elsif @account.blank?
-        Failure({errors: {account_email: "Unabled to find account with id #{input[:account_email]}"}})
+        Failure({errors: {account_email: "Unable to find account with id #{input[:account_email]}"}})
+      elsif @enterprise.tenants.where(key: input[:key]).present?
+        Failure({errors: {market_place: "already exists for the selected state."}})
       else
         Success(input.slice(:key, :owner_organization_name))
       end

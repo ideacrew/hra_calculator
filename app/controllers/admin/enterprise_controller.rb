@@ -4,7 +4,7 @@ class Admin::EnterpriseController < ApplicationController
   def show
     @enterprise = ::Enterprises::Enterprise.first
     @states     = Locations::UsState::NAME_IDS.map(&:first)
-    @accounts   = Account.all
+    @accounts   = Account.by_role("Marketplace Owner")
   end
 
   def account_create
@@ -13,7 +13,7 @@ class Admin::EnterpriseController < ApplicationController
     result = create_tenant.call(account_create_params)
 
     if result.success?
-      flash[:notice] = "Successfully created"
+      flash[:notice] = "Account was created successfully."
     else
       flash[:error]  = result.failure[:errors]
     end
@@ -26,7 +26,7 @@ class Admin::EnterpriseController < ApplicationController
     if result.success?
       flash[:notice] = "Successfully created #{result.success.owner_organization_name}"
     else
-      flash[:error]  = 'Something went wrong.'
+      flash[:error]  = result.failure[:errors].to_a.join(" ").humanize
     end
     redirect_to action: :show, id: params[:enterprise_id]
   end
