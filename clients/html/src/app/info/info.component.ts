@@ -5,7 +5,7 @@ import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { ResultService } from '../result.service'
 import { validateDate } from './date.validator'
-import { NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbDatepickerConfig, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import {NgxMaskModule} from 'ngx-mask'
 
 @Component({
@@ -224,7 +224,9 @@ export class InfoComponent implements OnInit {
 
   onSubmit() {
     if (this.hraForm.valid) {
-      this.resultService.setFormData(this.hraForm.value);      
+      var params = this.hraForm.value
+      params.dob = `${params.dob.year}-${params.dob.month}-${params.dob.day}`
+      this.resultService.setFormData(params);      
       this.httpClient.post<any>(environment.apiUrl+"/api/hra_results/hra_payload?tenant="+this.hostKey, this.hraForm.value).subscribe(
         (res) => {
           console.log(res)
