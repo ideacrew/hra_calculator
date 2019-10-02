@@ -159,11 +159,12 @@ export class InfoComponent implements OnInit {
           this.hraForm.removeControl('dob');
         }
         if(this.resultService.formData){
+          var date_string = this.resultService.formData.dob.split('-')
           this.hraForm.patchValue({
             state: this.resultService.formData.state,
             zipcode: this.resultService.formData.zipcode,
             county: this.resultService.formData.county,
-            dob: this.resultService.formData.dob,
+            dob: {year: +date_string[0], month: +date_string[1], day: +date_string[2]},
             household_frequency: this.resultService.formData.household_frequency,
             household_amount: this.resultService.formData.household_amount,
             hra_type: this.resultService.formData.hra_type,
@@ -173,7 +174,7 @@ export class InfoComponent implements OnInit {
             hra_amount: this.resultService.formData.hra_amount,
           });
           this.countyOptions = [this.resultService.formData.county]
-          this.effectiveEndOptions = [this.resultService.formData.end_month]
+          this.setEffectiveEndOptions(this.resultService.formData.start_month);
           this.selectedHouseholdFrequency = this.resultService.formData.household_frequency;
           this.selectedHraFrequency = this.resultService.formData.hra_frequency;
           this.selectedHraType = this.resultService.formData.hra_type;
