@@ -97,6 +97,19 @@ module ApplicationHelper
     end
   end
 
+  def input_number_control(setting, form)
+    id = setting[:key].to_s
+    input_value = setting[:value] || setting[:default]
+    aria_describedby = id
+
+    if setting[:attribute]
+      tag.input(nil, type: "number", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true)
+    else
+      tag.input(nil, type: "number", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true)
+    end
+  end
+
+
   def input_color_control(setting)
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]

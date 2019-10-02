@@ -205,8 +205,10 @@ export class InfoComponent implements OnInit {
           this.countyOptions = ["Zipcode is ouside state"];
           this.isCountyDisabled = true
         } else if (res.data.counties.length == 1) {
+          this.countyOptions = res.data.counties;
+          this.countyOptions.unshift("Select County")
           this.hraForm.patchValue({
-            county: res.data.counties[0]
+            county: res.data.counties[1]
           })
           this.isCountyDisabled = true
         } else {

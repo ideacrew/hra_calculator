@@ -75,4 +75,17 @@
     var result = document.getElementById('county_zip_year');
     result.value = event.target.value;
   });
+
+  var uploadElements = document.getElementsByClassName('custom-file-input');
+  for (var i = 0, max = uploadElements.length; i < max; i++) {
+
+    uploadElements[i].addEventListener('change', (event) => {
+      var fileName = event.target.value;
+      var parent = event.target.parentElement;
+      var labelElement = parent.querySelector(".custom-file-label")
+
+      labelElement.innerHTML = fileName;
+    });
+  }
+
 </script>
