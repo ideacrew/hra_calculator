@@ -18,7 +18,6 @@ This section explains how to use the Admin Portal to customize the HRA Tool for 
 5. [Tool UI Page - Customize Communication with Your Consumers](#tool-ui-page---customize-communication-with-your-consumers)
 
 
-
 ## Initial Sign In
 
 After verifying that the HRA Tool server and software is up and running, you may access the Admin Portal by pointing your Web browser to: my_hra_tool_server**/admin**.  This URL will route you to the Admin Portal's sign-in page.  
@@ -39,8 +38,6 @@ Password
 ## Enterprise Page - Create Your Marketplace
 
 The first time you sign in, you will land on the Admin Portal's **Enterprise** page.  
-
-
 
 
 2. On Enterprise page:
@@ -83,8 +80,8 @@ The HRA Tool accepts source data in one of two file formats, depending on the co
 | :---------- | :---------- | :-------- |
 | plan_and_benefits.xml | Individual Market Silver Plans in SERFF template XML output | XML |
 | rates.xml | Premium rates in SERFF template XML output | XML |
-| service_areas.xslx | Plan Service Areas in SERFF Excel format | MS Excel Open XML | 
-| county_zipcode.xslx | Plan Service Areas in SERFF Excel format | MS Excel Open XML| 
+| service_areas.xlsx | Plan Service Areas in SERFF Excel format | MS Excel Open XML | 
+| county_zipcode.xlsx | Plan Service Areas in SERFF Excel format | MS Excel Open XML| 
 
 The **Import SERFF Template** feature accepts plan data sets in zip file format structured as shown here:
 
@@ -94,11 +91,11 @@ serff_templates.zip
   |- [first_carrier_name]
   |    |- plan_and_benefits.xml
   |    |- rates.xml
-  |    |- service_areas.xslx
+  |    |- service_areas.xlsx
   |- [second_carrier_name]
        |- plan_and_benefits.xml
        |- rates.xml
-       |- service_areas.xslx
+       |- service_areas.xlsx
 ```
 
 
@@ -114,21 +111,21 @@ The tables below show the configuration settings and corresponding file set that
 
 File data required for Use Age Rating?:
 
-| Use Age Rating? | plan_and_benefit.xml | rates.xml |
+| Use Age Rating? | plan_and_benefits.xml | rates.xml |
 | :--------------: | :------------------: | :-------: |
 | Yes              | X                    | X         |
 | No               | X                    |           |
 
 File data required for Geographic Rating Area:
 
-| Geographic Rating Area    | service_areas.xslx | county_zipcode.xslx |
+| Geographic Rating Area    | service_areas.xlsx | county_zipcode.xlsx |
 | :----                     | :------:           | :-----:             |
 | Single Rating Area        |                    |                     |
 | County-based Rating Area  | X                  |                     |
 | Zipcode-based Rating Area | X                  | X                   |
 
 
-The **Import County/ZipCode Mapping File** feature supports loading of supplemental rating area information when the Geographic Rating Area Model option is set to: Zipcode-based Rating Areas.  Like the SERFF Templates, the import function expects a zip file.  In this case, it will include only one file named: **county_zipcode.xslx**
+The **Import County/ZipCode Mapping File** feature supports loading of supplemental rating area information when the Geographic Rating Area Model option is set to: Zipcode-based Rating Areas.  Like the SERFF Templates, the import function expects a zip file.  In this case, it will include only one file named: **county_zipcode.xlsx**
 
 ## Tool UI Page - Customize Communication with Your Consumers
 
