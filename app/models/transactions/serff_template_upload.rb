@@ -7,6 +7,7 @@ module Transactions
     step :check_for_zip
     step :unzip_serff
     step :validate_serff_folder_and_files # Every Folder should have expected files
+    step :process_for_countyzips
     step :process_serff_templates
 
     private
@@ -43,7 +44,6 @@ module Transactions
 
     def unzip_serff(input)
       begin
-        # TODO: Test this for unzipping as per sub-folders
         zip_file_s = input['serff_template']['value'].tempfile
         @destination = "#{Rails.root}/tmp/load_plan"
         FileUtils.rm_rf(@destination) if File.directory?(@destination)
@@ -73,6 +73,7 @@ module Transactions
     def validate_serff_folder_and_files(path)
       # path = "#{Rails.root}/tmp/load_plan/serff_template"
       begin
+        @sa_paths = []
         carrier_directories = Dir.glob(File.join(path, "*"))
         carrier_directories.each do |carrier_directory|
           # TODO: remove duplicate code
@@ -83,6 +84,8 @@ module Transactions
           service_area_file = xml_files.select{|file| File.basename(file) == "service_areas.xlsx" }.first
           plan_file = xml_files.select{|file| File.basename(file) == "plan_and_benefits.xml" }.first
           rates_file = xml_files.select{|file| File.basename(file) == "rates.xml" }.first
+
+          @sa_paths << service_area_file
 
           errors = []
           errors << "Plan XML doesnot exist for carrier: #{carrier_name}" if !plan_file
@@ -97,9 +100,23 @@ module Transactions
       Success(path)
     end
 
+    def process_for_countyzips(input_path)
+      @import_timestamp = DateTime.now
+      return Success(input_path) unless @tenant.geographic_rating_area_model == 'county'
+
+      cz_params = { cz_files: @sa_paths, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
+      icz_result = ::Operations::StoreCountyZip.new.call(cz_params)
+
+      if icz_result.success?
+        Success(input_path)
+      else
+        destroy_countyzips(@tenant, @import_timestamp)
+        Failure({errors: ["Unable to create CountyZips for given counties per SA serff_templates"]})
+      end
+    end
+
     def process_serff_templates(input_path)
       # input_path = "#{Rails.root}/db/seedfiles/plan_xmls/serff_templates/"
-      @import_timestamp = DateTime.now
       carrier_directories = Dir.glob(File.join(input_path, "*"))
       carrier_directories.each do |carrier_directory|
         # TODO: remove duplicate code
@@ -129,6 +146,10 @@ module Transactions
       end
 
       Success("New All service areas and plans got uploaded")
+    end
+
+    def destroy_countyzips(tenant, import_timestamp)
+      # TODO: destroy countyzips that got created.
     end
 
     def destory_created_objects(import_timestamp)
