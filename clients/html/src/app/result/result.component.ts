@@ -23,6 +23,10 @@ export class ResultComponent implements OnInit {
   hra_amount: Number;
   hra_type: String;
   full_hra_type: String;
+  hios_id: String;
+  plan_name: String;
+  carrier_name: String;
+  member_premium: Number;
   hra_determination: String;
   taxCredit: String;
   marketPlace: String;
@@ -83,6 +87,10 @@ export class ResultComponent implements OnInit {
       this.help_text_4 = this.result.data.aca_compliant;
       this.help_text_5 = this.result.data.results_page_help_text_2;
       this.hra_type = this.result.data.hra_type;
+      this.hios_id = this.result.data.hios_id;
+      this.plan_name = this.result.data.plan_name;
+      this.carrier_name = this.result.data.carrier_name;
+      this.member_premium = this.result.data.member_premium;
       this.hra_determination = this.result.data.hra_determination;
       this.residence = [this.state, this.zipcode, this.county].filter(function(val) { return (val !== null && val !== ""); }).join(" / ")
     }else{
