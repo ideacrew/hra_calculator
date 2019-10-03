@@ -51,14 +51,18 @@ module Transactions
     def persist(input)
       params = { file: input.to_h[:county_zip_file], tenant: @tenant, year: @year }
       return Success("CountyZips not needed") unless @tenant.geographic_rating_area_model == 'zipcode'
-
+      county_zip_initial_count = Locations::CountyZip.all.count
       county_zip_result = ::Operations::ImportCountyZip.new.call(params)
       if county_zip_result.success?
+        county_zip_final_count    = Locations::CountyZip.all.count
+        rating_area_initial_count = Locations::RatingArea.all.count
         rating_area_result = ::Operations::ImportRatingArea.new.call(params)
+        rating_area_final_count = Locations::RatingArea.all.count
+
         if rating_area_result.failure?
           return Failure({errors: ["#{rating_area_result.failure[:errors]}"]})
         else
-          Success("created CountyZips/RatingArea")
+          Success("Successfully created #{county_zip_final_count-county_zip_initial_count} CountyZip and #{rating_area_final_count - rating_area_initial_count} RatingArea records")
         end
       else
         Failure({errors: ["#{county_zip_result.failure[:errors]}"]})
