@@ -60,7 +60,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: true }),
     PerfectScrollbarModule,
     NgxMaskModule.forRoot()
