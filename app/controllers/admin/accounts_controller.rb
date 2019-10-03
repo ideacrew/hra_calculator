@@ -22,7 +22,7 @@ class Admin::AccountsController < ApplicationController
 
   def destroy
     @account = Account.find(params[:id])
-    @account.tenants.delete_all
+    @account.tenant.destroy!
     @account.destroy!
 
     redirect_to admin_enterprise_path(Enterprises::Enterprise.first)

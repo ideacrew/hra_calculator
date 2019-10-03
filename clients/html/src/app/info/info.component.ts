@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { ResultService } from '../result.service'
-import { validateDate } from './date.validator'
+import { validateDate, validateDateFormat } from './date.validator'
 import { NgbDateStruct, NgbDatepickerConfig, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import {NgxMaskModule} from 'ngx-mask'
 
@@ -77,7 +77,7 @@ export class InfoComponent implements OnInit {
       state: ['', Validators.required ],
       zipcode: ['', Validators.required],
       county: ['', Validators.required],
-      dob: ['', [Validators.required, validateDate]],
+      dob: ['', [Validators.required, validateDate, validateDateFormat]],
       household_frequency: ['', Validators.required ],
       household_amount: ['', Validators.required ],
       hra_type: ['', Validators.required ],
@@ -100,24 +100,20 @@ export class InfoComponent implements OnInit {
 
   showTab(n) {
     if(n === 1){
-      if(!(this.hraForm.controls['household_frequency'].valid) ||
-         !(this.hraForm.controls['household_amount'].valid)
-         ){
-          this.hraForm.controls['household_frequency'].markAsTouched();
-          this.hraForm.controls['household_amount'].markAsTouched();
-          return null;
-         }
-
       if(this.hraForm.controls['zipcode'] && !(this.hraForm.controls['zipcode'].valid)){
         this.hraForm.controls['zipcode'].markAsTouched()
-        return null;
       }
       if(this.hraForm.controls['county'] && !(this.hraForm.controls['county'].valid)){
         this.hraForm.controls['county'].markAsTouched()
-        return null;
       }
       if(this.hraForm.controls['dob'] && !(this.hraForm.controls['dob'].valid)) {
         this.hraForm.controls['dob'].markAsTouched()
+      }
+      if(!(this.hraForm.controls['household_frequency'].valid) ||
+         !(this.hraForm.controls['household_amount'].valid)
+        ){
+        this.hraForm.controls['household_frequency'].markAsTouched();
+        this.hraForm.controls['household_amount'].markAsTouched();
         return null;
       }
     }
@@ -159,12 +155,14 @@ export class InfoComponent implements OnInit {
           this.hraForm.removeControl('dob');
         }
         if(this.resultService.formData){
-          var date_string = this.resultService.formData.dob.split('-')
+          if(this.showDob){
+            var date_string = this.resultService.formData.dob.split('-')
+            this.hraForm.patchValue({dob: {year: +date_string[0], month: +date_string[1], day: +date_string[2]}})
+          }
           this.hraForm.patchValue({
             state: this.resultService.formData.state,
             zipcode: this.resultService.formData.zipcode,
             county: this.resultService.formData.county,
-            dob: {year: +date_string[0], month: +date_string[1], day: +date_string[2]},
             household_frequency: this.resultService.formData.household_frequency,
             household_amount: this.resultService.formData.household_amount,
             hra_type: this.resultService.formData.hra_type,
@@ -173,7 +171,11 @@ export class InfoComponent implements OnInit {
             hra_frequency: this.resultService.formData.hra_frequency,
             hra_amount: this.resultService.formData.hra_amount,
           });
-          this.countyOptions = [this.resultService.formData.county]
+
+          if(this.showZipcode){
+            this.countyOptions = [this.resultService.formData.county]
+          }
+
           this.setEffectiveEndOptions(this.resultService.formData.start_month);
           this.selectedHouseholdFrequency = this.resultService.formData.household_frequency;
           this.selectedHraFrequency = this.resultService.formData.hra_frequency;
