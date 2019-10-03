@@ -62,27 +62,7 @@ module Operations
                   end
                 end
 
-<<<<<<< HEAD
                 location_ids = ::Locations::CountyZip.where({state: state_abbreviation, :county_name.in => county_names}).pluck(:id).uniq
-=======
-              records = ::Locations::CountyZip.where({county_name: county_name, state: state_abbreviation})
-
-              if sheet.cell(i,6).present?
-                extracted_zips = extracted_zip_codes(sheet.cell(i,6)).each {|t| t.squish!}
-                records = records.where(:zip.in => extracted_zips)
-              end
-
-              location_ids = records.map(&:_id).uniq.compact
-
-              if existing_state_wide_areas.count > 0
-                v = existing_state_wide_areas.first
-                v.county_zip_ids << location_ids
-                v.county_zip_ids = v.county_zip_ids.flatten.uniq
-                v.issuer_hios_id = issuer_hios_id
-                v.save
-              else
-                # TODO: Create CountyZips in here for NY cases.
->>>>>>> Results Enchacements
                 ::Locations::ServiceArea.find_or_create_by!({
                   active_year: year,
                   issuer_provided_code: sheet.cell(i,1),
