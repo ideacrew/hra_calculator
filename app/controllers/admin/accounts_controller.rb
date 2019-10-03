@@ -22,8 +22,12 @@ class Admin::AccountsController < ApplicationController
 
   def destroy
     @account = Account.find(params[:id])
-    @account.tenant.destroy!
-    @account.destroy!
+    @account.tenant&.destroy!
+    if @account.destroy!
+      flash[:notice] = "Successfully deleted account associated with email - #{@account.email}"
+    else
+      flash[:error]  = 'Something went wrong.'
+    end
 
     redirect_to admin_enterprise_path(Enterprises::Enterprise.first)
   end
