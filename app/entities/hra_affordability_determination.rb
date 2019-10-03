@@ -22,4 +22,7 @@ class HraAffordabilityDetermination < Dry::Struct
   attribute :rating_area_id, Types::String.meta(omittable: true)
   attribute :service_area_ids, Types::Array.of(Types::String).meta(omittable: true)
   attribute :errors, Types::Array.default([].freeze)
+  attribute :hios_id, Types::String.meta(omittable: true)
+  attribute :plan_name, Types::String.meta(omittable: true)
+  attribute :carrier_name, Types::String.meta(omittable: true)
 end

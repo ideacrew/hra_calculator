@@ -31,7 +31,11 @@ module Transactions
     def find_member_premium(hra_obj)
       member_premium_result = ::Operations::MemberPremium.new.call(hra_obj)
       if member_premium_result.success?
-        hra_obj.member_premium = member_premium_result.success
+        sucess_res = member_premium_result.success
+        hra_obj.member_premium = sucess_res.first
+        hra_obj.carrier_name = sucess_res[1]
+        hra_obj.hios_id = sucess_res[2]
+        hra_obj.plan_name = sucess_res[3]
         Success(hra_obj)
       else
         Failure(hra_obj.to_h)
