@@ -30,9 +30,9 @@ module Operations
       fetch_products_result = ::Products::Operations::FetchProducts.new.call(hra_object)
       return Failure(hra_object) if fetch_products_result.failure?
 
-      lcrp_result = ::Products::Operations::LowCostReferencePlanCost.new.call({products: fetch_products_result.success, hra_object: hra_object})
-      if lcrp_result.success?
-        Success(lcrp_result.success)
+      lcrp_result_array = ::Products::Operations::LowCostReferencePlanCost.new.call({products: fetch_products_result.success, hra_object: hra_object})
+      if lcrp_result_array.success?
+        Success(lcrp_result_array.success)
       else
         Failure(hra_object)
       end
