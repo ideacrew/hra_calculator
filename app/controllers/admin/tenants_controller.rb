@@ -84,7 +84,7 @@ class Admin::TenantsController < ApplicationController
     result = Transactions::CountyZipFile.new.call(params.to_h)
 
     if result.success?
-      flash[:notice] = "Successfully uploaded CountyZips/RatingAreas"
+      flash[:notice] = result.success
     else
       flash[:error] = result.failure[:errors].first
     end

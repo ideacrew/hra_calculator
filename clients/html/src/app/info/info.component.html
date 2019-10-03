@@ -121,27 +121,32 @@
                   <div class="form-group">
                     <div class="input-group">
                       <label class="col-sm-3 col-form-label col-form-label-sm" for="dob">MM/DD/YYYY</label>
-                      <div class="input-group col-sm-4">
-                        <input class="form-control"
-                          placeholder="mm/dd/yyyy"
-                          name="dp"
-                          ngbDatepicker #d="ngbDatepicker"
-                          [minDate]="{year: 1900, month: 1, day: 1}"
-                          [maxDate]="today"
-                          formControlName="dob"
-                          required validateDate>
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-                            <i class="fas fa-calendar-alt"></i>
-                          </button>
+                      <div class="col-sm-4">
+                        <div class="input-group">
+                          <input class="form-control"
+                            placeholder="mm/dd/yyyy"
+                            name="dp"
+                            ngbDatepicker #d="ngbDatepicker"
+                            [minDate]="{year: 1900, month: 1, day: 1}"
+                            [maxDate]="today"
+                            formControlName="dob"
+                            validateDate validateDateFormat required>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                              <i class="fas fa-calendar-alt"></i>
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                      <div *ngIf="hraForm.controls['dob'].invalid && (hraForm.controls['dob'].dirty || hraForm.controls['dob'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['dob'].errors.required">
-                          Date of Birth is required.
-                        </div>
-                        <div *ngIf="hraForm.controls['dob'].errors.invalidDate">
-                            DOB must be between 01-01-1900 to Today.
+                        <div *ngIf="hraForm.controls['dob'].invalid && (hraForm.controls['dob'].dirty || hraForm.controls['dob'].touched)" class="input-group alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
+                          <div *ngIf="hraForm.controls['dob'].errors.required">
+                            Date of Birth is required.
+                          </div>
+                          <div *ngIf="hraForm.controls['dob'].errors.invalidDate">
+                            DOB must be between 01/01/1900 to Today.
+                          </div>
+                          <div *ngIf="hraForm.controls['dob'].errors.invalidDateFormat" >
+                            Please Enter Valid Date Format(MM/DD/YYYY)
+                          </div>
                         </div>
                       </div>
                     </div>
