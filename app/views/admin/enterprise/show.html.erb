@@ -4,7 +4,7 @@
 
   <ol>
     <li>Change password for the admin account</li>
-    <li>Create new account(s) that will become the owner for each Exchange Markletplace hosted on this system</li>
+    <li>Create new account(s) that will become the owner for each Exchange Marketplace hosted on this system</li>
     <li>Create Marketplace(s)</li>
   </ol>
 </div>
@@ -107,17 +107,17 @@
 <div>
   <h2>Benefit Year</h2>
   <br/>
-  <%= form_for(:enterprise, url: admin_enterprise_benefit_year_update_path(@enterprise), :html => {:method => :post}) do |form| %>
+  <%= form_for(@enterprise, url: admin_enterprise_benefit_year_update_path(@enterprise), :html => {:method => :post}) do |form| %>
 
     <div class="form-group col-md-4">
       <h5>Benefit Year</h5>
-      <%= select_dropdown('benefit_year', @enterprise.benefit_years.pluck(:calendar_year)) %>
+      <%= select_dropdown('benefit_year', form.object.benefit_years.pluck(:calendar_year)) %>
     </div>
 
     <div class="form-group col-md-4">
       <h5><p>Expected Contribution Factor</p></h5>
       <%= input_number_control({value: ''}, form) %>
-      <p> Enter the ?? factor value for the benefit plan year</p>
+      <p> <%= form.object.benefit_years.first.description %> </p>
     </div>
     <%= submit_tag 'Update Benefit Year', class: "btn btn-primary" %>
   <% end %>

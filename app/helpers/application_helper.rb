@@ -41,6 +41,8 @@ module ApplicationHelper
           concat(content_tag :option, item[0], value: item[1])
         elsif item.is_a? Hash
           concat(content_tag :option, item.first[1], value: item.first[0])
+        elsif input_id == 'state'
+          concat(content_tag :option, item.to_s.titleize, value: item)
         else
           concat(content_tag :option, item.to_s.humanize, value: item)
         end
@@ -103,9 +105,9 @@ module ApplicationHelper
     aria_describedby = id
 
     if setting[:attribute]
-      tag.input(nil, type: "number", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true)
+      tag.input(nil, type: "number", step:"any", min: 0, max: 1, value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true)
     else
-      tag.input(nil, type: "number", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true)
+      tag.input(nil, type: "number", step:"any", min: 0, max: 1, value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true)
     end
   end
 

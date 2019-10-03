@@ -17,4 +17,4 @@ namespaces:
           - key: :2020
             default: 0.0978
             type: :float
-            description: Enter the ?? factor value for the benefit plan year
+            description: For 2020 the factor is 0.0987 and should not be changed.
