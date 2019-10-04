@@ -106,18 +106,17 @@
 <br/>
 <div>
   <h2>Benefit Year</h2>
-  <br/>
-  <%= form_for(:enterprise, url: admin_enterprise_benefit_year_update_path(@enterprise), :html => {:method => :post}) do |form| %>
+  <%= form_for(@enterprise, url: admin_enterprise_benefit_year_update_path(enterprise_id: @enterprise), :html => {:method => :post}) do |form| %>
 
-    <div class="form-group col-md-4">
-      <h5>Benefit Year</h5>
-      <%= select_dropdown('benefit_year', @enterprise.benefit_years.pluck(:calendar_year)) %>
+    <div class="form-group col-md-4 mt-4">
+      <h5><p>Benefit Year</p></h5>
+      <%= select_dropdown('benefit_year', form.object.benefit_years.map(&:calendar_year), true) %>
     </div>
 
     <div class="form-group col-md-4">
       <h5><p>Expected Contribution Factor</p></h5>
-      <%= input_number_control({value: ''}, form) %>
-      <p> <%= @enterprise.benefit_years.first.description %> </p>
+      <%= input_number_control({value: form.object.benefit_years.first.expected_contribution}, form) %>
+      <p class="mt-3" > <%= form.object.benefit_years.first.description %> </p>
     </div>
     <%= submit_tag 'Update Benefit Year', class: "btn btn-primary" %>
   <% end %>
