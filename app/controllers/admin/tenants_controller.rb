@@ -7,7 +7,7 @@ class Admin::TenantsController < ApplicationController
   end
 
   def update
-    result = Transactions::UpdateTenant.new.call({id: params[:id], tenant: tenant_params})
+    result = Transactions::UpdateTenant.new.call({tenant: @tenant, tenant_params: tenant_params})
     tenant = result.value!
 
     if result.success?
@@ -26,7 +26,7 @@ class Admin::TenantsController < ApplicationController
   end
 
   def features_update
-    result = Transactions::UpdateTenant.new.call({id: params[:tenant_id], tenant: tenant_params})
+    result = Transactions::UpdateTenant.new.call({tenant: @tenant, tenant_params: tenant_params})
     tenant = result.value!
 
     if result.success?

@@ -22,7 +22,7 @@ class Admin::EnterpriseController < ApplicationController
 
   def tenant_create
     create_tenant = Transactions::CreateTenant.new
-    result = create_tenant.with_step_args(fetch: [enterprise_id: @enterprise.id]).call(tenant_params)
+    result = create_tenant.with_step_args(fetch: [enterprise: @enterprise]).call(tenant_params)
     if result.success?
       flash[:notice] = "Successfully created #{result.success.owner_organization_name}"
     else

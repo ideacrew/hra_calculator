@@ -9,12 +9,12 @@ module Transactions
     private
 
     def fetch(input)
-      @tenant = Tenants::Tenant.find(input[:id])
+      @tenant = input[:tenant]
 
       if @tenant.blank?
         Failure({errors: {tenant_id: "Unabled to find tenant record with id #{input[:id]}"}})
       else
-        Success(input[:tenant])
+        Success(input[:tenant_params])
       end
     end
 

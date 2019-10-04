@@ -10,10 +10,10 @@ module Transactions
 
     private
 
-    def fetch(input, enterprise_id:)
-      @enterprise = Enterprises::Enterprise.find(enterprise_id)
-      @account = Account.where(email: input[:account_email]).first
-      
+    def fetch(input, enterprise:)
+      @enterprise = enterprise
+      @account    = Account.where(email: input[:account_email]).first
+
       if @enterprise.blank?
         Failure({errors: {enterprise_id: "Unable to find enterprise record with id #{enterprise_id}"}})
       elsif @account.blank?
@@ -21,7 +21,7 @@ module Transactions
       elsif @account.tenant.present?
         Failure({errors: {account_email: "(#{input[:account_email]}) is owner for another marketplace. Please choose different account."}})
       elsif @enterprise.tenants.where(key: input[:key]).present?
-        Failure({errors: {market_place: "already exists for the selected state."}})
+        Failure({errors: {marketplace: "already exists for the selected state."}})
       else
         Success(input.slice(:key, :owner_organization_name))
       end
