@@ -99,6 +99,7 @@
                       <label class="col-sm-3 col-form-label col-form-label-sm" for="county">County</label>
                       <div class="col-sm-4">
                         <select class="form-control form-control-sm" id="county" formControlName="county" [attr.disabled]="isCountyDisabled ? '' : null" required>
+                          <option value='' disabled selected hidden>Choose</option>
                           <option *ngFor="let option of countyOptions" [ngValue]="option">
                             {{option}}
                           </option>
