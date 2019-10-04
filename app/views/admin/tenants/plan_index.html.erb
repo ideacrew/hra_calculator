@@ -2,30 +2,13 @@
 <br>
 <h4>Plan Import</h4>
 <br>
-<h5>Benefit Year</h5>
-<%= select_dropdown('benefit_year', @years) %>
-<br><br>
-
-<% if @tenant.geographic_rating_area_model == "zipcode" %>
-  <div>
-    <h5>County/Zipcode Mapping File</h5>
-    <%= form_for(:tenant, url: admin_tenant_zip_county_data_path(@tenant.id), :html => {:method => :post, :multipart => true}) do |tenant_form| %>
-      <%= hidden_field_tag :county_zip_year, nil %>
-      <div class="input-group">
-        <% option = ::Options::Option.new(key: 'county_zip') %>
-        <%= input_import_control(option, nil) %>
-      </div>
-      <br>
-      <%= submit_tag 'Submit', class: "btn btn-primary" %>
-    <% end %>
-  </div>
-  <br><br>
-<% end %>
 
 <div>
-  <h5>SERFF Template</h5>
   <%= form_for(:tenant, url: admin_tenant_upload_plan_data_path(@tenant.id), :html => {:method => :post, :multipart => true }) do |tenant_form| %>
-    <%= hidden_field_tag :serff_year, nil %>
+    <h5>Benefit Year</h5>
+    <%= select_dropdown('benefit_year', @years) %>
+    <br><br>
+    <h5>SERFF Template</h5>
     <div class="input-group">
       <% option = ::Options::Option.new(key: 'serff_template') %>
       <%= input_import_control(option, nil) %>
