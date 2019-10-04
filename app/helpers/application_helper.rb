@@ -105,9 +105,9 @@ module ApplicationHelper
     aria_describedby = id
 
     if setting[:attribute]
-      tag.input(nil, type: "number", step:"any", min: 0, max: 1, value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true)
+      tag.input(nil, type: "number", step:"any", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true, oninput: "check(this)")
     else
-      tag.input(nil, type: "number", step:"any", min: 0, max: 1, value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true)
+      tag.input(nil, type: "number", step:"any", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true, oninput: "check(this)")
     end
   end
 

@@ -138,3 +138,17 @@
 </div>
 
 <%= javascript_pack_tag 'password-modal' %>
+
+<script type="text/javascript">
+
+  function check(input) {
+    if (input.name == "enterprise[value]") {
+      if (input.value <= 0 || input.value >= 1) {
+        input.setCustomValidity('The number must be in between 0 and 1');
+      } else {
+        input.setCustomValidity('');
+      }
+    }
+  }
+
+</script>
