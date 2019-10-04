@@ -8,5 +8,6 @@ export interface HeaderFooterConfigurationResource {
   colors?: HeaderFooterColorSettings | null;
   typeFace?: string | null;
   site_logo?: string | null;
+  marketplace_name?: string;
   marketplace_website_url?: string | null;
 }

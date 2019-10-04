@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   tenant_logo_file: string = "";
   tenant_url: string = "";
   primaryColorCode: string;
+  marketplaceName: string = "HRA Tool";
 
   constructor(@Inject(HeaderFooterConfigurationService.PROVIDER_TOKEN) private configurationProvider: HeaderFooterConfigurationProvider) { 
   }
@@ -26,6 +27,9 @@ export class HeaderComponent implements OnInit {
     }
     if (resource.site_logo != null) {
       this.tenant_logo_file = resource.site_logo;
+    }
+    if (resource.marketplace_name != null) {
+      this.marketplaceName = resource.marketplace_name;
     }
     var colors = resource.colors;
     if (colors) {
