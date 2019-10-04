@@ -32,15 +32,21 @@ module ApplicationHelper
     tag.select(option_list, id: id, class: "form-control")
   end
 
-  def select_dropdown(input_id, list)
+  def select_dropdown(input_id, list, show_default=false)
     return unless list.is_a? Array
     content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']', required: true) do
-      concat(content_tag :option, "Select", value: "")
+      unless show_default
+        concat(content_tag :option, "Select", value: "")
+      end
       list.each do |item|
         if item.is_a? Array
           concat(content_tag :option, item[0], value: item[1])
         elsif item.is_a? Hash
           concat(content_tag :option, item.first[1], value: item.first[0])
+        elsif input_id == 'state'
+          concat(content_tag :option, item.to_s.titleize, value: item)
+        elsif show_default
+          concat(content_tag :option, item, value: item)
         else
           concat(content_tag :option, item.to_s.humanize, value: item)
         end
@@ -101,11 +107,10 @@ module ApplicationHelper
     id = setting[:key].to_s
     input_value = setting[:value] || setting[:default]
     aria_describedby = id
-
     if setting[:attribute]
-      tag.input(nil, type: "number", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true)
+      tag.input(nil, type: "number", step:"any", value: input_value, id: id, name: form.object_name.to_s + "[#{id}]",class: "form-control", required: true, oninput: "check(this)")
     else
-      tag.input(nil, type: "number", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true)
+      tag.input(nil, type: "number", step:"any", value: input_value, id: id, name: form.object_name.to_s + "[value]",class: "form-control", required: true, oninput: "check(this)")
     end
   end
 

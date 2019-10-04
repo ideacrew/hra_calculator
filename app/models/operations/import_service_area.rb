@@ -104,7 +104,8 @@ module Operations
         end
 
         Success('Created Service Area')
-      rescue
+      rescue => e
+        puts "service area issue, error: #{e.message}"
         Failure({errors: ["Unable to process file: #{sa_file}"]})
       end
     end
