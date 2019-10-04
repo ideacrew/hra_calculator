@@ -274,6 +274,7 @@
                     </label>
                     <div ngbDropdown class="col-sm-4">
                       <select (change)="setEffectiveEndOptions($event.target.value)" class="form-control form-control-sm" id="start_month" formControlName="start_month" ngModel required>
+                        <option value='' disabled selected hidden>Choose</option>
                         <option ngbDropdownToggle *ngFor="let option of effectiveStartOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
@@ -298,6 +299,7 @@
                     </label>
                     <div class="col-sm-4">
                       <select class="form-control form-control-sm" id="end_month" formControlName="end_month" ngModel required>
+                        <option value='' disabled selected hidden>Choose</option>
                         <option *ngFor="let option of effectiveEndOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
