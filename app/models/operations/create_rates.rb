@@ -23,7 +23,8 @@ module Operations
 
         rate_import_hash.run
         Success('Created Rates for given data')
-      rescue
+      rescue => e
+        puts "rates issue, error: #{e.message}"
         Failure({errors: ["Failed to store data from file #{File.basename(files.first)}"]})
       end
     end
