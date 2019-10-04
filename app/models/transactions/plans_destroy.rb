@@ -18,8 +18,7 @@ module Transactions
     end
 
     def destroy(input)
-      @tenant.products.destroy_all
-      state_abbr = @tenant.key.to_s.upcase
+      ::Products::Product.all.destroy_all
       ::Locations::ServiceArea.all.destroy_all
       ::Locations::RatingArea.all.destroy_all
       ::Locations::CountyZip.all.destroy_all
