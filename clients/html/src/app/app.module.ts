@@ -32,6 +32,7 @@ import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
 
 import { HeaderFooterConfigurationService } from "./configuration/header_footer/header_footer_configuration.service";
+import { FontCustomizerService } from "./shared/layouts/font_customizer.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -76,7 +77,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    HeaderFooterConfigurationService.providers()
+    HeaderFooterConfigurationService.providers(),
+    FontCustomizerService.providers()
   ],
   bootstrap: [AppComponent]
 })

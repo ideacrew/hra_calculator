@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HeaderFooterConfigurationProvider, HeaderFooterConfigurationService } from "../../configuration/header_footer/header_footer_configuration.service";
 import { HeaderFooterConfigurationResource } from "../../configuration/header_footer/header_footer_configuration.resources";
-
+import { FontCustomizerService, FontCustomizer } from './font_customizer.service';
 
 @Component({
   selector: 'layout-header',
@@ -14,7 +14,10 @@ export class HeaderComponent implements OnInit {
   primaryColorCode: string;
   marketplaceName: string = "HRA Tool";
 
-  constructor(@Inject(HeaderFooterConfigurationService.PROVIDER_TOKEN) private configurationProvider: HeaderFooterConfigurationProvider) { 
+  constructor(
+    @Inject(HeaderFooterConfigurationService.PROVIDER_TOKEN) private configurationProvider: HeaderFooterConfigurationProvider,
+    @Inject(FontCustomizerService.PROVIDER_TOKEN) private fontCustomizer : FontCustomizer
+    ) {
   }
 
   ngOnInit() {
@@ -32,11 +35,17 @@ export class HeaderComponent implements OnInit {
       this.marketplaceName = resource.marketplace_name;
     }
     var colors = resource.colors;
-    if (colors) {
+    if (colors != null) {
       if (colors.primary_color != null) {
         this.primaryColorCode = colors.primary_color;
+      }
+      if (colors.typefaces != null) {
+        this.applyTypefaceConfiguration(colors.typefaces);
       }
     }
   }
 
+  private applyTypefaceConfiguration(tfc: string) {
+    this.fontCustomizer.customizeFontFromTypefaceUrl(tfc);
+  }
 }
