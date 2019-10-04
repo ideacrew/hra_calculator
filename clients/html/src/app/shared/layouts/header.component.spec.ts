@@ -1,7 +1,6 @@
 import { HeaderComponent } from './header.component';
 import { HeaderFooterConfigurationConsumer } from '../../configuration/header_footer/header_footer_configuration.service';
 import { HeaderFooterConfigurationResource } from '../../configuration/header_footer/header_footer_configuration.resources';
-import { FontCustomizer } from './font_customizer.service';
 
 class MockHFConfigurationProvider {
   getHeaderFooterConfiguration(consumer : HeaderFooterConfigurationConsumer) : any {
