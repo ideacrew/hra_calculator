@@ -2,6 +2,7 @@ import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { HeaderFooterConfigurationResource } from "./header_footer_configuration.resources";
 import { ClassProvider, Injectable } from '@angular/core';
+import { Resource } from '../../resources/json_api';
 
 interface HeaderFooterConfigurationConsumer {
   applyHeaderFooterConfiguration(resource : HeaderFooterConfigurationResource) : void;
@@ -26,12 +27,13 @@ export class HeaderFooterConfigurationService {
   }
 
   getHeaderFooterConfiguration(consumer : HeaderFooterConfigurationConsumer) {
-    this.httpClient.get<HeaderFooterConfigurationResource>(this.apiUrl).subscribe(
-      (res) => {
-        console.log(res)
-        consumer.applyHeaderFooterConfiguration(res);
+    this.httpClient.get<Resource<HeaderFooterConfigurationResource>>(this.apiUrl).subscribe(
+      (res:Resource<HeaderFooterConfigurationResource>) => {
+        console.log(res.data);
+        consumer.applyHeaderFooterConfiguration(res.data);
       },
       (err) => {
+        console.log("GOT ERROR")
         console.log(err)
       }
     );
