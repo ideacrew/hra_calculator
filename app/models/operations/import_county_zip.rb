@@ -6,6 +6,7 @@ module Operations
       file = county_zip_params[:file]
       year = county_zip_params[:year]
       tenant = county_zip_params[:tenant]
+      import_timestamp = county_zip_params[:import_timestamp]
       state_abbreviation = tenant.key.to_s.upcase
 
       begin
@@ -16,11 +17,22 @@ module Operations
         last_row = sheet_data.last_row
         (2..last_row).each do |row_number| # data starts from row 2, row 1 has headers
           row_info = sheet_data.row(row_number)
-          ::Locations::CountyZip.find_or_create_by!({
-            county_name: row_info[@headers["county"]].squish!,
-            zip: row_info[@headers["zip"]].squish!,
-            state: state_abbreviation
+          county_name = row_info[@headers["county"]].squish!
+          zip_code = row_info[@headers["zip"]].squish!
+
+          existing_county = ::Locations::CountyZip.where({
+            state: state_abbreviation,
+            county_name: county_name,
+            zip: zip_code
           })
+          next if existing_county.present?
+
+          ::Locations::CountyZip.new({
+            created_at: import_timestamp,
+            county_name: county_name,
+            zip: zip_code,
+            state: state_abbreviation
+          }).save!
         end
 
         return Success('Created CountyZips for given data')
