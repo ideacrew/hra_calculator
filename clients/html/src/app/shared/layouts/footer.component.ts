@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from './../../../environments/environment';
+import { Component, OnInit, Inject } from '@angular/core';
+import { HeaderFooterConfigurationProvider, HeaderFooterConfigurationService } from "../../configuration/header_footer/header_footer_configuration.service";
+import { HeaderFooterConfigurationResource } from "../../configuration/header_footer/header_footer_configuration.resources";
 
 @Component({
   selector: 'layout-footer',
@@ -11,15 +11,12 @@ export class FooterComponent implements OnInit{
 	customer_support_number: String;
 	benefit_year: number;
 	today: number = Date.now();
-  hostKey: string;
   primaryColorCode: string;
 
-	constructor(private httpClient: HttpClient,) { 
-    if (environment.production) {
-      this.hostKey = window.location.host.split(".",1)[0];
-    } else {
-      this.hostKey = "dc";
-    }
+	constructor(
+    @Inject(HeaderFooterConfigurationService.PROVIDER_TOKEN) private configurationProvider: HeaderFooterConfigurationProvider,
+  ) {
+    this.benefit_year = new Date().getFullYear() + 1;
   }
 
 
@@ -28,16 +25,18 @@ export class FooterComponent implements OnInit{
   }
 
   getInitialInfo() {
-    this.httpClient.get<any>(environment.apiUrl+"/api/configurations/header_footer_config?tenant="+this.hostKey).subscribe(
-      (res) => {
-        console.log(res)
-        this.primaryColorCode = res.data.colors.primary_color;
-        this.customer_support_number = res.data.call_center_phone;
-        this.benefit_year = new Date().getFullYear() + 1;
-      },
-      (err) => {
-        console.log(err)
+    this.configurationProvider.getHeaderFooterConfiguration(this);
+  }
+
+  applyHeaderFooterConfiguration(resource : HeaderFooterConfigurationResource) : void {
+    if (resource.call_center_phone != null) {
+      this.customer_support_number = resource.call_center_phone;
+    }
+    var colors = resource.colors;
+    if (colors != null) {
+      if (colors.primary_color != null) {
+        this.primaryColorCode = colors.primary_color;
       }
-    );
+    }
   }
 }
