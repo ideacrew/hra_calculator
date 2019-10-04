@@ -31,6 +31,8 @@ import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
 
+import { HeaderFooterConfigurationService } from "./configuration/header_footer/header_footer_configuration.service";
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 1,
@@ -73,7 +75,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    }
+    },
+    HeaderFooterConfigurationService.providers()
   ],
   bootstrap: [AppComponent]
 })
