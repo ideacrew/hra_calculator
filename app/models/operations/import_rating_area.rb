@@ -24,9 +24,9 @@ module Operations
           location_ids = locations.map do |loc_record|
             county_zip = ::Locations::CountyZip.where(
               {
-                zip: loc_record['zip'],
+                state: state_abbreviation,
                 county_name: loc_record['county_name'],
-                state: state_abbreviation
+                zip: loc_record['zip']
               }
             ).first
             county_zip._id
@@ -42,7 +42,7 @@ module Operations
             ra.county_zip_ids = location_ids
             ra.save
           else
-            ::Locations::RatingArea.find_or_create_by!(
+            ::Locations::RatingArea.create(
               {
                 active_year: year,
                 exchange_provided_code: rating_area_id,

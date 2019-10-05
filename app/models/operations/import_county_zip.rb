@@ -17,9 +17,9 @@ module Operations
         (2..last_row).each do |row_number| # data starts from row 2, row 1 has headers
           row_info = sheet_data.row(row_number)
           ::Locations::CountyZip.find_or_create_by!({
+            state: state_abbreviation,
             county_name: row_info[@headers["county"]].squish!,
-            zip: row_info[@headers["zip"]].squish!,
-            state: state_abbreviation
+            zip: row_info[@headers["zip"]].squish!
           })
         end
 
