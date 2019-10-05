@@ -14,5 +14,13 @@ module Locations
     # specify which here.
     field :covered_states, type: Array
 
+
+    def county_zip_ids=(ids)
+      if self.county_zip_ids.present?
+        write_attribute(:county_zip_ids, (self.county_zip_ids + ids).uniq)
+      else
+        write_attribute(:county_zip_ids, ids.uniq)
+      end
+    end
   end
 end

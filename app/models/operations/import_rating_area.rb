@@ -25,9 +25,9 @@ module Operations
           location_ids = locations.map do |loc_record|
             county_zip = ::Locations::CountyZip.where(
               {
-                zip: loc_record['zip'],
+                state: state_abbreviation,
                 county_name: loc_record['county_name'],
-                state: state_abbreviation
+                zip: loc_record['zip']
               }
             ).first
             county_zip._id
