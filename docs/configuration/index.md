@@ -1,29 +1,29 @@
 ---
 layout: default
 title: Configuration
-nav_order: 3
+nav_order: 2
 has_children: false
+permalink: /hra_tool/configuration/
+parent: HRA Tool
 ---
+{: .no_toc }
 # Configuration
 
 The HRA Tool includes both a Web-facing Consumer Portal and a private Administrator Portal.  The Admin Portal is where you configure the system to follow the business rules and match the look and feel of your State-based Exchange system.  Unlike the Consumer Portal which is open to public access, the Admin Portal is is protected by account/password authentication and isolated into its own namespace which should be blocked from direct Internet access.
 
-This section explains how to use the Admin Portal to customize the HRA Tool for your site.  These functions include:
-
-1. [Initial Sign In](#enterprise-page---create-your-marketplace)
-1. [Enterprise Page - Create Your Marketplace](#enterprise-page---create-your-marketplace)
-2. [Profile Page - Add Your Brand](#profile-page---add-your-brand)
-3. [Features Page - Configure HRA Tool Calculations](#features-page---configure-hra-tool-calculations)
-4. [Plans Page - Import Plan Information](#plans-page---import-plan-information)
-5. [Tool UI Page - Customize Communication with Your Consumers](#tool-ui-page---customize-communication-with-your-consumers)
+Here you will find step-by-step instructions on how to use the Admin Portal to customize the HRA Tool for your site.  These steps are:
 
 
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## Initial Sign In
 
 After verifying that the HRA Tool server and software is up and running, you may access the Admin Portal by pointing your Web browser to: my_hra_tool_server**/admin**.  This URL will route you to the Admin Portal's sign-in page.  
 
- <img src="https://github.com/ideacrew/hra_calculator/tree/gh-pages/assets/images/Hra_Admin_Portal.png" width="400" align="center" >{: .pl-5 }
+<img src="{{ site.base_url }}/img/hra-admin-portal.png" width="400" alt="sign in page">{: .pl-5 }
 
 Under the HRA Tool [installation][1] process, the system initializes an account with the role: Enterprise Owner.  This account manages all aspects of the HRA Tool system, including accounts with the role: Marketplace Owner.  Use the credentials below to initially sign into the system:
 
