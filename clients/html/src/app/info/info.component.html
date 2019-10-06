@@ -146,7 +146,7 @@
                           <div *ngIf="hraForm.controls['dob'].errors.invalidDate">
                             DOB must be between 01/01/1900 to Today.
                           </div>
-                          <div *ngIf="hraForm.controls['dob'].errors.invalidDateFormat || hraForm.controls['dob'].errors.ngbDate">
+                          <div *ngIf="hraForm.controls['dob'].errors.invalidDateFormat">
                             Please Enter Valid Date Format(MM/DD/YYYY)
                           </div>
                         </div>
