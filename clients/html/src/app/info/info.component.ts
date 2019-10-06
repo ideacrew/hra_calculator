@@ -117,9 +117,7 @@ export class InfoComponent implements OnInit {
     this.showTab(0);
     this.getInitialInfo();
     const today = new Date;
-    console.log(today)
-    this.today = { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDay() - 1 };
-    console.log(this.today)
+    this.today = { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() };
   }
 
   showTab(n) {
