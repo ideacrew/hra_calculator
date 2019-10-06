@@ -20,10 +20,6 @@ function toInteger(value: any): number {
 @Injectable()
 export class UsDateParserFormatter extends NgbDateParserFormatter {
     parse(value: string): NgbDateStruct {
-        var invalidRegex = new RegExp("[^0-9\/]");
-        if (invalidRegex.test(value)) {
-          return null;
-        }
         if (value) {
             const dateParts = value.trim().split('/');
             if (dateParts.length === 1 && isNumber(dateParts[0])) {
