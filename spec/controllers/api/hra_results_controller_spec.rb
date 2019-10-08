@@ -1,11 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe HraResultsController do
+module Api
+RSpec.describe HraResultsController, :dbclean => :after_each do
   extend ::SettingsHelper
-
-  before do
-    DatabaseCleaner.clean
-  end
 
   if !validate_county && !offerings_constrained_to_zip_codes
     context 'hra_payload' do
@@ -352,8 +349,5 @@ RSpec.describe HraResultsController do
       end
     end
   end
-
-  after :all do
-    DatabaseCleaner.clean
-  end
+end
 end
