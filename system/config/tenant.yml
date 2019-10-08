@@ -90,7 +90,7 @@ namespaces:
                               default: '#007bff'
                             - key: :secondary_color
                               type: :swatch
-                              default: '#6c757d'
+                              default: '#868e96'
                             - key: :success_color
                               type: :swatch
                               default: '#28a745'
@@ -102,7 +102,7 @@ namespaces:
                               default: '#ffc107'
                             - key: :info_color
                               type: :swatch
-                              default: '#17a2b8'
+                              default: '#cce5ff'
                       - key: :branding
                         settings:
                           - key: :site_logo

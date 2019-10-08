@@ -20,6 +20,7 @@ export class InfoComponent implements OnInit {
   showNextBtn: boolean =  true;
   hraForm: any;
   countyOptions: any = [];
+  countyPlaceHolder: string = 'choose';
   selectedHouseholdFrequency: string;
   selectedHraType: string;
   primaryColorCode: string;
@@ -89,31 +90,59 @@ export class InfoComponent implements OnInit {
     console.log(this.hraForm);
   }
 
+  checkValue(str, max) {
+    if (str.charAt(0) !== '0' || str == '00') {
+      var num = parseInt(str);
+      if (isNaN(num) || num <= 0 || num > max) num = 1;
+      str = num > parseInt(max.toString().charAt(0)) && num.toString().length == 1 ? '0' + num : num.toString();
+    };
+    return str;
+  };
+
+  checkDateInput(e) {
+    var input = e.target.value;
+    if (/\D\/$/.test(input)) input = input.substr(0, input.length - 3);
+    var values = input.split('/').map(function(v) {
+      return v.replace(/\D/g, '')
+    });
+    if (values[0]) values[0] = this.checkValue(values[0], 12);
+    if (values[1]) values[1] = this.checkValue(values[1], 31);
+    var output = values.map(function(v, i) {
+      return v.length == 2 && i < 2 ? v + ' / ' : v;
+    });
+    e.target.value = output.join('').substr(0, 14);
+  }
+
   ngOnInit() {
     this.showTab(0);
     this.getInitialInfo();
     const today = new Date;
-    console.log(today)
-    this.today = { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDay() - 1 };
-    console.log(this.today)
+    this.today = { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() };
   }
 
   showTab(n) {
     if(n === 1){
+      let invalid = false;
       if(this.hraForm.controls['zipcode'] && !(this.hraForm.controls['zipcode'].valid)){
-        this.hraForm.controls['zipcode'].markAsTouched()
+        this.hraForm.controls['zipcode'].markAsTouched();
+        invalid = true
       }
       if(this.hraForm.controls['county'] && !(this.hraForm.controls['county'].valid)){
-        this.hraForm.controls['county'].markAsTouched()
+        this.hraForm.controls['county'].markAsTouched();
+        invalid = true
       }
       if(this.hraForm.controls['dob'] && !(this.hraForm.controls['dob'].valid)) {
-        this.hraForm.controls['dob'].markAsTouched()
+        this.hraForm.controls['dob'].markAsTouched();
+        invalid = true
       }
       if(!(this.hraForm.controls['household_frequency'].valid) ||
          !(this.hraForm.controls['household_amount'].valid)
         ){
         this.hraForm.controls['household_frequency'].markAsTouched();
         this.hraForm.controls['household_amount'].markAsTouched();
+        invalid = true
+      }
+      if(invalid) {
         return null;
       }
     }
@@ -209,18 +238,25 @@ export class InfoComponent implements OnInit {
       (res) => {
         console.log(res)
         if (res.data.counties.length == 0) {
-          this.countyOptions = ["Zipcode is ouside state"];
+          this.countyOptions = [];
+          this.countyPlaceHolder = 'zipcode is outside state'
+          this.hraForm.patchValue({
+            county: ''
+          })
           this.isCountyDisabled = true
         } else if (res.data.counties.length == 1) {
           this.countyOptions = res.data.counties;
-          this.countyOptions.unshift("Select County")
+          this.countyPlaceHolder = 'choose'
           this.hraForm.patchValue({
-            county: res.data.counties[1]
+            county: res.data.counties[0]
           })
           this.isCountyDisabled = true
         } else {
           this.countyOptions = res.data.counties;
-          this.countyOptions.unshift("Select County")
+          this.countyPlaceHolder = 'choose'
+          this.hraForm.patchValue({
+            county: ''
+          })
           this.isCountyDisabled = false
         }
       },

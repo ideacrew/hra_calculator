@@ -99,7 +99,7 @@
                       <label class="col-sm-3 col-form-label col-form-label-sm" for="county">County</label>
                       <div class="col-sm-4">
                         <select class="form-control form-control-sm" id="county" formControlName="county" [attr.disabled]="isCountyDisabled ? '' : null" required>
-                          <option value='' disabled selected hidden>Choose</option>
+                          <option value='' disabled selected hidden>{{countyPlaceHolder}}</option>
                           <option *ngFor="let option of countyOptions" [ngValue]="option">
                             {{option}}
                           </option>
@@ -131,6 +131,7 @@
                             [minDate]="{year: 1900, month: 1, day: 1}"
                             [maxDate]="today"
                             formControlName="dob"
+                            (input)="checkDateInput($event)"
                             validateDate validateDateFormat required>
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
@@ -145,7 +146,7 @@
                           <div *ngIf="hraForm.controls['dob'].errors.invalidDate">
                             DOB must be between 01/01/1900 to Today.
                           </div>
-                          <div *ngIf="hraForm.controls['dob'].errors.invalidDateFormat" >
+                          <div *ngIf="hraForm.controls['dob'].errors.invalidDateFormat">
                             Please Enter Valid Date Format(MM/DD/YYYY)
                           </div>
                         </div>
@@ -197,7 +198,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" style="text-align: right" (keypress)="numberOnly($event)" maxlength="11" mask="comma_separator" class="form-control" id="household_amount" formControlName="household_amount" ngModel required [attr.disabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null " />
+                        <input type="text" style="text-align: right" maxlength="11" mask="comma_separator.0" class="form-control" id="household_amount" formControlName="household_amount" ngModel required [attr.disabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null " />
                         <div class="input-group-append">
                           <span class="input-group-text">.00</span>
                         </div>
