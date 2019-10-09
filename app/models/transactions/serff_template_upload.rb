@@ -117,6 +117,7 @@ module Transactions
 
     # This step is for Tenants with geographic_rating_area_model as COUNTY/ZIPCODE.
     def process_countyzip_file(input_path)
+      @import_timestamp = DateTime.now
       return Success(input_path) if @tenant.geographic_rating_area_model == 'single'
 
       params = { file: @county_zip_files.first, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
