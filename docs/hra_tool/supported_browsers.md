@@ -9,7 +9,7 @@ nav_order: 9
 
 # Supported Browsers
 
-With [MVP Release](https://ideacrew.github.io/hra_calculator/releases/mvp_release/) of the HRA Tool, the following browser versions are supported. 
+With [MVP Release](https://ideacrew.github.io/hra_calculator/hra_tool/releases/mvp_release/) of the HRA Tool, the following browser versions are supported. 
 
 
 
