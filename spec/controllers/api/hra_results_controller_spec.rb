@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe HraResultsController do
+RSpec.describe Api::HraResultsController do
   extend ::SettingsHelper
 
   before do
