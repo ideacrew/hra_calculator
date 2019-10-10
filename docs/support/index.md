@@ -10,7 +10,7 @@ nav_order: 4
 
 The HRA Tool project's scope of work covers development of the initial application plus installation tools and documentation.  Although the application doesn't come with free support, as a state based exchange using or interested in using the HRA Tool you have options:
 
-* **For just about anything to do with the HRA Tool**, this Community site is your first stop.  It includes documentation on [project origin](../project_overview), how to [install](../hra_tool/installation) the application, [configure](../hra_tool/configuration) it for your SBE, understand how it [determines affordability](../hra_tool/affordability_determination) and more. 
+* **For just about anything to do with the HRA Tool**, this Community site is your first stop.  It includes documentation on [project origin](https://ideacrew.github.io/hra_calculator/hra_tool_project/), how to [install](../hra_tool/installation) the application, [configure](../hra_tool/configuration) it for your SBE, understand how it [determines affordability](../hra_tool/affordability_determination) and more. 
 
 * **If you are an SBE not currently using the HRA Tool and have questions or need assistance with setup**, please [contact State Health and Value Strategies](../contact_us) .
 
