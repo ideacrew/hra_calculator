@@ -143,4 +143,4 @@ A template mapping file is available here:
 ## Tool UI Page - Customize Communication with Your Consumers
 
 
-[1]: ../../installation
+[1]: ../installation
