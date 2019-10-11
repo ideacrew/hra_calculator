@@ -59,7 +59,7 @@ The **Profile** page is where you manage the User Interface (UI) theme and other
 
 ## Features Page - Configure HRA Tool Calculations
 
-The **Features** page offers configuration options to support your SBE's policies and plan offerings.  It's important to set your Marketplace's options before importing plan information.  As explained in the [Importing Plan Information](#importing-plan-information) section, these settings determine the type of data needed to determine HRA Affordability.  If these selections aren't made, the Plan import service may not accept your files, complaining about missing data.
+The **Features** page offers configuration options to support your SBE's policies and plan offerings.  It's important to set your Marketplace's options before importing plan information.  As explained in the [Importing Plan Information](#plans-page---import-plan-information) section, these settings determine the type of data needed to determine HRA Affordability.  If these selections aren't made, the Plan import service may not accept your files, complaining about missing data.
 
 There are two primary configuration settings on this page:
 
