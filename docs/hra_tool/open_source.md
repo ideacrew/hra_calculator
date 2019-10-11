@@ -10,7 +10,7 @@ nav_order: 1
 
 # Open Source
 
-The HRA Tool will always be open source.  The source code is available on [Github](https://github.com/ideacrew/hra_calculator/) .  It's published under the[MIT license](https://github.com/ideacrew/hra_calculator/tree/master/LICENSE.txt)
+The HRA Tool will always be open source.  The source code is available on [Github](https://github.com/ideacrew/hra_calculator/) .  It's published under the [MIT license](https://github.com/ideacrew/hra_calculator/blob/master/LICENSE)
 
 # FAQ
 
