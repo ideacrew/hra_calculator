@@ -14,22 +14,27 @@ module Operations
         sheet = xlsx.sheet(0)
         @result_hash = Hash.new {|results, k| results[k] = []}
 
-        (2..sheet.last_row).each do |i|
-          @result_hash[sheet.cell(i, 4)] << {
+        if tenant.geographic_rating_area_model == 'county'
+          (2..sheet.last_row).each do |i|
+            @result_hash[sheet.cell(i, 4)] << {"county_name" => sheet.cell(i, 2)}
+          end
+        else
+          (2..sheet.last_row).each do |i|
+            @result_hash[sheet.cell(i, 4)] << {
               "county_name" => sheet.cell(i, 2),
               "zip" => sheet.cell(i, 1)
-          }
+            }
+          end
         end
-        @result_hash.each do |rating_area_id, locations|
 
+        @result_hash.each do |rating_area_id, locations|
           location_ids = locations.map do |loc_record|
-            county_zip = ::Locations::CountyZip.where(
-              {
-                state: state_abbreviation,
-                county_name: loc_record['county_name'],
-                zip: loc_record['zip']
-              }
-            ).first
+            query_criteria = {
+                               state: state_abbreviation,
+                               county_name: loc_record['county_name']
+                             }
+            query_criteria.merge!({zip: loc_record['zip']}) unless tenant.geographic_rating_area_model == 'county'
+            county_zip = ::Locations::CountyZip.where(query_criteria).first
             county_zip._id
           end
 

@@ -12,7 +12,7 @@ module Products::Operations
 
       member_premiums = products.inject([]) do |premiums_array, product|
         begin
-          premium_tables = if ['zipcode'].include?(tenant.geographic_rating_area_model)
+          premium_tables = unless (tenant.geographic_rating_area_model == 'single')
             product.premium_tables.where(:rating_area_id => hra_object.rating_area_id).effective_period_cover(date)
           else
             product.premium_tables.effective_period_cover(date)

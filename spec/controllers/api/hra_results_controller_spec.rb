@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe HraResultsController do
+RSpec.describe Api::HraResultsController do
   extend ::SettingsHelper
 
   before do
@@ -14,7 +14,7 @@ RSpec.describe HraResultsController do
           {'hra_result' => { state: 'District of Columbia', dob: '2000-10-10', household_frequency: 'annually',
             household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
             hra_frequency: 'monthly', hra_amount: 100
-            }
+            }, tenant: 'dcas'
           }
         end
 
@@ -69,7 +69,7 @@ RSpec.describe HraResultsController do
           {'hra_result' => { state: '', dob: '2000-10-10', household_frequency: 'annually',
             household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
             hra_frequency: 'monthly', hra_amount: 100
-            }
+            }, tenant: 'dcas'
           }
         end
 
@@ -101,82 +101,6 @@ RSpec.describe HraResultsController do
       end
     end
 
-    context 'hra_information' do
-      before do
-        get :hra_information
-      end
-
-      it 'should be successful' do
-        expect(response).to have_http_status(:success)
-      end
-
-      it 'should return response in JSON format' do
-        expect{JSON.parse(response.body)}.not_to raise_error
-      end
-
-      context 'for response data' do
-        before do
-          @result = JSON.parse(response.body)
-        end
-
-        it 'should have success status' do
-          expect(@result['status']).to eq('success')
-        end
-
-        it 'should have success status' do
-          expect(@result['data'].class).to eq(::Hash)
-        end
-
-        it 'should have all the keys for the data' do
-          attr_keys = @result['data'].keys
-          HraDefaulter.schema.keys.map(&:name).map(&:to_s).each do |keyy|
-            expect(attr_keys.include?(keyy)).to be_truthy
-          end
-        end
-
-        it 'should have all the values for the data' do
-          @result['data'].values.each do |value|
-            expect(value).not_to be_nil
-          end
-        end
-      end
-    end
-
-    context 'hra_counties' do
-      before do
-        get :hra_counties
-      end
-
-      it 'should be successful' do
-        expect(response).to have_http_status(:success)
-      end
-
-      it 'should return response in JSON format' do
-        expect{JSON.parse(response.body)}.not_to raise_error
-      end
-
-      context 'for response data' do
-        before do
-          @result = JSON.parse(response.body)
-        end
-
-        it 'should have success status' do
-          expect(@result['status']).to eq('success')
-        end
-
-        it 'should have success status' do
-          expect(@result['data'].class).to eq(::Hash)
-        end
-
-        it 'should have the key for the data' do
-          expect(@result['data'].keys).to eq(['counties'])
-        end
-
-        it 'should return empty array' do
-          expect(@result['data'].values.first).to be_empty
-        end
-      end
-    end
   elsif validate_county && offerings_constrained_to_zip_codes
     let(:countyzip) { FactoryBot.create(:locations_county_zip) }
 
@@ -186,7 +110,7 @@ RSpec.describe HraResultsController do
           {'hra_result' => { state: 'Massachusetts', dob: '2000-10-10', household_frequency: 'annually',
             household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
             hra_frequency: 'monthly', hra_amount: 100, zipcode: countyzip.zip, county: countyzip.county_name
-            }
+            }, tenant: 'dcas'
           }
         end
 
@@ -241,7 +165,7 @@ RSpec.describe HraResultsController do
           {'hra_result' => { state: '', dob: '2000-10-10', household_frequency: 'annually',
             household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
             hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: ''
-            }
+            }, tenant: 'dcas'
           }
         end
 
@@ -273,84 +197,6 @@ RSpec.describe HraResultsController do
       end
     end
 
-    context 'hra_information' do
-      before do
-        get :hra_information
-      end
-
-      it 'should be successful' do
-        expect(response).to have_http_status(:success)
-      end
-
-      it 'should return response in JSON format' do
-        expect{JSON.parse(response.body)}.not_to raise_error
-      end
-
-      context 'for response data' do
-        before do
-          @result = JSON.parse(response.body)
-        end
-
-        it 'should have success status' do
-          expect(@result['status']).to eq('success')
-        end
-
-        it 'should have success status' do
-          expect(@result['data'].class).to eq(::Hash)
-        end
-
-        it 'should have all the keys for the data' do
-          attr_keys = @result['data'].keys
-          HraDefaulter.schema.keys.map(&:name).map(&:to_s).each do |keyy|
-            expect(attr_keys.include?(keyy)).to be_truthy
-          end
-        end
-
-        it 'should have all the values for the data' do
-          @result['data'].values.each do |value|
-            expect(value).not_to be_nil
-          end
-        end
-      end
-    end
-
-    context 'hra_counties' do
-      let(:countyzipcode) { FactoryBot.create(:locations_county_zip) }
-
-      before do
-        get :hra_counties, params: {hra_zipcode: countyzipcode.zip.to_s}
-      end
-
-      it 'should be successful' do
-        expect(response).to have_http_status(:success)
-      end
-
-      it 'should return response in JSON format' do
-        expect{JSON.parse(response.body)}.not_to raise_error
-      end
-
-      context 'for response data' do
-        before do
-          @result = JSON.parse(response.body)
-        end
-
-        it 'should have success status' do
-          expect(@result['status']).to eq('success')
-        end
-
-        it 'should have success status' do
-          expect(@result['data'].class).to eq(::Hash)
-        end
-
-        it 'should have the key for the data' do
-          expect(@result['data'].keys).to eq(['counties'])
-        end
-
-        it 'should have all the values for the data' do
-          expect(@result['data'].values.first).to eq([countyzipcode.county_name])
-        end
-      end
-    end
   end
 
   after :all do

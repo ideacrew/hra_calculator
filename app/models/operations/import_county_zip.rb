@@ -18,21 +18,14 @@ module Operations
         (2..last_row).each do |row_number| # data starts from row 2, row 1 has headers
           row_info = sheet_data.row(row_number)
           county_name = row_info[@headers["county"]].squish!
-          zip_code = row_info[@headers["zip"]].squish!
-
-          existing_county = ::Locations::CountyZip.where({
-            state: state_abbreviation,
-            county_name: county_name,
-            zip: zip_code
-          })
+          zip_code = (tenant.geographic_rating_area_model == 'county') ? nil : row_info[@headers["zip"]].squish!
+          query_criteria = {state: state_abbreviation, county_name: county_name}
+          query_criteria.merge!({zip: zip_code}) unless tenant.geographic_rating_area_model == 'county'
+          existing_county = ::Locations::CountyZip.where(query_criteria)
           next if existing_county.present?
 
-          ::Locations::CountyZip.new({
-            created_at: import_timestamp,
-            county_name: county_name,
-            zip: zip_code,
-            state: state_abbreviation
-          }).save!
+          params = query_criteria.merge!({created_at: import_timestamp})
+          ::Locations::CountyZip.new(params).save!
         end
 
         return Success('Created CountyZips for given data')

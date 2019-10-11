@@ -7,8 +7,7 @@ module Transactions
     step :check_for_zip
     step :unzip_serff
     step :validate_and_assign_serff_folder_and_files # Every Folder should have expected files
-    step :process_for_countyzips # This step is for Tenants with geographic_rating_area_model as COUNTY.
-    step :process_countyzip_file # This step is for Tenants with geographic_rating_area_model as ZIPCODE.
+    step :process_countyzip_file # This step is for Tenants with geographic_rating_area_model as COUNTY/ZIPCODE.
     step :process_serff_templates
 
     private
@@ -99,7 +98,7 @@ module Transactions
           end
         end
 
-        if @tenant.geographic_rating_area_model == 'zipcode'
+        unless @tenant.geographic_rating_area_model == 'single'
           if @county_zip_files.count == 1
             cz_file_contract = ::Validations::CountyZipFileContract.new.call({county_zip_file: @county_zip_files.first})
 
@@ -116,32 +115,17 @@ module Transactions
       Success(path)
     end
 
-    # This step is for Tenants with geographic_rating_area_model as COUNTY.
-    def process_for_countyzips(input_path)
-      @import_timestamp = DateTime.now
-      return Success(input_path) unless @tenant.geographic_rating_area_model == 'county'
-
-      cz_params = { cz_files: @sa_paths, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
-      icz_result = ::Operations::StoreCountyZip.new.call(cz_params)
-
-      if icz_result.success?
-        Success(input_path)
-      else
-        destroy_countyzips(@tenant, @import_timestamp)
-        Failure({errors: ["Unable to create CountyZips for given counties per SA serff_templates"]})
-      end
-    end
-
-    # This step is for Tenants with geographic_rating_area_model as ZIPCODE.
+    # This step is for Tenants with geographic_rating_area_model as COUNTY/ZIPCODE.
     def process_countyzip_file(input_path)
-      return Success(input_path) unless @tenant.geographic_rating_area_model == 'zipcode'
+      @import_timestamp = DateTime.now
+      return Success(input_path) if @tenant.geographic_rating_area_model == 'single'
 
       params = { file: @county_zip_files.first, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
       cz_process_result = Transactions::CountyZipFile.new.call(params)
       if cz_process_result.success?
         Success(input_path)
       else
-        destroy_countyzips(tenant, import_timestamp)
+        destroy_countyzips(@tenant, @import_timestamp)
         Failure({errors: ["Unable to create CountyZips/RatingArea for given counties per #{params[:file]}"]})
       end
     end

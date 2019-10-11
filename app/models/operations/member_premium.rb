@@ -9,7 +9,7 @@ module Operations
         hra_object.age = ::Operations::AgeOn.new.call(hra_object).success
       end
 
-      if ['zipcode'].include?(tenant.geographic_rating_area_model)
+      if ['zipcode', 'county'].include?(tenant.geographic_rating_area_model)
         rating_area_result = ::Locations::Operations::SearchForRatingArea.new.call(hra_object)
         if rating_area_result.success?
           hra_object.rating_area_id = rating_area_result.success.id.to_s

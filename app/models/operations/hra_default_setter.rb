@@ -5,6 +5,7 @@ module Operations
 
     def call(key)
       counties = ::Locations::CountyZip.all.where(state: key.to_s.upcase).pluck(:county_name).uniq
+      counties.sort!
       # TODO: Change this in year 2020 to ::Date.today.year
       year = ::Date.today.year + 1
 

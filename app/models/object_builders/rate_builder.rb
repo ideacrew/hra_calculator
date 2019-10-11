@@ -12,7 +12,7 @@ module ObjectBuilders
       @rating_area_id_cache = {}
       @rating_area_cache = {}
       @tenant = rate_hash[:tenant]
-      @rating_area_id_required = (@tenant.geographic_rating_area_model == 'zipcode')
+      @rating_area_id_required = (@tenant.geographic_rating_area_model != 'single')
       @premium_table_cache = Hash.new {|h, k| h[k] = Hash.new}
       @action = "new"
       FileUtils.mkdir_p(File.dirname(@log_path)) unless File.directory?(File.dirname(@log_path))
@@ -56,7 +56,7 @@ module ObjectBuilders
       (20..65).each do |metlife_age|
         @metlife_age = metlife_age
         key = "#{@rate[:plan_id]},#{@rate[:effective_date].to_date.year}"
-        rating_area = @rate[:rate_area_id].gsub("Rating Area ", "R-MA00")
+        rating_area = @rate[:rate_area_id]
         @results[key] << {
           age: metlife_age,
           start_on: @rate[:effective_date],
@@ -80,7 +80,7 @@ module ObjectBuilders
         calculate_and_build_metlife_premium_tables
       else
         key = "#{@rate[:plan_id]},#{@rate[:effective_date].to_date.year}"
-        rating_area = @rate[:rate_area_id].gsub("Rating Area ", "R-MA00")
+        rating_area = @rate[:rate_area_id]
         @results[key] << {
           age: assign_age,
           start_on: @rate[:effective_date],

@@ -51,7 +51,7 @@ module Transactions
     def persist(params)
       # params = { file: @county_zip_files.first, tenant: @tenant, year: @year, import_timestamp: @import_timestamp }
       @tenant = params[:tenant]
-      return Success("CountyZips not needed") unless @tenant.geographic_rating_area_model == 'zipcode'
+      return Success("CountyZips not needed") if @tenant.geographic_rating_area_model == 'single'
       county_zip_initial_count = Locations::CountyZip.all.count
       county_zip_result = ::Operations::ImportCountyZip.new.call(params)
       if county_zip_result.success?

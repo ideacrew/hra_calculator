@@ -9,12 +9,13 @@ module Locations::Operations
       zip_code = hra_object.zipcode
       year = hra_object.start_month.year
       state_abbreviation = hra_object.tenant.to_s.upcase
-
-      county_zip_ids = ::Locations::CountyZip.where(
-        :zip => zip_code,
-        :county_name => county_name,
-        :state => state_abbreviation
-      ).pluck(:id)
+      tenant = Tenants::Tenant.find_by_key(hra_object.tenant)
+      query_criteria = {
+        :state => state_abbreviation,
+        :county_name => county_name
+      }
+      query_criteria.merge!({:zip => zip_code}) if tenant.geographic_rating_area_model == 'zipcode'
+      county_zip_ids = ::Locations::CountyZip.where(query_criteria).pluck(:id).uniq
 
       rating_area = ::Locations::RatingArea.where(
         "active_year" => year,
