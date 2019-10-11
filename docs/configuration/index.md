@@ -142,5 +142,22 @@ A template mapping file is available here:
 
 ## Tool UI Page - Customize Communication with Your Consumers
 
+In the [MVP Release](https://ideacrew.github.io/hra_calculator/hra_tool/releases/mvp_release/), this page allows the Enterprise owner and/or Marketplace owners to directly input desired text and format for each of the following attributes. At installation the platform will come prepopulated with the "Current Text". These attributes may appear across multiple pages in the anonymous user experience. 
+
+| Template Name	| Current Text |
+|:------------- |:------------ |
+| page_title | HRA Affordability Tool |
+| a_tax_credit | a tax credit	|
+| market_place | MARKETPLACE |
+| how_to_enroll |	HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC |
+| off_market | similar coverage off Marketplace	|
+| results_page_help_text_1 | The results above are based on the information provided, which has not been independently verified. This is not a determination that you are eligible for a tax credit. |
+| results_page_help_text_2 | When you’re asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time. |
+| answer_no |	Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer). |
+| aca_compliant |	an ACA-compliant plan off Marketplace. Ask your employer about your options. |
+| minimum_essential_coverage | minimum essential coverage |
+| minimum_essential_coverage_link |	https://www.healthcare.gov/fees/plans-that-count-as-coverage/ |
+| short_term_plan | such as a short-term plan |
+
 
 [1]: ../installation
