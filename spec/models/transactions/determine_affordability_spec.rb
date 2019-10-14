@@ -76,7 +76,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
         context 'for response data' do
           before do
-            @result = @determined_result.success
+            @result ||= @determined_result.success
           end
 
           it 'should return a value of class Hash' do
@@ -108,7 +108,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
         context 'for response data' do
           before do
-            @result = @determined_result.success
+            @result ||= @determined_result.success
           end
 
           it 'should return a value of class Hash' do
@@ -148,7 +148,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
       context 'for response data' do
         before do
-          @result = @determined_result.failure
+          @result ||= @determined_result.failure
         end
 
         it 'should return a value of class Hash' do
@@ -213,7 +213,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
         context 'for response data' do
           before do
-            @result = @determined_result.success
+            @result ||= @determined_result.success
           end
 
           it 'should return a value of class Hash' do
@@ -245,7 +245,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
         context 'for response data' do
           before do
-            @result = @determined_result.success
+            @result ||= @determined_result.success
           end
 
           it 'should return a value of class Hash' do
@@ -285,7 +285,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
       context 'for response data' do
         before do
-          @result = @determined_result.failure
+          @result ||= @determined_result.failure
         end
 
         it 'should return a value of class Hash' do
@@ -343,7 +343,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
         context 'for response data' do
           before do
-            @result = @determined_result.success
+            @result ||= @determined_result.success
           end
 
           it 'should return a value of class Hash' do
@@ -375,7 +375,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
         context 'for response data' do
           before do
-            @result = @determined_result.success
+            @result ||= @determined_result.success
           end
 
           it 'should return a value of class Hash' do
@@ -415,7 +415,7 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
       context 'for response data' do
         before do
-          @result = @determined_result.failure
+          @result ||= @determined_result.failure
         end
 
         it 'should return a value of class Hash' do

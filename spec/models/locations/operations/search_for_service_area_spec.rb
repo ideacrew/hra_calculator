@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each do
+describe ::Locations::Operations::SearchForServiceArea, :dbclean => :after_each do
   before do
     DatabaseCleaner.clean
     enterprise = Enterprises::Enterprise.new(owner_organization_name: 'OpenHBX')
@@ -34,8 +34,8 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
     result.success
   end
 
-  let!(:rating_area) {FactoryBot.create(:locations_rating_area, active_year: 2020)}
-  let!(:countyzip) {::Locations::CountyZip.find(rating_area.county_zip_ids.first)}
+  let!(:countyzip) {FactoryBot.create(:locations_county_zip)}
+  let!(:search_areas) {FactoryBot.create(:locations_service_area, active_year: 2020, covered_states: [], county_zip_ids: [countyzip.id])}
 
   describe 'tenant with age_rated and zipcode' do
     let(:params) do
@@ -50,31 +50,31 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
 
     context 'for success case' do
       before :each do
-        @search_rating_area_result ||= subject.call(params)
+        @search_search_areas_result ||= subject.call(params)
       end
 
       it 'should return success' do
-        expect(@search_rating_area_result.success?).to be_truthy
+        expect(@search_search_areas_result.success?).to be_truthy
       end
 
-      it 'should return a valid Rating Area object id' do
-        rating_area_id = @search_rating_area_result.success
-        rating_area = ::Locations::RatingArea.find(rating_area_id)
-        expect(rating_area).to be_truthy
+      it 'should return valid Service Area object ids' do
+        search_areas_ids = @search_search_areas_result.success
+        search_areas = ::Locations::ServiceArea.find(search_areas_ids.first)
+        expect(search_areas).to be_truthy
       end
     end
 
     context 'for failure case' do
       before :each do
-        @search_rating_area_result ||= subject.call(params.merge!({zipcode: 20001}))
+        @search_search_areas_result ||= subject.call(params.merge!({zipcode: 20001}))
       end
 
       it 'should return failure' do
-        expect(@search_rating_area_result.failure?).to be_truthy
+        expect(@search_search_areas_result.failure?).to be_truthy
       end
 
       it 'should return errors' do
-        expect(@search_rating_area_result.failure).to eq({:errors=>["Unable to find Rating Area for given data"]})
+        expect(@search_search_areas_result.failure).to eq({:errors=>["Could Not find Service Areas for the given data"]})
       end
     end
   end
@@ -94,31 +94,31 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
 
     context 'for success case' do
       before :each do
-        @search_rating_area_result ||= subject.call(params)
+        @search_search_areas_result ||= subject.call(params)
       end
 
       it 'should return success' do
-        expect(@search_rating_area_result.success?).to be_truthy
+        expect(@search_search_areas_result.success?).to be_truthy
       end
 
-      it 'should return a valid Rating Area object id' do
-        rating_area_id = @search_rating_area_result.success
-        rating_area = ::Locations::RatingArea.find(rating_area_id)
-        expect(rating_area).to be_truthy
+      it 'should return valid Service Area object ids' do
+        search_areas_ids = @search_search_areas_result.success
+        search_areas = ::Locations::ServiceArea.find(search_areas_ids.first)
+        expect(search_areas).to be_truthy
       end
     end
 
     context 'for failure case' do
       before :each do
-        @search_rating_area_result ||= subject.call(params.merge!({county: 'County'}))
+        @search_search_areas_result ||= subject.call(params.merge!({county: 'County'}))
       end
 
       it 'should return failure' do
-        expect(@search_rating_area_result.failure?).to be_truthy
+        expect(@search_search_areas_result.failure?).to be_truthy
       end
 
       it 'should return errors' do
-        expect(@search_rating_area_result.failure).to eq({:errors=>["Unable to find Rating Area for given data"]})
+        expect(@search_search_areas_result.failure).to eq({:errors=>["Could Not find Service Areas for the given data"]})
       end
     end
   end
@@ -137,15 +137,15 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
 
     context 'for success case' do
       before :each do
-        @search_rating_area_result ||= subject.call(params)
+        @search_search_areas_result ||= subject.call(params)
       end
 
       it 'should return success' do
-        expect(@search_rating_area_result.success?).to be_truthy
+        expect(@search_search_areas_result.success?).to be_truthy
       end
 
-      it 'should not return any Rating Area object id' do
-        expect(@search_rating_area_result.success).to be_nil
+      it 'should not return any Service Area object ids' do
+        expect(@search_search_areas_result.success).to be_empty
       end
     end
   end

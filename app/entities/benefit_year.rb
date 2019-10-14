@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BenefitYear < Dry::Struct
   transform_keys(&:to_sym)
 

@@ -1,12 +1,22 @@
+# frozen_string_literal: true
+
 module Transactions
   class DetermineAffordability
     include Dry::Transaction
 
+    # init_benefit_year BenefitYear: expected_contribution, calendar_year(start_month, year)
+    # init_benefit_year Tenant: key(tenant), name(state)
+    # filter_premium Member: date_of_birth(dob), age(age), gross_income(household_amount), income_frequency(household_frequency), county(county), zipcode(zipcode), premium_age(age_lookup), premium_amount(member_premium)
+    # filter_premium LowCostReferencePlan: plan_name(plan_name), hios_id(hios_id), carrier_name(carrier_name), service_area_ids(service_area_ids), rating_area_id(rating_area_id)
+    # compare_benefit Hra: cost(hra), kind(hra_type), effective_start_date(start_month), effective_end_date(end_month), reimburse_amount(hra_amount), reimburse_frequency(hra_frequency), determination(hra_determination)
+
     step :validate
-    step :init_hra_object
-    step :find_member_premium
-    step :calculate_hra_cost
-    step :determine_affordability
+    step :init_benefit_year
+    step :fetch_rating_area
+    step :filter_plans
+    step :filter_premium
+    step :calculate_benefit
+    step :compare_benefit
     step :load_results_defaulter
 
     def validate(params)
@@ -23,48 +33,71 @@ module Transactions
       end
     end
 
-    def init_hra_object(input)
-      hra_obj = ::Operations::InitializeHra.new.call(input.to_h).success
-      Success(hra_obj)
+    def init_benefit_year(params)
+      benefit_year_obj = ::Enterprises::BenefitYear.where(calendar_year: params[:start_month].year).first
+      return Failure(params.merge!({errors: ["Unable to find BenefitYear object for given start_month date: #{params[:start_month]}"]})) unless benefit_year_obj
+
+      @benefit_year = ::BenefitYear.new({expected_contribution: benefit_year_obj.expected_contribution, calendar_year: benefit_year_obj.calendar_year})
+      Success(params.to_h.merge!({errors: []}))
     end
 
-    def find_member_premium(hra_obj)
-      member_premium_result = ::Operations::MemberPremium.new.call(hra_obj)
-      if member_premium_result.success?
-        sucess_res = member_premium_result.success
-        hra_obj.member_premium = sucess_res.first
-        hra_obj.carrier_name = sucess_res[1]
-        hra_obj.hios_id = sucess_res[2]
-        hra_obj.plan_name = sucess_res[3]
-        Success(hra_obj)
+    def fetch_rating_area(params)
+      params = params.to_h
+      rating_area_result = ::Locations::Operations::SearchForRatingArea.new.call(params)
+
+      if rating_area_result.success?
+        Success(params.merge!({rating_area_id: rating_area_result.success}))
       else
-        Failure(hra_obj.to_h)
+        Failure(params.merge!(rating_area_result.failure))
       end
     end
 
-    def calculate_hra_cost(hra_object)
-      annual_household_income = ::Operations::AnnualAmount.new.call({frequency: hra_object.household_frequency, amount: hra_object.household_amount})
-      annual_hra_amount = ::Operations::AnnualAmount.new.call({frequency: hra_object.hra_frequency, amount: hra_object.hra_amount})
-      hra_object.hra = begin
-                         ((hra_object.member_premium * 12) - annual_hra_amount)/annual_household_income
-                       rescue => e
-                         hra_object.errors += ['Could Not calculate hra for the given data']
-                         return Failure(hra_object.to_h)
-                       end
-      Success(hra_object)
+    def filter_plans(params)
+      params = params.to_h
+      fetch_products_result = ::Products::Transactions::FetchProducts.new.call(params)
+
+      if fetch_products_result.success?
+        Success(params.merge!({plans_query_criteria: fetch_products_result.success}))
+      else
+        Failure(params.merge!(fetch_products_result.failure))
+      end
     end
 
-    def determine_affordability(hra_object)
-      expected_contribution = 0.0978 # TODO: read this from the DB/Settings
-      hra_object.hra_determination = expected_contribution >= hra_object.hra ? :affordable : :unaffordable
-      Success(hra_object)
+    def filter_premium(params)
+      params = params.to_h
+      lcrp_result = ::Products::Operations::LowCostReferencePlanCost.new.call(params)
+      return Failure(params.merge!(lcrp_result.failure)) if lcrp_result.failure?
+
+      sucess_res = lcrp_result.success
+      params.merge!({member_premium: sucess_res.first,
+                     carrier_name: sucess_res[1],
+                     hios_id: sucess_res[2],
+                     plan_name: sucess_res[3]})
+      Success(params)
     end
 
-    def load_results_defaulter(hra_object)
-      hra_results_setter = ::Operations::HraDefaultResultsSetter.new.call(hra_object.tenant)
-      result_hash = hra_object.to_h
-      result_hash.merge!(hra_results_setter.success.to_h)
-      Success(result_hash)
+    def calculate_benefit(params)
+      params = params.to_h
+      calculate_benefit_result = ::Transactions::CalculateBenefit.new.call(params)
+
+      if calculate_benefit_result.success?
+        Success(params.merge!({hra: calculate_benefit_result.success}))
+      else
+        Failure(params.merge!(calculate_benefit_result.failure))
+      end
+    end
+
+    def compare_benefit(params)
+      params = params.to_h
+      hra_determination = @benefit_year.expected_contribution >= params[:hra] ? :affordable : :unaffordable
+      Success(params.merge!({hra_determination: hra_determination}))
+    end
+
+    def load_results_defaulter(params)
+      params = params.to_h
+      hra_results_setter = ::Operations::HraDefaultResultsSetter.new.call(params[:tenant])
+      params.merge!(hra_results_setter.success.to_h)
+      Success(params)
     end
   end
 end

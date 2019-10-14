@@ -60,7 +60,7 @@ export class InfoComponent implements OnInit {
     if (environment.production) {
       this.hostKey = window.location.host.split(".",1)[0];
     } else {
-      this.hostKey = "dc";
+      this.hostKey = "ma";
     }
   }
 

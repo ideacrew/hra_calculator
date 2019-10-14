@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Validations
   class HraContract < Dry::Validation::Contract
     include ::SettingsHelper

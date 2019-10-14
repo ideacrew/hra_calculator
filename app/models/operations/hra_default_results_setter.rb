@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Operations
   class HraDefaultResultsSetter
     include Dry::Transaction::Operation

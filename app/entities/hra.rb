@@ -7,8 +7,10 @@ class Hra < Dry::Struct
   HraMap = { ichra: "Individual Coverage HRA", qsehra: "Qualified Small Employer"  }
 
   attribute :kind, Types::String # :ichra or :qsehra
-  attribute :benefit_year_id, Types::String
-  attribute :effective_date, Types::Date
-  attribute :monthly_reimburse_amount, Types::Float
-
+  attribute :effective_start_date, Types::Date
+  attribute :effective_end_date, Types::Date
+  attribute :reimburse_amount, Types::Float
+  attribute :reimburse_frequency, Types::Float
+  attribute :cost, Types::Float
+  attribute :determination, Types::String
 end
