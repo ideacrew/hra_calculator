@@ -91,7 +91,7 @@ The HRA Tool accepts source data in one of two file formats, depending on the co
 | service_areas.xlsx | Plan Service Areas in SERFF Excel format | MS Excel Open XML | 
 | county_zipcode.xlsx | Plan Service Areas in SERFF Excel format | MS Excel Open XML| 
 
-The **Import SERFF Template** feature accepts plan data sets in zip file format structured as shown below. In [Release 0.2.0](), there was update provided to improve accuracy of the affordability alogorithm requiring, modifications to plan data requirements.
+The **Import SERFF Template** feature accepts plan data sets in zip file format structured as shown below. In [Release 0.2.0](https://ideacrew.github.io/hra_calculator/hra_tool/releases/release_0.2.0/), there was update provided to improve accuracy of the affordability alogorithm requiring, modifications to plan data requirements.
 
 ### Release 0.2.0 UPDATE
 
