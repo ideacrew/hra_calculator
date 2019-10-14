@@ -13,7 +13,7 @@ The HRA Tool offers consumers a simple, anonymous Web interface to enter minimal
 
 ## Geographic Rating Models
 
-To achieve the determination, the employee will enter their specific information that is uniquely required by their state’s [geographic rating area model](..features-page---configure-hra-tool-calculations). 
+To achieve the determination, the employee will enter their specific information that is uniquely required by their state’s [geographic rating area model](https://ideacrew.github.io/hra_calculator/hra_tool/configuration/#features-page---configure-hra-tool-calculations). 
 
 ## HRA Based Calculations
 
