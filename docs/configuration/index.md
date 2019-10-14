@@ -91,7 +91,17 @@ The HRA Tool accepts source data in one of two file formats, depending on the co
 | service_areas.xlsx | Plan Service Areas in SERFF Excel format | MS Excel Open XML | 
 | county_zipcode.xlsx | Plan Service Areas in SERFF Excel format | MS Excel Open XML| 
 
-The **Import SERFF Template** feature accepts plan data sets in zip file format structured as shown here:
+The **Import SERFF Template** feature accepts plan data sets in zip file format structured as shown below. In [Release 0.2.0](), there was update provided to improve accuracy of the affordability alogorithm requiring, modifications to plan data requirements.
+
+### Release 0.2.0 UPDATE
+
+1. SERFF Templates will be the top-level folder
+1. Each Carrier will have its own named folder nested within the SERFF Templates folder
+1. Each Carrier folder must contain:
+	 - Service Area template in .xlsx format
+	 - Plan and Benefit template in .xml format
+	 - Rates template in .xml format
+1. The County / ZipCode mapping file is required for all states and must be in .xlsx format. The caveat is that only the states that use zip-code geographic rating areas need to populate the zip-code values in the table, otherwise the zip-code rows can be left blank under the zip-code header. __Important: The rating area naming convention used in the County / ZipCode mapping file must identically match the naming convention used in the Rates templates. The County / ZipCode file is not to be nested within a Carrier folder, but rather have its own folder nested within the SERFF Templates folder.__ An example of the zip file layout is found below:
 
 
 ```
@@ -104,36 +114,14 @@ serff_templates.zip
        |- plan_and_benefits.xml
        |- rates.xml
        |- service_areas.xlsx
+  |- county_zipcode.xlsx
+  
 ```
-
 
 The zip file set is organized into directories by carrier.  Names given to the carrier directories will appear in the plan table carrier column.  For best results, use snake case (words seperated by underscore '_') to name them.  For example, a directory named "first_carrier_name" will appear in the plan table as: "First Carrier Name"
 
-
-The kinds of data the HRA Tool expects to find in the zip file depends upon the configuration options selected on the **Features** page.  
-
 >> You should include all carriers and all supporting data in a single zip file.  While the system will accept multiple uploads, unless all plan data is present the HRA Tool Consumer Portal may return incorrect determinations 
->> All files required by the configured features must be present in the zip file for the import process to succeed.
-
-The tables below show the configuration settings and corresponding file set that must be supplied in the zip file.  
-
-File data required for Use Age Rating?:
-
-| Use Age Rating? | plan_and_benefits.xml | rates.xml |
-| :--------------: | :------------------: | :-------: |
-| Yes              | X                    | X         |
-| No               | X                    |           |
-
-File data required for Geographic Rating Area:
-
-| Geographic Rating Area    | service_areas.xlsx | county_zipcode.xlsx |
-| :----                     | :------:           | :-----:             |
-| Single Rating Area        |                    |                     |
-| County-based Rating Area  | X                  |                     |
-| Zipcode-based Rating Area | X                  | X                   |
-
-
-The **Import County/ZipCode Mapping File** feature supports loading of supplemental rating area information when the Geographic Rating Area Model option is set to: Zipcode-based Rating Areas.  Like the SERFF Templates, the import function expects a zip file.  In this case, it will include only one file named: **county_zipcode.xlsx**
+>> The County / ZipCode file is not to be nested within a Carrier folder, but rather have its own folder nested within the SERFF Templates folder.
 
 A template mapping file is available here:
 
