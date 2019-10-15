@@ -124,6 +124,96 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
           end
         end
       end
+
+      context 'for initialized dry structs' do
+        before :each do
+          @determined_result ||= subject.call(valid_params)
+        end
+
+        context 'for tenant dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@tenant)
+          end
+
+          it 'should be an object of Tenant' do
+            expect(@dry_struct).to be_a ::Tenant
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for benefit_year dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@benefit_year)
+          end
+
+          it 'should be an object of benefit_year' do
+            expect(@dry_struct).to be_a ::BenefitYear
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for member dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@member)
+          end
+
+          it 'should be an object of member' do
+            expect(@dry_struct).to be_a ::Member
+          end
+
+          it 'should have all non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for low_cost_reference_plan dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@low_cost_reference_plan)
+          end
+
+          it 'should be an object of low_cost_reference_plan' do
+            expect(@dry_struct).to be_a ::LowCostReferencePlan
+          end
+
+          it 'should have non blank values' do
+            expect(@dry_struct.attributes.values.any? {|ele| ele.blank?}).to be_falsy
+          end
+        end
+
+        context 'for hra dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@hra)
+          end
+
+          it 'should be an object of hra' do
+            expect(@dry_struct).to be_a ::Hra
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for hra_affordability dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@hra_affordability)
+          end
+
+          it 'should be an object of hra_affordability' do
+            expect(@dry_struct).to be_a ::HraAffordabilityDetermination
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+      end
     end
 
     context 'with invalid data' do
@@ -261,6 +351,100 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
           end
         end
       end
+
+      context 'for initialized dry structs' do
+        before :each do
+          @determined_result ||= subject.call(valid_params)
+        end
+
+        context 'for tenant dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@tenant)
+          end
+
+          it 'should be an object of Tenant' do
+            expect(@dry_struct).to be_a ::Tenant
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for benefit_year dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@benefit_year)
+          end
+
+          it 'should be an object of benefit_year' do
+            expect(@dry_struct).to be_a ::BenefitYear
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for member dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@member)
+          end
+
+          it 'should be an object of member' do
+            expect(@dry_struct).to be_a ::Member
+          end
+
+          it 'should have non nil values for some attributes' do
+            expect(@dry_struct.attributes.except(:date_of_birth, :age, :zipcode, :premium_age).values).not_to include(nil)
+          end
+
+          it 'should have nil values for some attributes' do
+            expect(@dry_struct.attributes.slice(:date_of_birth, :age, :zipcode, :premium_age).values.uniq).to eq([nil])
+          end
+        end
+
+        context 'for low_cost_reference_plan dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@low_cost_reference_plan)
+          end
+
+          it 'should be an object of low_cost_reference_plan' do
+            expect(@dry_struct).to be_a ::LowCostReferencePlan
+          end
+
+          it 'should have non blank values' do
+            expect(@dry_struct.attributes.values.any? {|ele| ele.blank?}).to be_falsy
+          end
+        end
+
+        context 'for hra dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@hra)
+          end
+
+          it 'should be an object of hra' do
+            expect(@dry_struct).to be_a ::Hra
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for hra_affordability dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@hra_affordability)
+          end
+
+          it 'should be an object of hra_affordability' do
+            expect(@dry_struct).to be_a ::HraAffordabilityDetermination
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+      end
     end
 
     context 'with invalid data' do
@@ -388,6 +572,104 @@ describe ::Transactions::DetermineAffordability, :dbclean => :after_each do
 
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
+          end
+        end
+      end
+
+      context 'for initialized dry structs' do
+        before :each do
+          @determined_result ||= subject.call(valid_params)
+        end
+
+        context 'for tenant dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@tenant)
+          end
+
+          it 'should be an object of Tenant' do
+            expect(@dry_struct).to be_a ::Tenant
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for benefit_year dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@benefit_year)
+          end
+
+          it 'should be an object of benefit_year' do
+            expect(@dry_struct).to be_a ::BenefitYear
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for member dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@member)
+          end
+
+          it 'should be an object of member' do
+            expect(@dry_struct).to be_a ::Member
+          end
+
+          it 'should have non nil values for specific keys' do
+            expect(@dry_struct.attributes.except(:county, :zipcode).values).not_to include(nil)
+          end
+
+          it 'should have nil values for specific keys' do
+            expect(@dry_struct.attributes.slice(:county, :zipcode).values.uniq).to eq([nil])
+          end
+        end
+
+        context 'for low_cost_reference_plan dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@low_cost_reference_plan)
+          end
+
+          it 'should be an object of low_cost_reference_plan' do
+            expect(@dry_struct).to be_a ::LowCostReferencePlan
+          end
+
+          it 'should have non blank values for specific attributes' do
+            expect(@dry_struct.attributes.except(:service_area_ids, :rating_area_id).values.any? {|ele| ele.blank?}).to be_falsy
+          end
+
+          it 'should have blank values for specific attributes' do
+            expect(@dry_struct.attributes.slice(:service_area_ids, :rating_area_id).values.any? {|ele| ele.blank?}).to be_truthy
+          end
+        end
+
+        context 'for hra dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@hra)
+          end
+
+          it 'should be an object of hra' do
+            expect(@dry_struct).to be_a ::Hra
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
+          end
+        end
+
+        context 'for hra_affordability dry struct' do
+          before :each do
+            @dry_struct = subject.instance_variable_get(:@hra_affordability)
+          end
+
+          it 'should be an object of hra_affordability' do
+            expect(@dry_struct).to be_a ::HraAffordabilityDetermination
+          end
+
+          it 'should have non nil values' do
+            expect(@dry_struct.attributes.values).not_to include(nil)
           end
         end
       end

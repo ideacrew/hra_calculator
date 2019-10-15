@@ -4,19 +4,14 @@ module Transactions
   class DetermineAffordability
     include Dry::Transaction
 
-    # init_benefit_year BenefitYear: expected_contribution, calendar_year(start_month, year)
-    # init_benefit_year Tenant: key(tenant), name(state)
-    # filter_premium Member: date_of_birth(dob), age(age), gross_income(household_amount), income_frequency(household_frequency), county(county), zipcode(zipcode), premium_age(age_lookup), premium_amount(member_premium)
-    # filter_premium LowCostReferencePlan: plan_name(plan_name), hios_id(hios_id), carrier_name(carrier_name), service_area_ids(service_area_ids), rating_area_id(rating_area_id)
-    # compare_benefit Hra: cost(hra), kind(hra_type), effective_start_date(start_month), effective_end_date(end_month), reimburse_amount(hra_amount), reimburse_frequency(hra_frequency), determination(hra_determination)
-
     step :validate
-    step :init_benefit_year
+    step :init_entities
     step :fetch_rating_area
     step :filter_plans
     step :filter_premium
     step :calculate_benefit
     step :compare_benefit
+    step :init_hra_affordability
     step :load_results_defaulter
 
     def validate(params)
@@ -33,10 +28,11 @@ module Transactions
       end
     end
 
-    def init_benefit_year(params)
+    def init_entities(params)
       benefit_year_obj = ::Enterprises::BenefitYear.where(calendar_year: params[:start_month].year).first
       return Failure(params.merge!({errors: ["Unable to find BenefitYear object for given start_month date: #{params[:start_month]}"]})) unless benefit_year_obj
 
+      @tenant = ::Tenant.new({key: params[:tenant], name: params[:state]})
       @benefit_year = ::BenefitYear.new({expected_contribution: benefit_year_obj.expected_contribution, calendar_year: benefit_year_obj.calendar_year})
       Success(params.to_h.merge!({errors: []}))
     end
@@ -69,10 +65,15 @@ module Transactions
       return Failure(params.merge!(lcrp_result.failure)) if lcrp_result.failure?
 
       sucess_res = lcrp_result.success
-      params.merge!({member_premium: sucess_res.first,
-                     carrier_name: sucess_res[1],
-                     hios_id: sucess_res[2],
-                     plan_name: sucess_res[3]})
+      params.merge!({member_premium: sucess_res.first, carrier_name: sucess_res[1],
+                     hios_id: sucess_res[2], plan_name: sucess_res[3], premium_age: sucess_res[4], plan_kind: sucess_res[5]})
+      @member = ::Member.new({date_of_birth: params[:dob], age: params[:age],
+                              gross_income: params[:household_amount], income_frequency: params[:household_frequency],
+                              county: params[:county], zipcode: params[:zipcode], premium_age: params[:premium_age],
+                              premium_amount: params[:member_premium]})
+      @low_cost_reference_plan = ::LowCostReferencePlan.new({kind: params[:plan_kind], plan_name: params[:plan_name],
+                                                             hios_id: params[:hios_id], carrier_name: params[:carrier_name],
+                                                             service_area_ids: params[:service_area_ids], rating_area_id: params[:rating_area_id]})
       Success(params)
     end
 
@@ -90,12 +91,19 @@ module Transactions
     def compare_benefit(params)
       params = params.to_h
       hra_determination = @benefit_year.expected_contribution >= params[:hra] ? :affordable : :unaffordable
+      @hra = ::Hra.new({cost: params[:hra], kind: params[:hra_type], effective_start_date: params[:start_month], effective_end_date: params[:end_month], reimburse_amount: params[:hra_amount], reimburse_frequency: params[:hra_frequency], determination: hra_determination})
       Success(params.merge!({hra_determination: hra_determination}))
+    end
+
+    def init_hra_affordability(params)
+      params = params.to_h
+      @hra_affordability = ::HraAffordabilityDetermination.new({benefit_year: @benefit_year, tenant: @tenant, member: @member, low_cost_reference_plan: @low_cost_reference_plan, hra: @hra})
+      Success(params)
     end
 
     def load_results_defaulter(params)
       params = params.to_h
-      hra_results_setter = ::Operations::HraDefaultResultsSetter.new.call(params[:tenant])
+      hra_results_setter = ::Operations::HraDefaultResultsSetter.new.call(@tenant.key)
       params.merge!(hra_results_setter.success.to_h)
       Success(params)
     end

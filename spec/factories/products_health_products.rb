@@ -7,6 +7,7 @@ FactoryBot.define do
     health_plan_kind     { :pos }
     ehb                  { 0.9943 }
     metal_level_kind     { :silver }
+    carrier_name         { 'KP' }
     product_package_kinds { [:single_product, :single_issuer, :metal_level] }
     sequence(:hios_id, (10..99).cycle)  { |n| "41842DC04000#{n}-01" }
 
