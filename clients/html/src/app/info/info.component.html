@@ -197,6 +197,7 @@
                       labelText="Amount"
                       [formField]="hraForm.controls['household_amount']"
                       [parentFormControl]="hraForm"
+                      [dangerColorCode]="dangerColorCode"
                       [isDisabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null"
                     >
                    </div>
