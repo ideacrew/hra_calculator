@@ -7,10 +7,10 @@ import { AbstractControl, FormGroup } from '@angular/forms';
   styleUrls: ['./dollar_entry_field.component.scss']
 })
 export class DollarEntryFieldComponent {
-   @Input("labelClass") labelClass : string = "";
+   @Input("labelClass") labelClass : string = "col-sm-3 col-form-label col-form-label-sm";
    @Input("labelText") labelText : string = "";
    @Input("controlId") controlId : string = "";
-   @Input("controlClass") controlClass : string = "";
+   @Input("controlClass") controlClass : string = "col-sm-4";
    @Input("formField") formField : AbstractControl | null = null;
    @Input("parentFormControl") parentFormControl : FormGroup | null = null;
    @Input("requiredErrorText") requiredErrorText : string = "Amount is required.";

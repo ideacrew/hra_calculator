@@ -191,11 +191,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div dollarEntryField class="input-group"
-                      controlClass="col-sm-4"
+                    <div dollarEntryField
+                      class="input-group"
                       controlId="household_amount"
                       labelText="Amount"
-                      labelClass="col-sm-3 col-form-label col-form-label-sm"
                       [formField]="hraForm.controls['household_amount']"
                       [parentFormControl]="hraForm"
                       [isDisabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null"
