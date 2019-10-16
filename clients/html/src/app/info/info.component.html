@@ -191,25 +191,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                  <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="household_amount">Amount</label>
-                    <div class="col-sm-4">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">$</span>
-                        </div>
-                        <input type="text" style="text-align: right" maxlength="11" mask="comma_separator.0" class="form-control" id="household_amount" formControlName="household_amount" ngModel required [attr.disabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null " />
-                        <div class="input-group-append">
-                          <span class="input-group-text">.00</span>
-                        </div>
-                      </div>
-                      <div *ngIf="hraForm.controls['household_amount'].invalid && (hraForm.controls['household_amount'].dirty || hraForm.controls['household_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['household_amount'].errors.required">
-                          Amount is required.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    <div dollarEntryField class="input-group"
+                      controlClass="col-sm-4"
+                      controlId="household_amount"
+                      labelText="Amount"
+                      labelClass="col-sm-3 col-form-label col-form-label-sm"
+                      [formField]="hraForm.controls['household_amount']"
+                      [parentFormControl]="hraForm"
+                      [isDisabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null"
+                    >
+                   </div>
                 </div>
               </div>
               <div class="tab" [hidden]="!(currentTab === 1)">

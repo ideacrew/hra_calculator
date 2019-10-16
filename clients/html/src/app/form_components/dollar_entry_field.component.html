@@ -1,0 +1,23 @@
+<ng-container formGroup="parentFormControl">
+<label class="{{labelClass}} dollar-form-field" for="{{controlId}}">{{labelText}}</label>
+<div class="{{controlClass}}">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">$</span>
+    </div>
+    <input type="text" style="text-align: right" maxlength="11" mask="comma_separator.0" class="form-control"
+      id="{{controlId}}" formControlName="formField" ngModel required
+      [attr.disabled]="isDisabled" />
+    <div class="input-group-append">
+      <span class="input-group-text">.00</span>
+    </div>
+  </div>
+  <div
+    *ngIf="formField.invalid && (formField.dirty || formField.touched)"
+    class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
+    <div *ngIf="formField.errors.required">
+      {{requiredErrorText}}
+    </div>
+  </div>
+</div>
+</ng-container>
