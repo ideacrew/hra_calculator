@@ -11,9 +11,13 @@ describe('ResultComponent', () => {
   resultServiceStub = {
     results: {
       data: {
+        colors: {
+          primary_color: "red"
+        },
         county: "",
-        dob: "1990-09-09",
-        end_month: "2020-10-1",
+        dob: "09/09/1990",
+        // end_month: "2020-10-1",
+        end_month: "10/01/2020",
         household_amount: "60000",
         household_frequency: "annually",
         hra_amount: "5000",
@@ -21,7 +25,8 @@ describe('ResultComponent', () => {
         hra_frequency: "annually",
         hra_type: "ichra",
         marketPlace: "MARKETPLACE",
-        start_month: "2020-4-1",
+        // start_month: "2020-4-1",
+        start_month: "04/01/2020",
         state: "District of Columbia",
         taxCredit: "a tax credit",
         zipcode: ""
@@ -69,10 +74,14 @@ describe('ResultComponent', () => {
     }
     expect(userInfo).toContain(results["dob"]);
     expect(userInfo).toContain(results["household_amount"]);
-    expect(userInfo).toContain(results["household_frequency"]);
-    expect(userInfo).toContain(results["hra_type"]);
-    expect(userInfo).toContain(results["start_month"]);
-    expect(userInfo).toContain(results["end_month"]);
+    // expect(userInfo).toContain(results["household_frequency"]);
+    expect(userInfo).toContain("Annual");
+    // expect(userInfo).toContain(results["hra_type"]);
+    expect(userInfo).toContain("Individual Coverage HRA");
+    // expect(userInfo).toContain(results["start_month"]);
+    expect(userInfo).toContain("April 2020");
+    // expect(userInfo).toContain(results["end_month"]);
+    expect(userInfo).toContain("October 2020");
   });
 
   it('should show affordable ICHRA text', () => {

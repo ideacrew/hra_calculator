@@ -44,7 +44,7 @@ describe('InfoComponent', () => {
 
   it('should set effective end date options', () => {
     let dropdown = fixture.debugElement.query(By.css("#start_month")).nativeElement;
-    dropdown.value = dropdown.options[0].value;
+    dropdown.value = dropdown.options[1].value;
     let startDate = new Date(dropdown.value);
     let nextDate = new Date(startDate.getFullYear(), startDate.getMonth() + 11, 1);
     dropdown.dispatchEvent(new Event('change'));
