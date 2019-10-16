@@ -24,7 +24,7 @@ module Transactions
         end
         Failure(result)
       else
-        Success(output)
+        Success(output.to_h)
       end
     end
 
@@ -38,8 +38,7 @@ module Transactions
     end
 
     def fetch_rating_area(params)
-      params = params.to_h
-      rating_area_result = ::Locations::Operations::SearchForRatingArea.new.call(params)
+      rating_area_result = ::Locations::Transactions::SearchForRatingArea.new.call(params)
 
       if rating_area_result.success?
         Success(params.merge!({rating_area_id: rating_area_result.success}))
@@ -49,7 +48,6 @@ module Transactions
     end
 
     def filter_plans(params)
-      params = params.to_h
       fetch_products_result = ::Products::Transactions::FetchProducts.new.call(params)
 
       if fetch_products_result.success?
@@ -60,13 +58,10 @@ module Transactions
     end
 
     def filter_premium(params)
-      params = params.to_h
-      lcrp_result = ::Products::Operations::LowCostReferencePlanCost.new.call(params)
+      lcrp_result = ::Products::Transactions::LowCostReferencePlanCost.new.call(params)
       return Failure(params.merge!(lcrp_result.failure)) if lcrp_result.failure?
 
-      sucess_res = lcrp_result.success
-      params.merge!({member_premium: sucess_res.first, carrier_name: sucess_res[1],
-                     hios_id: sucess_res[2], plan_name: sucess_res[3], premium_age: sucess_res[4], plan_kind: sucess_res[5]})
+      params = lcrp_result.success
       @member = ::Member.new({date_of_birth: params[:dob], age: params[:age],
                               gross_income: params[:household_amount], income_frequency: params[:household_frequency],
                               county: params[:county], zipcode: params[:zipcode], premium_age: params[:premium_age],
@@ -78,7 +73,6 @@ module Transactions
     end
 
     def calculate_benefit(params)
-      params = params.to_h
       calculate_benefit_result = ::Transactions::CalculateBenefit.new.call(params)
 
       if calculate_benefit_result.success?
@@ -89,20 +83,17 @@ module Transactions
     end
 
     def compare_benefit(params)
-      params = params.to_h
       hra_determination = @benefit_year.expected_contribution >= params[:hra] ? :affordable : :unaffordable
       @hra = ::Hra.new({cost: params[:hra], kind: params[:hra_type], effective_start_date: params[:start_month], effective_end_date: params[:end_month], reimburse_amount: params[:hra_amount], reimburse_frequency: params[:hra_frequency], determination: hra_determination})
       Success(params.merge!({hra_determination: hra_determination}))
     end
 
     def init_hra_affordability(params)
-      params = params.to_h
       @hra_affordability = ::HraAffordabilityDetermination.new({benefit_year: @benefit_year, tenant: @tenant, member: @member, low_cost_reference_plan: @low_cost_reference_plan, hra: @hra})
       Success(params)
     end
 
     def load_results_defaulter(params)
-      params = params.to_h
       hra_results_setter = ::Operations::HraDefaultResultsSetter.new.call(@tenant.key)
       params.merge!(hra_results_setter.success.to_h)
       Success(params)

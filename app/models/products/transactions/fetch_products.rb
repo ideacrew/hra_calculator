@@ -10,7 +10,7 @@ module Products::Transactions
     private
 
     def fetch_service_area_ids(params)
-      service_areas_result = ::Locations::Operations::SearchForServiceArea.new.call(params)
+      service_areas_result = ::Locations::Transactions::SearchForServiceArea.new.call(params)
 
       if service_areas_result.success
         Success(params.merge!({service_area_ids: service_areas_result.success}))

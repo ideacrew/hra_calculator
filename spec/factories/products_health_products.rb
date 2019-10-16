@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :products_health_product, class: '::Products::HealthProduct' do
 
@@ -9,7 +11,7 @@ FactoryBot.define do
     metal_level_kind     { :silver }
     carrier_name         { 'KP' }
     product_package_kinds { [:single_product, :single_issuer, :metal_level] }
-    sequence(:hios_id, (10..99).cycle)  { |n| "41842DC04000#{n}-01" }
+    sequence(:hios_id, (10..99).cycle) { |n| "41842DC04000#{n}-01" }
 
     service_area { create(:locations_service_area) }
 
@@ -27,13 +29,13 @@ FactoryBot.define do
     trait :csr_87 do
       metal_level_kind        { :silver }
       benefit_market_kind     { :aca_individual }
-      csr_variant_id          { "87" }
+      csr_variant_id          { '87' }
     end
 
     trait :csr_00 do
       metal_level_kind        { :silver }
       benefit_market_kind     { :aca_individual }
-      csr_variant_id          { "00" }
+      csr_variant_id          { '00' }
     end
 
     trait :catastrophic do

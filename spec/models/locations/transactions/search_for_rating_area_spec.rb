@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require File.join(Rails.root, 'spec/shared_contexts/test_enterprise_admin_seed')
 
-describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each do
+describe ::Locations::Transactions::SearchForRatingArea, dbclean: :after_each do
   before do
     DatabaseCleaner.clean
   end
@@ -9,15 +11,15 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
   include_context 'setup enterprise admin seed'
   let!(:tenant_account) { FactoryBot.create(:account, email: 'admin@market_place.org', enterprise_id: enterprise.id) }
   let(:tenant_params) do
-    {key: :ma, owner_organization_name: 'MA Marketplace', account_email: tenant_account.email}
+    { key: :ma, owner_organization_name: 'MA Marketplace', account_email: tenant_account.email }
   end
   include_context 'setup tenant'
-  let!(:rating_area) {FactoryBot.create(:locations_rating_area, active_year: 2020)}
-  let!(:countyzip) {::Locations::CountyZip.find(rating_area.county_zip_ids.first)}
+  let!(:rating_area) { FactoryBot.create(:locations_rating_area, active_year: 2020) }
+  let!(:countyzip) { ::Locations::CountyZip.find(rating_area.county_zip_ids.first) }
 
   describe 'tenant with age_rated and zipcode' do
     let(:params) do
-      {tenant: :ma, state: 'Massachusetts', start_month: Date.new(2020), zipcode: countyzip.zip, county: countyzip.county_name}
+      { tenant: :ma, state: 'Massachusetts', start_month: Date.new(2020), zipcode: countyzip.zip, county: countyzip.county_name }
     end
 
     before :each do
@@ -44,7 +46,7 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
 
     context 'for failure case' do
       before :each do
-        @search_rating_area_result ||= subject.call(params.merge!({zipcode: 20001}))
+        @search_rating_area_result ||= subject.call(params.merge!({ zipcode: 20001 }))
       end
 
       it 'should return failure' do
@@ -52,7 +54,7 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
       end
 
       it 'should return errors' do
-        expect(@search_rating_area_result.failure).to eq({:errors=>["Unable to find Rating Area for given data"]})
+        expect(@search_rating_area_result.failure).to eq(errors: ["Unable to find Rating Area for given data"])
       end
     end
   end
@@ -88,7 +90,7 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
 
     context 'for failure case' do
       before :each do
-        @search_rating_area_result ||= subject.call(params.merge!({county: 'County'}))
+        @search_rating_area_result ||= subject.call(params.merge!({ county: 'County' }))
       end
 
       it 'should return failure' do
@@ -96,7 +98,7 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
       end
 
       it 'should return errors' do
-        expect(@search_rating_area_result.failure).to eq({:errors=>["Unable to find Rating Area for given data"]})
+        expect(@search_rating_area_result.failure).to eq(errors: ['Unable to find Rating Area for given data'])
       end
     end
   end
@@ -110,7 +112,7 @@ describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each d
     end
 
     let(:params) do
-      {tenant: :dc, state: 'District of Columbia', start_month: Date.new(2020)}
+      { tenant: :dc, state: 'District of Columbia', start_month: Date.new(2020) }
     end
 
     context 'for success case' do
