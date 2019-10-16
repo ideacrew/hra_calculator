@@ -19,6 +19,8 @@ The goal of the HRA Tool is to provide SBEs with an as close to turn-key solutio
 ## Prerequisites
 Because the HRA Tool is a Dockerized project, administrators and developers will need to download the Docker Desktop to deploy and manage the application.  Mac users will need to download and install the [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/), while Windows users will need to download and install the [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/).  The Docker Desktop installation includes Docker Engine, Docker CLI client, Docker Compose, Docker Machine, and Kitematic.
 
+Also, make sure that you have Git installed and available in the terminal you will use to download code, build and test the application (e.g. macOS terminal, Powershell, etc.).
+
 
 ## Architecture Overview
 The application stack is divided into multiple different containers:
