@@ -138,7 +138,7 @@ export class InfoComponent implements OnInit {
          !(this.hraForm.controls['household_amount'].valid)
         ){
         this.hraForm.controls['household_frequency'].markAsTouched();
-        this.hraForm.controls['household_amount'].markAsTouched();
+        this.hraForm.controls['household_amount'].markAsDirty();
         invalid = true
       }
       if(invalid) {
