@@ -1,39 +1,17 @@
 require 'rails_helper'
+require File.join(Rails.root, 'spec/shared_contexts/test_enterprise_admin_seed')
 
 describe ::Locations::Operations::SearchForRatingArea, :dbclean => :after_each do
   before do
     DatabaseCleaner.clean
-    enterprise = Enterprises::Enterprise.new(owner_organization_name: 'OpenHBX')
-    enterprise_option = Options::Option.new(key: 'owner_organization_name', default: 'My Organization', description: 'Name of the organization that manages', type: 'string')
-    enterprise.options = [enterprise_option]
-    enterprise.save!
-    @enterprise = enterprise
-    ResourceRegistry::AppSettings[:options].each do |option_hash|
-      if option_hash[:key] == :benefit_years
-        option = Options::Option.new(option_hash)
-
-        option.child_options.each do |setting|
-          enterprise.benefit_years.create({ expected_contribution: setting.default, calendar_year: setting.key.to_s.to_i, description: setting.description })
-        end
-      end
-    end
-    owner_account = Account.new(email: 'admin@openhbx.org', role: 'Enterprise Owner', uid: 'admin@openhbx.org', password: 'ChangeMe!', enterprise_id: enterprise.id)
-    owner_account.save!
   end
 
-  let!(:tenant_account) do
-    account = Account.new(email: 'admin@market_place.org', role: 'Marketplace Owner', uid: 'admin@market_place.org', password: 'ChangeMe!', enterprise_id: @enterprise.id)
-    account.save!
-    account
+  include_context 'setup enterprise admin seed'
+  let!(:tenant_account) { FactoryBot.create(:account, email: 'admin@market_place.org', enterprise_id: enterprise.id) }
+  let(:tenant_params) do
+    {key: :ma, owner_organization_name: 'MA Marketplace', account_email: tenant_account.email}
   end
-
-  let!(:tenant) do
-    tenant_params = {key: :ma, owner_organization_name: 'MA Marketplace', account_email: tenant_account.email}
-    create_tenant = ::Transactions::CreateTenant.new
-    result = create_tenant.with_step_args(fetch: [enterprise: @enterprise]).call(tenant_params)
-    result.success
-  end
-
+  include_context 'setup tenant'
   let!(:rating_area) {FactoryBot.create(:locations_rating_area, active_year: 2020)}
   let!(:countyzip) {::Locations::CountyZip.find(rating_area.county_zip_ids.first)}
 
