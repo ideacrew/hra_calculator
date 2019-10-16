@@ -97,11 +97,11 @@ class Admin::TenantsController < ApplicationController
 
     if result.success?
       flash[:notice] = 'Successfully destroyed plans'
-      redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
     else
-      result.failure
-      # display errors on the same page
+      flash[:error] = result.failure[:errors].first
     end
+
+    redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
   end
 
   private
