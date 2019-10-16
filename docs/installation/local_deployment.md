@@ -23,7 +23,7 @@ docker-compose run --rm runner rails credentials:edit
 Now, to start up the application in your local Docker environment in development mode, run the following commands:
 
 ```
-docker-compose run --rm rake db:seed
+docker-compose run --rm runner rake db:seed
 docker-compose -f docker-compose.dev.yml build
 docker-compose -f docker-compose.dev.yml up
 ```
@@ -55,7 +55,7 @@ docker-compose run --rm runner rails credentials:edit
 Now, to start up the application in your local Docker environment in production mode run the following commands:
 
 ``` 
-docker-compose run --rm rake db:seed
+docker-compose run --rm runner rake db:seed
 docker-compose -f docker-compose.prod.yml build 
 docker-compose -f docker-compose.prod.yml up 
 ```
