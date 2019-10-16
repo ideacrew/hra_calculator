@@ -11,9 +11,19 @@ export class DollarEntryFieldComponent {
    @Input("labelText") labelText : string = "";
    @Input("controlId") controlId : string = "";
    @Input("controlClass") controlClass : string = "col-sm-4";
-   @Input("formField") formField : AbstractControl | null = null;
+   @Input("controlName") controlName : string | null = null;
    @Input("parentFormControl") parentFormControl : FormGroup | null = null;
    @Input("requiredErrorText") requiredErrorText : string = "Amount is required.";
    @Input("dangerColorCode") dangerColorCode : string | null = null;
    @Input("isDisabled") isDisabled : string | null = null;
+
+   formField: AbstractControl | null = null;
+
+   ngOnInit() {
+     if (this.controlName != null) {
+       if (this.parentFormControl != null) {
+         this.formField = this.parentFormControl.get(this.controlName);
+       }
+     }
+   }
 }

@@ -30,7 +30,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
-import { DollarEntryFieldComponent } from './form_components/dollar_entry_field.component';
+import { DollarEntryFieldModule } from './form_components/dollar_entry_field.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -50,8 +50,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SidebarComponent,
     HomeComponent,
     InfoComponent,
-    ResultComponent,
-    DollarEntryFieldComponent
+    ResultComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +63,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LayoutsModule,
     RouterModule.forRoot(routes, { useHash: true }),
     PerfectScrollbarModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    DollarEntryFieldModule
   ],
   providers: [
     {
