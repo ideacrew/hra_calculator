@@ -58,7 +58,7 @@ docker-compose -f docker-compose.prod.yml build
 docker-compose -f docker-compose.prod.yml up 
 ```
 
-This starts the application on port 8080 in a terminal window where log output can be seen.  If you prefer to run the application as a background process, use `docker-compose up -d`.  Once the application is up, go to `http://localhost:8080` to test it.
+This starts the application on port 8080 in a terminal window where log output can be seen.  If you prefer to run the application as a background process, use `docker-compose -f docker-compose.prod.yml up -d`.  Once the application is up, go to `http://localhost:8080` to test it.
 
 To bring down the application simply run:
 
