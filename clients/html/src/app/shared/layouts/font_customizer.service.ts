@@ -33,6 +33,10 @@ export class FontCustomizerService {
         body {
           font-family: "${fontFamily}";
         }
+
+        .popover {
+          font-family: "${fontFamily}";
+        }
       `;
     }
   }
