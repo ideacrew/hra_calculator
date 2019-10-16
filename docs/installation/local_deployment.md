@@ -16,7 +16,7 @@ To prep your local environment to run the app you need to create Rails credentia
 ```
 git clone https://github.com/ideacrew/hra_calculator.git
 cd hra_calculator
-rm -f config/credentials.yml.enc
+rm config/credentials.yml.enc
 docker-compose run --rm runner rails credentials:edit 
 ```
 
@@ -49,7 +49,7 @@ To prep your local environment to run the app you need to create Rails credentia
 ```
 git clone https://github.com/ideacrew/hra_calculator.git
 cd hra_calculator
-rm -f config/credentials.yml.enc
+rm config/credentials.yml.enc
 docker-compose run --rm runner rails credentials:edit 
 ```
 Now, to start up the application in your local Docker environment in production mode run the following commands:
