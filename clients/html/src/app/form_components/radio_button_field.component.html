@@ -1,0 +1,32 @@
+<ng-container *ngIf="formField">
+  <ng-container [formGroup]="parentFormControl">
+      <label class="{{labelClass}} radio-button-form-field" for="{{controlId}}">{{labelText}}</label>
+      <div class="{{controlClass}}">
+        <div class="btn-group" data-toggle="buttons">
+          <span class="{{span1Class}}">
+              <input type="radio" class="form-control form-control-sm" id="{{controlId}}"
+              [formControlName]="controlName" value="{{control1Value}}" ngModel required (click)="click1Event.emit()"/> 
+              {{control1Label}}
+          </span>
+          <span class="{{span2Class}}">
+              <input type="radio" class="form-control form-control-sm" id="{{controlId}}"
+              [formControlName]="controlName" value="{{control2Value}}" ngModel required (click)="click2Event.emit()"/> 
+              {{control2Label}}
+          </span>
+        </div>
+        <ng-template #popContentRadio>
+            <div class="tooltip-italic" [innerHTML]="popContent"></div>
+        </ng-template>
+        <sup [ngbPopover]="popContentRadio">
+          <i class="fas fa-question-circle"></i>
+        </sup>
+        <div
+          *ngIf="formField.invalid && (formField.dirty || formField.touched)"
+          class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
+          <div *ngIf="formField.invalid">
+            {{requiredErrorText}}
+          </div>
+        </div>          
+      </div>
+  </ng-container>
+</ng-container>

@@ -169,26 +169,25 @@
                   </p>
                 </div>
                 <div class="form-group">
-                    <div class="input-group">
-                      <label class="col-sm-3 col-form-label col-form-label-sm" for="household_frequency">Frequency (choose one) </label>
-                      <div class="col-sm-4">
-                        <div class="btn-group" data-toggle="buttons">
-                          <span [ngClass]="(selectedHouseholdFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'">
-                              <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="household_frequency"
-                              formControlName="household_frequency" value="monthly" ngModel required (click)="onHouseholdChange('monthly')"/> Monthly
-                          </span>
-                          <span [ngClass]="(selectedHouseholdFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
-                              <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="household_frequency"
-                              formControlName="household_frequency" value="annually" ngModel required (click)="onHouseholdChange('annually')"/> Annual
-                          </span>
-                        </div>
-                        <div *ngIf="hraForm.controls['household_frequency'].invalid && (hraForm.controls['household_frequency'].dirty || hraForm.controls['household_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                          <div *ngIf="hraForm.controls['household_frequency'].errors.required">
-                            Frequency is required.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div radioButtonField
+                    class="input-group"
+                    [span1Class]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'"
+                    control1Value="monthly"
+                    control1Label="Monthly"
+                    [span2Class]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'"
+                    control2Value="annually"
+                    control2Label="Annually"
+                    controlId="hra_frequency"
+                    controlName="household_frequency"
+                    labelText="Frequency (choose one)"
+                    [parentFormControl]="hraForm"
+                    [dangerColorCode]="dangerColorCode"
+                    (click1Event)="onHraFrequencyChange('monthly')"
+                    (click2Event)="onHraFrequencyChange('annually')"
+                    requiredErrorText="Frequency is required."
+                    popContent="Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month."
+                  >
+                  </div>
                 </div>
                 <div class="form-group">
                     <div dollarEntryField
@@ -226,33 +225,25 @@
                       <strong>Type</strong>
                     </p>
                   </div>
-                  <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_type">Choose One</label>
-                    <div class="col-sm-8">
-                      <div class="btn-group hra-type-group" data-toggle="buttons">
-                        <span [ngClass]="(selectedHraType=='ichra')?'btn btn-outline-info active':'btn btn-outline-info'">
-                            <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="hra_type"
-                            formControlName="hra_type" value="ichra" ngModel required (click)="onHraTypeChange('ichra')"/> Individual Coverage HRA
-                        </span>
-                        <span [ngClass]="(selectedHraType=='qsehra')?'btn btn-outline-info active':'btn btn-outline-info'">
-                            <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="hra_type"
-                            formControlName="hra_type" value="qsehra" ngModel required (click)="onHraTypeChange('qsehra')"/> Qualified Small Employer HRA (QSEHRA)
-                        </span>
-                        <ng-template #popHraType>
-                          <div class="tooltip-italic">
-                            The type of HRA will appear prominently on the notice from the employer.
-                          </div>
-                        </ng-template>
-                        <sup [ngbPopover]="popHraType" >
-                          <i class="fas fa-question-circle"></i>
-                        </sup>
-                      </div>
-                      <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['hra_type'].errors.required">
-                          Type of HRA is required.
-                        </div>
-                      </div>
-                    </div>
+                  <div radioButtonField
+                    class="input-group"
+                    [span1Class]="(selectedHraType=='ichra')?'btn btn-outline-info active':'btn btn-outline-info'"
+                    control1Value="ichra"
+                    controlClass="col-sm-8"
+                    control1Label="Individual Coverage HRA"
+                    [span2Class]="(selectedHraType=='qsehra')?'btn btn-outline-info active':'btn btn-outline-info'"
+                    control2Value="qsehra"
+                    control2Label="Qualified Small Employer HRA (QSEHRA)"
+                    controlId="hra_type"
+                    controlName="hra_type"
+                    labelText="Choose One"
+                    [parentFormControl]="hraForm"
+                    [dangerColorCode]="dangerColorCode"
+                    (click1Event)="onHraTypeChange('ichra')"
+                    (click2Event)="onHraTypeChange('qsehra')"
+                    requiredErrorText="Type of HRA is required."
+                    popContent="The type of HRA will appear prominently on the notice from the employer."
+                  >
                   </div>
                 </div>
                 <div class="form-group">
@@ -323,31 +314,24 @@
                   </p>
                 </div>
                 <div class="form-group">
-                  <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_frequency">Frequency (choose one)</label>
-                    <div class="col-sm-4">
-                      <div class="btn-group" data-toggle="buttons">
-                        <span [ngClass]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active' :'btn btn-outline-info'">
-                            <input type="radio" class="form-control form-control-sm" id="hra_frequency"
-                            formControlName="hra_frequency" value="monthly" ngModel required (click)="onHraFrequencyChange('monthly')"/> Monthly
-                        </span>
-                        <span [ngClass]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
-                            <input type="radio" class="form-control form-control-sm" id="hra_frequency"
-                            formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> Total
-                        </span>
-                      </div>
-                      <div *ngIf="hraForm.controls['hra_frequency'].invalid && (hraForm.controls['hra_frequency'].dirty || hraForm.controls['hra_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['hra_frequency'].errors.required">
-                          Frequency is required.
-                        </div>
-                      </div>
-                      <ng-template #popContentHraFrequency>
-                        <div class="tooltip-italic">Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month.</div>
-                      </ng-template>
-                      <sup [ngbPopover]="popContentHraFrequency">
-                        <i class="fas fa-question-circle"></i>
-                      </sup>
-                    </div>
+                  <div radioButtonField
+                    class="input-group"
+                    [span1Class]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active' :'btn btn-outline-info'"
+                    control1Value="monthly"
+                    control1Label="Monthly"
+                    [span2Class]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'"
+                    control2Value="annually"
+                    control2Label="Total"
+                    controlId="hra_frequency"
+                    controlName="household_frequency"
+                    labelText="Frequency (choose one)"
+                    [parentFormControl]="hraForm"
+                    [dangerColorCode]="dangerColorCode"
+                    (click1Event)="onHraFrequencyChange('monthly')"
+                    (click2Event)="onHraFrequencyChange('annually')"
+                    requiredErrorText="Frequency is required."
+                    popContent="Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month."
+                  >
                   </div>
                 </div>
                 <div class="form-group">
