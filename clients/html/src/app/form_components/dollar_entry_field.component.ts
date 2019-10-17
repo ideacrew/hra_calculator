@@ -16,6 +16,7 @@ export class DollarEntryFieldComponent {
    @Input("requiredErrorText") requiredErrorText : string = "Amount is required.";
    @Input("dangerColorCode") dangerColorCode : string | null = null;
    @Input("isDisabled") isDisabled : string | null = null;
+   @Input("ariaDescribedBy") ariaDescribedBy : string | null = null;
 
    formField: AbstractControl | null = null;
 

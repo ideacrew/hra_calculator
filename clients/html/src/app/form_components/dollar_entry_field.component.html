@@ -1,6 +1,6 @@
 <ng-container *ngIf="formField">
 <ng-container [formGroup]="parentFormControl">
-<label class="{{labelClass}} dollar-form-field" for="{{controlId}}">{{labelText}}</label>
+<label class="{{labelClass}} dollar-form-field" for="{{controlId}}" id="{{controlId}}-text-label">{{labelText}}</label>
 <div class="{{controlClass}}">
   <div class="input-group">
     <div class="input-group-prepend">
@@ -9,6 +9,8 @@
     <input type="text" style="text-align: right" maxlength="11" mask="comma_separator.0" class="form-control"
       id="{{controlId}}" [formControlName]="controlName" required
       [attr.disabled]="isDisabled"
+      attr.aria-labelledby="{{controlId}}-text-label"
+      [attr.aria-describedby]="ariaDescribedBy"
       />
     <div class="input-group-append">
       <span class="input-group-text">.00</span>
