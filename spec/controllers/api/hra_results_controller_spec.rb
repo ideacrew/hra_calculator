@@ -1,11 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Api::HraResultsController do
+RSpec.describe Api::HraResultsController, dbclean: :after_each do
   extend ::SettingsHelper
-
-  before do
-    DatabaseCleaner.clean
-  end
 
   if !validate_county && !offerings_constrained_to_zip_codes
     context 'hra_payload' do
@@ -30,6 +26,8 @@ RSpec.describe Api::HraResultsController do
         }
 
         before do
+          token = HraClientSession.issue
+          request.headers["Authorization"] = "Bearer #{token}"
           get :hra_payload, params: valid_params
         end
 
@@ -74,6 +72,8 @@ RSpec.describe Api::HraResultsController do
         end
 
         before do
+          token = HraClientSession.issue
+          request.headers["Authorization"] = "Bearer #{token}"
           get :hra_payload, params: invalid_params
         end
 
@@ -126,6 +126,8 @@ RSpec.describe Api::HraResultsController do
         }
 
         before do
+          token = HraClientSession.issue
+          request.headers["Authorization"] = "Bearer #{token}"
           get :hra_payload, params: valid_params
         end
 
@@ -170,6 +172,8 @@ RSpec.describe Api::HraResultsController do
         end
 
         before do
+          token = HraClientSession.issue
+          request.headers["Authorization"] = "Bearer #{token}"
           get :hra_payload, params: invalid_params
         end
 
@@ -197,9 +201,5 @@ RSpec.describe Api::HraResultsController do
       end
     end
 
-  end
-
-  after :all do
-    DatabaseCleaner.clean
   end
 end

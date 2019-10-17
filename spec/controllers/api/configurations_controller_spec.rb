@@ -1,16 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Api::ConfigurationsController do
+RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
   extend ::SettingsHelper
-
-  before do
-    DatabaseCleaner.clean
-  end
 
   if !validate_county && !offerings_constrained_to_zip_codes
 
     context 'default_configuration' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :default_configuration
       end
 
@@ -52,6 +50,8 @@ RSpec.describe Api::ConfigurationsController do
 
     context 'counties' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :counties
       end
 
@@ -90,6 +90,8 @@ RSpec.describe Api::ConfigurationsController do
 
     context 'default_configuration' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :default_configuration
       end
 
@@ -133,6 +135,8 @@ RSpec.describe Api::ConfigurationsController do
       let(:countyzipcode) { FactoryBot.create(:locations_county_zip) }
 
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :counties, params: {hra_zipcode: countyzipcode.zip.to_s}
       end
 
@@ -166,9 +170,5 @@ RSpec.describe Api::ConfigurationsController do
         end
       end
     end
-  end
-
-  after :all do
-    DatabaseCleaner.clean
   end
 end
