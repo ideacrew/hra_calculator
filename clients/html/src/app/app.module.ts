@@ -32,6 +32,7 @@ import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
 import { DollarEntryFieldModule } from './form_components/dollar_entry_field.module';
 import { RadioButtonFieldModule } from './form_components/radio_button_field.module';
+import { DropdownModule } from './form_components/dropdown.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -66,7 +67,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     NgxMaskModule.forRoot(),
     DollarEntryFieldModule,
-    RadioButtonFieldModule
+    RadioButtonFieldModule,
+    DropdownModule
   ],
   providers: [
     {
