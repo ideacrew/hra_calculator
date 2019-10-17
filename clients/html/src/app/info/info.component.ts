@@ -321,4 +321,9 @@ export class InfoComponent implements OnInit {
     this.showErrors = false;
     this.errors = []
   }
+
+  householdAmountSettings = {
+      label: "Amount",
+      description: "Enter expected household income, in Dollars"
+  };
 }

@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxMaskModule } from 'ngx-mask'
+import { NgxMaskModule } from 'ngx-mask';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DollarEntryFieldComponent } from './dollar_entry_field.component';
 
@@ -17,7 +18,8 @@ import { DollarEntryFieldComponent } from './dollar_entry_field.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMaskModule
+    NgxMaskModule,
+    NgbModule
   ],
   exports: [
     DollarEntryFieldComponent

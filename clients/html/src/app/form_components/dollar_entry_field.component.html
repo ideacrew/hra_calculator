@@ -1,6 +1,16 @@
 <ng-container *ngIf="formField">
 <ng-container [formGroup]="parentFormControl">
-<label class="{{labelClass}} dollar-form-field" for="{{controlId}}" id="{{controlId}}-text-label">{{labelText}}</label>
+<label class="{{labelClass}} dollar-form-field" for="{{controlId}}" id="{{controlId}}-text-label">
+  {{settings.label}}
+  <ng-template #popContentState>
+      <div class="tooltip-italic" id="{{controlId}}-description">
+        {{settings.description}}
+      </div>
+    </ng-template>
+    <sup [ngbPopover]="popContentState" >
+      <i class="fas fa-question-circle"></i>
+    </sup>
+</label>
 <div class="{{controlClass}}">
   <div class="input-group">
     <div class="input-group-prepend">
@@ -10,7 +20,7 @@
       id="{{controlId}}" [formControlName]="controlName" required
       [attr.disabled]="isDisabled"
       attr.aria-labelledby="{{controlId}}-text-label"
-      [attr.aria-describedby]="ariaDescribedBy"
+      attr.aria-describedby="{{controlId}}-description"
       />
     <div class="input-group-append">
       <span class="input-group-text">.00</span>

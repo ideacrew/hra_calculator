@@ -193,12 +193,11 @@
                 <div class="form-group">
                     <div dollarEntryField
                       class="input-group"
-                      controlId="household_amount"
+                      [settings]="householdAmountSettings"
                       controlName="household_amount"
-                      labelText="Amount"
                       [parentFormControl]="hraForm"
+                      controlId="household_amount"
                       [dangerColorCode]="dangerColorCode"
-                      ariaDescribedBy="expected_household_income_form_description"
                       [isDisabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null"
                     >
                    </div>
