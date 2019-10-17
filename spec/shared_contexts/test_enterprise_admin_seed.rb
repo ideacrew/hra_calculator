@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.shared_context 'setup enterprise admin seed', shared_context: :metadata do
-  before do
-    DatabaseCleaner.clean
-  end
-
   let!(:enterprise) do
     new_enterprise = FactoryBot.create(:enterprise, owner_organization_name: 'OpenHBX')
     new_enterprise.options = [FactoryBot.build(:option)]
@@ -28,9 +24,13 @@ RSpec.shared_context 'setup enterprise admin seed', shared_context: :metadata do
 end
 
 RSpec.shared_context('setup tenant', shared_context: :metadata) do
-  let(:tenant) do
+  let!(:tenant) do
     create_tenant = ::Transactions::CreateTenant.new
     result = create_tenant.with_step_args(fetch: [enterprise: enterprise]).call(tenant_params)
-    result.success
+    tenant = result.success
+    options = tenant.sites.first.features.first.options.first.options
+    options.first.update_attributes!(value: value_for_age_rated)
+    options.second.update_attributes!(value: value_for_geo_rating_area)
+    tenant
   end
 end

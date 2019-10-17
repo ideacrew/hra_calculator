@@ -4,10 +4,6 @@ require 'rails_helper'
 require File.join(Rails.root, 'spec/shared_contexts/test_enterprise_admin_seed')
 
 describe ::Transactions::DetermineAffordability, dbclean: :after_each do
-  before do
-    DatabaseCleaner.clean
-  end
-
   include_context 'setup enterprise admin seed'
 
   let!(:tenant_account) { FactoryBot.create(:account, email: 'admin@market_place.org', enterprise_id: enterprise.id) }
@@ -16,6 +12,9 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
     let(:tenant_params) do
       { key: :ma, owner_organization_name: 'MA Marketplace', account_email: tenant_account.email }
     end
+
+    let(:value_for_age_rated) { 'age_rated' }
+    let(:value_for_geo_rating_area) { 'zipcode' }
 
     include_context 'setup tenant'
 
@@ -31,21 +30,15 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
     let(:valid_params) do
       {
         tenant: :ma, state: 'Massachusetts', dob: '2000-10-10', household_frequency: 'annually',
-        household_amount: 10_000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
+        household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
         hra_frequency: 'monthly', hra_amount: 100, zipcode: countyzip.zip, county: countyzip.county_name
       }
-    end
-
-    before :each do
-      options = tenant.sites.first.features.first.options.first.options
-      options.first.update_attributes!(value: 'age_rated')
-      options.second.update_attributes!(value: 'zipcode')
     end
 
     context 'with valid data' do
       context 'affordable' do
         before :each do
-          @determined_result ||= subject.call(valid_params.merge!(household_amount: 1_000_000))
+          @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
         it 'should be successful' do
@@ -201,7 +194,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
     context 'with invalid data' do
       let(:invalid_params) do
         { state: '', dob: '2000-10-10', household_frequency: 'annually',
-          household_amount: 10_000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
+          household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
@@ -238,6 +231,9 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
       { key: :ny, owner_organization_name: 'NY Marketplace', account_email: tenant_account.email }
     end
 
+    let(:value_for_age_rated) { 'non_age_rated' }
+    let(:value_for_geo_rating_area) { 'county' }
+
     include_context 'setup tenant'
 
     let!(:product1) do
@@ -249,28 +245,22 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
     let(:countyzip) do
       county_zip = ::Locations::CountyZip.find(product1.premium_tables.first.rating_area.county_zip_ids.first.to_s)
-      county_zip.update_attributes!(state: 'NY', county_name: 'New York')
+      county_zip.update_attributes!(state: 'NY', county_name: 'New York', zip: nil)
       county_zip
     end
 
     let(:valid_params) do
       {
         tenant: :ny, state: 'New York', household_frequency: 'annually',
-        household_amount: 10_000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
+        household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
         hra_frequency: 'monthly', hra_amount: 100, county: countyzip.county_name
       }
-    end
-
-    before :each do
-      options = tenant.sites.first.features.first.options.first.options
-      options.first.update_attributes!(value: 'non_age_rated')
-      options.second.update_attributes!(value: 'county')
     end
 
     context 'with valid data' do
       context 'affordable' do
         before :each do
-          @determined_result ||= subject.call(valid_params.merge!(household_amount: 1_000_000))
+          @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
         it 'should be successful' do
@@ -430,7 +420,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
     context 'with invalid data' do
       let(:invalid_params) do
         { state: '', dob: '2000-10-10', household_frequency: 'annually',
-          household_amount: 10_000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
+          household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
@@ -462,10 +452,13 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
     end
   end
 
-  describe 'tenant with non_age_rated and county' do
+  describe 'tenant with age_rated and single' do
     let(:tenant_params) do
       { key: :dc, owner_organization_name: 'DC Marketplace', account_email: tenant_account.email }
     end
+
+    let(:value_for_age_rated) { 'age_rated' }
+    let(:value_for_geo_rating_area) { 'single' }
 
     include_context 'setup tenant'
 
@@ -478,21 +471,15 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
     let(:valid_params) do
       {
         tenant: :dc, state: 'District of Columbia', dob: '2000-10-10', household_frequency: 'annually',
-        household_amount: 10_000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
+        household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
         hra_frequency: 'monthly', hra_amount: 100
       }
-    end
-
-    before :each do
-      options = tenant.sites.first.features.first.options.first.options
-      options.first.update_attributes!(value: 'age_rated')
-      options.second.update_attributes!(value: 'single')
     end
 
     context 'with valid data' do
       context 'affordable' do
         before :each do
-          @determined_result ||= subject.call(valid_params.merge!(household_amount: 1_000_000))
+          @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
         it 'should be successful' do
@@ -656,7 +643,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
     context 'with invalid data' do
       let(:invalid_params) do
         { state: '', dob: '2000-10-10', household_frequency: 'annually',
-          household_amount: 10_000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
+          household_amount: 10000, hra_type: 'ichra', start_month: '2020-1-1', end_month: '2020-12-1',
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
@@ -685,9 +672,5 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
         end
       end
     end
-  end
-
-  after :all do
-    DatabaseCleaner.clean
   end
 end

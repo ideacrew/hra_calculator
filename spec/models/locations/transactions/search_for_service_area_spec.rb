@@ -4,15 +4,13 @@ require 'rails_helper'
 require File.join(Rails.root, 'spec/shared_contexts/test_enterprise_admin_seed')
 
 describe ::Locations::Transactions::SearchForServiceArea, :dbclean => :after_each do
-  before do
-    DatabaseCleaner.clean
-  end
-
   include_context 'setup enterprise admin seed'
   let!(:tenant_account) { FactoryBot.create(:account, email: 'admin@market_place.org', enterprise_id: enterprise.id) }
   let(:tenant_params) do
     {key: :ma, owner_organization_name: 'MA Marketplace', account_email: tenant_account.email}
   end
+  let(:value_for_age_rated) { 'age_rated' }
+  let(:value_for_geo_rating_area) { 'zipcode' }
   include_context 'setup tenant'
   let!(:countyzip) { FactoryBot.create(:locations_county_zip) }
   let!(:search_areas) { FactoryBot.create(:locations_service_area, active_year: 2020, covered_states: [], county_zip_ids: [countyzip.id]) }
@@ -59,7 +57,7 @@ describe ::Locations::Transactions::SearchForServiceArea, :dbclean => :after_eac
     end
   end
 
-  describe 'tenant with age_rated and county' do
+  describe 'tenant with non_age_rated and county' do
     before :each do
       tenant.update_attributes!(key: :ny, owner_organization_name: 'NY Marketplace')
       options = tenant.sites.first.features.first.options.first.options
@@ -103,7 +101,7 @@ describe ::Locations::Transactions::SearchForServiceArea, :dbclean => :after_eac
     end
   end
 
-  describe 'tenant with age_rated and county' do
+  describe 'tenant with age_rated and single' do
     before :each do
       tenant.update_attributes!(key: :dc, owner_organization_name: 'DC Marketplace')
       options = tenant.sites.first.features.first.options.first.options
@@ -128,9 +126,5 @@ describe ::Locations::Transactions::SearchForServiceArea, :dbclean => :after_eac
         expect(@search_search_areas_result.success).to be_empty
       end
     end
-  end
-
-  after :all do
-    DatabaseCleaner.clean
   end
 end
