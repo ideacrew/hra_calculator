@@ -2,7 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: '[radioButtonField]',
+  selector: '[dropdown]',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
