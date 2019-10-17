@@ -15,9 +15,9 @@
           </span>
         </div>
         <ng-template #popContentRadio>
-            <div class="tooltip-italic" [innerHTML]="popContent"></div>
+          <div class="tooltip-italic" [innerHTML]="popContent"></div>
         </ng-template>
-        <sup [ngbPopover]="popContentRadio">
+        <sup *ngIf="displayToolTip" [ngbPopover]="popContentRadio">
           <i class="fas fa-question-circle"></i>
         </sup>
         <div

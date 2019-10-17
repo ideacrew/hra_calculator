@@ -171,21 +171,20 @@
                 <div class="form-group">
                   <div radioButtonField
                     class="input-group"
-                    [span1Class]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'"
+                    [span1Class]="(selectedHouseholdFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'"
                     control1Value="monthly"
                     control1Label="Monthly"
-                    [span2Class]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'"
+                    [span2Class]="(selectedHouseholdFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'"
                     control2Value="annually"
                     control2Label="Annually"
-                    controlId="hra_frequency"
+                    controlId="household_frequency"
                     controlName="household_frequency"
                     labelText="Frequency (choose one)"
                     [parentFormControl]="hraForm"
                     [dangerColorCode]="dangerColorCode"
-                    (click1Event)="onHraFrequencyChange('monthly')"
-                    (click2Event)="onHraFrequencyChange('annually')"
+                    (click1Event)="onHouseholdChange('monthly')"
+                    (click2Event)="onHouseholdChange('annually')"
                     requiredErrorText="Frequency is required."
-                    popContent="Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month."
                   >
                   </div>
                 </div>
@@ -243,6 +242,7 @@
                     (click1Event)="onHraTypeChange('ichra')"
                     (click2Event)="onHraTypeChange('qsehra')"
                     requiredErrorText="Type of HRA is required."
+                    displayToolTip=true
                     popContent="The type of HRA will appear prominently on the notice from the employer."
                   >
                   </div>
@@ -339,13 +339,14 @@
                     control2Value="annually"
                     control2Label="Total"
                     controlId="hra_frequency"
-                    controlName="household_frequency"
+                    controlName="hra_frequency"
                     labelText="Frequency (choose one)"
                     [parentFormControl]="hraForm"
                     [dangerColorCode]="dangerColorCode"
                     (click1Event)="onHraFrequencyChange('monthly')"
                     (click2Event)="onHraFrequencyChange('annually')"
                     requiredErrorText="Frequency is required."
+                    displayToolTip=true
                     popContent="Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month."
                   >
                   </div>

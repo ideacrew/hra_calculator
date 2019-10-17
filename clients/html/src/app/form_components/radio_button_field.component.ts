@@ -24,6 +24,7 @@ export class RadioButtonFieldComponent {
    @Input("span2Class") span2Class : string | null = null;
    @Input("control2Value") control2Value : string | null = null;
    @Input("control2Label") control2Label : string | null = null;
+   @Input("displayToolTip") displayToolTip : boolean = false;
    @Input("popContent") popContent : string = "";
 
    formField: AbstractControl | null = null;
