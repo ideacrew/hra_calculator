@@ -1,0 +1,19 @@
+es:
+  getting_started:  
+    header: Empezando
+    paragraph: "Esta herramienta es para personas a quienes un empleador les ofreció un Acuerdo de reembolso de salud (HRA) para ayudar a pagar el seguro de salud para 2020. Si se le ofrecen ciertos tipos de HRA, es posible que no califique para [un crédito fiscal] para ayudar a comprar un plan [MARKETPLACE]. Esta herramienta lo ayudará a determinar cómo la HRA que le ofrecen afecta su elegibilidad para [un crédito fiscal] y qué hacer a continuación."
+    use_tool:
+      header: Use esta herramienta si ...
+      content:
+    skip_tool:
+      header:
+    footer: El apoyo a esta herramienta fue proporcionado por la Fundación Robert Wood Johnson. Las opiniones expresadas aquí no reflejan necesariamente las opiniones de la Fundación.
+  about_you:
+    header: Acerca de ti
+    paragraph: Ingrese la siguiente información para el miembro de la familia a quien se le ofrece la HRA
+    place_of_residence:
+      header: Lugar de residencia
+      state:  Estado
+      state_help: "Si no es residente de este estado, visite https://www.healthcare.gov/get-coverage/ para encontrar el Mercado en su estado."
+      zip_code: Código postal
+      county: County
