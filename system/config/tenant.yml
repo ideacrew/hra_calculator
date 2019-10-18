@@ -5,17 +5,17 @@ namespaces:
     namespaces:
       - key: :ic
         settings:
-        - key: owner_organization_name
-          default: Ideacrew
-          description: The Marketplace owner organization name
-          type: :string
+          - key: owner_organization_name
+            default: Ideacrew
+            description: The Marketplace owner organization name
+            type: :string
         namespaces:
           - key: :sites
             namespaces:
-              - key: :primary
+              - key: :admin_portal
                 settings:
                   - key: :title
-                    default: HRA Affordability Tool
+                    default: HRA Tool Admin Portal
                     type: :string
                   - key: :description
                     type: :string
@@ -26,7 +26,7 @@ namespaces:
                       - key: :ui_tool_pages
                         settings:
                           - key: :page_title
-                            default: HRA Affordability Tool
+                            default: HRA Tool
                             type: :string
                             description: The page title may not be changed
                           - key: :a_tax_credit
@@ -109,6 +109,244 @@ namespaces:
                             description: Best dimensions are 150px x 60px
                             type: :base_64
                             default: nil
+                  - key: :environments
+                    namespaces:
+                    - key: :production
+              - key: :consumer_portal
+                settings:
+                  - key: :title
+                    default: HRA Tool Consumer Portal
+                    type: :string
+                  - key: :description
+                    type: :string
+                    default: This tool will help you determine how an HRA you're offered affects your eligibility for a tax credit and what to do next
+                namespaces:
+                  - key: :options
+                    namespaces:
+                      - key: :ui_elements
+                        namespaces:
+                          - key: :getting_started
+                            default: Getting Started
+                            type: :string
+                            description: The page title may not be changed
+                            namespaces:
+                              - key: :header
+                                default: 'Getting Started'
+                                type: :string
+                                description: 
+                              - key: :paragraph
+                                default: 'Getting Started'
+                                type: :string
+                                description:                           
+                              - key: :use_tool
+                                settings:
+                                  - key: :header 
+                                    default: Use this tool if…
+                                    type: :string
+                                    description:
+                                  - key: :content 
+                                    default: Test Content
+                                    type: :string
+                                    description: "You have been offered one of the following HRAs that can be used to help buy a health insurance plan on your own:"
+                              - key: :skip_tool
+                                settings:
+                                  - key: :header 
+                                    default: Skip this tool if…
+                                    type: :string
+                                    description:
+                                  - key: :content 
+                                    default: Test Content
+                                    type: :string
+                                    description: "Your employer has only offered you one or more of the following:"
+                              - key: :footer
+                                default: Support for this tool was provided by the Robert Wood Johnson Foundation. The views expressed here do not necessarily reflect the views of the Foundation.
+                                type: :string
+                                description:
+                          - key: :about_you
+                            type: string
+                            default: About You
+                            namespaces:
+                              - key: :header
+                                type: :string
+                                default: About You
+                              - key: :paragraph
+                                type: :string
+                                default: Enter the following information for the family member who is offered the HRA
+                                description: This is the family member whose employer or former employer (if family member is a retiree) is offering the HRA.
+                              - key: :place_of_residence
+                                settings:
+                                  - key: :header
+                                    type: :string
+                                    default: Place of Residence
+                                    description: "Enter the family member’s place of residence, even if the employer is located somewhere else."
+                                  - key: :state
+                                    type: :string
+                                    default: State
+                                    description: "If you are not a resident of this state, please visit https://www.healthcare.gov/get-coverage/ to find the Marketplace in your state."
+                                  - key: :zip_code
+                                    type: :string
+                                    default: Zip Code
+                                  - key: :county
+                                    type: :string
+                                    default: County                                    
+                              - key: :date_of_birth
+                                settings:
+                                  - key: :header
+                                    type: :string
+                                    default: Date of Birth
+                                  - key: :format
+                                    type: :string
+                                    default: MM/DD/YYYY
+                              - key: :household_income
+                                settings:
+                                  - key: :header
+                                    type: :string
+                                    default: Expected Household Income
+                                    description: |-
+                                      This is your household income before taxes. For most people, annual household income is
+                                      the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040).
+                                      Specifically, household income is equal to adjusted gross income plus the following amounts: 
+                                      Social Security benefits that are otherwise excluded from gross income, interest from tax-exempt bonds, 
+                                      any foreign-source income excluded from gross income under section 911 of the Internal
+                                      Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare).
+                                  - key: :frequency
+                                    type: :string
+                                    default: State
+                                    description: Frequency
+                                  - key: :amount
+                                    type: :string
+                                    default: Amount
+                                  - key: :monthly
+                                    type: :string
+                                    default: Monthly                               
+                                  - key: :annual
+                                    type: :string
+                                    default: Annual              
+                          - key: :about_hra
+                            type: string
+                            default: About the HRA You've Been Offered
+                            namespaces:
+                              - key: :header
+                                type: :string
+                                default: About the HRA You've Been Offered
+                              - key: :paragraph
+                                type: :string
+                                default: Enter the following information about the HRA that you have been offered. All answers can be found in the HRA notice provided by the employer.
+                              - key: :type
+                                settings:
+                                  - key: :header
+                                    type: :string
+                                    default: Type
+                                    description: Enter the family member’s place of residence, even if the employer is located somewhere else.
+                                  - key: :choose_one
+                                    type: :string
+                                    default: Choose One
+                                    description: The type of HRA will appear prominently on the notice from the employer.
+                                  - key: :ichra
+                                    type: :string
+                                    default: Individual Coverage HRA
+                                  - key: :qsehra
+                                    type: :string
+                                    default: Qualified Small Employer HRA (QSEHRA)                                
+                              - key: :effective_period
+                                settings:
+                                  - key: :header
+                                    type: :string
+                                    default: Effective Period
+                                  - key: :start_month
+                                    type: :string
+                                    default: Start Month
+                                    description: This is the first month the HRA is available to you.
+                                  - key: :end_month
+                                    type: :string
+                                    default: End Month
+                                    description: This is the last month of the HRA plan year.
+                              - key: :maximum_offered
+                                settings:
+                                  - key: :header
+                                    type: :string
+                                    default: Maximum Amount for Employee-Only Health Insurance
+                                    description: This is the amount the employer has offered to contribute to the HRA if you purchase health insurance for only the employee (not including other family members). Some employers provide one amount if only the employee enrolls in coverage (sometimes referred to as “self-only” coverage), and a larger amount if the employee plus other family members enroll in coverage. Enter the amount of the HRA if only the employee enrolls, even if you plan to enroll in family coverage.
+                                  - key: :frequency
+                                    type: :string
+                                    default: Frequency
+                                    description: Choose Monthly Amount to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose Total Amount to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month.
+                                  - key: :amount
+                                    type: :string
+                                    default: Amount
+                                  - key: :monthly
+                                    type: :string
+                                    default: Monthly                               
+                                  - key: :total
+                                    type: :string
+                                    default: Total
+                          - key: :info_and_results
+                            type: string
+                            default: Your Information and Results
+                            namespaces:
+                              - key: :header
+                                type: :string
+                                default: Your Information and Results
+                              - key: :info_entered
+                                settings:
+                                  - key: :header
+                                    type: :string
+                                    default: The Information You Entered
+                                  - key: :residence
+                                    type: :string
+                                    default: Residence
+                                  - key: :dob
+                                    type: :string
+                                    default: Date of Birth
+                                  - key: :household_income
+                                    type: :string
+                                    default: 2020 Household Income
+                                  - key: :hra_type
+                                    type: :string
+                                    default: HRA type
+                                  - key: :start_date
+                                    type: :string
+                                    default: Start Date
+                                  - key: :end_date
+                                    type: :string
+                                    default: End Date
+                                  - key: :employer_contribution
+                                    type: :string
+                                    default: Employer Contribution
+                              - key: :results
+                                namespaces:
+                                  - key: :header
+                                    type: :string
+                                    default: Your Results
+                                  - key: :ichra
+                                    settings:
+                                      - key: :affordable
+                                        type: :string
+                                        default: "Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal standards. As a result, you do not qualify for [a tax credit] through [MARKETPLACE] for yourself or any family member who is eligible to benefit from the HRA. But, you can use your HRA to help make purchasing coverage more affordable."
+                                      - key: :unaffordable
+                                        type: :string
+                                        default: "Based on the information you entered, the HRA offered to you is not large enough to make health insurance “affordable” based on federal standards. As a result, you may qualify for [a tax credit] to help you buy [MARKETPLACE] coverage based on your income and other factors."
+                                  - key: :qsehra
+                                    settings:
+                                      - key: :affordable
+                                        type: :string
+                                        default: "Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal standards. As a result, you do not qualify for [a tax credit] through [MARKETPLACE] for yourself or for any family member who is eligible to benefit from the HRA. But, you can use your HRA to help make buying"
+                                      - key: :unaffordable
+                                        type: :string
+                                        default: "Based on the information you entered, your HRA is not large enough on its own to make health insurance “affordable” based on federal standards. As a result, you may qualify for [a tax credit] through [MARKETPLACE] based on your income and other factors. If you qualify for [a tax credit], you can use it in addition to your HRA, but you'll want to adjust the amount to avoid owing back money at tax time."
+                              - key: :next_steps
+                                namespaces:
+                                  - key: :header
+                                    type: :string
+                                    default: Next Steps
+                  #     - key: :translations
+                  #       namespaces:
+                  #         - key: :en
+                  #           default: English
+                  #           type: :string
+                  #         - key: :es
+                  #           default: Spanish
+                  #           type: :string   
                   - key: :environments
                     namespaces:
                     - key: :production

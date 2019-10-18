@@ -63,4 +63,14 @@ class Options::Option
 
     super(Base64.strict_encode64(file))
   end
+
+  def to_h
+    if child_options.present?
+      {
+        :"#{key}" => child_options.map(&:to_h)
+      }
+    else
+      setting_hash
+    end
+  end
 end

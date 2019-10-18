@@ -32,6 +32,7 @@ class Sites::Site
   # Following method needs to be updated if multi environment params passed.
   def environments=(env_params)
     env_params.each do |env_hash|
+      next unless env_hash[:features]
       env_hash[:features].each do |feature_hash|
         self.features.build(feature_hash)
       end
