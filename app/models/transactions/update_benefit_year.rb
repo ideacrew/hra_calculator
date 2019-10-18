@@ -20,7 +20,7 @@ module Transactions
       if @benefit_year.update_attributes(expected_contribution: input["enterprises_enterprise"]["value"])
         Success(@benefit_year)
       else
-        Failure({errors: "Failed to save benefit year"})
+        Failure({errors: ["Failed to save benefit year"]})
       end
     end
   end
