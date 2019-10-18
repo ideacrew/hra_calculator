@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       post :tenant_create
       post :benefit_year_create
       post :benefit_year_update
+      get :purge_hra
     end
 
     resources :tenants, only: [:show, :update] do
