@@ -56,7 +56,8 @@ gem 'pundit',                   '~> 2.1.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails', branch: '4-0-dev'
+  gem 'rails-controller-testing'
   gem 'yard' #,                   '~> 0.9.12',  require: false
   gem 'climate_control' #
   gem 'factory_bot_rails',      '~> 4.11'
