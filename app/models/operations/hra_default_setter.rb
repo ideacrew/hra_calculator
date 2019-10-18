@@ -15,6 +15,10 @@ module Operations
       color_options   = ::Operations::ColorOptions.new.call(tenant)
       feature_options = ::Operations::TenantFeatures.new.call(tenant)
 
+      site        = tenant.sites.detect{|site| site.key == :consumer_portal}
+      ui_elements = site.options.by_key(:ui_elements).first
+
+
       state = Locations::UsState::NAME_IDS.detect{|state| state[1] == tenant.key.to_s.upcase}
 
       hra_defaulter = ::HraDefaulter.new({
@@ -26,7 +30,8 @@ module Operations
         market_place: market_place,
         colors: color_options.value!,
         ui_pages: ui_page_options.value!,
-        features: feature_options.value!
+        features: feature_options.value!,
+        ui_elements: ui_elements.child_options.map(&:to_h)
       })
 
       Success(hra_defaulter)

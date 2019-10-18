@@ -23,6 +23,8 @@ class Admin::TenantsController < ApplicationController
   end
 
   def features_show
+    hra_default_setter = ::Operations::HraDefaultSetter.new.call(@tenant.key)
+    @data = {status: "success", data: hra_default_setter.success.to_h}
   end
 
   def features_update
@@ -40,6 +42,11 @@ class Admin::TenantsController < ApplicationController
 
   def ui_pages_show
     @page = @tenant.sites[0].options.where(key: :ui_tool_pages).first
+  end
+
+  def translations_show
+    @page = @tenant.sites[1].options.where(key: :ui_tool_pages).first
+    @translations = @tenant.sites[1].options.where(key: :translations).first
   end
 
   def ui_element_update
