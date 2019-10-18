@@ -21,13 +21,11 @@ export class ResultComponent implements OnInit {
   hra_frequency: String;
   hra_frequency_text: String;
   hra_amount: Number;
-  hra_type: String;
   full_hra_type: String;
   hios_id: String;
   plan_name: String;
   carrier_name: String;
   member_premium: Number;
-  hra_determination: String;
   taxCredit: String;
   marketPlace: String;
   help_text_1: String;
@@ -54,6 +52,27 @@ export class ResultComponent implements OnInit {
     private resultService: ResultService,
     private router: Router,
   ) {
+  }
+
+  private _hra_type : string | null;
+  private _hra_determination : string | null;
+
+  public get hra_type() : string | null {
+    return this._hra_type;
+  }
+
+  public set hra_type(new_type: string | null) {
+    this._hra_type = new_type;
+    this.updateHRATypes();
+  }
+
+  public get hra_determination() : string | null {
+    return this._hra_determination;
+  }
+
+  public set hra_determination(new_type: string | null) {
+    this._hra_determination = new_type;
+    this.updateHRATypes();
   }
 
   ngOnInit() {
@@ -109,6 +128,10 @@ export class ResultComponent implements OnInit {
       this.hra_frequency_text = 'Monthly';
     }
 
+    this.updateHRATypes();
+  }
+
+  private updateHRATypes() {
     if(this.hra_type == "qsehra") {
       this.full_hra_type = 'Qualified Small Employer HRA'
       if (this.hra_determination == 'unaffordable'){

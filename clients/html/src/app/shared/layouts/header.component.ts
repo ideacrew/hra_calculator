@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
       this.tenant_url =  resource.marketplace_website_url;
     }
     if (resource.site_logo != null) {
-      this.tenant_logo_file = resource.site_logo;
+      this.tenant_logo_file = 'data:image/png;base64,' + resource.site_logo;
     }
     if (resource.marketplace_name != null) {
       this.marketplaceName = resource.marketplace_name;
