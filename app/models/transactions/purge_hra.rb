@@ -11,7 +11,7 @@ module Transactions
       @tenants = ::Tenants::Tenant.all
 
       if @tenants.blank?
-        Failure({errors: "There are no tenants."})
+        Failure({errors: ['There are no tenants.']})
       else
         Success(@tenants)
       end
