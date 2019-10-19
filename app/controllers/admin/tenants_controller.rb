@@ -24,7 +24,7 @@ class Admin::TenantsController < ApplicationController
 
   def features_show
     hra_default_setter = ::Operations::HraDefaultSetter.new.call(@tenant.key)
-    @data = {status: "success", data: hra_default_setter.success.to_h}
+    @data = {status: "success", data: {type: 'ui_settings', attributes: hra_default_setter.success.to_h}}
   end
 
   def features_update
