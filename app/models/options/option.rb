@@ -41,9 +41,7 @@ class Options::Option
       title: title,
       description: description,
       type: type,
-      default: default,
-      value: value,
-      aria_label: aria_label,
+      value: value || default
     }
   end
 
@@ -66,9 +64,15 @@ class Options::Option
 
   def to_h
     if child_options.present?
-      {
-        :"#{key}" => child_options.map(&:to_h)
-      }
+      options_hash = child_options.inject({}) do |data, option|
+        if option.to_h.has_key?(option.key)
+          data.merge(option.to_h)
+        else
+          data[option.key] = option.to_h; data
+        end
+      end
+
+      {:"#{key}" => options_hash}
     else
       setting_hash
     end

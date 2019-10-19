@@ -13,5 +13,6 @@ class HraDefaulter < Dry::Struct
   attribute :ui_pages,          Types::Array
   attribute :colors,            Types::Array
   attribute :features,          Types::Array
-  attribute :ui_elements,       Types::Array
+  attribute :pages,             Types::Array
+  attribute :translations,      Types::Array
 end
