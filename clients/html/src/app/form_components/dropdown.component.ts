@@ -1,12 +1,19 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { ControlSettings } from '../configuration/control_settings'
 
 @Component({
   selector: '[dropdown]',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
+
 export class DropdownComponent {
+
+  @Input("settings") settings : ControlSettings = {
+    label: "Choose",
+    description: "Select a Value From Dropdown"
+  };
 
   @Input("labelClass") labelClass : string = "col-sm-3 col-form-label col-form-label-sm";
   @Input("labelText") labelText : string = "";
@@ -16,14 +23,12 @@ export class DropdownComponent {
   @Input("parentFormControl") parentFormControl : FormGroup | null = null;
   @Input("requiredErrorText") requiredErrorText : string | null = null;
   @Input("dangerColorCode") dangerColorCode : string | null = null;
-  // @Input("span1Class") span1Class : string | null = null;
-  @Input("dropdownOptions") dropdownOptions : string | null = null;
-  @Input("control1Value") control1Value : string | null = null;
-  @Input("control1Label") control1Label : string | null = null;
-  @Input("span2Class") span2Class : string | null = null;
-  @Input("control2Value") control2Value : string | null = null;
-  @Input("control2Label") control2Label : string | null = null;
+  @Input("placeHolderText") placeHolderText : string = "";
+  @Input("dropdownOptions") dropdownOptions : any = [];
+  @Input("formatDATE") formatDATE : boolean = false;
+  @Input("displayToolTip") displayToolTip : boolean = false;
   @Input("popContent") popContent : string = "";
+  @Input("isDisabled") isDisabled : string | null = null;
 
   formField: AbstractControl | null = null;
 

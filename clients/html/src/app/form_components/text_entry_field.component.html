@@ -1,0 +1,25 @@
+<ng-container *ngIf="formField">
+    <ng-container [formGroup]="parentFormControl">
+    <label class="{{labelClass}} text-form-field" for="{{controlId}}" id="{{controlId}}-text-label">
+      {{settings.label}}
+    </label>
+    <div class="{{controlClass}}">
+      <div class="input-group"           attr.aria-labelledby={{settings.label}}
+      attr.aria-describedby={{settings.description}}>
+        <input type="text" class="form-control" minlength={{minLength}} maxlength={{maxLength}}
+          id="{{controlId}}" [formControlName]="controlName" required
+        />
+      </div>
+      <div
+        *ngIf="formField.invalid && (formField.dirty || formField.touched)"
+        class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
+          <div *ngIf="!!formField.errors.required">
+            {{requiredErrorText}}
+          </div>
+          <div *ngIf="!!formField.errors.minlength">
+            {{lengthErrorText}}
+          </div>
+      </div>
+    </div>
+    </ng-container>
+    </ng-container>

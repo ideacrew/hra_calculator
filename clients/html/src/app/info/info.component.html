@@ -77,39 +77,38 @@
                 </div>
                 <div *ngIf="showZipcode">
                   <div class="form-group">
-                    <div class="input-group">
-                      <label class="col-sm-3 col-form-label col-form-label-sm" for="zipcode">Zip Code</label>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" (keypress)="numberOnly($event)" formControlName="zipcode" id="zipcode" pattern="[0-9]{5}" minlength="5" maxlength="5" (blur)="getCountyInfo()"/>
-                        <div *ngIf="hraForm.controls['zipcode'].invalid && (hraForm.controls['zipcode'].dirty || hraForm.controls['zipcode'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                          <div *ngIf="hraForm.controls['zipcode'].errors.required">
-                            Zipcode is required.
-                          </div>
-                          <div *ngIf="hraForm.controls['zipcode'].errors.minlength">
-                            Zipcode should be 5 digits.
-                          </div>
-                        </div>
-                      </div>
+                    <div textEntryField
+                      class="input-group"
+                      [settings]="zipcodeSettings"
+                      controlName="zipcode"
+                      [parentFormControl]="hraForm"
+                      controlId="zipcode"
+                      [dangerColorCode]="dangerColorCode"
+                      (keypress)="numberOnly($event)"
+                      requiredErrorText="Zipcode is required."
+                      minlength="5"
+                      maxlength="5"
+                      lengthErrorText="Zipcode should be 5 digits."
+                      (input)="getCountyInfo()"
+                    >
                     </div>
                   </div>
                 </div>
+
                 <div *ngIf="showCounty">
                   <div class="form-group">
-                    <div class="input-group">
-                      <label class="col-sm-3 col-form-label col-form-label-sm" for="county">County</label>
-                      <div class="col-sm-4">
-                        <select class="form-control form-control-sm" id="county" formControlName="county" [attr.disabled]="isCountyDisabled ? '' : null" required>
-                          <option value='' disabled selected hidden>{{countyPlaceHolder}}</option>
-                          <option *ngFor="let option of countyOptions" [ngValue]="option">
-                            {{option}}
-                          </option>
-                        </select>
-                        <div *ngIf="hraForm.controls['county'].invalid && (hraForm.controls['county'].dirty || hraForm.controls['county'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                          <div *ngIf="hraForm.controls['county'].errors.required">
-                            County is required.
-                          </div>
-                        </div>
-                      </div>
+                    <div dropdown
+                      class="input-group"
+                      controlId="county"
+                      controlName="county"
+                      [settings]="countySettings"
+                      [parentFormControl]="hraForm"
+                      [dangerColorCode]="dangerColorCode"
+                      requiredErrorText="County is required."
+                      placeHolderText={{countyPlaceHolder}}
+                      [dropdownOptions]="countyOptions"
+                      [isDisabled]="isCountyDisabled ? '' : null"
+                    >
                     </div>
                   </div>
                 </div>
@@ -171,6 +170,7 @@
                 <div class="form-group">
                   <div radioButtonField
                     class="input-group"
+                    [settings]="householfFrequencySettings"
                     [span1Class]="(selectedHouseholdFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'"
                     control1Value="monthly"
                     control1Label="Monthly"
@@ -179,7 +179,6 @@
                     control2Label="Annually"
                     controlId="household_frequency"
                     controlName="household_frequency"
-                    labelText="Frequency (choose one)"
                     [parentFormControl]="hraForm"
                     [dangerColorCode]="dangerColorCode"
                     (click1Event)="onHouseholdChange('monthly')"
@@ -196,7 +195,6 @@
                       labelText="Amount"
                       [parentFormControl]="hraForm"
                       [dangerColorCode]="dangerColorCode"
-                      ariaDescribedBy="expected_household_income_form_description"
                       [isDisabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null"
                     >
                    </div>
@@ -236,7 +234,7 @@
                     control2Label="Qualified Small Employer HRA (QSEHRA)"
                     controlId="hra_type"
                     controlName="hra_type"
-                    labelText="Choose One"
+                    [settings]="hraTypeSettings"
                     [parentFormControl]="hraForm"
                     [dangerColorCode]="dangerColorCode"
                     (click1Event)="onHraTypeChange('ichra')"
@@ -253,8 +251,6 @@
                   </p>
                 </div>
                 <div class="form-group">
-
-
                   <div dropdown
                     class="input-group"
                     controlId="start_month"
@@ -263,57 +259,31 @@
                     [parentFormControl]="hraForm"
                     [dangerColorCode]="dangerColorCode"
                     requiredErrorText="Start Month is required."
-                    dropdownOptions="let option of effectiveStartOptions"
+                    placeHolderText="Choose"
+                    [dropdownOptions]="effectiveStartOptions"
+                    formatDATE=true
+                    displayToolTip=true
                     popContent="This is the first month the HRA is available to you."
+                    (change)="setEffectiveEndOptions($event.target.value)"
                   >
                   </div>
-
-                  <!-- <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="start_month">
-                      Start Month
-                    </label>
-                    <div ngbDropdown class="col-sm-4">
-                      <select (change)="setEffectiveEndOptions($event.target.value)" class="form-control form-control-sm" id="start_month" formControlName="start_month" ngModel required>
-                        <option value='' disabled selected hidden>Choose</option>
-                        <option ngbDropdownToggle *ngFor="let option of effectiveStartOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
-                      </select>
-                      <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['start_month'].errors.required">
-                          Start Month is required.
-                        </div>
-                      </div>
-                    </div>
-                    <ng-template #popContentStartMonth>
-                      <div class="tooltip-italic">This is the first month the HRA is available to you.
-                      </div>
-                    </ng-template>
-                    <sup [ngbPopover]="popContentStartMonth">
-                      <i class="fas fa-question-circle"></i>
-                    </sup>
-                  </div> -->
                 </div>
+
                 <div class="form-group">
-                  <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="end_month">
-                      End Month
-                    </label>
-                    <div class="col-sm-4">
-                      <select class="form-control form-control-sm" id="end_month" formControlName="end_month" ngModel required>
-                        <option value='' disabled selected hidden>Choose</option>
-                        <option *ngFor="let option of effectiveEndOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
-                      </select>
-                      <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['end_month'].errors.required">
-                          End Month is required.
-                        </div>
-                      </div>
-                    </div>
-                    <ng-template #popContentEndMonth>
-                      <div class="tooltip-italic">This is the last month of the HRA plan year.</div>
-                    </ng-template>
-                    <sup [ngbPopover]="popContentEndMonth">
-                      <i class="fas fa-question-circle"></i>
-                    </sup>
+                  <div dropdown
+                    class="input-group"
+                    controlId="end_month"
+                    controlName="end_month"
+                    labelText="End Month"
+                    [parentFormControl]="hraForm"
+                    [dangerColorCode]="dangerColorCode"
+                    placeHolderText="Choose"
+                    requiredErrorText="End Month is required."
+                    [dropdownOptions]="effectiveEndOptions"
+                    formatDATE=true
+                    displayToolTip=true
+                    popContent="This is the last month the HRA is available to you."
+                  >
                   </div>
                 </div>
                 <div class="form-group">
@@ -340,7 +310,7 @@
                     control2Label="Total"
                     controlId="hra_frequency"
                     controlName="hra_frequency"
-                    labelText="Frequency (choose one)"
+                    [settings]="hraAmountFrequencySettings"
                     [parentFormControl]="hraForm"
                     [dangerColorCode]="dangerColorCode"
                     (click1Event)="onHraFrequencyChange('monthly')"
@@ -352,25 +322,16 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_amount">Amount</label>
-                    <div class="col-sm-4">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">$</span>
-                        </div>
-                        <input type="text" class="form-control" style="text-align: right" (keypress)="numberOnly($event)" mask="comma_separator" maxlength="11" [disabled]="hraForm.controls['household_frequency'].invalid" id="hra_amount" formControlName="hra_amount" ngModel required [attr.disabled]="(hraForm.controls['hra_frequency'].value =='') ? '' : null "/>
-                        <div class="input-group-append">
-                          <span class="input-group-text">.00</span>
-                        </div>
-                      </div>
-                      <div *ngIf="hraForm.controls['hra_amount'].invalid && (hraForm.controls['hra_amount'].dirty || hraForm.controls['hra_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['hra_amount'].errors.required">
-                          Amount is required.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    <div dollarEntryField
+                    class="input-group"
+                    controlId="hra_amount"
+                    controlName="hra_amount"
+                    labelText="Amount"
+                    [parentFormControl]="hraForm"
+                    [dangerColorCode]="dangerColorCode"
+                    [isDisabled]="(hraForm.controls['household_frequency'].value =='') ? '' : null"
+                  >
+                 </div>
                 </div>
               </div>
 

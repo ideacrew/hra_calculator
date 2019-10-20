@@ -1,17 +1,21 @@
 <ng-container *ngIf="formField">
   <ng-container [formGroup]="parentFormControl">
-      <label class="{{labelClass}} radio-button-form-field" for="{{controlId}}">{{labelText}}</label>
+      <label class="{{labelClass}} radio-button-form-field" for="{{controlId}}" id="{{controlId}}-radio-button-label">{{settings.label}}</label>
       <div class="{{controlClass}}">
         <div class="btn-group" data-toggle="buttons">
           <span class="{{span1Class}}">
-              <input type="radio" class="form-control form-control-sm" id="{{controlId}}"
-              [formControlName]="controlName" value="{{control1Value}}" ngModel required (click)="click1Event.emit()"/> 
-              {{control1Label}}
+            <input type="radio" class="form-control form-control-sm" id="{{controlId}}"
+            [formControlName]="controlName" value="{{control1Value}}"
+            attr.aria-labelledby="{{controlId}}-text-label" attr.aria-describedby="{{control1Label}}-description"
+            ngModel required (click)="click1Event.emit()"/> 
+            {{control1Label}}
           </span>
           <span class="{{span2Class}}">
-              <input type="radio" class="form-control form-control-sm" id="{{controlId}}"
-              [formControlName]="controlName" value="{{control2Value}}" ngModel required (click)="click2Event.emit()"/> 
-              {{control2Label}}
+            <input type="radio" class="form-control form-control-sm" id="{{controlId}}"
+            [formControlName]="controlName" value="{{control2Value}}"
+            attr.aria-labelledby="{{controlId}}-text-label" attr.aria-describedby="{{control2Label}}-description"
+            ngModel required (click)="click2Event.emit()"/> 
+            {{control2Label}}
           </span>
         </div>
         <ng-template #popContentRadio>

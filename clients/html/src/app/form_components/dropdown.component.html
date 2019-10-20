@@ -1,24 +1,27 @@
 <ng-container *ngIf="formField">
   <ng-container [formGroup]="parentFormControl">
+    <label class="{{labelClass}} dropdown-form_field" for="{{controlId}}" id="{{controlId}}-dropdown-label">{{settings.label}}</label>
     <div class="{{controlClass}}">
-        <label class="{{labelClass}} dropdown" for="{{controlId}}">{{labelText}}</label>
-      <div ngbDropdown class="{{dropdownClass}}">
-        <select (change)="setEffectiveEndOptions($event.target.value)" class="form-control form-control-sm" id="{{controlId}}" [formControlName]="controlName" ngModel required>
-          <option value='' disabled selected hidden>Choose</option>
-
+      <div ngbDropdown>
+        <select class="form-control form-control-sm" id="{{controlId}}" [formControlName]="controlName"
+          attr.aria-labelledby="{{controlId}}-text-label"
+          attr.aria-describedby="{{controlId}}-{{settings.description}}"
+          [attr.disabled]="isDisabled" ngModel required>
+          <option value='' disabled selected hidden>{{placeHolderText}}</option>
+          <option ngbDropdownToggle *ngFor="let option of dropdownOptions" [value]="option">{{formatDATE ? (option | date: 'MMMM y') : option }} </option>
         </select>
+        <ng-template #popContentDropdown>
+          <div class="tooltip-italic" [innerHTML]="popContent"></div>
+        </ng-template>
+        <sup [ngbPopover]="popContentDropdown">
+          <i class="fas fa-question-circle"></i>
+        </sup>
         <div *ngIf="formField.invalid && (formField.dirty || formField.touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
           <div *ngIf="formField.invalid">
-            {{requiredErrorField}}
+            {{requiredErrorText}}
           </div>
         </div>
       </div>
-      <ng-template #popContentStartMonth>
-        <div class="tooltip-italic" [innerHTML]="popContent"></div>
-      </ng-template>
-      <sup [ngbPopover]="popContentStartMonth">
-        <i class="fas fa-question-circle"></i>
-      </sup>
     </div>
   </ng-container>
 </ng-container>

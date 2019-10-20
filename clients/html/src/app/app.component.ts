@@ -10,4 +10,8 @@ import { UsDateParserFormatter } from "./us_date_parser_formatter"
 })
 export class AppComponent {
   title = 'app';
+
+  onActivate(event: any) {
+    window.scroll(0,0);
+  }
 }
