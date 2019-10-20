@@ -5,7 +5,7 @@ import { ControlSettings } from '../configuration/control_settings'
 @Component({
   selector: '[textEntryField]',
   templateUrl: './text_entry_field.component.html',
-  styleUrls: ['./text_entry_field.component.scss']
+  styleUrls: ['./form.component.scss']
 })
 export class TextEntryFieldComponent {
   // Reactive form directives

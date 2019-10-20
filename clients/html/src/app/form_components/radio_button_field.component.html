@@ -6,14 +6,14 @@
           <span class="{{span1Class}}">
             <input type="radio" class="form-control form-control-sm" id="{{controlId}}"
             [formControlName]="controlName" value="{{control1Value}}"
-            attr.aria-labelledby="{{controlId}}-text-label" attr.aria-describedby="{{control1Label}}-description"
+            attr.aria-labelledby="{{controlId}}-radio-button-label" attr.aria-describedby="{{controlId}}-radio-button-label"
             ngModel required (click)="click1Event.emit()"/> 
             {{control1Label}}
           </span>
           <span class="{{span2Class}}">
             <input type="radio" class="form-control form-control-sm" id="{{controlId}}"
             [formControlName]="controlName" value="{{control2Value}}"
-            attr.aria-labelledby="{{controlId}}-text-label" attr.aria-describedby="{{control2Label}}-description"
+            attr.aria-labelledby="{{controlId}}-radio-button-label" attr.aria-describedby="{{controlId}}-radio-button-label"
             ngModel required (click)="click2Event.emit()"/> 
             {{control2Label}}
           </span>

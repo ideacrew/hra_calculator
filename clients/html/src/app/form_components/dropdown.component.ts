@@ -5,7 +5,7 @@ import { ControlSettings } from '../configuration/control_settings'
 @Component({
   selector: '[dropdown]',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss']
+  styleUrls: ['./form.component.scss']
 })
 
 export class DropdownComponent {

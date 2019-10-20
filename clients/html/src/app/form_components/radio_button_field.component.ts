@@ -5,7 +5,7 @@ import { ControlSettings } from '../configuration/control_settings'
 @Component({
   selector: '[radioButtonField]',
   templateUrl: './radio_button_field.component.html',
-  styleUrls: ['./radio_button_field.component.scss']
+  styleUrls: ['./form.component.scss']
 })
 
 export class RadioButtonFieldComponent {

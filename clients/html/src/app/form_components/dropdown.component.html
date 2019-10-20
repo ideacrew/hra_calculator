@@ -4,18 +4,12 @@
     <div class="{{controlClass}}">
       <div ngbDropdown>
         <select class="form-control form-control-sm" id="{{controlId}}" [formControlName]="controlName"
-          attr.aria-labelledby="{{controlId}}-text-label"
-          attr.aria-describedby="{{controlId}}-{{settings.description}}"
+          attr.aria-labelledby="{{controlId}}-dropdown-label"
+          attr.aria-describedby="{{controlId}}-dropdown-label"
           [attr.disabled]="isDisabled" ngModel required>
           <option value='' disabled selected hidden>{{placeHolderText}}</option>
           <option ngbDropdownToggle *ngFor="let option of dropdownOptions" [value]="option">{{formatDATE ? (option | date: 'MMMM y') : option }} </option>
         </select>
-        <ng-template #popContentDropdown>
-          <div class="tooltip-italic" [innerHTML]="popContent"></div>
-        </ng-template>
-        <sup [ngbPopover]="popContentDropdown">
-          <i class="fas fa-question-circle"></i>
-        </sup>
         <div *ngIf="formField.invalid && (formField.dirty || formField.touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
           <div *ngIf="formField.invalid">
             {{requiredErrorText}}
@@ -23,5 +17,11 @@
         </div>
       </div>
     </div>
+    <ng-template #popContentDropdown>
+        <div class="tooltip-italic" [innerHTML]="popContent"></div>
+      </ng-template>
+      <sup *ngIf="displayToolTip" [ngbPopover]="popContentDropdown" class="ml-n2">
+        <i class="fas fa-question-circle"></i>
+      </sup>
   </ng-container>
 </ng-container>

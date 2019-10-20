@@ -4,7 +4,7 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 @Component({
   selector: '[dollarEntryField]',
   templateUrl: './dollar_entry_field.component.html',
-  styleUrls: ['./dollar_entry_field.component.scss']
+  styleUrls: ['./form.component.scss']
 })
 export class DollarEntryFieldComponent {
    @Input("labelClass") labelClass : string = "col-sm-3 col-form-label col-form-label-sm";

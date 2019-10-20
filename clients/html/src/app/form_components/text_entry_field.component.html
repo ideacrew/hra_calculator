@@ -4,8 +4,8 @@
       {{settings.label}}
     </label>
     <div class="{{controlClass}}">
-      <div class="input-group"           attr.aria-labelledby={{settings.label}}
-      attr.aria-describedby={{settings.description}}>
+      <div class="input-group" attr.aria-labelledby="{{controlId}}-text-label"
+      attr.aria-describedby="{{controlId}}-text-label">
         <input type="text" class="form-control" minlength={{minLength}} maxlength={{maxLength}}
           id="{{controlId}}" [formControlName]="controlName" required
         />

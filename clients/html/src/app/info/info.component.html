@@ -124,6 +124,7 @@
                       <div class="col-sm-4">
                         <div class="input-group">
                           <input class="form-control"
+                            id="dob"
                             placeholder="mm/dd/yyyy"
                             name="dp"
                             ngbDatepicker #d="ngbDatepicker"
@@ -133,7 +134,7 @@
                             (input)="checkDateInput($event)"
                             validateDate validateDateFormat required>
                           <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button" aria-label="calender icon">
                               <i class="fas fa-calendar-alt"></i>
                             </button>
                           </div>
