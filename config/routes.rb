@@ -55,5 +55,11 @@ Rails.application.routes.draw do
         post :hra_payload
       end
     end
+
+    resources :client_sessions, only: [] do
+      collection do
+        get :issue_token
+      end
+    end
   end
 end

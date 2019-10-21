@@ -1,5 +1,5 @@
 module Api
-  class HraResultsController < ApplicationController
+  class HraResultsController < ApiController
     def hra_payload
       determine_affordability = ::Transactions::DetermineAffordability.new.call(formatted_params)
 

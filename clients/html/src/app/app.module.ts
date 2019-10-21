@@ -5,7 +5,7 @@ import { CommonModule} from '@angular/common';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -34,6 +34,7 @@ import { DollarEntryFieldModule } from './form_components/dollar_entry_field.mod
 import { RadioButtonFieldModule } from './form_components/radio_button_field.module';
 import { TextEntryFieldModule } from './form_components/text_entry_field.module';
 import { DropdownModule } from './form_components/dropdown.module';
+import { JwtInterceptor }  from './authentication/jwt_interceptor';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -80,6 +81,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
