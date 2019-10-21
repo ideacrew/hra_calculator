@@ -46,7 +46,7 @@ module ApplicationHelper
         elsif input_id == 'state'
           concat(content_tag :option, item.to_s.titleize, value: item)
         elsif show_default
-          concat(content_tag :option, item, value: item)
+          concat(content_tag :option, item, value: item, id: "#{input_id}_#{item}")
         else
           concat(content_tag :option, item.to_s.humanize, value: item)
         end
