@@ -1,8 +1,8 @@
 ---
 en:
-  site_header.header: HRA Tool
-  site_footer.customer_support: Customer Support
-  site_footer.benefit_year: Benefit Year
+  site.header: HRA Tool
+  site.footer.customer_support: Customer Support
+  site.footer.benefit_year: Benefit Year
   getting_started.title: Getting Started
   getting_started.paragraph: |-
     <p>This tool is for people who have been offered a Health Reimbursement Arrangement (HRA) by an employer to help pay for health insurance for {{benefit_year}}. If you are offered certain types of HRAs, you may not qualify for [a tax credit] to help purchase a {{marketplace}} plan. This tool will help you determine how the HRA you're offered affects your eligibility for [a tax credit] and what to do next.</p>
