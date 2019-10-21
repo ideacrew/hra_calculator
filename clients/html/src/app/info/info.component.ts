@@ -239,21 +239,21 @@ export class InfoComponent implements OnInit {
           console.log(res)
           if (res.data.counties.length == 0) {
             this.countyOptions = [];
-            this.countyPlaceHolder = 'zipcode is outside state'
+            this.countyPlaceHolder = 'Zipcode is outside state'
             this.hraForm.patchValue({
               county: ''
             })
             this.isCountyDisabled = true
           } else if (res.data.counties.length == 1) {
             this.countyOptions = res.data.counties;
-            this.countyPlaceHolder = 'choose'
+            this.countyPlaceHolder = 'Choose'
             this.hraForm.patchValue({
               county: res.data.counties[0]
             })
             this.isCountyDisabled = true
           } else {
             this.countyOptions = res.data.counties;
-            this.countyPlaceHolder = 'choose'
+            this.countyPlaceHolder = 'Choose'
             this.hraForm.patchValue({
               county: ''
             })
@@ -266,7 +266,7 @@ export class InfoComponent implements OnInit {
         }
       );
     } else {
-      this.countyPlaceHolder = 'choose'
+      this.countyPlaceHolder = 'Choose'
       this.hraForm.patchValue({
         county: ''
       })
