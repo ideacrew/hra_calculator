@@ -3,7 +3,7 @@ es:
   site_header.header: HRA Tool
   site_footer.customer_support: Atención al cliente
   site_footer.benefit_year: Año de beneficio
-  getting_started.header: Empezando
+  getting_started.title: Empezando
   getting_started.use_tool.header: Use esta herramienta si ...
   getting_started.use_tool.content: |-
     Te han ofrecido uno de los

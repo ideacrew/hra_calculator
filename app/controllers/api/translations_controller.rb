@@ -10,8 +10,8 @@ module Api
     end
 
     def find_tenant
-      tenant_id = params[:tenant_id] || params[:id]
-      @tenant = Tenants::Tenant.find(tenant_id)
+      tenant_id = params[:tenant_id]
+      @tenant = tenant_id.blank? ? Tenants::Tenant.first : Tenants::Tenant.find(tenant_id)
       @enterprise = @tenant.enterprise
     end
   end

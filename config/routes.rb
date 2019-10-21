@@ -55,7 +55,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resource :translations, only: [:show] do
+    resources :translations, only: [:show] do
     end
   end
 
