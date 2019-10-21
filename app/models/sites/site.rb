@@ -16,6 +16,8 @@ class Sites::Site
 
   embeds_many :options, as: :configurable,
               class_name: 'Options::Option'
+  
+  scope :by_key, ->(key) { where(key: key) }
 
   accepts_nested_attributes_for :features, :options
 
