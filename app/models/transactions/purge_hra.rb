@@ -1,5 +1,5 @@
 module Transactions
-  class PlansDestroy
+  class PurgeHra
     include Dry::Transaction
 
     step :fetch
@@ -7,13 +7,13 @@ module Transactions
 
     private
 
-    def fetch(input)
-      @tenant = ::Tenants::Tenant.find(input[:id])
+    def fetch
+      @tenants = ::Tenants::Tenant.all
 
-      if @tenant.blank?
-        Failure({errors: ["Unable to find tenant record with id #{input[:id]}"]})
+      if @tenants.blank?
+        Failure({errors: ['There are no tenants.']})
       else
-        Success({:state => @tenant.key.to_s.upcase})
+        Success(@tenants)
       end
     end
 
@@ -22,6 +22,7 @@ module Transactions
       ::Locations::ServiceArea.all.destroy_all
       ::Locations::RatingArea.all.destroy_all
       ::Locations::CountyZip.all.destroy_all
+      input.destroy_all
       Success('Process done')
     end
   end

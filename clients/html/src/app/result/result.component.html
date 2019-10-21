@@ -54,7 +54,7 @@
             </div>
             <div *ngIf="(showUnaffordableQsehraText)">
               <div class="p-2 bd-highlight card-border">
-                <p><strong>Based on the information you entered, your HRA is not large enough on its own to make health insurance “affordable” based on federal standards.</strong> As a result, you may qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> through <span [innerHTML]="marketPlace">{{marketPlace}}</span> based on your income and other factors. If you qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span>, you can use it in addition to your HRA, but you'll want to adjust the amount to avoid owing back money at tax time.</p>
+                <p class="m-0"><strong id="qsehra-unaffordable">Based on the information you entered, your HRA is not large enough on its own to make health insurance “affordable” based on federal standards.</strong> As a result, you may qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> through <span [innerHTML]="marketPlace">{{marketPlace}}</span> based on your income and other factors. If you qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span>, you can use it in addition to your HRA, but you'll want to adjust the amount to avoid owing back money at tax time.</p>
               </div>
               <br/>
               <div class="content">
@@ -74,7 +74,7 @@
                   <li>
                     If you are <strong>not</strong> eligible for <span [innerHTML]="taxCredit">{{taxCredit}}</span>, you may still purchase a <span [innerHTML]="marketPlace">{{marketPlace}}</span> plan and use the HRA to help pay for it.
                   </li>
-                </ul> 
+                </ul>
               </div>
               <div class="content">
                 <h4> Using your HRA: </h4>
@@ -85,13 +85,13 @@
                   <li>
                     <strong>If you decide not to enroll in health insurance or you purchase more limited coverage <span [innerHTML]="short_term_plan_text">{{short_term_plan_text}}</span>, you cannot use the HRA.</strong>.
                   </li>
-                </ul> 
+                </ul>
               </div>
             </div>
 
             <div *ngIf="(showAffordableQsehraText)">
               <div class="p-2 bd-highlight card-border">
-                <p><strong> Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal standards.</strong> As a result, you do not qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> through <span [innerHTML]="marketPlace">{{marketPlace}}</span> for yourself or for any family member who is eligible to benefit from the HRA. But, you can use your HRA to help make buying a <span [innerHTML]="marketPlace">{{marketPlace}}</span> plan more affordable. You can also use your HRA if you enroll in other coverage.</p>
+                <p class="m-0"><strong id="qsehra-affordable"> Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal standards.</strong> As a result, you do not qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> through <span [innerHTML]="marketPlace">{{marketPlace}}</span> for yourself or for any family member who is eligible to benefit from the HRA. But, you can use your HRA to help make buying a <span [innerHTML]="marketPlace">{{marketPlace}}</span> plan more affordable. You can also use your HRA if you enroll in other coverage.</p>
               </div>
               <br/>
               <div class="content">
@@ -107,7 +107,7 @@
                   <li>
                     <strong>If you decide not to enroll in health insurance or you purchase more limited coverage, <span [innerHTML]="short_term_plan_text">{{short_term_plan_text}}</span>, you cannot use the HRA.</strong>
                   </li>
-                </ul> 
+                </ul>
               </div>
               <div [ngStyle]="{'background-color': infoColorCode}" class="pt-4 bd-highlight card-border result-box alert alert-info">
                 <p><i class="fas fa-exclamation-triangle"></i> Based on the information you entered, you should not accept <span [innerHTML]="taxCredit">{{taxCredit}}</span> to purchase health insurance through <span [innerHTML]="marketPlace">{{marketPlace}}</span>. </p>
@@ -116,7 +116,7 @@
 
             <div *ngIf="(showUnaffordableIchraText)">
               <div class="p-2 bd-highlight card-border">
-                <p><strong> Based on the information you entered, the HRA offered to you is not large enough to make health insurance “affordable” based on federal standards.</strong> As a result, you may qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> to help you buy <span [innerHTML]="marketPlace">{{marketPlace}}</span> coverage based on your income and other factors.</p>
+                <p class="m-0"><strong id="ichra-unaffordable"> Based on the information you entered, the HRA offered to you is not large enough to make health insurance “affordable” based on federal standards.</strong> As a result, you may qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> to help you buy <span [innerHTML]="marketPlace">{{marketPlace}}</span> coverage based on your income and other factors.</p>
               </div>
               <br/>
               <div class="content">
@@ -135,7 +135,7 @@
                   <li>
                    If you enroll with <span [innerHTML]="taxCredit">{{taxCredit}}</span>, notify your employer that you are opting out of the HRA.<strong> You cannot receive both an HRA and <span [innerHTML]="taxCredit">{{taxCredit}}</span> from <span [innerHTML]="marketPlace">{{marketPlace}}</span>.</strong> If you receive both, you may owe money back at tax time.
                   </li>
-                </ul> 
+                </ul>
               </div>
               <div class="content">
                 <h4> If you don't receive <span [innerHTML]="taxCredit">{{taxCredit}}</span>: </h4>
@@ -149,7 +149,7 @@
                   <li>
                    If your employer has offered you a “salary reduction agreement” to pay the share of health insurance premium not covered by the HRA, you may be better off using your HRA to buy <span [innerHTML]="help_text_4">{{help_text_4}}</span>
                   </li>
-                </ul> 
+                </ul>
               </div>
               <div [ngStyle]="{'background-color': infoColorCode}" class="pt-4 bd-highlight card-border result-box alert alert-info">
                 <p><i class="fas fa-exclamation-triangle"></i>If you receive <span [innerHTML]="taxCredit">{{taxCredit}}</span> from <span [innerHTML]="marketPlace">{{marketPlace}}</span>, you must notify your employer that you are opting out of the HRA.</p>
@@ -158,7 +158,7 @@
 
             <div *ngIf="(showAffordableIchraText)">
               <div class="p-2 bd-highlight card-border">
-                <p><strong> Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal standards.</strong> As a result, you do not qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> through <span [innerHTML]="marketPlace">{{marketPlace}}</span> for yourself or any family member who is eligible to benefit from the HRA.<strong>  But, you can use your HRA to help make purchasing coverage more affordable.</strong></p>
+                <p class="m-0"><strong id="ichra-affordable"> Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal standards.</strong> As a result, you do not qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> through <span [innerHTML]="marketPlace">{{marketPlace}}</span> for yourself or any family member who is eligible to benefit from the HRA.<strong>  But, you can use your HRA to help make purchasing coverage more affordable.</strong></p>
               </div>
               <br/>
               <div class="content">
@@ -173,7 +173,7 @@
                   <li>
                     If you buy a <span [innerHTML]="marketPlace">{{marketPlace}}</span> plan, do not accept <span [innerHTML]="taxCredit">{{taxCredit}}</span>, or you may owe money back at tax time. <span [innerHTML]="enroll_without_aptc_text">{{enroll_without_aptc_text}}</span>
                   </li>
-                </ul> 
+                </ul>
               </div>
               <div class="content">
                 <h4> Informing your employer: </h4>
@@ -184,7 +184,7 @@
                   <li>
                     <strong>If you enroll in any other coverage – including more limited coverage <span [innerHTML]="short_term_plan_text">{{short_term_plan_text}}</span> – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.</strong>.
                   </li>
-                </ul> 
+                </ul>
               </div>
               <div [ngStyle]="{'background-color': infoColorCode}" class="pt-4 bd-highlight card-border result-box alert alert-info" >
                 <p><i class="fas fa-exclamation-triangle"></i> Based on the information you entered, you should not accept <span [innerHTML]="taxCredit">{{taxCredit}}</span> to purchase health insurance through <span [innerHTML]="marketPlace">{{marketPlace}}</span>.</p>

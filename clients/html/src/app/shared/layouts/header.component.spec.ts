@@ -45,7 +45,7 @@ describe("HeaderComponent",
       var component = new HeaderComponent(mockProvider, fontCustomizer);
       component.ngOnInit();
       expect(component.marketplaceName).toBe(mock_marketplace_name);
-      expect(component.tenant_logo_file).toBe(mock_tenant_logo);
+      expect(component.tenant_logo_file).toBe('data:image/png;base64,' + mock_tenant_logo);
       expect(component.tenant_url).toBe(mock_tenant_url);
       expect(component.primaryColorCode).toBe(mock_primary_color_code);
     });

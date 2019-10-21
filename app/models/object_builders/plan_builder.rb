@@ -65,7 +65,7 @@ module ObjectBuilders
         end
         @logger.info "\nSaved Plan: #{@qhp.plan_marketing_name}, hios product id: #{@qhp.standard_component_id} \n"
       rescue Exception => e
-        return Failure({errors: ["Failed to import plans for carrier: #{@carrier_name}"]})
+        return "Failed to import plans for carrier: #{@carrier_name}"
       end
     end
 
