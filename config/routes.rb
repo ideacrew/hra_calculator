@@ -54,6 +54,9 @@ Rails.application.routes.draw do
         post :hra_payload
       end
     end
+
+    resource :translations, only: [:show] do
+    end
   end
 
   resources :hra_results, :defaults => { :format => 'json' } do
