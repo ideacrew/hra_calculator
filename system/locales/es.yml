@@ -1,11 +1,11 @@
 ---
 es:
-  site_header.header: HRA Tool
-  site_footer.customer_support: Atención al cliente
-  site_footer.benefit_year: Año de beneficio
+  site.title: HRA Tool
+  site.customer_support: Atención al cliente
+  site.benefit_year: Año de beneficio
   getting_started.title: Empezando
-  getting_started.use_tool.header: Use esta herramienta si ...
-  getting_started.use_tool.content: |-
+  getting_started.use_if.label: Use esta herramienta si ...
+  getting_started.use_if.body: |-
     Te han ofrecido uno de los
     siguientes HRA que pueden usarse para
     ayudar a comprar un plan de seguro de salud en
@@ -15,8 +15,8 @@ es:
     HRA "(" QSEHRA ")
     (Uno de estos términos aparecerá en
     el aviso de su empleador)
-  getting_started.skip_tool.header: Omita esta herramienta si ...
-  getting_started.skip_tool.content: |-
+  getting_started.do_not_use_if.label: Omita esta herramienta si ...
+  getting_started.do_not_use_if.body: |-
     Su empleador solo le ha ofrecido uno
     o más de lo siguiente:
     Una HRA que no sea un individuo

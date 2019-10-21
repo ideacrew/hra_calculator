@@ -15,8 +15,8 @@ export interface SiteTranslations {
   title: string;
   customer_support: string;
   benefit_year: string;
-  button_previous_label: string;
-  button_next_label: string;
+  previous_button_label: string;
+  next_button_label: string;
 }
 
 export interface GettingStartedTranslations {

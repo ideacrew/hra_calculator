@@ -9,6 +9,7 @@ import { FooterComponent } from './footer.component';
 
 import { HeaderFooterConfigurationService } from "../../configuration/header_footer/header_footer_configuration.service";
 import { FontCustomizerService } from "./font_customizer.service";
+import { TokenizedTranslationModule } from '../../translations/tokenized_translation_module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FontCustomizerService } from "./font_customizer.service";
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    TokenizedTranslationModule
   ],
   providers: [
     HeaderFooterConfigurationService.providers(),

@@ -1,8 +1,10 @@
 ---
 en:
-  site.header: HRA Tool
-  site.footer.customer_support: Customer Support
-  site.footer.benefit_year: Benefit Year
+  site.title: HRA Tool
+  site.customer_support: Customer Support
+  site.benefit_year: Benefit Year
+  site.next_button_label: Next
+  site.previous_button_label: Previous
   getting_started.title: Getting Started
   getting_started.paragraph: |-
     <p>This tool is for people who have been offered a Health Reimbursement Arrangement (HRA) by an employer to help pay for health insurance for {{benefit_year}}. If you are offered certain types of HRAs, you may not qualify for [a tax credit] to help purchase a {{marketplace}} plan. This tool will help you determine how the HRA you're offered affects your eligibility for [a tax credit] and what to do next.</p>
@@ -162,9 +164,6 @@ en:
   info_and_results.footer: When you’re asked to set your tax credit amount, reduce
     what you accept by your monthly HRA amount to help avoid having to pay back money
     at tax time
-  site.btn.start: Start
-  site.btn.next: Next
-  site.btn.previous: Previous
   site.btn.edit_info: Edit Info
   site.btn.start_over: Start Over
   site.btn.print_results: Print Your Results
