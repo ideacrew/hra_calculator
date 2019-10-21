@@ -32,6 +32,9 @@ import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
 import { TranslationHttpLoader } from "./translations/translation_loader";
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TokenizedTranslatePipe } from './translations/tokenized_translate_pipe';
+import { TokenizedHtmlTranslatePipe } from './translations/tokenized_html_translate_pipe';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -55,7 +58,9 @@ export function createTranslateLoader(http: HttpClient) {
     SidebarComponent,
     HomeComponent,
     InfoComponent,
-    ResultComponent
+    ResultComponent,
+    TokenizedTranslatePipe,
+    TokenizedHtmlTranslatePipe
   ],
   imports: [
     CommonModule,

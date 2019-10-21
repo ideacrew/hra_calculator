@@ -26,5 +26,5 @@ export interface GettingStartedTranslations {
   disclaimer: string;
   use_if: CardTranslations;
   do_not_use_if: CardTranslations;
-  button_getting_started_label: string;
+  start_button_label: string;
 }
