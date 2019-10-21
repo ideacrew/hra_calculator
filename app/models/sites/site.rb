@@ -16,6 +16,8 @@ class Sites::Site
 
   embeds_many :options, as: :configurable,
               class_name: 'Options::Option'
+  
+  scope :by_key, ->(key) { where(key: key) }
 
   accepts_nested_attributes_for :features, :options
 
@@ -32,6 +34,7 @@ class Sites::Site
   # Following method needs to be updated if multi environment params passed.
   def environments=(env_params)
     env_params.each do |env_hash|
+      next unless env_hash[:features]
       env_hash[:features].each do |feature_hash|
         self.features.build(feature_hash)
       end

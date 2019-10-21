@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get  :features_show
       put  :features_update
       get  :ui_pages_show
+      get  :translations_show
       get  :ui_pages_edit
       patch :ui_element_update
       get  :plan_index
