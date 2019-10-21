@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfoComponent } from './info.component';
+import { DollarEntryFieldComponent } from './../form_components/dollar_entry_field.component';
+import { RadioButtonFieldComponent } from './../form_components/radio_button_field.component';
+import { TextEntryFieldComponent } from './../form_components/text_entry_field.component';
+import { DropdownComponent } from './../form_components/dropdown.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -16,7 +20,7 @@ describe('InfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoComponent ],
+      declarations: [ InfoComponent, DollarEntryFieldComponent, RadioButtonFieldComponent, TextEntryFieldComponent, DropdownComponent ],
       providers: [
         { provide: ResultService, useValue: resultServiceStub },
         { provide: Router, useValue: routerStub },
@@ -45,6 +49,7 @@ describe('InfoComponent', () => {
   it('should set effective end date options', () => {
     let dropdown = fixture.debugElement.query(By.css("#start_month")).nativeElement;
     dropdown.value = dropdown.options[1].value;
+    component.setEffectiveEndOptions(dropdown.value);
     let startDate = new Date(dropdown.value);
     let nextDate = new Date(startDate.getFullYear(), startDate.getMonth() + 11, 1);
     dropdown.dispatchEvent(new Event('change'));
@@ -53,23 +58,23 @@ describe('InfoComponent', () => {
   });
 
   it('should update household frequency onHouseholdChange', () => {
-    fixture.nativeElement.querySelector("input#household_frequency[value='monthly']").click();
+    fixture.nativeElement.querySelector("input#household_frequency[ng-reflect-value='monthly']").click();
     expect(component.selectedHouseholdFrequency).toBe("monthly");
-    fixture.nativeElement.querySelector("input#household_frequency[value='annually']").click();
+    fixture.nativeElement.querySelector("input#household_frequency[ng-reflect-value='annually']").click();
     expect(component.selectedHouseholdFrequency).toBe("annually");
   });
 
   it('should update HRA type onHraTypeChange', () => {
-    fixture.nativeElement.querySelector("input[value='ichra']").click();
+    fixture.nativeElement.querySelector("input[ng-reflect-value='ichra']").click();
     expect(component.selectedHraType).toBe("ichra");
-    fixture.nativeElement.querySelector("input[value='qsehra']").click();
+    fixture.nativeElement.querySelector("input[ng-reflect-value='qsehra']").click();
     expect(component.selectedHraType).toBe("qsehra");
   });
 
   it ('should update HRA frequency onHraFrequencyChange', () => {
-    fixture.nativeElement.querySelector("input#hra_frequency[value='monthly']").click();
+    fixture.nativeElement.querySelector("input#hra_frequency[ng-reflect-value='monthly']").click();
     expect(component.selectedHraFrequency).toBe("monthly");
-    fixture.nativeElement.querySelector("input#hra_frequency[value='annually']").click();
+    fixture.nativeElement.querySelector("input#hra_frequency[ng-reflect-value='annually']").click();
     expect(component.selectedHraFrequency).toBe("annually");
   });
 });

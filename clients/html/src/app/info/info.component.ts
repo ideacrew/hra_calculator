@@ -333,7 +333,7 @@ export class InfoComponent implements OnInit {
 
   countySettings = {
     label: "County",
-    description: "Selecy County"
+    description: "Select County"
   };
 
   householfFrequencySettings = {

@@ -73,7 +73,7 @@ describe('ResultComponent', () => {
       expect(userInfo).toContain(results["zipcode"]);
     }
     expect(userInfo).toContain(results["dob"]);
-    expect(userInfo).toContain(results["household_amount"]);
+    expect(userInfo).toContain("60,000");
     // expect(userInfo).toContain(results["household_frequency"]);
     expect(userInfo).toContain("Annual");
     // expect(userInfo).toContain(results["hra_type"]);
