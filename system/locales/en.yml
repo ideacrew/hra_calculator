@@ -163,21 +163,21 @@ en:
   info_and_results.footer: When you’re asked to set your tax credit amount, reduce
     what you accept by your monthly HRA amount to help avoid having to pay back money
     at tax time
-  btn.start: Start
-  btn.next: Next
-  btn.previous: Previous
-  btn.edit_info: Edit Info
-  btn.start_over: Start Over
-  btn.print_results: Print Your Results
-  month.jan: January
-  month.feb: February
-  month.mar: March
-  month.apr: April
-  month.may: May
-  month.jun: June
-  month.jul: July
-  month.aug: August
-  month.sep: September
-  month.oct: October
-  month.nov: November
-  month.dec: December
+  site.btn.start: Start
+  site.btn.next: Next
+  site.btn.previous: Previous
+  site.btn.edit_info: Edit Info
+  site.btn.start_over: Start Over
+  site.btn.print_results: Print Your Results
+  site.month.jan: January
+  site.month.feb: February
+  site.month.mar: March
+  site.month.apr: April
+  site.month.may: May
+  site.month.jun: June
+  site.month.jul: July
+  site.month.aug: August
+  site.month.sep: September
+  site.month.oct: October
+  site.month.nov: November
+  site.month.dec: December
