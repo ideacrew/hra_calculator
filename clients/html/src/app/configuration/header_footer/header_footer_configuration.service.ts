@@ -29,7 +29,6 @@ export class HeaderFooterConfigurationService {
   getHeaderFooterConfiguration(consumer : HeaderFooterConfigurationConsumer) {
     this.httpClient.get<ResourceResponse<HeaderFooterConfigurationResource>>(this.apiUrl).subscribe(
       (res:ResourceResponse<HeaderFooterConfigurationResource>) => {
-        console.log(res.data);
         consumer.applyHeaderFooterConfiguration(res.data);
       },
       (err) => {

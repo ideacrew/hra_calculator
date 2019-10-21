@@ -13,7 +13,7 @@
             </div>
             <form [formGroup]="hraForm" (ngSubmit)="onSubmit()">
               <div class="tab" [hidden]="!(currentTab === 0)">
-                <h1>About You</h1>
+                <h1>{{"about_you.header.title" | tokenized_translate}}</h1>
                 <hr>
                 <div class="d-inline-flex ie-flex">
                   <div class="col-md-2">
@@ -21,18 +21,15 @@
                   </div>
                   <div class="col-md-12">
                     <p class="step-desription">
-                      <strong>
-                        Enter the following information for the family member
-                        who is offered the HRA.
+                      <strong [innerHTML]="'about_you.header.paragraph' | tokenized_html_translate">
+                      </strong>
                         <ng-template #popContentFamily>
-                          <div class="tooltip-italic">
-                            This is the family member whose employer is offering the HRA.
+                          <div class="tooltip-italic" [innerHtml]="'about_you.header.help' | tokenized_html_translate">
                           </div>
                         </ng-template>
                         <sup [ngbPopover]="popContentFamily">
                           <i class="fas fa-question-circle "></i>
                         </sup>
-                      </strong>
                     </p>
                   </div>
                 </div>
@@ -40,28 +37,27 @@
                   <br/>
                   <p>
                     <strong>
-                      Place of Residence
+                      {{'about_you.place_of_residence.header' | tokenized_translate}}
+                    </strong>
                       <ng-template #popContentResidence>
-                        <div class="tooltip-italic">Enter the family member’s place of residence, even if the employer is located somewhere else.
+                        <div class="tooltip-italic" [innerHtml]="'about_you.place_of_residence.description' | tokenized_html_translate">
                         </div>
                       </ng-template>
                       <sup [ngbPopover]="popContentResidence">
                         <i class="fas fa-question-circle"></i>
                       </sup>
-                    </strong>
                   </p>
                 </div>
                 <div class="form-group">
                   <div class="input-group">
                     <label class="col-sm-3 col-form-label col-form-label-sm" for="state">
-                      State
+                      {{'about_you.place_of_residence.state.label' | tokenized_translate}}
                     </label>
                     <div class="col-sm-4 state-align">
                       <input type="hidden" formControlName="state" id="state">
                       {{ this.hraForm.value.state }}
                       <ng-template #popContentState>
-                        <div class="tooltip-italic">
-                          If you are not a resident of this state, please visit <a href="https://www.healthcare.gov/get-coverage/" target="_blank">https://www.healthcare.gov/get-coverage/</a> to find the Marketplace in your state.
+                        <div class="tooltip-italic" [innerHTML]="'about_you.place_of_residence.state.description' | tokenized_html_translate">
                         </div>
                       </ng-template>
                       <sup [ngbPopover]="popContentState" >
@@ -69,7 +65,7 @@
                       </sup>
                       <div *ngIf="hraForm.controls['state'].invalid && (hraForm.controls['state'].dirty || hraForm.controls['state'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['state'].errors.required">
-                          State is required.
+                          {{'about_you.place_of_residence.state.error_required' | tokenized_translate}}
                         </div>
                       </div>
                     </div>
@@ -78,15 +74,17 @@
                 <div *ngIf="showZipcode">
                   <div class="form-group">
                     <div class="input-group">
-                      <label class="col-sm-3 col-form-label col-form-label-sm" for="zipcode">Zip Code</label>
+                      <label class="col-sm-3 col-form-label col-form-label-sm" for="zipcode">
+                        {{'about_you.place_of_residence.zip.label' | tokenized_translate}}
+                      </label>
                       <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" (keypress)="numberOnly($event)" formControlName="zipcode" id="zipcode" pattern="[0-9]{5}" minlength="5" maxlength="5" (blur)="getCountyInfo()"/>
                         <div *ngIf="hraForm.controls['zipcode'].invalid && (hraForm.controls['zipcode'].dirty || hraForm.controls['zipcode'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                           <div *ngIf="hraForm.controls['zipcode'].errors.required">
-                            Zipcode is required.
+                            {{'about_you.place_of_residence.zip.error_required' | tokenized_translate}}
                           </div>
                           <div *ngIf="hraForm.controls['zipcode'].errors.minlength">
-                            Zipcode should be 5 digits.
+                            {{'about_you.place_of_residence.zip.error_length' | tokenized_translate}}
                           </div>
                         </div>
                       </div>
@@ -96,7 +94,7 @@
                 <div *ngIf="showCounty">
                   <div class="form-group">
                     <div class="input-group">
-                      <label class="col-sm-3 col-form-label col-form-label-sm" for="county">County</label>
+                      <label class="col-sm-3 col-form-label col-form-label-sm" for="county">{{'about_you.place_of_residence.county.label' | tokenized_translate}}</label>
                       <div class="col-sm-4">
                         <select class="form-control form-control-sm" id="county" formControlName="county" [attr.disabled]="isCountyDisabled ? '' : null" required>
                           <option value='' disabled selected hidden>{{countyPlaceHolder}}</option>
@@ -106,7 +104,7 @@
                         </select>
                         <div *ngIf="hraForm.controls['county'].invalid && (hraForm.controls['county'].dirty || hraForm.controls['county'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                           <div *ngIf="hraForm.controls['county'].errors.required">
-                            County is required.
+                            {{'about_you.place_of_residence.county.error_required' | tokenized_translate}}
                           </div>
                         </div>
                       </div>
@@ -116,12 +114,12 @@
                 <div *ngIf="showDob" >
                   <div class="form-group">
                     <p>
-                      <strong>Date of Birth</strong>
+                      <strong>{{'about_you.date_of_birth.header' | tokenized_translate}}</strong>
                     </p>
                   </div>
                   <div class="form-group">
                     <div class="input-group">
-                      <label class="col-sm-3 col-form-label col-form-label-sm" for="dob">MM/DD/YYYY</label>
+                      <label class="col-sm-3 col-form-label col-form-label-sm" for="dob">{{'about_you.date_of_birth.label' | tokenized_translate}}</label>
                       <div class="col-sm-4">
                         <div class="input-group">
                           <input class="form-control"
@@ -141,13 +139,13 @@
                         </div>
                         <div *ngIf="hraForm.controls['dob'].invalid && (hraForm.controls['dob'].dirty || hraForm.controls['dob'].touched)" class="input-group alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                           <div *ngIf="hraForm.controls['dob'].errors.required">
-                            Date of Birth is required.
+                            {{'about_you.date_of_birth.error_required' | tokenized_translate}}
                           </div>
                           <div *ngIf="hraForm.controls['dob'].errors.invalidDate">
-                            DOB must be between 01/01/1900 to Today.
+                            {{'about_you.date_of_birth.error_range' | tokenized_translate}}
                           </div>
                           <div *ngIf="hraForm.controls['dob'].errors.invalidDateFormat">
-                            Please Enter Valid Date Format(MM/DD/YYYY)
+                            {{'about_you.date_of_birth.error_format' | tokenized_translate}}
                           </div>
                         </div>
                       </div>
@@ -157,34 +155,34 @@
                 <div class="form-group">
                   <p>
                     <strong>
-                      Expected 2020 Household Income
-                      <ng-template #popContentHouseholdIncome>
-                        <div class="tooltip-italic">This is your household income before taxes. For most people, annual household income is the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040).Specifically, household income is equal to adjusted gross income plus the following amounts: Social Security benefits that are excluded from gross income, interest from tax-exempt bonds, any foreign-source income excluded from gross income under section 911 of Internal Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare).
-                        </div>
-                      </ng-template>
-                      <sup [ngbPopover]="popContentHouseholdIncome">
-                        <i class="fas fa-question-circle"></i>
-                      </sup>
+                      {{'about_you.household_income.header' | tokenized_translate}}
                     </strong>
+                    <ng-template #popContentHouseholdIncome>
+                      <div class="tooltip-italic" [innerHTML]="'about_you.household_income.description' | tokenized_html_translate">
+                      </div>
+                    </ng-template>
+                    <sup [ngbPopover]="popContentHouseholdIncome">
+                      <i class="fas fa-question-circle"></i>
+                    </sup>
                   </p>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                      <label class="col-sm-3 col-form-label col-form-label-sm" for="household_frequency">Frequency (choose one) </label>
+                      <label class="col-sm-3 col-form-label col-form-label-sm" for="household_frequency">{{'about_you.household_income.frequency.label' | tokenized_translate}}</label>
                       <div class="col-sm-4">
                         <div class="btn-group" data-toggle="buttons">
                           <span [ngClass]="(selectedHouseholdFrequency=='monthly')?'btn btn-outline-info active':'btn btn-outline-info'">
                               <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="household_frequency"
-                              formControlName="household_frequency" value="monthly" ngModel required (click)="onHouseholdChange('monthly')"/> Monthly
+                              formControlName="household_frequency" value="monthly" ngModel required (click)="onHouseholdChange('monthly')"/> {{'about_you.household_income.frequency.monthly' | tokenized_translate}}
                           </span>
                           <span [ngClass]="(selectedHouseholdFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
                               <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="household_frequency"
-                              formControlName="household_frequency" value="annually" ngModel required (click)="onHouseholdChange('annually')"/> Annual
+                              formControlName="household_frequency" value="annually" ngModel required (click)="onHouseholdChange('annually')"/> {{'about_you.household_income.frequency.annual' | tokenized_translate}}
                           </span>
                         </div>
                         <div *ngIf="hraForm.controls['household_frequency'].invalid && (hraForm.controls['household_frequency'].dirty || hraForm.controls['household_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                           <div *ngIf="hraForm.controls['household_frequency'].errors.required">
-                            Frequency is required.
+                            {{'about_you.household_income.frequency.error_required' | tokenized_translate}}
                           </div>
                         </div>
                       </div>
@@ -192,7 +190,7 @@
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="household_amount">Amount</label>
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="household_amount">{{'about_you.household_income.amount.label' | tokenized_translate}}</label>
                     <div class="col-sm-4">
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -205,7 +203,7 @@
                       </div>
                       <div *ngIf="hraForm.controls['household_amount'].invalid && (hraForm.controls['household_amount'].dirty || hraForm.controls['household_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['household_amount'].errors.required">
-                          Amount is required.
+                          {{'about_you.household_income.amount.error_required' | tokenized_translate}}
                         </div>
                       </div>
                     </div>
@@ -384,15 +382,15 @@
 
               <div style="overflow:auto;">
                 <div style="float:left;">
-                  <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)" routerLink="/home"> <i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
+                  <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)" routerLink="/home"> <i class="fas fa-arrow-circle-left fa-lg"> </i> {{"site.previous_button_label" | tokenized_translate}}</button>
                 </div>
                 <div style="float:left;">
-                  <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><i class="fas fa-arrow-circle-left fa-lg"> </i> Previous</button>
+                  <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 0)" (click)="showTab(currentTab-1)"><i class="fas fa-arrow-circle-left fa-lg"> </i> {{"site.previous_button_label" | tokenized_translate}}</button>
                 </div>
                 <div style="float:right;">
                   <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" [hidden]="(currentTab === 1)"
-                  (click)="showTab(currentTab+1)">Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
-                  <button [ngStyle]="{'background-color': primaryColorCode}" type="submit" class="btn btn btn-md button-style card-color" [hidden]="(currentTab != 1)" >Next <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
+                  (click)="showTab(currentTab+1)">{{"site.next_button_label" | tokenized_translate}} <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
+                  <button [ngStyle]="{'background-color': primaryColorCode}" type="submit" class="btn btn btn-md button-style card-color" [hidden]="(currentTab != 1)" >{{"site.next_button_label" | tokenized_translate}} <i class="fas fa-arrow-circle-right fa-lg"> </i></button>
                 </div>
               </div>
               <!-- Circles which indicates the steps of the form: -->

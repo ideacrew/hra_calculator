@@ -37,30 +37,43 @@ en:
       <li>Other types of health benefits</li>
       <li>No health benefits</li>
     </ul>
-  about_you.header: About You
-  about_you.paragraph: Enter the following information for the family member who is
+  about_you.header.title: About You
+  about_you.header.paragraph: Enter the following information for the family member who is
     offered the HRA
-  about_you.paragraph.help: This is the family member whose employer or former employer
+  about_you.header.help: This is the family member whose employer or former employer
     (if family member is a retiree) is offering the HRA.
   about_you.place_of_residence.header: Place of Residence
-  about_you.place_of_residence.help: Enter the family member’s place of residence,
+  about_you.place_of_residence.description: Enter the family member’s place of residence,
     even if the employer is located somewhere else.
-  about_you.place_of_residence.state: State
-  about_you.place_of_residence.state.help: If you are not a resident of this state,
-    please visit https://www.healthcare.gov/get-coverage/ to find the Marketplace
+  about_you.place_of_residence.state.label: State
+  about_you.place_of_residence.state.description: If you are not a resident of this state,
+    please visit <a href="https://www.healthcare.gov/get-coverage/" target="_blank">https://www.healthcare.gov/get-coverage/</a> to find the Marketplace
     in your state.
-  about_you.place_of_residence.zip_code: Zip Code
-  about_you.place_of_residence.county: County
+  about_you.place_of_residence.state.error_required: State is required.
+  about_you.place_of_residence.county.label: County
+  about_you.place_of_residence.county.description: MISSING COUNTY HELP TEXT
+  about_you.place_of_residence.county.error_required: County is required.
+  about_you.place_of_residence.zip.label: Zip Code
+  about_you.place_of_residence.zip.description: MISSING ZIP HELP TEXT
+  about_you.place_of_residence.zip.error_required: Zipcode is required.
+  about_you.place_of_residence.zip.error_length: Zipcode should be 5 digits.
   about_you.date_of_birth.header: Date of Birth
-  about_you.date_of_birth.format: MM/DD/YYYY
-  about_you.household_income.header: Expected Household Income
-  about_you.household_income.help: |-
-    This is your household income before taxes. For most people, annual household income is the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040). Specifically, household income is equal to adjusted gross income plus the following amounts: Social Security benefits that are otherwise excluded from gross income, interest from tax-exempt bonds, any foreign-source income excluded from gross income under section 911 of the Internal
-    Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare).
-  about_you.household_income.frequency: Frequency
-  about_you.household_income.amount: Amount
-  about_you.household_income.monthly: Monthly
-  about_you.household_income.annual: Annual
+  about_you.date_of_birth.label: MM/DD/YYYY
+  about_you.date_of_birth.description: MISSING DOB HELP TEXT
+  about_you.date_of_birth.error_required: Date of Birth is required.
+  about_you.date_of_birth.error_range: DOB must be between 01/01/1900 to Today.
+  about_you.date_of_birth.error_format: Please Enter Valid Date Format(MM/DD/YYYY)
+  about_you.household_income.header: Expected {{benefit_year}} Household Income
+  about_you.household_income.description: |-
+    This is your household income before taxes. For most people, annual household income is the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040). Specifically, household income is equal to adjusted gross income plus the following amounts: Social Security benefits that are excluded from gross income, interest from tax-exempt bonds, any foreign-source income excluded from gross income under section 911 of Internal Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare).
+  about_you.household_income.frequency.label: Frequency
+  about_you.household_income.frequency.description: MISSING FREQUENCY HELP TEXT
+  about_you.household_income.frequency.annual: Annual
+  about_you.household_income.frequency.monthly: Monthly
+  about_you.household_income.frequency.error_required: Frequency is required.
+  about_you.household_income.amount.label: Amount
+  about_you.household_income.amount.description: MISSING AMOUNT HELP TEXT
+  about_you.household_income.amount.error_required: Amount is required.
   about_hra.header: About the HRA You've Been Offered
   about_hra.paragraph: Enter the following information about the HRA that you have
     been offered. All answers can be found in the HRA notice provided by the employer.
