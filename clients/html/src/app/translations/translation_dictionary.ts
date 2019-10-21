@@ -1,6 +1,7 @@
 import { AboutYouTranslations } from "./about_you";
 import { AboutHraTranslations } from "./about_hra";
 import { CardTranslations } from "./common";
+import { HraResultsTranslations } from "./hra_results";
 
 export interface TranslationDictionary {
   site: SiteTranslations;
@@ -26,8 +27,4 @@ export interface GettingStartedTranslations {
   use_if: CardTranslations;
   do_not_use_if: CardTranslations;
   button_getting_started_label: string;
-}
-
-export interface HraResultsTranslations {
-
 }
