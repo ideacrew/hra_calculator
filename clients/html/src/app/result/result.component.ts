@@ -22,7 +22,6 @@ export class ResultComponent implements OnInit {
   hra_frequency_text: String;
   hra_amount: Number;
   full_hra_type: String;
-  hra_determination: String;
   taxCredit: String;
   marketPlace: String;
   help_text_1: String;
