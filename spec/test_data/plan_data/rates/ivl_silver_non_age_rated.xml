@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<qhpApplicationRateGroupListVO xmlns="http://vo.ffe.cms.hhs.gov">
+  <qhpApplicationRateGroupVO>
+    <header>
+      <templateVersion>v9.0</templateVersion>
+      <issuerId cellLocation="Rate_Table-B.6">
+        <cellValue>49526</cellValue>
+      </issuerId>
+      <tin cellLocation="Rate_Table-B.7">
+        <cellValue>16-1105741</cellValue>
+      </tin>
+    </header>
+    <ratingMethod cellLocation="Rate_Table-B.10">
+      <cellValue>Family-Tier Rates</cellValue>
+    </ratingMethod>
+    <items>
+      <effectiveDate cellLocation="Rate_Table-B.8">
+        <cellValue>2020-01-01</cellValue>
+      </effectiveDate>
+      <expirationDate cellLocation="Rate_Table-B.9">
+        <cellValue>2020-12-31</cellValue>
+      </expirationDate>
+      <planId cellLocation="Rate_Table-A.15">
+        <cellValue>49526NY0450001</cellValue>
+      </planId>
+      <rateAreaId cellLocation="Rate_Table-B.15">
+        <cellValue>Rating Area 2</cellValue>
+      </rateAreaId>
+      <primaryEnrollee cellLocation="Rate_Table-E.15">
+        <cellValue>100</cellValue>
+      </primaryEnrollee>
+      <coupleEnrollee cellLocation="Rate_Table-G.15">
+        <cellValue>200</cellValue>
+      </coupleEnrollee>
+      <primaryEnrolleeOneDependent cellLocation="Rate_Table-H.15">
+        <cellValue>300</cellValue>
+      </primaryEnrolleeOneDependent>
+      <primaryEnrolleeTwoDependent cellLocation="Rate_Table-I.15">
+        <cellValue>300</cellValue>
+      </primaryEnrolleeTwoDependent>
+      <primaryEnrolleeManyDependent cellLocation="Rate_Table-J.15">
+        <cellValue>300</cellValue>
+      </primaryEnrolleeManyDependent>
+      <coupleEnrolleeOneDependent cellLocation="Rate_Table-K.15">
+        <cellValue>300</cellValue>
+      </coupleEnrolleeOneDependent>
+      <coupleEnrolleeTwoDependent cellLocation="Rate_Table-L.15">
+        <cellValue>400</cellValue>
+      </coupleEnrolleeTwoDependent>
+      <coupleEnrolleeManyDependent cellLocation="Rate_Table-M.15">
+        <cellValue>500</cellValue>
+      </coupleEnrolleeManyDependent>
+    </items>
+    <items>
+      <effectiveDate cellLocation="Rate_Table-B.8">
+        <cellValue>2020-01-01</cellValue>
+      </effectiveDate>
+      <expirationDate cellLocation="Rate_Table-B.9">
+        <cellValue>2020-12-31</cellValue>
+      </expirationDate>
+      <planId cellLocation="Rate_Table-A.16">
+        <cellValue>49526NY0450002</cellValue>
+      </planId>
+      <rateAreaId cellLocation="Rate_Table-B.16">
+        <cellValue>Rating Area 2</cellValue>
+      </rateAreaId>
+      <primaryEnrollee cellLocation="Rate_Table-E.16">
+        <cellValue>100</cellValue>
+      </primaryEnrollee>
+      <coupleEnrollee cellLocation="Rate_Table-G.16">
+        <cellValue>200</cellValue>
+      </coupleEnrollee>
+      <primaryEnrolleeOneDependent cellLocation="Rate_Table-H.16">
+        <cellValue>300</cellValue>
+      </primaryEnrolleeOneDependent>
+      <primaryEnrolleeTwoDependent cellLocation="Rate_Table-I.16">
+        <cellValue>300</cellValue>
+      </primaryEnrolleeTwoDependent>
+      <primaryEnrolleeManyDependent cellLocation="Rate_Table-J.16">
+        <cellValue>300</cellValue>
+      </primaryEnrolleeManyDependent>
+      <coupleEnrolleeOneDependent cellLocation="Rate_Table-K.16">
+        <cellValue>400</cellValue>
+      </coupleEnrolleeOneDependent>
+      <coupleEnrolleeTwoDependent cellLocation="Rate_Table-L.16">
+        <cellValue>400</cellValue>
+      </coupleEnrolleeTwoDependent>
+      <coupleEnrolleeManyDependent cellLocation="Rate_Table-M.16">
+        <cellValue>400</cellValue>
+      </coupleEnrolleeManyDependent>
+    </items>
+  </qhpApplicationRateGroupVO>
+</qhpApplicationRateGroupListVO>
