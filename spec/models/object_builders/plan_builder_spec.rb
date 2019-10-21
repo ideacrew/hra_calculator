@@ -4,7 +4,7 @@ require 'rails_helper'
 require Rails.root.join('lib', 'tasks', 'parsers', 'plan_benefit_template_parser')
 require File.join(Rails.root, 'spec/shared_contexts/test_enterprise_admin_seed')
 
-describe 'plan builder', dbclean: :after_each do
+describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
   before(:each) do
     DatabaseCleaner.clean
   end

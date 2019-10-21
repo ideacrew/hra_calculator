@@ -33,6 +33,7 @@ describe ::Transactions::PurgeHra, dbclean: :after_each do
       expect(::Locations::ServiceArea.all.count).to be_zero
       expect(::Locations::RatingArea.all.count).to be_zero
       expect(::Locations::CountyZip.all.count).to be_zero
+      expect(::Account.where(email: 'admin@market_place.org').all.count).to be_zero
       expect(::Tenants::Tenant.all.count).to be_zero
     end
   end
