@@ -97,7 +97,7 @@ export class ResultComponent implements OnInit {
       this.short_term_plan_text = this.result.data.short_term_plan;
       this.minimum_essential_coverage_text = this.result.data.minimum_essential_coverage;
       this.minimum_essential_coverage_link = this.result.data.minimum_essential_coverage_link;
-      this.enroll_without_aptc_text = this.result.data.enroll_without_aptc;
+      this.enroll_without_aptc_text = this.result.data.how_to_enroll;
       this.help_text_3 = this.result.data.off_market;
       this.help_text_4 = this.result.data.aca_compliant;
       this.help_text_5 = this.result.data.results_page_help_text_2;
