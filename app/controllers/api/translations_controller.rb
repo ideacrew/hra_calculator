@@ -5,7 +5,7 @@ module Api
     def show
       language = params[:id] || "en"
       hra_default_setter = ::Operations::HraDefaultSetter.new.call(@tenant.key)
-      @data =  hra_default_setter.success.to_h[:translations]
+      @data =  hra_default_setter.success.to_h[:translations][language.to_sym]
       render json: @data
     end
 

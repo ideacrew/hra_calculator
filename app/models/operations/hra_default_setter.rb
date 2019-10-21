@@ -39,15 +39,15 @@ module Operations
     end
 
     def extract_translations(translation_element)
+      results = Hash.new
       translation_element.options.collect do |option|
         locales = option.child_options.inject({}) do |locales, child_option|
           locales[child_option.key] = child_option.value || child_option.default
           locales
         end
-        {
-          option.key => process_locales(locales)
-        }
+        results[option.key] = process_locales(locales)
       end
+      results
     end
 
     def process_locales(locales)
