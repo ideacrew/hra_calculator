@@ -74,37 +74,42 @@ en:
   about_you.household_income.amount.label: Amount
   about_you.household_income.amount.description: MISSING AMOUNT HELP TEXT
   about_you.household_income.amount.error_required: Amount is required.
-  about_hra.header: About the HRA You've Been Offered
-  about_hra.paragraph: Enter the following information about the HRA that you have
-    been offered. All answers can be found in the HRA notice provided by the employer.
-  about_hra.type.header: Type
-  about_hra.type.choose_one: Choose One
-  about_hra.type.choose_one.help: The type of HRA will appear prominently on the notice
+  about_hra.header.title: About the HRA You've Been Offered
+  about_hra.header.paragraph: |-
+    <strong>Enter the following information about the HRA that you have
+    been offered.</strong> All answers can be found in the HRA notice provided by the employer.
+  about_hra.hra_type.header: Type
+  about_hra.hra_type.label: Choose One
+  about_hra.hra_type.description: The type of HRA will appear prominently on the notice
     from the employer.
-  about_hra.type.ichra: Individual Coverage HRA
-  about_hra.type.qsehra: Qualified Small Employer HRA (QSEHRA)
+  about_hra.hra_type.error_required: Type of HRA is required.
+  about_hra.hra_type.ichra: Individual Coverage HRA
+  about_hra.hra_type.qsehra: Qualified Small Employer HRA (QSEHRA)
   about_hra.effective_period.header: Effective Period
-  about_hra.effective_priod.start_month: Start Month
-  about_hra.effective_priod.start_month.help: This is the first month the HRA is available
-    to you.
-  about_hra.effective_priod.end_month: End Month
-  about_hra.effective_priod.end_month.help: This is the last month of the HRA plan
-    year.
-  about_hra.maximum_offered.header: Maximum Amount for Employee-Only Health Insurance
-  about_hra.maximum_offered.help: This is the amount the employer has offered to contribute
+  about_hra.effective_period.choose_month: Choose
+  about_hra.effective_period.start_month.label: Start Month
+  about_hra.effective_period.start_month.description: This is the first month the HRA is available to you.
+  about_hra.effective_period.start_month.error_required: Start Month is required.
+  about_hra.effective_period.end_month.label: End Month
+  about_hra.effective_period.end_month.description: This is the last month of the HRA plan year.
+  about_hra.effective_period.end_month.error_required: End Month is required.
+  about_hra.maximum_amount.header: Maximum Amount for Employee-Only Health Insurance
+  about_hra.maximum_amount.description: This is the amount the employer has offered to contribute
     to the HRA if you purchase health insurance for only the employee (not including
     other family members). Some employers provide one amount if only the employee
     enrolls in coverage (sometimes referred to as “self-only” coverage), and a larger
     amount if the employee plus other family members enroll in coverage. Enter the
     amount of the HRA if only the employee enrolls, even if you plan to enroll in
     family coverage.
-  about_hra.maximum_offered.frequency: Frequency
-  about_hra.maximum_offered.frequency.help: |-
-    Choose Monthly Amount to enter the maximum amount the HRA would pay towards employee-only coverage per
-    month. Choose Total Amount to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month.
-  about_hra.maximum_offered.amount: Amount
-  about_hra.maximum_offered.monthly: Monthly
-  about_hra.maximum_offered.total: Total
+  about_hra.maximum_amount.frequency.label: Frequency (choose one)
+  about_hra.maximum_amount.frequency.description: |-
+    Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month.
+  about_hra.maximum_amount.frequency.monthly: Monthly
+  about_hra.maximum_amount.frequency.total: Total
+  about_hra.maximum_amount.frequency.error_required: Frequency is required.
+  about_hra.maximum_amount.amount.label: Amount
+  about_hra.maximum_amount.amount.description: AMOUNT HELP TEXT MISSING
+  about_hra.maximum_amount.amount.error_required: Amount is required.
   info_and_results.header: Your Information and Results
   info_and_results.info_entered.header: The Information You Entered
   info_and_results.info_entered.residence: Residence

@@ -13,25 +13,29 @@ interface AboutHraHeaderTranslations {
 }
 
 interface HraTypeTranslations {
-  label: string;
-  choice: HraTypeChoiceTranslations;
-}
-
-interface HraTypeChoiceTranslations {
+  header: string;
   label: string;
   description: string;
+  error_required: string;
   ichra: string;
   qsehra: string;
 }
 
 interface EffectivePeriodTranslations {
+  header: string;
+  choose_month: string;
+  start_month: MonthSelectionTranslations;
+  end_month: MonthSelectionTranslations;
+}
+
+interface MonthSelectionTranslations {
   label: string;
-  start_month: LabelDescription;
-  end_month: LabelDescription;
+  description: string;
+  error_required: string;
 }
 
 interface MaximumAmountTranslations {
-  label: string;
+  header: string;
   description: string;
   frequency: MaximumAmountFrequencyTranslations;
   amount: MaximumAmountValueTranslations;
@@ -40,6 +44,7 @@ interface MaximumAmountTranslations {
 interface MaximumAmountFrequencyTranslations {
   label: string;
   description: string;
+  error_required: string;
   monthly: string;
   total: string;
 }

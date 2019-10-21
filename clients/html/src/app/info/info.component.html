@@ -211,18 +211,14 @@
                 </div>
               </div>
               <div class="tab" [hidden]="!(currentTab === 1)">
-                <h1>About the HRA You've Been Offered</h1>
+                <h1>{{'about_hra.header.title' | tokenized_translate}}</h1>
                 <hr/>
                 <div class="d-inline-flex ie-flex">
                   <div>
                     <img src="../../assets/images/about_hra.png" alt="Profile picture" height="100"/>
                   </div>
                   <div class="col-md-11">
-                    <p>
-                      <strong>
-                        Enter the following information about the HRA that you have been offered.
-                      </strong>
-                      All answers can be found in the HRA notice provided by the employer.
+                    <p [innerHTML]="'about_hra.header.paragraph' | tokenized_html_translate">
                     </p>
                   </div>
                 </div>
@@ -230,24 +226,24 @@
                   <br/>
                   <div class="form-group">
                     <p>
-                      <strong>Type</strong>
+                      <strong>{{'about_hra.hra_type.header' | tokenized_translate}}</strong>
                     </p>
                   </div>
                   <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_type">Choose One</label>
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_type">{{'about_hra.hra_type.label' | tokenized_translate}}</label>
                     <div class="col-sm-8">
                       <div class="btn-group hra-type-group" data-toggle="buttons">
                         <span [ngClass]="(selectedHraType=='ichra')?'btn btn-outline-info active':'btn btn-outline-info'">
                             <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="hra_type"
-                            formControlName="hra_type" value="ichra" ngModel required (click)="onHraTypeChange('ichra')"/> Individual Coverage HRA
+                            formControlName="hra_type" value="ichra" ngModel required (click)="onHraTypeChange('ichra')"/> {{'about_hra.hra_type.ichra' | tokenized_translate}}
                         </span>
                         <span [ngClass]="(selectedHraType=='qsehra')?'btn btn-outline-info active':'btn btn-outline-info'">
                             <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="hra_type"
-                            formControlName="hra_type" value="qsehra" ngModel required (click)="onHraTypeChange('qsehra')"/> Qualified Small Employer HRA (QSEHRA)
+                            formControlName="hra_type" value="qsehra" ngModel required (click)="onHraTypeChange('qsehra')"/> {{'about_hra.hra_type.qsehra' | tokenized_translate}}
                         </span>
                         <ng-template #popHraType>
-                          <div class="tooltip-italic">
-                            The type of HRA will appear prominently on the notice from the employer.
+                          <div class="tooltip-italic"[innerHTML]="'about_hra.hra_type.description' | tokenized_html_translate">
+                            
                           </div>
                         </ng-template>
                         <sup [ngbPopover]="popHraType" >
@@ -256,7 +252,7 @@
                       </div>
                       <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['hra_type'].errors.required">
-                          Type of HRA is required.
+                          {{'about_hra.hra_type.error_required' | tokenized_translate}}
                         </div>
                       </div>
                     </div>
@@ -264,27 +260,27 @@
                 </div>
                 <div class="form-group">
                   <p>
-                    <strong>Effective Period</strong>
+                    <strong>{{'about_hra.effective_period.header' | tokenized_translate}}</strong>
                   </p>
                 </div>
                 <div class="form-group">
                   <div class="input-group">
                     <label class="col-sm-3 col-form-label col-form-label-sm" for="start_month">
-                      Start Month
+                      {{'about_hra.effective_period.start_month.label' | tokenized_translate}}
                     </label>
                     <div ngbDropdown class="col-sm-4">
                       <select (change)="setEffectiveEndOptions($event.target.value)" class="form-control form-control-sm" id="start_month" formControlName="start_month" ngModel required>
-                        <option value='' disabled selected hidden>Choose</option>
+                        <option value='' disabled selected hidden>{{'about_hra.effective_period.choose_month' | tokenized_translate}}</option>
                         <option ngbDropdownToggle *ngFor="let option of effectiveStartOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['start_month'].errors.required">
-                          Start Month is required.
+                          {{'about_hra.effective_period.start_month.error_required' | tokenized_translate}}
                         </div>
                       </div>
                     </div>
                     <ng-template #popContentStartMonth>
-                      <div class="tooltip-italic">This is the first month the HRA is available to you.
+                      <div class="tooltip-italic" [innerHTML]="'about_hra.effective_period.start_month.description' | tokenized_html_translate">
                       </div>
                     </ng-template>
                     <sup [ngbPopover]="popContentStartMonth">
@@ -295,21 +291,21 @@
                 <div class="form-group">
                   <div class="input-group">
                     <label class="col-sm-3 col-form-label col-form-label-sm" for="end_month">
-                      End Month
+                      {{'about_hra.effective_period.end_month.label' | tokenized_translate}}
                     </label>
                     <div class="col-sm-4">
                       <select class="form-control form-control-sm" id="end_month" formControlName="end_month" ngModel required>
-                        <option value='' disabled selected hidden>Choose</option>
+                        <option value='' disabled selected hidden>{{'about_hra.effective_period.choose_month' | tokenized_translate}}</option>
                         <option *ngFor="let option of effectiveEndOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['end_month'].errors.required">
-                          End Month is required.
+                          {{'about_hra.effective_period.end_month.error_required' | tokenized_translate}}
                         </div>
                       </div>
                     </div>
                     <ng-template #popContentEndMonth>
-                      <div class="tooltip-italic">This is the last month of the HRA plan year.</div>
+                      <div class="tooltip-italic" [innerHTML]="'about_hra.effective_period.end_month.description' | tokenized_html_translate"></div>
                     </ng-template>
                     <sup [ngbPopover]="popContentEndMonth">
                       <i class="fas fa-question-circle"></i>
@@ -319,37 +315,37 @@
                 <div class="form-group">
                   <p>
                     <strong>
-                      Maximum Amount for Employee-Only Health Insurance
+                      {{'about_hra.maximum_amount.header' | tokenized_translate}}
+                      </strong>
                       <ng-template #popContentHraAmount>
-                        <div class="tooltip-italic">This is the amount the employer has offered to contribute to the HRA if you purchase health insurance for only the employee (not including other family members). Some employers provide one amount if only the employee enrolls in coverage (sometimes referred to as “self-only” coverage), and a larger amount if the employee plus other family members enroll in coverage. Enter the amount of the HRA if only the employee enrolls, even if you plan to enroll in family coverage.</div>
+                        <div class="tooltip-italic" [innerHTML]="'about_hra.maximum_amount.description' | tokenized_html_translate"></div>
                       </ng-template>
                       <sup [ngbPopover]="popContentHraAmount">
                         <i class="fas fa-question-circle"></i>
                       </sup>
-                    </strong>
                   </p>
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_frequency">Frequency (choose one)</label>
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_frequency">{{'about_hra.maximum_amount.frequency.label' | tokenized_translate}}</label>
                     <div class="col-sm-4">
                       <div class="btn-group" data-toggle="buttons">
                         <span [ngClass]="(selectedHraFrequency=='monthly')?'btn btn-outline-info active' :'btn btn-outline-info'">
                             <input type="radio" class="form-control form-control-sm" id="hra_frequency"
-                            formControlName="hra_frequency" value="monthly" ngModel required (click)="onHraFrequencyChange('monthly')"/> Monthly
+                            formControlName="hra_frequency" value="monthly" ngModel required (click)="onHraFrequencyChange('monthly')"/> {{'about_hra.maximum_amount.frequency.monthly' | tokenized_translate}}
                         </span>
                         <span [ngClass]="(selectedHraFrequency=='annually')?'btn btn-outline-info active':'btn btn-outline-info'">
                             <input type="radio" class="form-control form-control-sm" id="hra_frequency"
-                            formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> Total
+                            formControlName="hra_frequency" value="annually" ngModel required (click)="onHraFrequencyChange('annually')"/> {{'about_hra.maximum_amount.frequency.total' | tokenized_translate}}
                         </span>
                       </div>
                       <div *ngIf="hraForm.controls['hra_frequency'].invalid && (hraForm.controls['hra_frequency'].dirty || hraForm.controls['hra_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['hra_frequency'].errors.required">
-                          Frequency is required.
+                          {{'about_hra.maximum_amount.frequency.error_required' | tokenized_translate}}
                         </div>
                       </div>
                       <ng-template #popContentHraFrequency>
-                        <div class="tooltip-italic">Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month.</div>
+                        <div class="tooltip-italic" [innerHTML]="'about_hra.maximum_amount.frequency.description' | tokenized_html_translate"></div>
                       </ng-template>
                       <sup [ngbPopover]="popContentHraFrequency">
                         <i class="fas fa-question-circle"></i>
@@ -359,7 +355,7 @@
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_amount">Amount</label>
+                    <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_amount">{{'about_hra.maximum_amount.amount.label' | tokenized_translate}}</label>
                     <div class="col-sm-4">
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -372,7 +368,7 @@
                       </div>
                       <div *ngIf="hraForm.controls['hra_amount'].invalid && (hraForm.controls['hra_amount'].dirty || hraForm.controls['hra_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['hra_amount'].errors.required">
-                          Amount is required.
+                          {{'about_hra.maximum_amount.amount.error_required' | tokenized_translate}}
                         </div>
                       </div>
                     </div>
