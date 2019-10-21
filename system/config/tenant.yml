@@ -130,7 +130,7 @@ namespaces:
                             type: :string
                             description: The page title may not be changed
                             namespaces:
-                              - key: :title
+                              - key: :header
                                 title: 'Getting Started'
                                 type: :string
                                 description: 
