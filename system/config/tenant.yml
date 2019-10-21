@@ -344,14 +344,6 @@ namespaces:
                                   - key: :next_steps_alert
                                     type: :alert
                                     default:                           
-                  #     - key: :translations
-                  #       namespaces:
-                  #         - key: :en
-                  #           default: English
-                  #           type: :string
-                  #         - key: :es
-                  #           default: Spanish
-                  #           type: :string   
                   - key: :environments
                     namespaces:
                     - key: :production

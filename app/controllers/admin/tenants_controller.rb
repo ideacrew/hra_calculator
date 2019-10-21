@@ -45,8 +45,8 @@ class Admin::TenantsController < ApplicationController
   end
 
   def translations_show
-    @page = @tenant.sites[1].options.where(key: :ui_tool_pages).first
-    @translations = @tenant.sites[1].options.where(key: :translations).first
+    @page = @tenant.consumer_portal.options.by_key(:ui_elements).first
+    @translations = @tenant.consumer_portal.options.by_key(:translations).first
   end
 
   def ui_element_update
