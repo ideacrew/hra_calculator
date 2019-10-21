@@ -12,11 +12,7 @@ module Operations
         tenant = rates_params[:tenant]
         rate_import_hash = files.inject(::ObjectBuilders::RateBuilder.new({tenant: tenant})) do |rate_hash, file|
           xml = Nokogiri::XML(File.open(file))
-          rates = if year < 2018
-            Parser::PlanRateGroupParser.parse(xml.root.canonicalize, :single => true)
-          else
-            Parser::PlanRateGroupListParser.parse(xml.root.canonicalize, :single => true)
-          end
+          rates = Parser::PlanRateGroupListParser.parse(xml.root.canonicalize, :single => true)
           rate_hash.add(rates.to_hash, "new", year)
           rate_hash
         end

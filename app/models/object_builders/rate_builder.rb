@@ -28,14 +28,9 @@ module ObjectBuilders
 
     def add(rates_hash, action, year)
       set_rating_area_cache
-      if year < 2018
-        @rates_array = @rates_array + rates_hash[:items]
+      rates_hash[:plan_rate_group_attributes].each do |rate_group_attributes|
+        @rates_array = @rates_array + rate_group_attributes[:items]
         @action = action
-      else
-        rates_hash[:plan_rate_group_attributes].each do |rate_group_attributes|
-          @rates_array = @rates_array + rate_group_attributes[:items]
-          @action = action
-        end
       end
     end
 

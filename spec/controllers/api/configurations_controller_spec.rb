@@ -45,7 +45,6 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
         it 'should have all the keys for the data' do
           attr_keys = @result['data'].keys
           HraDefaulter.schema.keys.map(&:name).map(&:to_s).each do |keyy|
-            next keyy if ["start_month_dates", "end_month_dates"].include?(keyy)
             expect(attr_keys.include?(keyy)).to be_truthy
           end
         end
@@ -130,7 +129,6 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
         it 'should have all the keys for the data' do
           attr_keys = @result['data'].keys
           HraDefaulter.schema.keys.map(&:name).map(&:to_s).each do |keyy|
-            next keyy if ["start_month_dates", "end_month_dates"].include?(keyy)
             expect(attr_keys.include?(keyy)).to be_truthy
           end
         end
@@ -253,7 +251,6 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
         it 'should have all the keys for the data' do
           attr_keys = @result['data'].keys
           HraDefaulter.schema.keys.map(&:name).map(&:to_s).each do |keyy|
-            next keyy if ["start_month_dates", "end_month_dates"].include?(keyy)
             expect(attr_keys.include?(keyy)).to be_truthy
           end
         end

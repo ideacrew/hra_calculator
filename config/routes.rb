@@ -56,20 +56,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  resources :hra_results, :defaults => { :format => 'json' } do
-    collection do
-      post :hra_payload
-      get :header_footer_config
-    end
-  end
-
-  resources :configurations, :defaults => { :format => 'json' } do
-    collection do
-      get :default_configuration
-      get :counties
-    end
-  end
-
-  # root to: 'admin#index'
 end
