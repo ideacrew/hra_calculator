@@ -5,8 +5,11 @@ require Rails.root.join('lib', 'tasks', 'parsers', 'plan_benefit_template_parser
 require File.join(Rails.root, 'spec/shared_contexts/test_enterprise_admin_seed')
 
 describe 'plan builder', dbclean: :after_each do
-  include_context 'setup enterprise admin seed'
+  before(:each) do
+    DatabaseCleaner.clean
+  end
 
+  include_context 'setup enterprise admin seed'
   let!(:tenant_account) { FactoryBot.create(:account, email: 'admin@market_place.org', enterprise_id: enterprise.id) }
 
   describe 'tenant with age_rated and zipcode as geographic rating area model', dbclean: :after_each do
@@ -20,14 +23,7 @@ describe 'plan builder', dbclean: :after_each do
 
     include_context 'setup tenant'
 
-    let!(:product) { FactoryBot.create(:products_health_product, hios_id: '42690MA1234502-01', hios_base_id: '42690MA1234502',
-        csr_variant_id: '01', application_period: Date.new(2020, 1, 1)..Date.new(2020, 12, 31), tenant: tenant)}
-
-    let!(:service_area) do
-      product.service_area.update_attributes!(issuer_hios_id: '42690', active_year: 2020)
-      product.service_area
-    end
-
+    let!(:service_area) { FactoryBot.create(:locations_service_area, issuer_hios_id: '42690', active_year: 2020)}
     let(:import_timestamp) { DateTime.now }
 
     context 'product loading non-silver plan' do
@@ -35,21 +31,17 @@ describe 'plan builder', dbclean: :after_each do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_gold_pb_bcbs.xml')).first
       end
 
-      it 'should have 1 existing product' do
-        expect(::Products::Product.all.count).to eq 1
-      end
-
       context 'when product loader is called with a file' do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name' })
+          plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'MA Carrier Name' })
           plan_builder.add(product_parser.to_hash)
           plan_builder.run
         end
 
         it 'should not load gold product from file' do
-          expect(::Products::Product.all.count).to eq 1
+          expect(::Products::Product.all.count).to eq 0
         end
       end
     end
@@ -63,13 +55,13 @@ describe 'plan builder', dbclean: :after_each do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name'})
+          plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'MA Carrier Name'})
           plan_builder.add(product_parser.to_hash)
           plan_builder.run
         end
 
-        it "should load ivl product from file" do
-          expect(::Products::Product.all.count).to eq 1
+        it "should not load product from file as file is invalid" do
+          expect(::Products::Product.all.count).to eq 0
         end
       end
     end
@@ -83,14 +75,11 @@ describe 'plan builder', dbclean: :after_each do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name'})
+          @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'MA Carrier Name'})
           @plan_builder.add(product_parser.to_hash)
           @plan_builder.run
         end
 
-        it "should load ivl products from file" do
-          expect(::Products::Product.all.count).to eq 2
-        end
 
         it "should load ivl products from file for MA tenant" do
           expect(tenant.products.count).to eq 2
@@ -109,11 +98,11 @@ describe 'plan builder', dbclean: :after_each do
         end
 
         it 'should set carrier_name' do
-          expect(tenant.products.second.carrier_name).to eq('Carrier Name')
+          expect(tenant.products.pluck(:carrier_name).uniq).to eq(['MA Carrier Name'])
         end
 
         it 'should set a particular timestamp to created_at' do
-          expect(tenant.products.second.created_at).to eq(import_timestamp)
+          expect(tenant.products.pluck(:created_at).uniq).to eq([import_timestamp])
         end
 
         it 'should set service_area_map' do
@@ -135,25 +124,11 @@ describe 'plan builder', dbclean: :after_each do
 
     include_context 'setup tenant'
 
-    let!(:product) { FactoryBot.create(:products_health_product, hios_id: '42690MA1234502-01', hios_base_id: '42690MA1234502',
-        csr_variant_id: '01', application_period: Date.new(2020, 1, 1)..Date.new(2020, 12, 31), tenant: tenant)}
+    let!(:service_area) { FactoryBot.create(:locations_service_area, issuer_hios_id: '42690', active_year: 2020, issuer_provided_code: 'MAS001', covered_states: ['NY'])}
 
-    let!(:service_area) do
-      product.service_area.update_attributes!(issuer_hios_id: '42690', active_year: 2020, issuer_provided_code: 'MAS001', covered_states: ['NY'])
-      product.service_area
-    end
+    let!(:countyzip) { FactoryBot.create(:locations_county_zip, state: 'NY', county_name: 'New York', zip: nil) }
 
-    let(:rating_area) do
-      ra = product.premium_tables.first.rating_area
-      ra.update_attributes!(active_year: 2020)
-      ra
-    end
-
-    let(:countyzip) do
-      county_zip = ::Locations::CountyZip.find(rating_area.county_zip_ids.first.to_s)
-      county_zip.update_attributes!(state: 'NY', county_name: 'New York', zip: nil)
-      county_zip
-    end
+    let!(:rating_area) { FactoryBot.create(:locations_rating_area, active_year: 2020, county_zip_ids: [countyzip.id]) }
 
     let(:import_timestamp) { DateTime.now }
 
@@ -162,21 +137,17 @@ describe 'plan builder', dbclean: :after_each do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_gold_pb_bcbs.xml')).first
       end
 
-      it 'should have 1 existing product' do
-        expect(::Products::Product.all.count).to eq 1
-      end
-
       context 'when product loader is called with a file' do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name' })
+          plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'NY Carrier Name' })
           plan_builder.add(product_parser.to_hash)
           plan_builder.run
         end
 
         it 'should not load gold product from file' do
-          expect(::Products::Product.all.count).to eq 1
+          expect(::Products::Product.all.count).to eq 0
         end
       end
     end
@@ -190,13 +161,13 @@ describe 'plan builder', dbclean: :after_each do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name'})
+          plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'NY Carrier Name'})
           plan_builder.add(product_parser.to_hash)
           plan_builder.run
         end
 
-        it "should load ivl product from file" do
-          expect(::Products::Product.all.count).to eq 1
+        it "should not load ivl product from file" do
+          expect(::Products::Product.all.count).to eq 0
         end
       end
     end
@@ -210,16 +181,12 @@ describe 'plan builder', dbclean: :after_each do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name'})
+          @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'NY Carrier Name'})
           @plan_builder.add(product_parser.to_hash)
           @plan_builder.run
         end
 
-        it "should load ivl products from file" do
-          expect(::Products::Product.all.count).to eq 2
-        end
-
-        it "should load ivl products from file for MA tenant" do
+        it "should load ivl products from file for NY tenant" do
           expect(tenant.products.count).to eq 2
         end
 
@@ -236,11 +203,11 @@ describe 'plan builder', dbclean: :after_each do
         end
 
         it 'should set carrier_name' do
-          expect(tenant.products.second.carrier_name).to eq('Carrier Name')
+          expect(tenant.products.pluck(:carrier_name).uniq).to eq(['NY Carrier Name'])
         end
 
         it 'should set a particular timestamp to created_at' do
-          expect(tenant.products.second.created_at).to eq(import_timestamp)
+          expect(tenant.products.pluck(:created_at).uniq).to eq([import_timestamp])
         end
 
         it 'should set service_area_map' do
@@ -262,13 +229,6 @@ describe 'plan builder', dbclean: :after_each do
 
     include_context 'setup tenant'
 
-    let!(:product) { 
-      plan = FactoryBot.create(:products_health_product, hios_id: '42690MA1234502-01', hios_base_id: '42690MA1234502',
-        csr_variant_id: '01', application_period: Date.new(2020, 1, 1)..Date.new(2020, 12, 31), tenant: tenant, service_area_id: nil)
-      plan.premium_tables.first.update_attributes!(rating_area_id: nil)
-      plan
-    }
-
     let(:import_timestamp) { DateTime.now }
 
     context 'product loading non-silver plan' do
@@ -276,21 +236,17 @@ describe 'plan builder', dbclean: :after_each do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_gold_pb_bcbs.xml')).first
       end
 
-      it 'should have 1 existing product' do
-        expect(::Products::Product.all.count).to eq 1
-      end
-
       context 'when product loader is called with a file' do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name' })
+          plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'DC Carrier Name' })
           plan_builder.add(product_parser.to_hash)
           plan_builder.run
         end
 
         it 'should not load gold product from file' do
-          expect(::Products::Product.all.count).to eq 1
+          expect(::Products::Product.all.count).to eq 0
         end
       end
     end
@@ -304,13 +260,13 @@ describe 'plan builder', dbclean: :after_each do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name'})
+          plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'DC Carrier Name'})
           plan_builder.add(product_parser.to_hash)
           plan_builder.run
         end
 
-        it "should load ivl product from file" do
-          expect(::Products::Product.all.count).to eq 1
+        it "should not load ivl product from file" do
+          expect(::Products::Product.all.count).to eq 0
         end
       end
     end
@@ -324,16 +280,12 @@ describe 'plan builder', dbclean: :after_each do
         before :each do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
-          @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'Carrier Name'})
+          @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'DC Carrier Name'})
           @plan_builder.add(product_parser.to_hash)
           @plan_builder.run
         end
 
-        it "should load ivl products from file" do
-          expect(::Products::Product.all.count).to eq 2
-        end
-
-        it "should load ivl products from file for MA tenant" do
+        it "should load ivl products from file for DC tenant" do
           expect(tenant.products.count).to eq 2
         end
 
@@ -350,11 +302,11 @@ describe 'plan builder', dbclean: :after_each do
         end
 
         it 'should set carrier_name' do
-          expect(tenant.products.second.carrier_name).to eq('Carrier Name')
+          expect(tenant.products.pluck(:carrier_name).uniq).to eq(['DC Carrier Name'])
         end
 
         it 'should set a particular timestamp to created_at' do
-          expect(tenant.products.second.created_at).to eq(import_timestamp)
+          expect(tenant.products.pluck(:created_at).uniq).to eq([import_timestamp])
         end
 
         it 'should not set service_area_map' do
