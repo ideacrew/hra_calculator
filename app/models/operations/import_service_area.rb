@@ -85,7 +85,7 @@ module Operations
 
         Success('Created Service Areas for the given data')
       rescue => e
-        puts "service area issue, error: #{e.message}"
+        puts "service area issue, error: #{e.message}" unless Rails.env.test?
         Failure({errors: ["Unable to process file: #{sa_file}"]})
       end
     end
