@@ -183,8 +183,6 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'header_footer_config' do
       before do
-        token = HraClientSession.issue
-        request.headers["Authorization"] = "Bearer #{token}"
         get :header_footer_config, params: {tenant: tenant.key}
       end
 
@@ -228,8 +226,6 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'default_configuration' do
       before do
-        token = HraClientSession.issue
-        request.headers["Authorization"] = "Bearer #{token}"
         get :default_configuration, params: {tenant: tenant.key}
       end
 
@@ -272,8 +268,6 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'header_footer_config' do
       before do
-        token = HraClientSession.issue
-        request.headers["Authorization"] = "Bearer #{token}"
         get :header_footer_config, params: {tenant: tenant.key}
       end
 

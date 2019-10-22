@@ -64,16 +64,6 @@ class Admin::EnterpriseController < ApplicationController
     redirect_to admin_enterprise_path(params["enterprise_id"])
   end
 
-  def purge_hra
-    result = ::Transactions::PurgeHra.new.call
-    if result.success?
-      flash[:notice] = 'Successfully purged HRA database.'
-    else
-      flash[:notice] = result.failure[:errors]
-    end
-    redirect_to admin_enterprise_path(params["enterprise_id"])
-  end
-
   private
 
   def find_enterprise
