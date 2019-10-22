@@ -1,0 +1,51 @@
+---
+es:
+  site.title: HRA Tool
+  site.customer_support: Atención al cliente
+  site.benefit_year: Año de beneficio
+  getting_started.title: Empezando
+  getting_started.use_if.label: Use esta herramienta si ...
+  getting_started.use_if.body: |-
+    Te han ofrecido uno de los
+    siguientes HRA que pueden usarse para
+    ayudar a comprar un plan de seguro de salud en
+    tu propio:
+    Una "HRA de cobertura individual"
+    Un "pequeño empleador calificado
+    HRA "(" QSEHRA ")
+    (Uno de estos términos aparecerá en
+    el aviso de su empleador)
+  getting_started.do_not_use_if.label: Omita esta herramienta si ...
+  getting_started.do_not_use_if.body: |-
+    Su empleador solo le ha ofrecido uno
+    o más de lo siguiente:
+    Una HRA que no sea un individuo
+    Cobertura HRA o un pequeño calificado
+    Empleador HRA
+    Una cuenta de ahorro de salud (HSA)
+    Un gasto flexible en salud
+    acuerdo (FSA)
+    Patrocinado por el empleador tradicional
+    seguro de salud
+    Otros tipos de beneficios para la salud.
+    Sin beneficios para la salud
+  about_you.header: Acerca de ti
+  about_you.paragraph: Ingrese la siguiente información para el miembro de la familia
+    a quien se le ofrece la HRA
+  about_you.paragraph.help: Este es el miembro de la familia cuyo empleador o ex empleador
+    (si un miembro de la familia es un jubilado) está ofreciendo la HRA.
+  about_you.place_of_residence.header: Lugar de residencia
+  about_you.place_of_residence.help: Ingrese el lugar de residencia del miembro de
+    la familia, incluso si el empleador se encuentra en otro lugar.
+  about_you.place_of_residence.state: Estado
+  about_you.place_of_residence.state.help: !ruby/string:Roo::Link
+    str: Si no es residente de este estado, visite https://www.healthcare.gov/get-coverage/
+      para encontrar el Mercado en su estado.
+    href: https://www.healthcare.gov/get-coverage/
+  about_you.place_of_residence.zip_code: Código postal
+  about_you.place_of_residence.county: Condado
+  about_you.date_of_birth.header: Fecha de nacimiento
+  about_you.household_income.header: Ingresos esperados del hogar
+  about_you.household_income.help: |-
+    Este es el ingreso de su hogar antes de impuestos. Para la mayoría de las personas, el ingreso familiar anual es el mismo que el ingreso bruto ajustado federal que ingresa en su declaración de impuestos federales (Formulario 1040). Específicamente, el ingreso del hogar es igual al ingreso bruto ajustado más los siguientes montos: beneficios del Seguro Social que de otro modo se excluyen del ingreso bruto, intereses de bonos exentos de impuestos, cualquier ingreso de fuente extranjera excluido del ingreso bruto según la sección 911 del Internal
+    Código de ingresos (raro), y los ingresos de los dependientes que deben presentar una declaración de impuestos por separado (raro).

@@ -24,16 +24,17 @@ Rails.application.routes.draw do
     end
 
     resources :tenants, only: [:show, :update] do
-      post :upload_logo
-      get  :features_show
-      put  :features_update
-      get  :ui_pages_show
-      get  :ui_pages_edit
-      patch :ui_element_update
-      get  :plan_index
-      post :upload_plan_data
-      post :zip_county_data
-      get :plans_destroy
+      post  :upload_logo
+      get   :features_show
+      put   :features_update
+      get   :translations_show
+      get   :fetch_locales
+      get   :edit_translation
+      post  :update_translation
+      get   :plan_index
+      post  :upload_plan_data
+      post  :zip_county_data
+      get   :plans_destroy
     end
   end
 
@@ -53,6 +54,9 @@ Rails.application.routes.draw do
       collection do
         post :hra_payload
       end
+    end
+
+    resources :translations, only: [:show] do
     end
   end
 

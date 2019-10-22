@@ -277,7 +277,6 @@ export class InfoComponent implements OnInit {
       this.resultService.setFormData(params);      
       this.httpClient.post<any>(environment.apiUrl+"/api/hra_results/hra_payload?tenant="+this.hostKey, this.hraForm.value).subscribe(
         (res) => {
-          console.log(res)
           if(res.status == 'success'){
             this.resultService.setResults(res);
             this.router.navigateByUrl('/result');

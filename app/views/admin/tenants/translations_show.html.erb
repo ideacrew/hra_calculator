@@ -1,0 +1,34 @@
+<div>
+  <div class="form-group col-md-4">
+    <h5>Choose Page</h5>
+    <%= select_dropdown('ui_page', @translation_entity.sections) %>
+  </div>
+
+  <div class="form-group col-md-4">
+    <h5>Translate from</h5>
+    <%= select_dropdown('translate_from', @tenant.supported_language_options.pluck(:title, :key)) %>
+  </div>
+
+  <div class="form-group col-md-4">
+    <h5>Translate to</h5>
+    <%= select_dropdown('translate_to', @tenant.supported_language_options.pluck(:title, :key)) %>
+  </div>
+
+  <%= hidden_field_tag 'edit_translation_url', admin_tenant_edit_translation_path(@tenant), id: 'edit_translation_url' %>
+  <%= hidden_field_tag 'fetch_locales_url', admin_tenant_fetch_locales_path(@tenant), id: 'fetch_locales_url' %>
+
+  <div class="form-group col">
+    <h5>Source Text</h5>
+    <div id="translations">
+      <%= render 'source_translations' %>
+    </div>
+  </div>
+
+   <div class="form-group col">
+    <div id="translation-alert"></div>
+    <h5>Edited Text</h5>
+    <div id="edit_translation">
+      <%= render 'edit_translation' %>
+    </div>
+  </div>
+</div>

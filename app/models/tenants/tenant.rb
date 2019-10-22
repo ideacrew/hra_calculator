@@ -45,4 +45,32 @@ class Tenants::Tenant
   def self.find_by_key(key)
     where(key: key.to_sym).first
   end
+
+  def consumer_portal
+    sites.by_key(:consumer_portal).first
+  end
+
+  def admin_portal
+    sites.by_key(:admin_portal).first
+  end
+
+  def translations
+    consumer_portal.options.by_key(:translations).first
+  end
+
+  def languages
+    consumer_portal.options.by_key(:languages).first
+  end
+
+  def language_options
+    languages.options.sort_by(&:title)
+  end
+
+  def supported_languages
+    admin_portal.options.by_key(:supported_languages).first
+  end
+
+  def supported_language_options
+    supported_languages.options.sort_by(&:title)
+  end
 end

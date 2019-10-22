@@ -7,7 +7,7 @@ namespaces:
         namespaces:
           - key: :sites
             namespaces:
-              - key: :primary
+              - key: :admin_portal
                 namespaces:
                   - key: :environments
                     namespaces:
