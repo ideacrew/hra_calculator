@@ -14,7 +14,7 @@ Commit SHA: [Click Here]
 
 ## What’s Included in this Release?
 
-Since the initial 0.2.0 release on 10/11, the team has been busy making some adjustments to ensure the overall quality of the tool meets expectations. Below you can find the details about what is new:
+Since the [release 0.2.0](https://ideacrew.github.io/hra_calculator/hra_tool/releases/release_0.2.0/) on 10/11, the team has been busy making some adjustments to ensure the overall quality of the tool meets expectations. Below you can find the details about what is new:
 
 - Tightened up a few gramatical issues on various pages throughout the application.
 - Corrected the disclaimer text on the results page for all possible results.   
