@@ -6,6 +6,11 @@ class Admin::EnterpriseController < ApplicationController
   def show
     @states     = Locations::UsState::NAME_IDS.map(&:first)
     @accounts   = Account.by_role("Marketplace Owner")
+    @benefit_year_values_hash = {}
+    @enterprise.benefit_years.each do |benefit_year|
+      @benefit_year_values_hash[benefit_year.calendar_year] = benefit_year.expected_contribution
+    end
+    @benefit_year_values_hash = @benefit_year_values_hash.to_json
   end
 
   def account_create
