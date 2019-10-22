@@ -5,7 +5,8 @@ import { CommonModule} from '@angular/common';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -34,6 +35,7 @@ import { TranslationHttpLoader } from "./translations/translation_loader";
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TokenizedTranslationModule } from './translations/tokenized_translation_module';
 
+import { JwtInterceptor }  from './authentication/jwt_interceptor';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -88,6 +90,11 @@ export function createTranslateLoader(http: HttpClient) {
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

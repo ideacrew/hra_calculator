@@ -58,6 +58,12 @@ Rails.application.routes.draw do
 
     resources :translations, only: [:show] do
     end
+
+    resources :client_sessions, only: [] do
+      collection do
+        get :issue_token
+      end
+    end
   end
 
   resources :hra_results, :defaults => { :format => 'json' } do

@@ -52,6 +52,7 @@ gem 'database_cleaner',         '~> 1.7'
 gem 'devise'
 gem 'webpacker',                '~> 4.0.2'
 gem 'pundit',                   '~> 2.1.0'
+gem 'jwt',                 '~> 2.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
