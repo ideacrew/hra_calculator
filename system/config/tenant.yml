@@ -43,10 +43,10 @@ namespaces:
                             default: similar coverage off Marketplace
                           - key: results_page_help_text_1
                             type: string
-                            default: The results above are based on the information provided, which has not been independently verified. This is not a determination that you are eligible for a tax credit.
+                            default: When you’re asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time.
                           - key: results_page_help_text_2
                             type: string
-                            default: When you’re asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time
+                            default: The results above are based on the information provided, which has not been independently verified. This is not a determination that you are eligible for a tax credit
                           - key: answer_no
                             type: string
                             default: Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer)

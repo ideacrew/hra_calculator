@@ -21,13 +21,11 @@ export class ResultComponent implements OnInit {
   hra_frequency: String;
   hra_frequency_text: String;
   hra_amount: Number;
-  hra_type: String;
   full_hra_type: String;
   hios_id: String;
   plan_name: String;
   carrier_name: String;
   member_premium: Number;
-  hra_determination: String;
   taxCredit: String;
   marketPlace: String;
   help_text_1: String;
@@ -56,6 +54,27 @@ export class ResultComponent implements OnInit {
   ) {
   }
 
+  private _hra_type : string | null;
+  private _hra_determination : string | null;
+
+  public get hra_type() : string | null {
+    return this._hra_type;
+  }
+
+  public set hra_type(new_type: string | null) {
+    this._hra_type = new_type;
+    this.updateHRATypes();
+  }
+
+  public get hra_determination() : string | null {
+    return this._hra_determination;
+  }
+
+  public set hra_determination(new_type: string | null) {
+    this._hra_determination = new_type;
+    this.updateHRATypes();
+  }
+
   ngOnInit() {
     this.result = this.resultService.results;
     if(this.result){
@@ -82,7 +101,7 @@ export class ResultComponent implements OnInit {
       this.short_term_plan_text = this.result.data.short_term_plan;
       this.minimum_essential_coverage_text = this.result.data.minimum_essential_coverage;
       this.minimum_essential_coverage_link = this.result.data.minimum_essential_coverage_link;
-      this.enroll_without_aptc_text = this.result.data.enroll_without_aptc;
+      this.enroll_without_aptc_text = this.result.data.how_to_enroll;
       this.help_text_3 = this.result.data.off_market;
       this.help_text_4 = this.result.data.aca_compliant;
       this.help_text_5 = this.result.data.results_page_help_text_2;
@@ -109,6 +128,10 @@ export class ResultComponent implements OnInit {
       this.hra_frequency_text = 'Monthly';
     }
 
+    this.updateHRATypes();
+  }
+
+  private updateHRATypes() {
     if(this.hra_type == "qsehra") {
       this.full_hra_type = 'Qualified Small Employer HRA'
       if (this.hra_determination == 'unaffordable'){
