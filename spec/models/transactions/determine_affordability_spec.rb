@@ -37,7 +37,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
     context 'with valid data' do
       context 'affordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
@@ -69,7 +69,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
       end
 
       context 'unaffordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params)
         end
 
@@ -108,7 +108,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
-      before :each do
+      before do
         @determined_result ||= subject.call(invalid_params)
       end
 
@@ -169,7 +169,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
     context 'with valid data' do
       context 'affordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
@@ -201,7 +201,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
       end
 
       context 'unaffordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params)
         end
 
@@ -240,7 +240,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
-      before :each do
+      before do
         @determined_result ||= subject.call(invalid_params)
       end
 
@@ -294,7 +294,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
     context 'with valid data' do
       context 'affordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
@@ -326,7 +326,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
       end
 
       context 'unaffordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params)
         end
 
@@ -365,7 +365,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
-      before :each do
+      before do
         @determined_result ||= subject.call(invalid_params)
       end
 

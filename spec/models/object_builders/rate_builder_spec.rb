@@ -24,7 +24,7 @@ describe ObjectBuilders::RateBuilder, type: :model, dbclean: :after_each do
     include_context 'setup rating areas and products for ma'
 
     context 'with an existing product' do
-      before :each do
+      before do
         tenant.products.by_application_period(application_period).each do |new_product|
           new_product.premium_tables = []
           new_product.save!
@@ -68,7 +68,7 @@ describe ObjectBuilders::RateBuilder, type: :model, dbclean: :after_each do
     end
 
     context 'with a non-existing product' do
-      before :each do
+      before do
         tenant.products.by_application_period(application_period).destroy_all
       end
 
@@ -78,7 +78,7 @@ describe ObjectBuilders::RateBuilder, type: :model, dbclean: :after_each do
     end
 
     context 'without rating areas' do
-      before :each do
+      before do
         ::Locations::RatingArea.all.destroy_all
       end
 
@@ -100,7 +100,7 @@ describe ObjectBuilders::RateBuilder, type: :model, dbclean: :after_each do
     include_context 'setup rating areas and products for ny'
 
     context 'with an existing product' do
-      before :each do
+      before do
         tenant.products.by_application_period(application_period).each do |new_product|
           new_product.premium_tables = []
           new_product.save!
@@ -138,7 +138,7 @@ describe ObjectBuilders::RateBuilder, type: :model, dbclean: :after_each do
     end
 
     context 'with a non-existing product' do
-      before :each do
+      before do
         tenant.products.by_application_period(application_period).destroy_all
       end
 
@@ -148,7 +148,7 @@ describe ObjectBuilders::RateBuilder, type: :model, dbclean: :after_each do
     end
 
     context 'without rating areas' do
-      before :each do
+      before do
         ::Locations::RatingArea.all.destroy_all
       end
 
@@ -176,7 +176,7 @@ describe ObjectBuilders::RateBuilder, type: :model, dbclean: :after_each do
         ::Locations::CountyZip.all.destroy_all
       end
 
-      before :each do
+      before do
         tenant.products.by_application_period(application_period).each do |new_product|
           new_product.premium_tables = []
           new_product.save!
@@ -214,7 +214,7 @@ describe ObjectBuilders::RateBuilder, type: :model, dbclean: :after_each do
     end
 
     context 'with a non-existing product' do
-      before :each do
+      before do
         tenant.products.by_application_period(application_period).destroy_all
       end
 

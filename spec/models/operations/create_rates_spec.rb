@@ -27,7 +27,7 @@ RSpec.describe Operations::CreateRates, type: :model, dbclean: :after_each do
     include_context 'setup tenant'
     include_context 'setup rating areas and products for ma'
 
-    before :each do
+    before do
       @file = 'spec/test_data/plan_data/rates/ivl_silver_age_rated.xml'
     end
 

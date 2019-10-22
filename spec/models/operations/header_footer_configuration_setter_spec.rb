@@ -18,7 +18,7 @@ RSpec.describe Operations::HeaderFooterConfigurationSetter, type: :model, dbclea
   end
 
   context 'for call' do
-    before :each do
+    before do
       @result = subject.call(:ma).success
     end
 

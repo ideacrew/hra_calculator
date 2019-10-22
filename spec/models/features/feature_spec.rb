@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Features::Feature, type: :model do
 
-  before(:each) do
+  before do
     DatabaseCleaner.clean
 
     @site    = FactoryBot.create(:site)

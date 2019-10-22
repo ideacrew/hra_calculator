@@ -20,7 +20,7 @@ describe ::Transactions::PurgeHra, dbclean: :after_each do
       product
     end
 
-    before :each do
+    before do
       @result = subject.call
     end
 

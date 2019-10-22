@@ -24,7 +24,7 @@ describe ::Locations::Operations::SearchForServiceArea, :dbclean => :after_each 
     end
 
     context 'for success case' do
-      before :each do
+      before do
         @search_search_areas_result ||= subject.call(hra_object)
       end
 
@@ -40,7 +40,7 @@ describe ::Locations::Operations::SearchForServiceArea, :dbclean => :after_each 
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         hra_object.zipcode = 20001
         @search_search_areas_result ||= subject.call(hra_object)
       end
@@ -56,7 +56,7 @@ describe ::Locations::Operations::SearchForServiceArea, :dbclean => :after_each 
   end
 
   describe 'tenant with non_age_rated and county' do
-    before :each do
+    before do
       tenant.update_attributes!(key: :ny, owner_organization_name: 'NY Marketplace')
       options = tenant.sites.first.features.first.options.first.options
       options.first.update_attributes!(value: 'age_rated')
@@ -72,7 +72,7 @@ describe ::Locations::Operations::SearchForServiceArea, :dbclean => :after_each 
     end
 
     context 'for success case' do
-      before :each do
+      before do
         @search_search_areas_result ||= subject.call(hra_object)
       end
 
@@ -88,7 +88,7 @@ describe ::Locations::Operations::SearchForServiceArea, :dbclean => :after_each 
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         hra_object.county = 'County'
         @search_search_areas_result ||= subject.call(hra_object)
       end
