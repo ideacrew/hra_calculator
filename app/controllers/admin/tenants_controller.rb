@@ -8,7 +8,6 @@ class Admin::TenantsController < ApplicationController
 
   def update
     result = Transactions::UpdateTenant.new.call({tenant: @tenant, tenant_params: tenant_params})
-    tenant = result.value!
 
     if result.success?
       flash[:notice] = 'Successfully updated marketplace settings'
@@ -16,7 +15,7 @@ class Admin::TenantsController < ApplicationController
       flash[:error]  = 'Something went wrong.'
     end
 
-    redirect_to admin_tenant_path(id: tenant.id, tab_name: params[:id]+"_profile")
+    redirect_to admin_tenant_path(id: @tenant.id, tab_name: params[:id]+"_profile")
   end
 
   def upload_logo
@@ -27,7 +26,6 @@ class Admin::TenantsController < ApplicationController
 
   def features_update
     result = Transactions::UpdateTenant.new.call({tenant: @tenant, tenant_params: tenant_params})
-    tenant = result.value!
 
     if result.success?
       flash[:notice] = 'Successfully updated marketplace settings'
@@ -44,7 +42,7 @@ class Admin::TenantsController < ApplicationController
 
   def ui_element_update
     result = Transactions::UpdateUiElement.new.call({tenant_id: ui_element_params[:tenant_id], ui_element: ui_element_params.slice(:option_id, :option)})
-    ui_element = result.value!
+
     if result.success?
       flash[:notice] = 'Successfully updated page settings'
     else
@@ -79,29 +77,16 @@ class Admin::TenantsController < ApplicationController
     redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
   end
 
-  def zip_county_data
-    params.permit!
-    result = Transactions::CountyZipFile.new.call(params.to_h)
-
-    if result.success?
-      flash[:notice] = result.success
-    else
-      flash[:error] = result.failure[:errors].first
-    end
-
-    redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
-  end
-
   def plans_destroy
     result = ::Transactions::PlansDestroy.new.call(params)
 
     if result.success?
       flash[:notice] = 'Successfully destroyed plans'
-      redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
     else
-      result.failure
-      # display errors on the same page
+      flash[:error] = result.failure[:errors].first
     end
+
+    redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
   end
 
   private
