@@ -6,6 +6,7 @@ require File.join(Rails.root, 'spec/shared_contexts/test_enterprise_admin_seed')
 RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each do
   include_context 'setup enterprise admin seed'
   let!(:tenant_account) { FactoryBot.create(:account, email: 'admin@market_place.org', enterprise_id: enterprise.id) }
+  let!(:invalid_account) { FactoryBot.create(:account, enterprise_id: enterprise.id) }
   let(:tenant_params) do
     { key: :ma, owner_organization_name: 'MA Marketplace', account_email: tenant_account.email }
   end
@@ -124,23 +125,44 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
   end
 
   describe "GET #ui_pages_show" do
-    before do
-      sign_in tenant_account
-      get :ui_pages_show, params: {tenant_id: tenant.id}
+    context 'with a valid account loggedin' do
+      before do
+        sign_in tenant_account
+        get :ui_pages_show, params: {tenant_id: tenant.id}
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should set an instance variable' do
+        option = controller.instance_variable_get(:@page)
+        expect(option).to be_a ::Options::Option
+        expect(option.key).to eq(:ui_tool_pages)
+      end
+
+      it 'should render template' do
+        expect(response).to render_template('ui_pages_show')
+      end
     end
 
-    it "returns http success" do
-      expect(response).to have_http_status(:success)
-    end
+    context 'with an invalid account loggedin' do
+      before do
+        sign_in invalid_account
+        get :ui_pages_show, params: {tenant_id: tenant.id}
+      end
 
-    it 'should set an instance variable' do
-      option = controller.instance_variable_get(:@page)
-      expect(option).to be_a ::Options::Option
-      expect(option.key).to eq(:ui_tool_pages)
-    end
+      it "returns http redirect" do
+        expect(response).to have_http_status(:redirect)
+      end
 
-    it 'should render template' do
-      expect(response).to render_template('ui_pages_show')
+      it 'should redirect to enterprise show' do
+        expect(response).to redirect_to(admin_enterprise_path(enterprise.id))
+      end
+
+      it 'should set flash alert' do
+        expect(flash[:alert]).to eq('You are not authorized to perform this action.')
+      end
     end
   end
 
