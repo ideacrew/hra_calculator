@@ -39,10 +39,6 @@ class Admin::TenantsController < ApplicationController
     redirect_to action: :features_show, id: params[:tenant_id], tab_name: params[:tenant_id]+"_features"
   end
 
-  def ui_pages_show
-    @page = @tenant.sites[0].options.where(key: :ui_tool_pages).first
-  end
-
   def translations_show
     @translation_entity = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :show]).call(params).value!
   end
@@ -72,23 +68,6 @@ class Admin::TenantsController < ApplicationController
     else
       flash[:error]  = 'Something went wrong.'
     end
-  end
-
-  def ui_element_update
-    result = Transactions::UpdateUiElement.new.call({tenant_id: ui_element_params[:tenant_id], ui_element: ui_element_params.slice(:option_id, :option)})
-    ui_element = result.value!
-    if result.success?
-      flash[:notice] = 'Successfully updated page settings'
-    else
-      flash[:error]  = 'Something went wrong.'
-    end
-
-    redirect_to action: :ui_pages_show, id: params[:tenant_id], tab_name: params[:tenant_id]+"_ui_pages"
-  end
-
-  def ui_pages_edit
-    @tenant = Tenants::Tenant.find(params[:tenant_id])
-    @option = @tenant.sites[0].options.where(key: :ui_tool_pages).first.options.find(params[:option_id])
   end
 
   def plan_index
@@ -170,10 +149,5 @@ class Admin::TenantsController < ApplicationController
         ]
       ]
     )
-  end
-
-  def ui_element_params
-    params.permit!
-    params.to_h
   end
 end
