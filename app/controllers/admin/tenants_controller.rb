@@ -1,5 +1,6 @@
 class Admin::TenantsController < ApplicationController
   layout 'admin'
+  protect_from_forgery except: [:fetch_locales, :edit_translation, :update_translation]
 
   before_action :find_tenant, :authorized_user?
 
@@ -23,8 +24,6 @@ class Admin::TenantsController < ApplicationController
   end
 
   def features_show
-    hra_default_setter = ::Operations::HraDefaultSetter.new.call(@tenant.key)
-    @data = {status: "success", data: {type: 'ui_settings', attributes: hra_default_setter.success.to_h}}
   end
 
   def features_update
@@ -45,8 +44,34 @@ class Admin::TenantsController < ApplicationController
   end
 
   def translations_show
-    @page = @tenant.consumer_portal.options.by_key(:ui_elements).first
-    @translations = @tenant.consumer_portal.options.by_key(:translations).first
+    @translation_entity = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :show]).call(params).value!
+  end
+
+  def fetch_locales
+    @translation_entity = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :fetch_locales]).call(params).value!
+
+    respond_to do |format|
+      format.js { render partial: 'source_translations'}
+    end
+  end
+
+  def edit_translation
+    @translation_entity = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :edit_translation]).call(params).value!
+
+    respond_to do |format|
+      format.js { render partial: 'edit_translation'}
+    end
+  end
+
+  def update_translation
+    @translation_entity  = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :update_translation]).call(params).value!
+    @translation_entity.editable_translation.value = params['translation']['value']
+    
+    if @translation_entity.editable_translation.save
+      flash[:notice] = 'Successfully updated translation'
+    else
+      flash[:error]  = 'Something went wrong.'
+    end
   end
 
   def ui_element_update
@@ -64,8 +89,6 @@ class Admin::TenantsController < ApplicationController
   def ui_pages_edit
     @tenant = Tenants::Tenant.find(params[:tenant_id])
     @option = @tenant.sites[0].options.where(key: :ui_tool_pages).first.options.find(params[:option_id])
-
-    # redirect_to action: :ui_pages_show, id: params[:tenant_id], tab_name: params[:tenant_id]+"_ui_pages"
   end
 
   def plan_index

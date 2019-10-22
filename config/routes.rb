@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       get   :ui_pages_show
       get   :translations_show
       get   :fetch_locales
+      get   :edit_translation
+      post  :update_translation
       get   :ui_pages_edit
       patch :ui_element_update
       get   :plan_index

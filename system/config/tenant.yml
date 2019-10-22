@@ -109,6 +109,16 @@ namespaces:
                             description: Best dimensions are 150px x 60px
                             type: :base_64
                             default: nil
+                      - key: :supported_languages
+                        settings:
+                          - key: :en
+                            title: English
+                            type: :string
+                            default:
+                          - key: :es
+                            title: Spanish
+                            type: :string
+                            default:
                   - key: :environments
                     namespaces:
                     - key: :production
@@ -344,6 +354,57 @@ namespaces:
                                   - key: :next_steps_alert
                                     type: :alert
                                     default:                           
+                      - key: :languages
+                        description: Choose the languages offered by the marketplace
+                        settings:
+                          - key: :en
+                            title: English
+                            type: :string
+                            default:
+                          - key: :fr
+                            title: French
+                            type: :string
+                            default:
+                          - key: :es
+                            title: Spanish
+                            type: :string
+                            default:
+                          - key: :de
+                            title: German
+                            type: :string
+                            default:
+                          - key: :hi
+                            title: Hindi
+                            type: :string
+                            default:
+                          - key: :am
+                            title: Amharic
+                            type: :string
+                            default:
+                          - key: :bn
+                            title: Bengali
+                            type: :string
+                            default:
+                          - key: :ur
+                            title: Urdu
+                            type: :string
+                            default: 
+                          - key: :ru
+                            title: Russian
+                            type: :string
+                            default:
+                          - key: :vi
+                            title: Vietnamese
+                            type: :string
+                            default:
+                          - key: :ja
+                            title: Japanese
+                            type: :string
+                            default:
+                          - key: :ar
+                            title: Arabic
+                            type: :string
+                            default:
                   - key: :environments
                     namespaces:
                     - key: :production
