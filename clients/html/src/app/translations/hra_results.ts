@@ -32,7 +32,7 @@ interface ProductInformationTranslations {
 interface DeterminationAdviceTranslations {
   recommendation: string;
   next_steps: string;
-  notice: string;
+  notice?: string;
 }
 
 interface DeterminationResultTranslations {

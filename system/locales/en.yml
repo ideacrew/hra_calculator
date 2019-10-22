@@ -38,15 +38,15 @@ en:
       <li>No health benefits</li>
     </ul>
   about_you.header.title: About You
-  about_you.header.paragraph: Enter the following information for the family member who is
-    offered the HRA
+  about_you.header.paragraph: Enter the following information for the family member who is offered the HRA
   about_you.header.help: This is the family member whose employer or former employer
     (if family member is a retiree) is offering the HRA.
   about_you.place_of_residence.header: Place of Residence
   about_you.place_of_residence.description: Enter the family member’s place of residence,
     even if the employer is located somewhere else.
   about_you.place_of_residence.state.label: State
-  about_you.place_of_residence.state.description: If you are not a resident of this state,
+  about_you.place_of_residence.state.description: |-
+    If you are not a resident of this state,
     please visit <a href="https://www.healthcare.gov/get-coverage/" target="_blank">https://www.healthcare.gov/get-coverage/</a> to find the Marketplace
     in your state.
   about_you.place_of_residence.state.error_required: State is required.
@@ -63,9 +63,12 @@ en:
   about_you.date_of_birth.error_required: Date of Birth is required.
   about_you.date_of_birth.error_range: DOB must be between 01/01/1900 to Today.
   about_you.date_of_birth.error_format: Please Enter Valid Date Format(MM/DD/YYYY)
-  about_you.household_income.header: Expected {{benefit_year}} Household Income
-  about_you.household_income.description: |-
-    This is your household income before taxes. For most people, annual household income is the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040). Specifically, household income is equal to adjusted gross income plus the following amounts: Social Security benefits that are excluded from gross income, interest from tax-exempt bonds, any foreign-source income excluded from gross income under section 911 of Internal Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare).
+  about_you.household_income.header: |-
+    Expected {{benefit_year}} Household Income
+  about_you.household_income.description: |
+    This is your household income before taxes. For most people, annual household income is the same as federal adjusted gross income that you enter on your federal income tax return (Form 1040).
+    Specifically, household income is equal to adjusted gross income plus the following
+    amounts: Social Security benefits that are excluded from gross income, interest from tax-exempt bonds, any foreign-source income excluded from gross income under section 911 of Internal Revenue Code (rare), and the income of dependents who are required to file a separate income tax return (rare).
   about_you.household_income.frequency.label: Frequency
   about_you.household_income.frequency.description: MISSING FREQUENCY HELP TEXT
   about_you.household_income.frequency.annual: Annual
@@ -80,8 +83,7 @@ en:
     been offered.</strong> All answers can be found in the HRA notice provided by the employer.
   about_hra.hra_type.header: Type
   about_hra.hra_type.label: Choose One
-  about_hra.hra_type.description: The type of HRA will appear prominently on the notice
-    from the employer.
+  about_hra.hra_type.description: The type of HRA will appear prominently on the notice from the employer.
   about_hra.hra_type.error_required: Type of HRA is required.
   about_hra.hra_type.ichra: Individual Coverage HRA
   about_hra.hra_type.qsehra: Qualified Small Employer HRA (QSEHRA)
@@ -94,7 +96,8 @@ en:
   about_hra.effective_period.end_month.description: This is the last month of the HRA plan year.
   about_hra.effective_period.end_month.error_required: End Month is required.
   about_hra.maximum_amount.header: Maximum Amount for Employee-Only Health Insurance
-  about_hra.maximum_amount.description: This is the amount the employer has offered to contribute
+  about_hra.maximum_amount.description: |-
+    This is the amount the employer has offered to contribute
     to the HRA if you purchase health insurance for only the employee (not including
     other family members). Some employers provide one amount if only the employee
     enrolls in coverage (sometimes referred to as “self-only” coverage), and a larger
@@ -110,81 +113,98 @@ en:
   about_hra.maximum_amount.amount.label: Amount
   about_hra.maximum_amount.amount.description: AMOUNT HELP TEXT MISSING
   about_hra.maximum_amount.amount.error_required: Amount is required.
-  info_and_results.header: Your Information and Results
-  info_and_results.info_entered.header: The Information You Entered
-  info_and_results.info_entered.residence: Residence
-  info_and_results.info_entered.dob: Date of Birth
-  info_and_results.info_entered.household_income: 2020 Household Income
-  info_and_results.info_entered.hra_type: HRA type
-  info_and_results.info_entered.start_date: Start Date
-  info_and_results.info_entered.end_date: End Date
-  info_and_results.info_entered.employer_contribution: Employer Contribution
-  info_and_results.results.header: Your Results
-  info_and_results.results.ichra.affordable: Based on the information you entered,
-    your HRA is large enough to make health insurance “affordable” based on federal
-    standards. As a result, you do not qualify for [a tax credit] through [MARKETPLACE]
-    for yourself or any family member who is eligible to benefit from the HRA. But,
-    you can use your HRA to help make purchasing coverage more affordable.
-  info_and_results.results.ichra.unaffordable: Based on the information you entered,
-    the HRA offered to you is not large enough to make health insurance “affordable”
-    based on federal standards. As a result, you may qualify for [a tax credit] to
-    help you buy [MARKETPLACE] coverage based on your income and other factors.
-  info_and_results.results.qsehra.affordable: Based on the information you entered,
-    your HRA is large enough to make health insurance “affordable” based on federal
-    standards. As a result, you do not qualify for [a tax credit] through [MARKETPLACE]
-    for yourself or for any family member who is eligible to benefit from the HRA.
-    But, you can use your HRA to help make buying
-  info_and_results.results.qsehra.unaffordable: Based on the information you entered,
+  hra_results.title: Your Information and Results
+  hra_results.footer: |-
+    When you’re asked to set your tax credit amount, reduce
+    what you accept by your monthly HRA amount to help avoid having to pay back money
+    at tax time.
+  hra_results.start_over_button_label: Start Over
+  hra_results.print_results_button_label: Print Your Results
+  hra_results.your_information.header: The Information You Entered
+  hra_results.your_information.residence: Residence
+  hra_results.your_information.date_of_birth: Date of Birth
+  hra_results.your_information.plan_year_household_income: "{{benefit_year}} Household Income"
+  hra_results.your_information.hra_type: HRA type
+  hra_results.your_information.start_date: Start Date
+  hra_results.your_information.end_date: End Date
+  hra_results.your_information.employer_contribution: Employer Contribution
+  hra_results.your_information.edit_info_button_label: Edit Info
+  hra_results.product_information.issuer_name: Carrier Name
+  hra_results.product_information.product_name: Plan Name
+  hra_results.product_information.hios_id: Hios Id
+  hra_results.product_information.member_premium: Member Premium
+  hra_results.determination_results.your_results_header: Your Results
+  hra_results.determination_results.next_steps_header: Next Steps
+  hra_results.determination_results.qsehra_unaffordable.next_steps: |- 
+    <p>To find out if you’re eligible for [a tax credit], you will complete the {{marketplace}} application. But first, here are some important things to keep in mind:</p>
+    <p>When completing the application:</p>
+    <ul>
+    <li>[Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).]</li>
+    <li>If you are eligible for [a tax credit], using it along with your HRA will help make {{marketplace}} coverage more affordable. [When you're asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time.]</li>
+    <li>If you are not eligible for [a tax credit], you may still purchase a {{marketplace}} plan and use the HRA to help pay for it.</li>
+    </ul>
+    <p>Using your HRA:</p>
+    <ul>
+    <li>If you enroll in a {{marketplace}} plan or other [minimum essential coverage], inform your employer so you can use the HRA.</li>
+    <li>If you decide not to enroll in health insurance or you purchase more limited coverage [such as a short-term plan], you cannot use the HRA.</li>
+    </ul>
+  hra_results.determination_results.qsehra_unaffordable.recommendation: |-
+    <strong>Based on the information you entered,
     your HRA is not large enough on its own to make health insurance “affordable”
-    based on federal standards. As a result, you may qualify for [a tax credit] through
-    [MARKETPLACE] based on your income and other factors. If you qualify for [a tax
+    based on federal standards.</strong> As a result, you may qualify for [a tax credit] through
+    {{marketplace}} based on your income and other factors. If you qualify for [a tax
     credit], you can use it in addition to your HRA, but you'll want to adjust the
     amount to avoid owing back money at tax time.
-  info_and_results.next_steps.header: Next Steps
-  info_and_results.next_steps.ichra.affordable: |-
-    Purchasing health insurance:
-    •  Your HRA can help pay for a [MARKETPLACE] plan or [similar coverage off Marketplace.] You can also use it if you're enrolled in Medicare. If your employer has offered you a “salary reduction agreement” to pay the share of the health insurance premium not covered by the HRA, you may be better off using your HRA to buy [an ACA-compliant plan off Marketplace. Ask your employer about your options.]
-    •  If you buy a [MARKETPLACE] plan, do not accept [a tax credit], or you may owe money back at tax time. [HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC]
-    Informing your employer:
-    •  If you enroll in a [MARKETPLACE] plan, [similar coverage off Marketplace], or Medicare, inform your employer that you are accepting the HRA.
-    •  If you enroll in any other coverage – including more limited coverage[ such as a short-term plan] – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.
-  info_and_results.next_steps.ichra.unaffordable: |-
-    To find out if you’re eligible for [a tax credit], you will complete the [MARKETPLACE] application. But first, here are some important things to keep in mind:
-    When completing the application:
-    •  [Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).]
-    •  If you qualify for [a tax credit], it will generally be larger than your HRA amount.
-    •  If you enroll with [a tax credit], notify your employer that you are opting out of the HRA. You cannot receive both an HRA and [a tax credit] from [MARKETPLACE]. If you receive both, you may owe money back at tax time.
-    If you don't receive [a tax credit]:
-    •  Your HRA can help pay for a [MARKETPLACE] plan or [similar coverage off Marketplace.] You can also use it if you're enrolled in Medicare. If you enroll in one of these types of coverage, inform your employer that you are accepting the HRA.
-    •  If you enroll in any other coverage – including more limited coverage[ such as a short-term plan] – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.
-    •  If your employer has offered you a “salary reduction agreement” to pay the share of health insurance premium not covered by the HRA, you may be better off using your HRA to buy [an ACA-compliant plan off Marketplace. Ask your employer about your options.]
-  info_and_results.next_steps.qsehra.affordable: |-
-    Complete the [MARKETPLACE] application to learn about your options for purchasing health insurance with your HRA. But first, here are some important things to keep in mind:
-    •  When completing the application, do not accept [a tax credit] to purchase health insurance through [MARKETPLACE]. If you do, you may owe money back at tax time. [HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC]
-    •  If you enroll in a [MARKETPLACE] plan or other [minimum essential coverage], inform your employer so you can use the HRA.
-    •  If you decide not to enroll in health insurance or you purchase more limited coverage[ such as a short-term plan], you cannot use the HRA.
-  info_and_results.next_steps.qsehra.unaffordable: |-
-    To find out if you’re eligible for [a tax credit], you will complete the [MARKETPLACE] application. But first, here are some important things to keep in mind:
-    When completing the application:
-    •  [Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).]
-    •  If you are eligible for [a tax credit], using it along with your HRA will help make [MARKETPLACE] coverage more affordable. [When you're asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time.]
-    •  If you are not eligible for [a tax credit], you may still purchase a [MARKETPLACE] plan and use the HRA to help pay for it.
-    Using your HRA:
-    •  If you enroll in a [MARKETPLACE] plan or other [minimum essential coverage], inform your employer so you can use the HRA.
-    •  If you decide not to enroll in health insurance or you purchase more limited coverage[ such as a short-term plan], you cannot use the HRA.
-  info_and_results.warning.ichra.affordable: Based on the information you entered,
-    you should not accept [a tax credit] to purchase health insurance through [MARKETPLACE].
-  info_and_results.warning.ichra.unaffordable: If you receive [a tax credit] from
-    [MARKETPLACE], you must notify your employer that you are opting out of the HRA.
-  info_and_results.warning.qsehra.affordable: Based on the information you entered,
-    you should not accept [a tax credit] to purchase health insurance through [MARKETPLACE].
-  info_and_results.warning.qsehra.unaffordable: N/A
-  info_and_results.footer: When you’re asked to set your tax credit amount, reduce
-    what you accept by your monthly HRA amount to help avoid having to pay back money
-    at tax time
-  site.btn.edit_info: Edit Info
-  site.btn.start_over: Start Over
-  site.btn.print_results: Print Your Results
+  hra_results.determination_results.qsehra_affordable.next_steps: |-
+    <p>Complete the {{marketplace}} application to learn about your options for purchasing health insurance with your HRA. But first, here are some important things to keep in mind:</p>
+    <ul>
+    <li>When completing the application, do not accept [a tax credit] to purchase health insurance through [MARKETPLACE]. If you do, you may owe money back at tax time. [HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC]</li>
+    <li>If you enroll in a {{marketplace}} plan or other [minimum essential coverage], inform your employer so you can use the HRA.</li>
+    <li>If you decide not to enroll in health insurance or you purchase more limited coverage[ such as a short-term plan], you cannot use the HRA.</li>
+    </ul>
+  hra_results.determination_results.qsehra_affordable.notice: Based on the information you entered, you should not accept {{taxCredit}} to purchase health insurance through {{marketplace}}.
+  hra_results.determination_results.qsehra_affordable.recommendation: |-
+    <strong>Based on the information you entered,
+    your HRA is large enough to make health insurance “affordable” based on federal
+    standards.</strong> As a result, you do not qualify for [a tax credit] through {{marketplace}}
+    for yourself or for any family member who is eligible to benefit from the HRA.
+    But, you can use your HRA to help make buying a {{marketPlace}} plan more affordable. You can also use your HRA if you enroll in other coverage.
+  hra_results.determination_results.ichra_affordable.next_steps: |-
+    <p>Purchasing health insurance:</p>
+    <ul>
+    <li>Your HRA can help pay for a [MARKETPLACE] plan or [similar coverage off Marketplace.] You can also use it if you're enrolled in Medicare. If your employer has offered you a “salary reduction agreement” to pay the share of the health insurance premium not covered by the HRA, you may be better off using your HRA to buy [an ACA-compliant plan off Marketplace. Ask your employer about your options.]</li>
+    <li>If you buy a [MARKETPLACE] plan, do not accept [a tax credit], or you may owe money back at tax time. [HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC]</li>
+    </ul>
+    <p>Informing your employer:</p>
+    <ul>
+    <li>If you enroll in a [MARKETPLACE] plan, [similar coverage off Marketplace], or Medicare, inform your employer that you are accepting the HRA.</li>
+    <li>If you enroll in any other coverage – including more limited coverage[ such as a short-term plan] – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.</li>
+    </ul>
+  hra_results.determination_results.ichra_affordable.notice: Based on the information you entered, you should not accept [a tax credit] to purchase health insurance through {{marketplace}}.
+  hra_results.determination_results.ichra_affordable.recommendation: |-
+    <strong>Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal
+    standards.</strong> As a result, you do not qualify for [a tax credit] through [MARKETPLACE]
+    for yourself or any family member who is eligible to benefit from the HRA. But,
+    you can use your HRA to help make purchasing coverage more affordable.
+  hra_results.determination_results.ichra_unaffordable.next_steps: |-
+    <p>To find out if you’re eligible for [a tax credit], you will complete the {{marketplace}} application. But first, here are some important things to keep in mind:</p>
+    <p>When completing the application:</p>
+    <ul>
+    <li>[Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).]</li>
+    <li>If you qualify for [a tax credit], it will generally be larger than your HRA amount.</li>
+    <li>If you enroll with [a tax credit], notify your employer that you are opting out of the HRA. You cannot receive both an HRA and [a tax credit] from [MARKETPLACE]. If you receive both, you may owe money back at tax time.</li>
+    </ul>
+    <p>If you don't receive [a tax credit]:</p>
+    <ul>
+    <li>Your HRA can help pay for a [MARKETPLACE] plan or [similar coverage off Marketplace.] You can also use it if you're enrolled in Medicare. If you enroll in one of these types of coverage, inform your employer that you are accepting the HRA.</li>
+    <li>If you enroll in any other coverage – including more limited coverage[ such as a short-term plan] – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.</li>
+    <li>If your employer has offered you a “salary reduction agreement” to pay the share of health insurance premium not covered by the HRA, you may be better off using your HRA to buy [an ACA-compliant plan off Marketplace. Ask your employer about your options.]</li>
+    </ul>
+  hra_results.determination_results.ichra_unaffordable.notice: If you receive [a tax credit] from {{marketplace}}, you must notify your employer that you are opting out of the HRA.
+  hra_results.determination_results.ichra_unaffordable.recommendation: |-
+    <strong>Based on the information you entered, the HRA offered to you is not large enough to make health insurance “affordable”
+    based on federal standards.</strong> As a result, you may qualify for [a tax credit] to
+    help you buy {{marketplace}} coverage based on your income and other factors.
   site.month.jan: January
   site.month.feb: February
   site.month.mar: March

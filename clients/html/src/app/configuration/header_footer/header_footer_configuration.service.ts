@@ -15,7 +15,9 @@ export interface HeaderFooterConfigurationProvider {
 @Injectable()
 export class HeaderFooterConfigurationService {
   private hostKey: string;
-  private apiUrl;
+  private apiUrl: string;
+
+  public configResource: HeaderFooterConfigurationResource | null = null;
 
   constructor(private httpClient: HttpClient) { 
     if (environment.production) {
@@ -23,12 +25,18 @@ export class HeaderFooterConfigurationService {
     } else {
       this.hostKey = "dc";
     }
-    this.apiUrl = environment.apiUrl+"/api/configurations/header_footer_config?tenant="+this.hostKey;
+    this.apiUrl = environment.apiUrl + "/api/configurations/header_footer_config?tenant=" + this.hostKey;
   }
 
   getHeaderFooterConfiguration(consumer : HeaderFooterConfigurationConsumer) {
+    if (this.configResource != null) {
+      consumer.applyHeaderFooterConfiguration(this.configResource);
+      return;
+    }
+    var service = this;
     this.httpClient.get<ResourceResponse<HeaderFooterConfigurationResource>>(this.apiUrl).subscribe(
       (res:ResourceResponse<HeaderFooterConfigurationResource>) => {
+        service.configResource = res.data;
         consumer.applyHeaderFooterConfiguration(res.data);
       },
       (err) => {
