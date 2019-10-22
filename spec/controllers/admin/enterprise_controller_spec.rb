@@ -7,7 +7,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
   include_context 'setup enterprise admin seed'
 
   describe "GET #show" do
-    before :each do
+    before do
       sign_in owner_account
       get :show, params: {id: enterprise.id}
     end
@@ -28,7 +28,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
 
   describe "POST #account_create" do
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::CreateAccount).to receive(:call).with(anything).and_return(Dry::Monads::Result::Success.new(''))
         sign_in owner_account
         post :account_create, params: {enterprise_id: enterprise.id}
@@ -48,7 +48,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::CreateAccount).to receive(:call).with(anything).and_return(Dry::Monads::Result::Failure.new({errors: ['Cannot create Account.']}))
         sign_in owner_account
         post :account_create, params: {enterprise_id: enterprise.id}
@@ -84,7 +84,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
     include_context 'setup tenant'
 
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::CreateTenant).to receive(:call).with(anything).and_return(Dry::Monads::Result::Success.new(tenant))
         sign_in owner_account
         post :tenant_create, params: tenant_create_params
@@ -104,7 +104,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::CreateTenant).to receive(:call).with(anything).and_return(Dry::Monads::Result::Failure.new({errors: {marketplace: 'already exists for the selected state.'}}))
         sign_in owner_account
         post :tenant_create, params: tenant_create_params
@@ -132,7 +132,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
     end
 
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::UpdateBenefitYear).to receive(:call).with(anything).and_return(Dry::Monads::Result::Success.new(''))
         sign_in owner_account
         post :benefit_year_update, params: benefit_year_create_params
@@ -152,7 +152,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::UpdateBenefitYear).to receive(:call).with(anything).and_return(Dry::Monads::Result::Failure.new({errors: ['Failed to save benefit year']}))
         sign_in owner_account
         post :benefit_year_update, params: benefit_year_create_params
@@ -174,7 +174,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
 
   describe "GET #purge_hra" do
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::PurgeHra).to receive(:call).and_return(Dry::Monads::Result::Success.new(''))
         sign_in owner_account
         get :purge_hra, params: {enterprise_id: enterprise.id}
@@ -194,7 +194,7 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::PurgeHra).to receive(:call).and_return(Dry::Monads::Result::Failure.new({errors: ['There are no tenants.']}))
         sign_in owner_account
         get :purge_hra, params: {enterprise_id: enterprise.id}

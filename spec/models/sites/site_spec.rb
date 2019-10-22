@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Sites::Site, type: :model do
 
-  before(:each) do
+  before do
     DatabaseCleaner.clean
     @tenant = FactoryBot.create(:tenant, enterprise: FactoryBot.create(:enterprise))
     @site = FactoryBot.create(:site, tenant: @tenant)

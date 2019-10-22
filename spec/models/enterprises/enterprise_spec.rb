@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Enterprises::Enterprise, type: :model do
 
-  before(:each) do
+  before do
     DatabaseCleaner.clean
 
     @account    = FactoryBot.create(:account)

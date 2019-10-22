@@ -23,7 +23,7 @@ RSpec.describe Operations::CreatePlan, type: :model, dbclean: :after_each do
     let(:value_for_geo_rating_area) { 'single' }
     include_context 'setup tenant'
 
-    before :each do
+    before do
       @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_gold_pb_bcbs.xml')).first
     end
 

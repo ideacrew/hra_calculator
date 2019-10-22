@@ -41,7 +41,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
 
   describe "POST #update" do
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::UpdateTenant).to receive(:call).with(anything).and_return(Dry::Monads::Result::Success.new(tenant))
         sign_in tenant_account
         post :update, params: controller_params
@@ -61,7 +61,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::UpdateTenant).to receive(:call).with(anything).and_return(Dry::Monads::Result::Failure.new(tenant))
         sign_in tenant_account
         post :update, params: controller_params
@@ -83,7 +83,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
 
   describe "PUT #features_update" do
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::UpdateTenant).to receive(:call).with(anything).and_return(Dry::Monads::Result::Success.new(tenant))
         sign_in tenant_account
         put :features_update, params: controller_params.merge!(tenant_id: tenant.id)
@@ -103,7 +103,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::UpdateTenant).to receive(:call).with(anything).and_return(Dry::Monads::Result::Failure.new(tenant))
         sign_in tenant_account
         put :features_update, params: controller_params.merge!(tenant_id: tenant.id)
@@ -124,7 +124,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
   end
 
   describe "GET #ui_pages_show" do
-    before :each do
+    before do
       sign_in tenant_account
       get :ui_pages_show, params: {tenant_id: tenant.id}
     end
@@ -152,7 +152,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
     end
 
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::UpdateUiElement).to receive(:call).with(anything).and_return(Dry::Monads::Result::Success.new(tenant))
         sign_in tenant_account
         patch :ui_element_update, params: ui_element_params.merge!({tenant_id: tenant.id})
@@ -172,7 +172,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::UpdateUiElement).to receive(:call).with(anything).and_return(Dry::Monads::Result::Failure.new(tenant))
         sign_in tenant_account
         patch :ui_element_update, params: ui_element_params.merge!({tenant_id: tenant.id})
@@ -200,7 +200,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
         'tenant_id' => tenant.id }
     end
 
-    before :each do
+    before do
       sign_in tenant_account
       get :ui_pages_edit, params: ui_pages_edit_params, xhr: true
     end
@@ -220,7 +220,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
   end
 
   describe "GET #plan_index" do
-    before :each do
+    before do
       sign_in tenant_account
       get :plan_index, params: {tenant_id: tenant.id}
     end
@@ -242,7 +242,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
 
   describe "POST #upload_plan_data" do
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::SerffTemplateUpload).to receive(:call).with(anything).and_return(Dry::Monads::Result::Success.new(tenant))
         sign_in tenant_account
         get :upload_plan_data, params: { tenant_id: tenant.id }
@@ -262,7 +262,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::SerffTemplateUpload).to receive(:call).with(anything).and_return(Dry::Monads::Result::Failure.new({errors: ['Failure case']}))
         sign_in tenant_account
         get :upload_plan_data, params: { tenant_id: tenant.id }
@@ -284,7 +284,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
 
   describe "GET #plans_destroy" do
     context 'for success case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::PlansDestroy).to receive(:call).with(anything).and_return(Dry::Monads::Result::Success.new(tenant))
         sign_in tenant_account
         get :plans_destroy, params: { id: tenant.id, tenant_id: tenant.id }
@@ -304,7 +304,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
     end
 
     context 'for failure case' do
-      before :each do
+      before do
         allow_any_instance_of(Transactions::PlansDestroy).to receive(:call).with(anything).and_return(Dry::Monads::Result::Failure.new({errors: ["Unable to find tenant record with id #{tenant.id}"]}))
         sign_in tenant_account
         get :plans_destroy, params: { id: tenant.id, tenant_id: tenant.id }
