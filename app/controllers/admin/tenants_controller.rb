@@ -64,9 +64,9 @@ class Admin::TenantsController < ApplicationController
     @translation_entity.editable_translation.value = params['translation']['value']
     
     if @translation_entity.editable_translation.save
-      flash[:notice] = 'Successfully updated translation'
+      @messages = { success: 'Successfully updated translation.' }
     else
-      flash[:error]  = 'Something went wrong.'
+      @messages = { error: 'Something went wrong.' }
     end
   end
 

@@ -1,2 +1,14 @@
-document.getElementById('edit_translation').innerHTML = xhr.responseText;
-addTranslationNavHandlers();
+document.getElementById('edit_translation').innerHTML = "<%= escape_javascript(render "edit_translation") %>";
+document.getElementById('translation-alert').innerHTML = "<%= escape_javascript(render "admin/shared/alert") %>";
+
+<% if @messages[:success].present? %>
+  var className = 'alert-success';
+  document.getElementsByClassName('alert')[0].querySelector('.message').innerText = "<%= @messages[:success] %>";
+<% else %>
+  var className = 'alert-danger';
+  document.getElementsByClassName('alert')[0].querySelector('.message').innerText = "<%= @messages[:error] %>";
+<% end %>
+
+var element = document.getElementsByClassName('alert')[0];
+element.classList.add(className, 'show');
+setTimeout(function(){ document.getElementById('translation-alert').innerHTML = '' }, 3000);
