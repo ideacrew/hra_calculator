@@ -22,10 +22,6 @@ export class ResultComponent implements OnInit {
   hra_frequency_text: String;
   hra_amount: Number;
   full_hra_type: String;
-  hios_id: String;
-  plan_name: String;
-  carrier_name: String;
-  member_premium: Number;
   taxCredit: String;
   // marketPlace: String;
   // help_text_1: String;
@@ -95,10 +91,6 @@ export class ResultComponent implements OnInit {
       this.hra_frequency = this.result.data.hra_frequency;
       this.hra_amount = this.result.data.hra_amount;
       this.hra_type = this.result.data.hra_type;
-      this.hios_id = this.result.data.hios_id;
-      this.plan_name = this.result.data.plan_name;
-      this.carrier_name = this.result.data.carrier_name;
-      this.member_premium = this.result.data.member_premium;
       this.hra_determination = this.result.data.hra_determination;
       this.residence = [this.state, this.zipcode, this.county].filter(function(val) { return (val !== null && val !== ""); }).join(" / ")
     }else{
