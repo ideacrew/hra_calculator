@@ -27,12 +27,12 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
     let(:import_timestamp) { DateTime.now }
 
     context 'product loading non-silver plan' do
-      before :each do
+      before do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_gold_pb_bcbs.xml')).first
       end
 
       context 'when product loader is called with a file' do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'MA Carrier Name' })
@@ -47,12 +47,12 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
     end
 
     context 'product loading with invalid xml' do
-      before :each do
+      before do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_invalid.xml')).first
       end
 
       context "when product loader is called with a file" do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'MA Carrier Name'})
@@ -72,7 +72,7 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
       end
 
       context "when product loader is called with a file" do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'MA Carrier Name'})
@@ -133,12 +133,12 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
     let(:import_timestamp) { DateTime.now }
 
     context 'product loading non-silver plan' do
-      before :each do
+      before do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_gold_pb_bcbs.xml')).first
       end
 
       context 'when product loader is called with a file' do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'NY Carrier Name' })
@@ -153,12 +153,12 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
     end
 
     context 'product loading with invalid xml' do
-      before :each do
+      before do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_invalid.xml')).first
       end
 
       context "when product loader is called with a file" do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'NY Carrier Name'})
@@ -178,7 +178,7 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
       end
 
       context "when product loader is called with a file" do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'NY Carrier Name'})
@@ -232,12 +232,12 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
     let(:import_timestamp) { DateTime.now }
 
     context 'product loading non-silver plan' do
-      before :each do
+      before do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_gold_pb_bcbs.xml')).first
       end
 
       context 'when product loader is called with a file' do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           plan_builder = ObjectBuilders::PlanBuilder.new({ tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'DC Carrier Name' })
@@ -252,12 +252,12 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
     end
 
     context 'product loading with invalid xml' do
-      before :each do
+      before do
         @file = Dir.glob(File.join(Rails.root, 'spec/test_data/plan_data/plans/ivl_invalid.xml')).first
       end
 
       context "when product loader is called with a file" do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'DC Carrier Name'})
@@ -277,7 +277,7 @@ describe ObjectBuilders::PlanBuilder, type: :model, dbclean: :after_each do
       end
 
       context "when product loader is called with a file" do
-        before :each do
+        before do
           xml = Nokogiri::XML(File.open(@file))
           product_parser = Parser::PlanBenefitTemplateParser.parse(xml.root.canonicalize, :single => true)
           @plan_builder = ObjectBuilders::PlanBuilder.new({tenant: tenant, import_timestamp: import_timestamp, carrier_name: 'DC Carrier Name'})

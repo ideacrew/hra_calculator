@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Enterprises::BenefitYear, type: :model do
 
-  before(:each) do
+  before do
     DatabaseCleaner.clean
 
     @enterprise   = FactoryBot.create(:enterprise)

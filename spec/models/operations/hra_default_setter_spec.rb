@@ -18,7 +18,7 @@ RSpec.describe Operations::HraDefaultSetter, type: :model, dbclean: :after_each 
   end
 
   context 'for call' do
-    before :each do
+    before do
       @result = subject.call(:ma).success
     end
 

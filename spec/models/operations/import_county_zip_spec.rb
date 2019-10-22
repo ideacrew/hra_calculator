@@ -29,7 +29,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
           {file: file, year: year, tenant: tenant, import_timestamp: DateTime.now}
         end
 
-        before :each do
+        before do
           @result ||= subject.call(params)
         end
 
@@ -38,7 +38,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
         end
 
         it 'should create CountyZip object' do
-          expect(::Locations::CountyZip.all.count).to eq(713)
+          expect(::Locations::CountyZip.all.count).to eq(14)
         end
 
         it 'should create CountyZip object for MA tenant' do
@@ -56,7 +56,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
           {file: file, year: year, tenant: tenant, import_timestamp: DateTime.now}
         end
 
-        before :each do
+        before do
           FactoryBot.create(:locations_county_zip, zip: '01001', county_name: 'Hampden')
           FactoryBot.create(:locations_county_zip, zip: '01002', county_name: 'Franklin')
           FactoryBot.create(:locations_county_zip, zip: '01002', county_name: 'Hampshire')
@@ -68,7 +68,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
         end
 
         it 'should create CountyZip object' do
-          expect(::Locations::CountyZip.all.count).to eq(713)
+          expect(::Locations::CountyZip.all.count).to eq(14)
         end
 
         it 'should create CountyZip object for MA tenant' do
@@ -86,7 +86,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
         {file: 'bad_file.xlsx', year: year, tenant: tenant, import_timestamp: DateTime.now}
       end
 
-      before :each do
+      before do
         @result ||= subject.call(params)
       end
 
@@ -119,7 +119,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
           {file: file, year: year, tenant: tenant, import_timestamp: DateTime.now}
         end
 
-        before :each do
+        before do
           @result ||= subject.call(params)
         end
 
@@ -128,7 +128,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
         end
 
         it 'should create CountyZip object' do
-          expect(::Locations::CountyZip.all.count).to eq(62)
+          expect(::Locations::CountyZip.all.count).to eq(11)
         end
 
         it 'should create CountyZip object for NY tenant' do
@@ -146,7 +146,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
           {file: file, year: year, tenant: tenant, import_timestamp: DateTime.now}
         end
 
-        before :each do
+        before do
           FactoryBot.create(:locations_county_zip, zip: nil, county_name: 'Albany', state: 'NY')
           FactoryBot.create(:locations_county_zip, zip: nil, county_name: 'Rensselaer', state: 'NY')
           FactoryBot.create(:locations_county_zip, zip: nil, county_name: 'Saratoga', state: 'NY')
@@ -158,7 +158,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
         end
 
         it 'should create CountyZip object' do
-          expect(::Locations::CountyZip.all.count).to eq(62)
+          expect(::Locations::CountyZip.all.count).to eq(11)
         end
 
         it 'should create CountyZip object for NY tenant' do
@@ -176,7 +176,7 @@ RSpec.describe Operations::ImportCountyZip, type: :model, dbclean: :after_each d
         {file: 'bad_file.xlsx', year: year, tenant: tenant, import_timestamp: DateTime.now}
       end
 
-      before :each do
+      before do
         @result ||= subject.call(params)
       end
 
