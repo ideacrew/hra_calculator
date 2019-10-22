@@ -45,8 +45,8 @@ export class HomeComponent implements OnInit {
         this.infoColorCode = res.data.colors.info_color;
         this.successColorCode = res.data.colors.success_color;
         this.warningColorCode = res.data.colors.warning_color;
-        this.marketPlace = res.data.ui_pages.market_place;
-        this.taxCredit = res.data.ui_pages.a_tax_credit;
+        this.marketPlace = res.data.market_place;
+        this.taxCredit = res.data.a_tax_credit;
       },
       (err) => {
         console.log(err)
