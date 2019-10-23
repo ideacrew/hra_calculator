@@ -6,12 +6,18 @@
       <%= render partial: 'admin/shared/options_form', locals: {form: site_form} %>
     <% end %>
   <% end %>
-  <%= submit_tag 'Update Profile', class: "btn btn-primary" %>
+  <div class="mt-3">
+    <%= submit_tag 'Update Profile', class: "btn btn-primary" %>
+  </div>
 <% end %>
+
+<%= render partial: 'language_select' %>
 
 <%= javascript_pack_tag 'js-color-swatch' %>
 
 <script>
+  registerLanguageDelete();
+
   var uploadElements = document.getElementsByClassName('custom-file-input');
   for (var i = 0, max = uploadElements.length; i < max; i++) {
 

@@ -1,6 +1,6 @@
 class Admin::TenantsController < ApplicationController
   layout 'admin'
-  protect_from_forgery except: [:fetch_locales, :edit_translation, :update_translation]
+  protect_from_forgery except: [:fetch_locales, :edit_translation, :update_translation, :delete_language]
 
   before_action :find_tenant, :authorized_user?
 
@@ -98,6 +98,11 @@ class Admin::TenantsController < ApplicationController
     redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
   end
 
+  def delete_language
+    supported_languages = @tenant.supported_languages
+    supported_languages.options.where(:id => BSON::ObjectId.from_string(params['lang_id'])).delete
+  end
+
   private
 
   def find_tenant
@@ -116,9 +121,9 @@ class Admin::TenantsController < ApplicationController
       sites_attributes: [
         :id,
         options_attributes: [
-          :id, :value,
+          :id, :value, :supported_languages,
           child_options_attributes: [
-            :id, :value,
+            :id, :value, 
             child_options_attributes: [:id, :value]
           ]
         ],

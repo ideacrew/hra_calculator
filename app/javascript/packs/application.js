@@ -20,6 +20,7 @@ import './bootstrap_custom.js'
 import {} from 'jquery-ujs'
 import { registerPlanIndexEvents } from  '../js/plan_index'
 import { registerTranslationEvents } from '../js/translations'
+import { registerLanguageDelete } from '../js/language_delete'
 
 // require("@rails/ujs").start()
 // require('rails-ujs').start()
@@ -35,5 +36,6 @@ require("@rails/actiontext")
 import bsCustomFileInput from 'bs-custom-file-input'
 import 'trix/dist/trix.css'
 
-global.registerPlanIndexEvents = registerPlanIndexEvents;
+global.registerPlanIndexEvents   = registerPlanIndexEvents;
 global.registerTranslationEvents = registerTranslationEvents;
+global.registerLanguageDelete    = registerLanguageDelete;

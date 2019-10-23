@@ -6,7 +6,11 @@ import { environment } from './../../environments/environment';
 export class TranslationHttpLoader implements TranslateLoader {
   private hostKey = "dc";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    if (environment.production) {
+      this.hostKey = window.location.host.split(".",1)[0];
+    }
+  }
 
   /**
    * Gets the translations from the server
