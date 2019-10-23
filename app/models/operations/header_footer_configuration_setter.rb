@@ -6,7 +6,7 @@ module Operations
       tenant = Tenants::Tenant.find_by_key(key)
       site   = tenant.sites.first
       enterprise = tenant.enterprise
-      benefit_year = enterprise.benefit_years.first
+      benefit_year = enterprise.benefit_years.last
 
       options = [:site, :branding].inject([])  do |data, key|
         site_option  = site.options.by_key(key).first
