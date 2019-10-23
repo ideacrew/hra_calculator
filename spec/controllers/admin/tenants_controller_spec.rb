@@ -228,4 +228,138 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
       end
     end
   end
+
+  describe 'GET #translations_show' do
+    let(:translations_show_params) do
+      { tab_name: "#{tenant.id.to_s}_translations", tenant_id: tenant.id.to_s }
+    end
+
+    before do
+      sign_in tenant_account
+      get :translations_show, params: translations_show_params
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'should set instance variable translation_entity' do
+      expect(controller.instance_variable_get(:@translation_entity)).to be_a Translation
+    end
+
+    it 'should render template' do
+      expect(response).to render_template('translations_show')
+    end    
+  end
+
+  describe 'GET #fetch_locales' do
+    let(:fetch_locales_params) do
+      { page: 'site', from_locale: 'en', to_locale: 'es', tenant_id: tenant.id.to_s}
+    end
+
+    before do
+      sign_in tenant_account
+      get :fetch_locales, params: fetch_locales_params, xhr: true
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'should set instance variable translation_entity' do
+      expect(controller.instance_variable_get(:@translation_entity)).to be_a Translation
+    end
+
+    it 'should render template' do
+      expect(response).to render_template(partial: 'admin/tenants/_source_translations')
+    end    
+  end
+
+  describe 'GET #edit_translation' do
+    let(:edit_translation_params) do
+      { page: 'about_hra', from_locale: 'en', to_locale: 'en', translation_key: 'about_hra.header.title', tenant_id: tenant.id.to_s }
+    end
+
+    before do
+      sign_in tenant_account
+      get :edit_translation, params: edit_translation_params, xhr: true
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'should set instance variable translation_entity' do
+      expect(controller.instance_variable_get(:@translation_entity)).to be_a Translation
+    end
+
+    it 'should render template' do
+      expect(response).to render_template(partial: 'admin/tenants/_edit_translation')
+    end
+  end
+
+  describe 'POST #update_translation' do
+    context 'for success case' do
+      let(:value) { "<div>About the HRA You've Been ____Offered</div>" }
+
+      let(:update_translation_params) do
+        { translation: { current_locale: 'en', translation_key: 'about_hra.header.title', value: value },
+          translation_key: 'about_hra.header.title',
+          tenant_id: tenant.id.to_s }
+      end
+
+      before do
+        sign_in tenant_account
+        post :update_translation, params: update_translation_params, xhr: true
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should set instance variable translation_entity' do
+        expect(controller.instance_variable_get(:@translation_entity).editable_translation.value).to eq(value)
+      end
+
+      it 'should set instance variable messages' do
+        expect(controller.instance_variable_get(:@messages)).to eq({ success: 'Successfully updated translation.' })
+      end
+
+      it 'should render template' do
+        expect(response).to render_template('update_translation')
+      end
+    end
+
+    context 'for failure case' do
+      let(:value) { "<div>About the HRA You've Been ____Offered</div>" }
+
+      let(:update_translation_params) do
+        { translation: { current_locale: 'en', translation_key: 'about_hra.header.title', value: value },
+          translation_key: 'about_hra.header.title',
+          tenant_id: tenant.id.to_s }
+      end
+
+      before do
+        allow_any_instance_of(Options::Option).to receive(:save).and_return(false)
+        sign_in tenant_account
+        post :update_translation, params: update_translation_params, xhr: true
+      end
+
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should set instance variable translation_entity' do
+        expect(controller.instance_variable_get(:@translation_entity).editable_translation.value).to eq(value)
+      end
+
+      it 'should set instance variable messages' do
+        expect(controller.instance_variable_get(:@messages)).to eq(error: 'Something went wrong.')
+      end
+
+      it 'should render template' do
+        expect(response).to render_template('update_translation')
+      end
+    end
+  end
 end
