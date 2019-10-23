@@ -200,7 +200,7 @@ export class InfoComponent implements OnInit {
             start_month: this.resultService.formData.start_month,
             end_month: this.resultService.formData.end_month,
             hra_frequency: this.resultService.formData.hra_frequency,
-            hra_amount: this.resultService.formData.hra_amount,
+            hra_amount: this.resultService.formData.hra_amount
           });
 
           if(this.showZipcode){
