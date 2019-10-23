@@ -48,7 +48,10 @@ class Options::Option
   def supported_languages=(val)
     site     = Sites::Site.where('options._id'=> self.id).first
     language = site.tenant.languages.options.where(key: val.to_sym).first
-    self.child_options.build(key: language.key, title: language.title, type: language.type)
+    
+    if child_options.by_key(language.key).blank?
+      child_options.build(key: language.key, title: language.title, type: language.type)
+    end
   end
 
   def settings=(params)
