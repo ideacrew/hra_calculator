@@ -25,7 +25,6 @@ Now, to start up the application in your local Docker environment in development
 ```
 docker-compose -f docker-compose.dev.yml build
 docker-compose -f docker-compose.dev.yml up
-docker exec -it hra_calculator_app_1 /bin/bash -c "bundle exec rake db:seed"
 ```
 
 This starts the application on port 4200 in a terminal window where log output can be seen.  If you prefer to run the application as a background process, use `docker-compose -f docker-compose.dev.yml up -d`.   To seed the database, in a separate terminal window (or the same window if the -d flag is used), run the following: 
