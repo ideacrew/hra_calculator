@@ -1,12 +1,12 @@
 function registerTranslationEvents() {
 
   function addTranslationNavHandlers() {
-    const elements = document.querySelectorAll('#translations .nav-link');
+    const elements = document.querySelectorAll('#translations .nav-item');
 
     elements.forEach((element) => {
       element.addEventListener('click', (e) => {
         var currentElement  = e.currentTarget;
-        var translation_key = currentElement.text;
+        var translation_key = currentElement.textContent;
 
         var page_element    = document.getElementById('ui_page').value;
         var translate_from  = document.getElementById('translate_from').value;
