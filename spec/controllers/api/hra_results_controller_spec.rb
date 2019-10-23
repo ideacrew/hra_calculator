@@ -243,6 +243,8 @@ RSpec.describe Api::HraResultsController, :dbclean => :after_each do
         end
 
         before do
+          token = HraClientSession.issue
+          request.headers["Authorization"] = "Bearer #{token}"
           get :hra_payload, params: valid_params
         end
 
@@ -285,6 +287,8 @@ RSpec.describe Api::HraResultsController, :dbclean => :after_each do
         end
 
         before do
+          token = HraClientSession.issue
+          request.headers["Authorization"] = "Bearer #{token}"
           get :hra_payload, params: invalid_params
         end
 
