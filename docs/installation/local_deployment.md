@@ -24,11 +24,17 @@ Now, to start up the application in your local Docker environment in development
 
 ```
 docker-compose -f docker-compose.dev.yml build
-docker-compose run --rm runner rake db:seed
 docker-compose -f docker-compose.dev.yml up
+docker exec -it hra_calculator_app_1 /bin/bash -c "bundle exec rake db:seed"
 ```
 
-This starts the application on port 4200 in a terminal window where log output can be seen.  If you prefer to run the application as a background process, use `docker-compose -f docker-compose.dev.yml up -d`.  Once the application is up, go to `http://localhost:4200` to test it.
+This starts the application on port 4200 in a terminal window where log output can be seen.  If you prefer to run the application as a background process, use `docker-compose -f docker-compose.dev.yml up -d`.   To seed the database, in a separate terminal window (or the same window if the -d flag is used), run the following: 
+
+```
+docker exec -it hra_calculator_app_1 /bin/bash -c "bundle exec rake db:seed"
+```
+
+Once the application is up, go to `http://localhost:4200` to test it.
 
 To bring down the application simply run:
 
@@ -56,11 +62,16 @@ Now, to start up the application in your local Docker environment in production 
 
 ``` 
 docker-compose -f docker-compose.prod.yml build 
-docker-compose run --rm runner rake db:seed
 docker-compose -f docker-compose.prod.yml up 
 ```
 
-This starts the application on port 8080 in a terminal window where log output can be seen.  If you prefer to run the application as a background process, use `docker-compose -f docker-compose.prod.yml up -d`.  Once the application is up, go to `http://localhost:8080` to test it.
+This starts the application on port 8080 in a terminal window where log output can be seen.  If you prefer to run the application as a background process, use `docker-compose -f docker-compose.prod.yml up -d`.  To seed the database, in a separate terminal window (or the same window if the -d flag is used), run the following: 
+
+```
+docker exec -it hra_calculator_app_1 /bin/bash -c "bundle exec rake db:seed"
+```
+
+Once the application is up, go to `http://localhost:8080` to test it.
 
 To bring down the application simply run:
 
