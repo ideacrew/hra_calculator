@@ -361,7 +361,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">$</span>
                         </div>
-                        <input type="text" class="form-control" style="text-align: right" (keypress)="numberOnly($event)" mask="comma_separator" maxlength="11" [disabled]="hraForm.controls['household_frequency'].invalid" id="hra_amount" formControlName="hra_amount" ngModel required [attr.disabled]="(hraForm.controls['hra_frequency'].value =='') ? '' : null "/>
+                        <input type="text" class="form-control" style="text-align: right" mask="comma_separator.0" maxlength="11" [disabled]="hraForm.controls['household_frequency'].invalid" id="hra_amount" formControlName="hra_amount" ngModel required [attr.disabled]="(hraForm.controls['hra_frequency'].value =='') ? '' : null "/>
                         <div class="input-group-append">
                           <span class="input-group-text">.00</span>
                         </div>
