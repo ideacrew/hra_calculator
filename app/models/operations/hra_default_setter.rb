@@ -30,15 +30,18 @@ module Operations
         colors: color_options.value!,
         features: feature_options.value!,
         pages: ui_elements.child_options.map(&:to_h),
-        translations: extract_translations(translation_ele)
+        translations: extract_translations(tenant, translation_ele)
       })
 
       Success(hra_defaulter)
     end
 
-    def extract_translations(translation_element)
+    # send translations only for the languages offered by marketplace
+    def extract_translations(tenant, translation_element)
       results = Hash.new
-      translation_element.options.collect do |option|
+      languages_supported = tenant.supported_language_options.map(&:key)
+      translation_element.options.each do |option|
+        next unless languages_supported.include?(option.key)
         locales = option.child_options.inject({}) do |locales, child_option|
           locales[child_option.key] = child_option.value || child_option.default
           locales
