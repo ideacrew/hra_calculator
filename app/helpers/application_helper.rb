@@ -32,7 +32,7 @@ module ApplicationHelper
     tag.select(option_list, id: id, class: "form-control")
   end
 
-  def select_dropdown(input_id, list, show_default=false)
+  def select_dropdown(input_id, list, show_default=false, selected=nil)
     name = (input_id.to_s.scan(/supported_languages/).present? ? input_id : 'admin[' + input_id.to_s + ']')
    
     return unless list.is_a? Array
@@ -42,7 +42,9 @@ module ApplicationHelper
       end
       list.each do |item|
         if item.is_a? Array
-          concat(content_tag :option, item[0], value: item[1])
+          is_selected = false
+          is_selected = true if selected.present? && selected == item[1]
+          concat(content_tag :option, item[0], value: item[1], selected: is_selected)
         elsif item.is_a? Hash
           concat(content_tag :option, item.first[1], value: item.first[0])
         elsif input_id == 'state'
