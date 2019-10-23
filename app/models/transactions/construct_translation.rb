@@ -17,7 +17,13 @@ module Transactions
         locale = get_locale_for(input[:translation][:current_locale]) 
       end
 
+      if input[:to_locale].present? && locale.blank?
+        language = @tenant.languages.options.where(key: input[:to_locale].to_sym).first
+        locale   = translation_option.child_options.create(key: language.key, title: language.title, type: language.type)
+      end
+
       current_locale = locale || default_locale
+
       page = input[:page] || 'site'
 
       current_locale_options = current_locale.child_options.select{|option| option.key.to_s.match(/^#{page}/).present?}
