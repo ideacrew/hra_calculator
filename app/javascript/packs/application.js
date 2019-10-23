@@ -21,14 +21,13 @@ import {} from 'jquery-ujs'
 import { registerPlanIndexEvents } from  '../js/plan_index'
 import { registerTranslationEvents } from '../js/translations'
 import { registerLanguageDelete } from '../js/language_delete'
+import { registerTenantShowEvents } from '../js/tenant_show'
 
 // require("@rails/ujs").start()
 // require('rails-ujs').start()
 // require("turbolinks").start()
 require("@rails/activestorage").start()
 // require("channels")
-
-console.log('Hello World from Webpacker')
 
 require("trix")
 require("@rails/actiontext")
@@ -39,3 +38,5 @@ import 'trix/dist/trix.css'
 global.registerPlanIndexEvents   = registerPlanIndexEvents;
 global.registerTranslationEvents = registerTranslationEvents;
 global.registerLanguageDelete    = registerLanguageDelete;
+global.registerPlanIndexEvents = registerPlanIndexEvents;
+global.registerTenantShowEvents = registerTenantShowEvents;
