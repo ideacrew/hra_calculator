@@ -19,14 +19,13 @@ import '../stylesheets/application'
 import './bootstrap_custom.js'
 import {} from 'jquery-ujs'
 import { registerPlanIndexEvents } from  '../js/plan_index'
+import { registerTenantShowEvents } from '../js/tenant_show'
 
 // require("@rails/ujs").start()
 // require('rails-ujs').start()
 // require("turbolinks").start()
 require("@rails/activestorage").start()
 // require("channels")
-
-console.log('Hello World from Webpacker')
 
 require("trix")
 require("@rails/actiontext")
@@ -35,3 +34,4 @@ import bsCustomFileInput from 'bs-custom-file-input'
 import 'trix/dist/trix.css'
 
 global.registerPlanIndexEvents = registerPlanIndexEvents;
+global.registerTenantShowEvents = registerTenantShowEvents;

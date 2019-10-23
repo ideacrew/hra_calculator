@@ -10,15 +10,5 @@
 <%= javascript_pack_tag 'js-color-swatch' %>
 
 <script>
-  var uploadElements = document.getElementsByClassName('custom-file-input');
-  for (var i = 0, max = uploadElements.length; i < max; i++) {
-
-    uploadElements[i].addEventListener('change', (event) => {
-      var fileName = event.target.value.replace("C:\\fakepath\\", "");
-      var parent = event.target.parentElement;
-      var labelElement = parent.querySelector(".custom-file-label")
-
-      labelElement.innerHTML = fileName;
-    });
-  }
+  registerTenantShowEvents();
 </script>
