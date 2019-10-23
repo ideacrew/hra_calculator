@@ -39,7 +39,10 @@ module Transactions
          current_locale: current_locale,
          sections: sections,
          current_locale_options: current_locale_options,
-         editable_translation: editable_translation || current_locale_options.first
+         editable_translation: editable_translation || current_locale_options.first,
+         from_locale: input[:from_locale] || :en,
+         to_locale: input[:to_locale] || :en,
+         page: page
       }
 
       Success(entity_hash)
@@ -66,7 +69,8 @@ module Transactions
     end
 
     def sections
-      default_locale.child_options.pluck(:key).collect{|key| key.to_s.split('.')[0]}.uniq
+      pages = default_locale.child_options.pluck(:key).collect{|key| key.to_s.split('.')[0]}.uniq
+      pages.collect{|p| [p.humanize, p]}
     end
   end
 end
