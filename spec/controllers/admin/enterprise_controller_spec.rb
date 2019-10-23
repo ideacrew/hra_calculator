@@ -18,7 +18,8 @@ RSpec.describe Admin::EnterpriseController, type: :controller, dbclean: :after_e
 
     it 'should set an instance variable' do
       expect(controller.instance_variable_get(:@states).count).to eq(52)
-      expect(controller.instance_variable_get(:@accounts)).not_to be_nil
+      expect(controller.instance_variable_get(:@accounts).pluck(:email)).to eq(["admin@openhbx.org"])
+      expect(controller.instance_variable_get(:@marketplace_accounts).pluck(:email)).to eq([])
     end
 
     it 'should render template' do

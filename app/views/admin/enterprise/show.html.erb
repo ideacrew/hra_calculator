@@ -82,7 +82,7 @@
 
     <div class="form-group col-md-4">
       <h5><p>Owner Account</p></h5>
-      <%= select_dropdown('account', @accounts.map(&:email)) %>
+      <%= select_dropdown('account', @marketplace_accounts.map(&:email)) %>
     </div>
     <%= submit_tag 'Add Market Place', class: "btn btn-primary" %>
   <% end %>

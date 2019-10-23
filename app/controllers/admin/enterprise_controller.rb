@@ -5,7 +5,8 @@ class Admin::EnterpriseController < ApplicationController
 
   def show
     @states     = Locations::UsState::NAME_IDS.map(&:first)
-    @accounts   = Account.by_role("Marketplace Owner")
+    @accounts   = Account.all
+    @marketplace_accounts = Account.by_role("Marketplace Owner")
   end
 
   def account_create
