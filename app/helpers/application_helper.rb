@@ -33,8 +33,10 @@ module ApplicationHelper
   end
 
   def select_dropdown(input_id, list, show_default=false)
+    name = (input_id.to_s.scan(/supported_languages/).present? ? input_id : 'admin[' + input_id.to_s + ']')
+   
     return unless list.is_a? Array
-    content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']', required: true) do
+    content_tag(:select, class: "form-control", id: input_id, name: name, required: true) do
       unless show_default
         concat(content_tag :option, "Select", value: "")
       end
