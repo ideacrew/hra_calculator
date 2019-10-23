@@ -35,6 +35,7 @@ export class FontCustomizerService {
         }
         .popover {
           font-family: "${fontFamily}";
+          font-style: italic;
         }
       `;
     }

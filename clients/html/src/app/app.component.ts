@@ -13,7 +13,9 @@ import { JwtRefreshService } from './authentication/jwt_refresh_service';
 })
 export class AppComponent {
   title = 'app';
-
+  onActivate(event: any) {
+    window.scroll(0,0);
+  }
   constructor(translate: TranslateService, private http: HttpClient) {
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');

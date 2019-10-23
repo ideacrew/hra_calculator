@@ -11,7 +11,6 @@ module Operations
 
       tenant = Tenants::Tenant.find_by_key(key)
       site   = tenant.sites.first
-      ui_page_options = ::Operations::UiPageOptions.new.call(tenant)
       color_options   = ::Operations::ColorOptions.new.call(tenant)
       feature_options = ::Operations::TenantFeatures.new.call(tenant)
 
@@ -29,7 +28,6 @@ module Operations
         tax_credit: tax_credit,
         market_place: market_place,
         colors: color_options.value!,
-        ui_pages: ui_page_options.value!,
         features: feature_options.value!,
         pages: ui_elements.child_options.map(&:to_h),
         translations: extract_translations(translation_ele)

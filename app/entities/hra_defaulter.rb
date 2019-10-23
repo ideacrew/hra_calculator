@@ -10,7 +10,7 @@ class HraDefaulter < Dry::Struct
   attribute :end_month_dates,   Types::Array.of(Types::String).meta(omittable: true)
   attribute :tax_credit,        Types::String
   attribute :market_place,      Types::String
-  attribute :ui_pages,          Types::Array
+  # attribute :ui_pages,          Types::Array
   attribute :colors,            Types::Array
   attribute :features,          Types::Array
   attribute :pages,             Types::Array

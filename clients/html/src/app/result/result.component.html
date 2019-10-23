@@ -21,7 +21,7 @@
                   </tr>
                   <tr>
                     <td>{{ "hra_results.your_information.plan_year_household_income" | tokenized_translate }}</td>
-                    <td style="font-weight:bold"> $ {{household_amount}} ({{household_frequency_text}})</td>
+                    <td style="font-weight:bold"> $ {{household_amount | number}} ({{household_frequency_text}})</td>
                   </tr>
                   <tr>
                     <td>{{ "hra_results.your_information.hra_type" | tokenized_translate }}</td>
@@ -37,23 +37,7 @@
                   </tr>
                   <tr>
                     <td>{{ "hra_results.your_information.employer_contribution" | tokenized_translate }}</td>
-                    <td style="font-weight:bold"> $ {{hra_amount}} ({{hra_frequency_text}})</td>
-                  </tr>
-                  <tr>
-                    <td>{{ "hra_results.product_information.issuer_name" | tokenized_translate }}</td>
-                    <td style="font-weight:bold">{{carrier_name}}</td>
-                  </tr>
-                  <tr>
-                    <td>{{ "hra_results.product_information.product_name" | tokenized_translate }}</td>
-                    <td style="font-weight:bold">{{plan_name}}</td>
-                  </tr>
-                  <tr>
-                    <td>{{ "hra_results.product_information.hios_id" | tokenized_translate }}</td>
-                    <td style="font-weight:bold">{{hios_id}}</td>
-                  </tr>
-                  <tr>
-                    <td>{{ "hra_results.product_information.member_premium" | tokenized_translate }}</td>
-                    <td style="font-weight:bold"> $ {{member_premium}}</td>
+                    <td style="font-weight:bold"> $ {{hra_amount | number}} ({{hra_frequency_text}})</td>
                   </tr>
                 </table>
             </div>
@@ -103,7 +87,7 @@
 
             <div *ngIf="(showAffordableIchraText)">
               <div class="p-2 bd-highlight card-border">
-                <p class="m-0"><strong id="ichra-affordable" [innerHTML]="'hra_results.determination_results.ichra_affordable.recommendation' | tokenized_html_translate"></p>
+                <p class="m-0" id="ichra-affordable" [innerHTML]="'hra_results.determination_results.ichra_affordable.recommendation' | tokenized_html_translate"></p>
               </div>
               <br/>
               <div class="content">
@@ -125,7 +109,7 @@
               </div>
             </div>
             <br><br>
-              <p style="text-align: center; font-style: italic;"><span [innerHTML]="help_text_5">{{help_text_5}}</span>.</p>
+              <p style="text-align: center; font-style: italic;" [innerHTML]="'hra_results.footer' | tokenized_html_translate"></p>
             <br><br>
           </div>
         </div>
