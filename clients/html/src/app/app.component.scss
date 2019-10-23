@@ -36,8 +36,15 @@
   float: right;
 }
 
-.header-logo, .header-title {
-  font-size: 40px;
+.header-logo, .header-title, .long-header-title {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.header-title {
+  font-size: 40px;
+}
+
+.long-header-title{
+  font-size: 20px;
 }
