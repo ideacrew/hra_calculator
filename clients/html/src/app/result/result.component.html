@@ -53,7 +53,7 @@
             </div>
             <div *ngIf="(showUnaffordableQsehraText)">
               <div class="p-2 bd-highlight card-border">
-                <p [innerHTML]="'hra_results.determination_results.qsehra_unaffordable.recommendation' | tokenized_html_translate"></p>
+                <p class="m-0" id="qsehra-unaffordable" [innerHTML]="'hra_results.determination_results.qsehra_unaffordable.recommendation' | tokenized_html_translate"></p>
               </div>
               <br/>
               <div class="content">
@@ -65,7 +65,7 @@
 
             <div *ngIf="(showAffordableQsehraText)">
                 <div class="p-2 bd-highlight card-border">
-                  <p [innerHTML]="'hra_results.determination_results.qsehra_affordable.recommendation' | tokenized_html_translate"></p>
+                  <p class="m-0" id="qsehra-affordable" [innerHTML]="'hra_results.determination_results.qsehra_affordable.recommendation' | tokenized_html_translate"></p>
                 </div>
                 <br/>
                 <div class="content">
@@ -79,7 +79,7 @@
 
             <div *ngIf="(showUnaffordableIchraText)">
               <div class="p-2 bd-highlight card-border">
-                <p [innerHTML]="'hra_results.determination_results.ichra_unaffordable.recommendation' | tokenized_html_translate"></p>
+                <p class="m-0" id="ichra-unaffordable" [innerHTML]="'hra_results.determination_results.ichra_unaffordable.recommendation' | tokenized_html_translate"></p>
               </div>
               <br/>
               <div class="content">

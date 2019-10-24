@@ -1,7 +1,56 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, getTestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { JwtRefreshService, InitialTokenListener } from '../authentication/jwt_refresh_service';
+import { TokenizedTranslatePipe } from '../translations/tokenized_translate_pipe';
+import { TokenizedHtmlTranslatePipe } from '../translations/tokenized_html_translate_pipe';
+import { TranslateModule, TranslateLoader,  TranslateService } from '@ngx-translate/core';
+import { HeaderFooterConfigurationService } from "../configuration/header_footer/header_footer_configuration.service";
+import { Provider } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 import { ResultComponent } from './result.component';
 import { ResultService }   from '../result.service';
 import { Router } from '@angular/router';
+
+class MockTranslationLoader implements TranslateLoader {
+  private mockTranslations = {
+    "hra_results.determination_results.ichra_affordable": {
+      "recommendation": "is large enough"
+    },
+    "hra_results.determination_results.ichra_unaffordable": {
+      "recommendation": "is not large enough"
+    },
+    "hra_results.determination_results.qsehra_affordable": {
+      "recommendation": "is large enough"
+    },
+    "hra_results.determination_results.qsehra_unaffordable": {
+      "recommendation": "is not large enough"
+    }
+  };
+
+  public getTranslation(lang: string): Observable<any> {
+    return of(this.mockTranslations);
+  }
+}
+
+export function createTranslateLoader() {
+  return new MockTranslationLoader();
+}
+
+class MockHeaderFooterService {
+  getHeaderFooterConfiguration(consumer : ResultComponent) {
+
+  };
+}
+
+class MockJwtTokenRefresher {
+  hasToken() {
+    return true;
+  }
+  getFirstToken(initialTokenListener : InitialTokenListener) { }
+};
 
 describe('ResultComponent', () => {
   let component: ResultComponent;
@@ -38,13 +87,43 @@ describe('ResultComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultComponent ],
-      providers: [
-        { provide: ResultService, useValue: resultServiceStub },
-        { provide: Router, useValue: routerStub }
-      ]
+      imports: [
+        CommonModule,
+        BrowserModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: MockTranslationLoader
+          }
+        })
+      ],
+      providers: (<Array<Provider>>[
+        {
+          provide: JwtRefreshService.PROVIDER_TOKEN,
+          useClass: MockJwtTokenRefresher
+        },
+        {
+          provide: HeaderFooterConfigurationService.PROVIDER_TOKEN,
+          useClass: MockHeaderFooterService
+        },
+        { 
+          provide: ResultService,
+          useValue: resultServiceStub
+        },
+        { 
+          provide: Router,
+          useValue: routerStub
+        }
+      ]),
+      declarations: [ 
+        ResultComponent,
+        TokenizedHtmlTranslatePipe,
+        TokenizedTranslatePipe
+      ],
     })
     .compileComponents();
+    getTestBed().get(TranslateService).use("en");
   }));
 
   beforeEach(() => {
@@ -59,7 +138,7 @@ describe('ResultComponent', () => {
 
   it('should show the information the user entered', () => {
     let userInfo = "";
-    fixture.nativeElement.querySelectorAll("div.content td").forEach((el) => {
+    fixture.nativeElement.querySelectorAll("div.content td").forEach((el: { textContent: string; }) => {
       userInfo += el.textContent;
     });
     let results = resultServiceStub["results"]["data"]
@@ -73,7 +152,7 @@ describe('ResultComponent', () => {
       expect(userInfo).toContain(results["zipcode"]);
     }
     expect(userInfo).toContain(results["dob"]);
-    expect(userInfo).toContain(results["household_amount"]);
+    expect(userInfo).toContain("60,000");
     // expect(userInfo).toContain(results["household_frequency"]);
     expect(userInfo).toContain("Annual");
     // expect(userInfo).toContain(results["hra_type"]);
