@@ -1,11 +1,11 @@
-import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 import { JwtSessionToken } from './jwt_session_token';
 import { JwtUserService } from "./jwt_user_service";
 import { Injectable, ClassProvider } from "@angular/core";
 
-interface InitialTokenListener {
+export interface InitialTokenListener {
   hasToken: boolean;
 }
 

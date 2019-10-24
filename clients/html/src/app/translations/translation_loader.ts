@@ -16,7 +16,7 @@ export class TranslationHttpLoader implements TranslateLoader {
   /**
    * Gets the translations from the server
    */
-  public getTranslation(lang: string): Observable<Object> {
+  public getTranslation(lang: string): Observable<any> {
     var requestHeaders = new HttpHeaders({
       'Content-Type': 'text/plain'
     });

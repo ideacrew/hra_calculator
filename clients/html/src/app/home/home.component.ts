@@ -1,7 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FullComponent } from '../layouts/full/full.component';
-import { BlankComponent } from '../layouts/blank/blank.component';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { JwtRefreshService, JwtTokenRefresher } from '../authentication/jwt_refresh_service';
 
