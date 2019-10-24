@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators, FormControl } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
@@ -7,6 +7,7 @@ import { ResultService } from '../result.service'
 import { validateDate, validateDateFormat } from './date.validator'
 import { NgbDateStruct, NgbDatepickerConfig, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask'
+import { JwtRefreshService, JwtTokenRefresher } from '../authentication/jwt_refresh_service';
 
 @Component({
   templateUrl: './info.component.html',
@@ -41,15 +42,27 @@ export class InfoComponent implements OnInit {
   errors: any = [];
   isCountyDisabled: boolean = false;
   hostKey: string;
+  private _hasToken: boolean = false;
+
+  public get hasToken() : boolean {
+    return this._hasToken;
+  }
+
+  public set hasToken(val) {
+    this._hasToken = val;
+    if (this._hasToken) {
+      this.getInitialInfo();
+    }
+  }
 
   constructor(
+    @Inject(JwtRefreshService.PROVIDER_TOKEN) private jwtTokenRefresher : JwtTokenRefresher, 
     private fb: FormBuilder,
     private httpClient: HttpClient,
     private router: Router,
     private resultService: ResultService,
     private config: NgbDatepickerConfig
   ) {
-
     for (var _i = 0; _i < 12; _i++) {
       let next_date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+_i, 1);
       this.effectiveStartOptions.push(next_date)
@@ -114,10 +127,13 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showTab(0);
-    this.getInitialInfo();
     const today = new Date;
     this.today = { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() };
+    this.hasToken = this.jwtTokenRefresher.hasToken();
+    if (!this.hasToken) {
+      this.jwtTokenRefresher.getFirstToken(this);
+    }
+    this.showTab(0);
   }
 
   showTab(n) {

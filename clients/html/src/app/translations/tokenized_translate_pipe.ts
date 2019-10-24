@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Injectable, Inject, Pipe, SecurityContext } from '@an
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { HeaderFooterConfigurationResource } from "../configuration/header_footer/header_footer_configuration.resources";
 import { HeaderFooterConfigurationProvider, HeaderFooterConfigurationService } from "../configuration/header_footer/header_footer_configuration.service";
+import { StripTagsPipe } from "angular-pipes/esm2015/angular-pipes";
 
 @Injectable()
 @Pipe({
@@ -11,6 +12,7 @@ import { HeaderFooterConfigurationProvider, HeaderFooterConfigurationService } f
 export class TokenizedTranslatePipe extends TranslatePipe {
   public benefit_year = (new Date().getFullYear() + 1).toString();
   public marketplace = "My Marketplace";
+  public stp = new StripTagsPipe();
 
   constructor(
     @Inject(HeaderFooterConfigurationService.PROVIDER_TOKEN) private configurationProvider: HeaderFooterConfigurationProvider,
@@ -21,7 +23,9 @@ export class TokenizedTranslatePipe extends TranslatePipe {
   }
 
   transform(query: string, ...args: any[]): any {
-    return super.transform(query, {marketplace: this.marketplace, benefit_year: this.benefit_year}, ...args);
+    return this.stp.transform(
+      super.transform(query, {marketplace: this.marketplace, benefit_year: this.benefit_year}, ...args)
+    );
   }
 
   applyHeaderFooterConfiguration(resource : HeaderFooterConfigurationResource) : void {

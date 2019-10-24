@@ -3,17 +3,28 @@ import { environment } from '../../environments/environment';
 
 import { JwtSessionToken } from './jwt_session_token';
 import { JwtUserService } from "./jwt_user_service";
+import { Injectable, ClassProvider } from "@angular/core";
 
 interface InitialTokenListener {
   hasToken: boolean;
 }
 
+export interface JwtTokenRefresher {
+  hasToken() : boolean;
+  getFirstToken(initialTokenListener : InitialTokenListener): void;
+}
+
+@Injectable()
 export class JwtRefreshService {
   static SKIP_INTERCEPTORS_HEADER = 'X-Skip-Angular-Interceptors';
 
   public user: any;
   
   constructor(private http: HttpClient) {
+  }
+
+  hasToken() {
+    return JwtUserService.hasValidToken();
   }
   
   getFirstToken(initialTokenListener : InitialTokenListener) {
@@ -58,4 +69,13 @@ export class JwtRefreshService {
       }
     )
   }
+
+  static providers() : ClassProvider {
+    return {
+      provide: JwtRefreshService.PROVIDER_TOKEN,
+      useClass: JwtRefreshService
+    };
+  }
+
+  static PROVIDER_TOKEN = "DI_TOKEN_FOR_JwtRefreshService";
 }

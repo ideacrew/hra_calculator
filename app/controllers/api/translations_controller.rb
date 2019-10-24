@@ -1,5 +1,5 @@
 module Api
-  class TranslationsController < ApplicationController
+  class TranslationsController < ActionController::Base
     before_action :find_tenant
 
     def show
