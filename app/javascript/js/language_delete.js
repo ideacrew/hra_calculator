@@ -3,8 +3,17 @@ function registerLanguageDelete() {
 
   preferences.forEach((element) => {
     element.addEventListener('click', (e) => {
+      var lang_id = element.getAttribute('id').split('-')[1];
+      document.querySelectorAll('#offered_languages .delete-language')[0].setAttribute('data-entity-id', lang_id);
+    })
+  })
 
-      var lang_id = element.getAttribute('id').split('-')[1];;
+  const deleteButtons = document.querySelectorAll('#offered_languages .delete-language');
+
+  deleteButtons.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      
+      var lang_id = element.getAttribute('data-entity-id');
       var locales_url = document.getElementById('delete_language_url').value;
       var request_url = locales_url + "?lang_id=" + lang_id;
 
@@ -14,10 +23,13 @@ function registerLanguageDelete() {
       xhr.send();
 
       xhr.onreadystatechange = (e) => {
-        element.parentNode.parentNode.removeChild(element.parentNode);
+        var language_element = document.getElementById('close-' + lang_id);
+        language_element.parentNode.parentNode.removeChild(language_element.parentNode);
+        document.getElementById('delete-cancel').click();
       }
     })
   })
+
 }
 
 module.exports = {
