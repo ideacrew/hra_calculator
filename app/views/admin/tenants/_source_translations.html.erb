@@ -2,7 +2,8 @@
   <div class="col-4" style="height: 200px; overflow-y: scroll;">
     <div class="nav flex-column nav-pills list-group" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <% @translation_entity.current_locale_options.each do |translation_ele|%>
-          <div class="list-group-item nav-item" id="<%= @translation_entity.current_locale.key %>-<%= translation_ele.key.to_s.gsub('.', '-') %>" data-toggle="pill" href="#v-pills-<%= @translation_entity.current_locale.key %>-<%= translation_ele.key.to_s.gsub('.', '-') %>" role="tab" aria-controls="v-pills-<%= @translation_entity.current_locale.key %>-<%= translation_ele.key.to_s.gsub('.', '-') %>" aria-selected="true"><%= translation_ele.key %></div>
+          <% line_item_identifier = [@translation_entity.current_locale.key.to_s, translation_ele.key.to_s.gsub('.', '-')].join('-') %>
+          <div class="list-group-item nav-item" data-toggle="pill" href="#v-pills-<%= line_item_identifier %>" role="tab" aria-controls="v-pills-<%= line_item_identifier %>" aria-selected="true"><%= translation_ele.key %></div>
        <% end %>
     </div>
   </div>
@@ -10,7 +11,8 @@
   <div class="col-8">
     <div class="tab-content" id="v-pills-tabContent">
         <% @translation_entity.current_locale_options.each do |translation_ele|%>
-        <div class="tab-pane card fade" id="v-pills-<%= @translation_entity.current_locale.key %>-<%= translation_ele.key.to_s.gsub('.', '-') %>" role="tabpanel" aria-labelledby="v-pills-<%= @translation_entity.current_locale.key %>-<%= translation_ele.key.to_s.gsub('.', '-') %>-tab" style="height: 200px; overflow-y: scroll;">
+        <% line_item_identifier = [@translation_entity.current_locale.key.to_s, translation_ele.key.to_s.gsub('.', '-')].join('-') %>
+        <div class="tab-pane card fade" id="v-pills-<%= line_item_identifier %>" role="tabpanel" aria-labelledby="v-pills-<%= line_item_identifier %>-tab" style="height: 200px; overflow-y: scroll;">
           <div class="card-body">
             <%= (translation_ele.value || translation_ele.default)&.html_safe %>
           </div>
