@@ -75,17 +75,23 @@
               <div class="content">
                 <h3>{{ "hra_results.determination_results.next_steps_header" | tokenized_translate }}</h3>
                 <div [innerHTML]="'hra_results.determination_results.qsehra_unaffordable.next_steps' | tokenized_html_translate"></div>
-                <p [innerHTML]="'hra_results.determination_results.qsehra_affordable.recommendation' | tokenized_html_translate"></p>
               </div>
               <br/>
-              <div class="content">
-                <h3>{{ "hra_results.determination_results.next_steps_header" | tokenized_translate }}</h3>
-                <div [innerHTML]="'hra_results.determination_results.qsehra_affordable.next_steps' | tokenized_html_translate"></div>
-              </div>
-              <div [ngStyle]="{'background-color': infoColorCode}" class="pt-4 bd-highlight card-border result-box alert alert-info">
-                <p><i class="fas fa-exclamation-triangle"></i> {{'hra_results.determination_results.qsehra_affordable.notice' | tokenized_translate}} </p>
-              </div>
             </div>
+
+            <div *ngIf="(showAffordableQsehraText)">
+                <div class="p-2 bd-highlight card-border">
+                  <p [innerHTML]="'hra_results.determination_results.qsehra_affordable.recommendation' | tokenized_html_translate"></p>
+                </div>
+                <br/>
+                <div class="content">
+                  <h3>{{ "hra_results.determination_results.next_steps_header" | tokenized_translate }}</h3>
+                  <div [innerHTML]="'hra_results.determination_results.qsehra_affordable.next_steps' | tokenized_html_translate"></div>
+                </div>
+                <div [ngStyle]="{'background-color': infoColorCode}" class="pt-4 bd-highlight card-border result-box alert alert-info">
+                  <p><i class="fas fa-exclamation-triangle"></i>{{'hra_results.determination_results.qsehra_affordable.notice' | tokenized_translate}}</p>
+                </div>
+              </div>
 
             <div *ngIf="(showUnaffordableIchraText)">
               <div class="p-2 bd-highlight card-border">
