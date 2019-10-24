@@ -25,9 +25,11 @@
   <% @tenant.supported_language_options.each do |language_option| %>
     <div type="button" class="btn btn-outline-info ml-2 language_option">
       <%= language_option.title %>
-      <button type="button" class="close" id="close-<%= language_option.id %>" aria-label="Close">
+      <% if language_option.key != :en %>
+      <button type="button" class="close ml-1" id="close-<%= language_option.id %>" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
+      <% end %>
     </div>
   <% end %>
 </div>
