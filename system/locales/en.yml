@@ -157,7 +157,7 @@ en:
   hra_results.determination_results.qsehra_affordable.next_steps: |-
     <p>Complete the {{marketplace}} application to learn about your options for purchasing health insurance with your HRA. But first, here are some important things to keep in mind:</p>
     <ul>
-    <li>When completing the application, do not accept a tax credit to purchase health insurance through {{MARKETPLACE}}. If you do, you may owe money back at tax time. HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC</li>
+    <li>When completing the application, do not accept a tax credit to purchase health insurance through {{marketplace}}. If you do, you may owe money back at tax time. HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC</li>
     <li>If you enroll in a {{marketplace}} plan or other minimum essential coverage, inform your employer so you can use the HRA.</li>
     <li>If you decide not to enroll in health insurance or you purchase more limited coverage such as a short-term plan, you cannot use the HRA.</li>
     </ul>
@@ -167,22 +167,22 @@ en:
     your HRA is large enough to make health insurance “affordable” based on federal
     standards.</strong> As a result, you do not qualify for a tax credit through {{marketplace}}
     for yourself or for any family member who is eligible to benefit from the HRA.
-    But, you can use your HRA to help make buying a {{marketPlace}} plan more affordable. You can also use your HRA if you enroll in other coverage.
+    But, you can use your HRA to help make buying a {{marketplace}} plan more affordable. You can also use your HRA if you enroll in other coverage.
   hra_results.determination_results.ichra_affordable.next_steps: |-
     <p>Purchasing health insurance:</p>
     <ul>
-    <li>Your HRA can help pay for a {{MARKETPLACE}} plan or similar coverage off Marketplace. You can also use it if you're enrolled in Medicare. If your employer has offered you a “salary reduction agreement” to pay the share of the health insurance premium not covered by the HRA, you may be better off using your HRA to buy an ACA-compliant plan off Marketplace. Ask your employer about your options.</li>
-    <li>If you buy a {{MARKETPLACE}} plan, do not accept a tax credit, or you may owe money back at tax time. HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC</li>
+    <li>Your HRA can help pay for a {{marketplace}} plan or similar coverage off Marketplace. You can also use it if you're enrolled in Medicare. If your employer has offered you a “salary reduction agreement” to pay the share of the health insurance premium not covered by the HRA, you may be better off using your HRA to buy an ACA-compliant plan off Marketplace. Ask your employer about your options.</li>
+    <li>If you buy a {{marketplace}} plan, do not accept a tax credit, or you may owe money back at tax time. HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC</li>
     </ul>
     <p>Informing your employer:</p>
     <ul>
-    <li>If you enroll in a {{MARKETPLACE}} plan, similar coverage off Marketplace, or Medicare, inform your employer that you are accepting the HRA.</li>
+    <li>If you enroll in a {{marketplace}} plan, similar coverage off Marketplace, or Medicare, inform your employer that you are accepting the HRA.</li>
     <li>If you enroll in any other coverage – including more limited coverage such as a short-term plan – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.</li>
     </ul>
   hra_results.determination_results.ichra_affordable.notice: Based on the information you entered, you should not accept a tax credit to purchase health insurance through {{marketplace}}.
   hra_results.determination_results.ichra_affordable.recommendation: |-
     <strong>Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal
-    standards.</strong> As a result, you do not qualify for a tax credit through {{MARKETPLACE}}
+    standards.</strong> As a result, you do not qualify for a tax credit through {{marketplace}}
     for yourself or any family member who is eligible to benefit from the HRA.
     <strong> But, you can use your HRA to help make purchasing coverage more affordable.</strong>
   hra_results.determination_results.ichra_unaffordable.next_steps: |-
@@ -191,11 +191,11 @@ en:
     <ul>
     <li>Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).</li>
     <li>If you qualify for a tax credit, it will generally be larger than your HRA amount.</li>
-    <li>If you enroll with a tax credit, notify your employer that you are opting out of the HRA. You cannot receive both an HRA and a tax credit from {{MARKETPLACE}}. If you receive both, you may owe money back at tax time.</li>
+    <li>If you enroll with a tax credit, notify your employer that you are opting out of the HRA. You cannot receive both an HRA and a tax credit from {{marketplace}}. If you receive both, you may owe money back at tax time.</li>
     </ul>
     <p>If you don't receive a tax credit:</p>
     <ul>
-    <li>Your HRA can help pay for a {{MARKETPLACE}} plan or similar coverage off Marketplace. You can also use it if you're enrolled in Medicare. If you enroll in one of these types of coverage, inform your employer that you are accepting the HRA.</li>
+    <li>Your HRA can help pay for a {{marketplace}} plan or similar coverage off Marketplace. You can also use it if you're enrolled in Medicare. If you enroll in one of these types of coverage, inform your employer that you are accepting the HRA.</li>
     <li>If you enroll in any other coverage – including more limited coverage such as a short-term plan – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.</li>
     <li>If your employer has offered you a “salary reduction agreement” to pay the share of health insurance premium not covered by the HRA, you may be better off using your HRA to buy an ACA-compliant plan off Marketplace. Ask your employer about your options.</li>
     </ul>
