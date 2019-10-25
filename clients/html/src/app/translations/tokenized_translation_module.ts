@@ -5,6 +5,7 @@ import { CommonModule} from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenizedTranslatePipe } from './tokenized_translate_pipe';
 import { TokenizedHtmlTranslatePipe } from './tokenized_html_translate_pipe';
+import { NgPipesModule } from 'angular-pipes'
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TokenizedHtmlTranslatePipe } from './tokenized_html_translate_pipe';
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgPipesModule
   ],
   exports: [
     TokenizedTranslatePipe,

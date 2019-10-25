@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Injectable, Inject, Pipe, SecurityContext } from '@an
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { HeaderFooterConfigurationResource } from "../configuration/header_footer/header_footer_configuration.resources";
 import { HeaderFooterConfigurationProvider, HeaderFooterConfigurationService } from "../configuration/header_footer/header_footer_configuration.service";
-import { StripTagsPipe } from "angular-pipes/esm2015/angular-pipes";
+import { StripTagsPipe } from  "angular-pipes";
 
 @Injectable()
 @Pipe({
