@@ -46,7 +46,7 @@ en:
   about_you.place_of_residence.state.label: State
   about_you.place_of_residence.state.description: |-
     If you are not a resident of this state,
-    please visit <a href="https://www.healthcare.gov/get-coverage/" target="_blank">https://www.healthcare.gov/get-coverage/</a> to find the {{marketplace}}
+    please visit <a href="https://www.healthcare.gov/get-coverage/" target="_blank">https://www.healthcare.gov/get-coverage/</a> to find the Marketplace
     in your state.
   about_you.place_of_residence.state.error_required: State is required.
   about_you.place_of_residence.county.label: County
@@ -157,7 +157,7 @@ en:
   hra_results.determination_results.qsehra_affordable.next_steps: |-
     <p>Complete the {{marketplace}} application to learn about your options for purchasing health insurance with your HRA. But first, here are some important things to keep in mind:</p>
     <ul>
-    <li>When completing the application, do not accept a tax credit to purchase health insurance through {{marketplace}}. If you do, you may owe money back at tax time. HOW TO ENROLL THROUGH {{marketplace}} WITHOUT APTC</li>
+    <li>When completing the application, do not accept a tax credit to purchase health insurance through {{marketplace}}. If you do, you may owe money back at tax time. HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC</li>
     <li>If you enroll in a {{marketplace}} plan or other minimum essential coverage, inform your employer so you can use the HRA.</li>
     <li>If you decide not to enroll in health insurance or you purchase more limited coverage such as a short-term plan, you cannot use the HRA.</li>
     </ul>
@@ -171,12 +171,12 @@ en:
   hra_results.determination_results.ichra_affordable.next_steps: |-
     <p>Purchasing health insurance:</p>
     <ul>
-    <li>Your HRA can help pay for a {{marketplace}} plan or similar coverage off {{marketplace}}. You can also use it if you're enrolled in Medicare. If your employer has offered you a “salary reduction agreement” to pay the share of the health insurance premium not covered by the HRA, you may be better off using your HRA to buy an ACA-compliant plan off {{marketplace}}. Ask your employer about your options.</li>
-    <li>If you buy a {{marketplace}} plan, do not accept a tax credit, or you may owe money back at tax time. HOW TO ENROLL THROUGH {{marketplace}} WITHOUT APTC</li>
+    <li>Your HRA can help pay for a {{marketplace}} plan or similar coverage off Marketplace. You can also use it if you're enrolled in Medicare. If your employer has offered you a “salary reduction agreement” to pay the share of the health insurance premium not covered by the HRA, you may be better off using your HRA to buy an ACA-compliant plan off Marketplace. Ask your employer about your options.</li>
+    <li>If you buy a {{marketplace}} plan, do not accept a tax credit, or you may owe money back at tax time. HOW TO ENROLL THROUGH MARKETPLACE WITHOUT APTC</li>
     </ul>
     <p>Informing your employer:</p>
     <ul>
-    <li>If you enroll in a {{marketplace}} plan, similar coverage off {{marketplace}}, or Medicare, inform your employer that you are accepting the HRA.</li>
+    <li>If you enroll in a {{marketplace}} plan, similar coverage off Marketplace, or Medicare, inform your employer that you are accepting the HRA.</li>
     <li>If you enroll in any other coverage – including more limited coverage such as a short-term plan – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.</li>
     </ul>
   hra_results.determination_results.ichra_affordable.notice: Based on the information you entered, you should not accept a tax credit to purchase health insurance through {{marketplace}}.
@@ -195,9 +195,9 @@ en:
     </ul>
     <p>If you don't receive a tax credit:</p>
     <ul>
-    <li>Your HRA can help pay for a {{marketplace}} plan or similar coverage off {{marketplace}}. You can also use it if you're enrolled in Medicare. If you enroll in one of these types of coverage, inform your employer that you are accepting the HRA.</li>
+    <li>Your HRA can help pay for a {{marketplace}} plan or similar coverage off Marketplace. You can also use it if you're enrolled in Medicare. If you enroll in one of these types of coverage, inform your employer that you are accepting the HRA.</li>
     <li>If you enroll in any other coverage – including more limited coverage such as a short-term plan – or you decide not to purchase health insurance, you cannot use your HRA and must notify your employer that you are opting out.</li>
-    <li>If your employer has offered you a “salary reduction agreement” to pay the share of health insurance premium not covered by the HRA, you may be better off using your HRA to buy an ACA-compliant plan off {{marketplace}}. Ask your employer about your options.</li>
+    <li>If your employer has offered you a “salary reduction agreement” to pay the share of health insurance premium not covered by the HRA, you may be better off using your HRA to buy an ACA-compliant plan off Marketplace. Ask your employer about your options.</li>
     </ul>
   hra_results.determination_results.ichra_unaffordable.notice: If you receive a tax credit from {{marketplace}}, you must notify your employer that you are opting out of the HRA.
   hra_results.determination_results.ichra_unaffordable.recommendation: |-
