@@ -50,10 +50,12 @@ es:
     href: https://www.healthcare.gov/get-coverage/
   about_you.place_of_residence.state.error_required: Se requiere estado.
   about_you.place_of_residence.county.label: Condado
+  about_you.place_of_residence.county.choose_county: Escoger
   about_you.place_of_residence.county.description: TEXTO DE AYUDA DEL CONDADO FALTANTE
   about_you.place_of_residence.county.error_required: Se requiere el condado.
   about_you.place_of_residence.zip.label: Código postal
   about_you.place_of_residence.zip.description: TEXTO DE AYUDA ZIP DESAPARECIDO
+  about_you.place_of_residence.zip.out_of_state: código postal fuera del estado
   about_you.place_of_residence.zip.error_required: Se requiere código postal.
   about_you.place_of_residence.zip.error_length: El código postal debe tener 5 dígitos.
   about_you.date_of_birth.header: Fecha de nacimiento

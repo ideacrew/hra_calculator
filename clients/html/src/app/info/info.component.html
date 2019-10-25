@@ -99,7 +99,8 @@
                       <label class="col-sm-3 col-form-label col-form-label-sm" for="county">{{'about_you.place_of_residence.county.label' | tokenized_translate}}</label>
                       <div class="col-sm-4">
                         <select class="form-control form-control-sm" id="county" formControlName="county" aria-labelledby="county" aria-describedby="county" [attr.disabled]="isCountyDisabled ? '' : null" required>
-                          <option value='' disabled selected hidden>{{countyPlaceHolder}}</option>
+                          <option *ngIf="countyPlaceHolder == 'zipcode is outside state'" value='' disabled selected hidden>{{'about_you.place_of_residence.zip.out_of_state' | tokenized_translate}}</option>
+                          <option *ngIf="countyPlaceHolder == 'Choose'" value='' disabled selected hidden>{{'about_you.place_of_residence.county.choose_county' | tokenized_translate}}</option>
                           <option *ngFor="let option of countyOptions" [ngValue]="option">
                             {{option}}
                           </option>
@@ -236,7 +237,7 @@
                   </div>
                   <div class="input-group">
                     <label class="col-sm-3 col-form-label col-form-label-sm" for="hra_type">{{'about_hra.hra_type.label' | tokenized_translate}}</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-9">
                       <div class="btn-group hra-type-group" data-toggle="buttons">
                         <span [ngClass]="(selectedHraType=='ichra')?'btn btn-outline-info active':'btn btn-outline-info'">
                             <input [ngStyle]="{'background-color': primaryColorCode}" type="radio" class="form-control form-control-sm" id="hra_type" aria-labelledby="hra_type" aria-describedby="hra_type"
@@ -254,7 +255,7 @@
                           <i class="fas fa-question-circle"></i>
                         </sup>
                       </div>
-                      <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
+                      <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger col-sm-5" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['hra_type'].errors.required">
                           {{'about_hra.hra_type.error_required' | tokenized_translate}}
                         </div>
@@ -275,7 +276,7 @@
                     <div ngbDropdown class="col-sm-4">
                       <select (change)="setEffectiveEndOptions($event.target.value)" class="form-control form-control-sm" id="start_month" aria-labelledby="start_month" aria-describedby="start_month" formControlName="start_month" ngModel required>
                         <option value='' disabled selected hidden>{{'about_hra.effective_period.choose_month' | tokenized_translate}}</option>
-                        <option ngbDropdownToggle *ngFor="let option of effectiveStartOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
+                        <option ngbDropdownToggle *ngFor="let option of effectiveStartOptions" [value]="option">{{("site.month."  + (option | date: 'MMM').toLowerCase()) | tokenized_translate}} {{option | date: 'y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['start_month'].errors.required">
@@ -300,7 +301,7 @@
                     <div class="col-sm-4">
                       <select class="form-control form-control-sm" id="end_month" aria-labelledby="end_month" aria-describedby="end_month" formControlName="end_month" ngModel required>
                         <option value='' disabled selected hidden>{{'about_hra.effective_period.choose_month' | tokenized_translate}}</option>
-                        <option *ngFor="let option of effectiveEndOptions" [value]="option">{{option | date: 'MMMM y'}}</option>
+                        <option *ngFor="let option of effectiveEndOptions" [value]="option">{{("site.month."  + (option | date: 'MMM').toLowerCase()) | tokenized_translate}} {{option | date: 'y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
                         <div *ngIf="hraForm.controls['end_month'].errors.required">
