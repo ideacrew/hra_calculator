@@ -50,10 +50,12 @@ en:
     in your state.
   about_you.place_of_residence.state.error_required: State is required.
   about_you.place_of_residence.county.label: County
+  about_you.place_of_residence.county.choose_county: Choose
   about_you.place_of_residence.county.description: MISSING COUNTY HELP TEXT
   about_you.place_of_residence.county.error_required: County is required.
   about_you.place_of_residence.zip.label: Zip Code
   about_you.place_of_residence.zip.description: MISSING ZIP HELP TEXT
+  about_you.place_of_residence.zip.out_of_state: zipcode out of state
   about_you.place_of_residence.zip.error_required: Zipcode is required.
   about_you.place_of_residence.zip.error_length: Zipcode should be 5 digits.
   about_you.date_of_birth.header: Date of Birth
