@@ -39,8 +39,7 @@ en:
     </ul>
   about_you.header.title: About You
   about_you.header.paragraph: Enter the following information for the family member who is offered the HRA
-  about_you.header.help: This is the family member whose employer or former employer
-    (if family member is a retiree) is offering the HRA.
+  about_you.header.help: This is the family member whose employer is offering the HRA.
   about_you.place_of_residence.header: Place of Residence
   about_you.place_of_residence.description: Enter the family member’s place of residence,
     even if the employer is located somewhere else.
@@ -115,9 +114,9 @@ en:
   about_hra.maximum_amount.amount.error_required: Amount is required.
   hra_results.title: Your Information and Results
   hra_results.footer: |-
-    When you’re asked to set your tax credit amount, reduce
-    what you accept by your monthly HRA amount to help avoid having to pay back money
-    at tax time.
+    The results above are based on the information provided,
+    which has not been independently verified. This is not a determination
+    that you are eligible for a tax credit.
   hra_results.start_over_button_label: Start Over
   hra_results.print_results_button_label: Print Your Results
   hra_results.your_information.header: The Information You Entered
@@ -139,7 +138,7 @@ en:
     <p>To find out if you’re eligible for [a tax credit], you will complete the {{marketplace}} application. But first, here are some important things to keep in mind:</p>
     <p>When completing the application:</p>
     <ul>
-    <li>[Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).]</li>
+    <li>Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).</li>
     <li>If you are eligible for [a tax credit], using it along with your HRA will help make {{marketplace}} coverage more affordable. [When you're asked to set your tax credit amount, reduce what you accept by your monthly HRA amount to help avoid having to pay back money at tax time.]</li>
     <li>If you are not eligible for [a tax credit], you may still purchase a {{marketplace}} plan and use the HRA to help pay for it.</li>
     </ul>
@@ -184,13 +183,13 @@ en:
   hra_results.determination_results.ichra_affordable.recommendation: |-
     <strong>Based on the information you entered, your HRA is large enough to make health insurance “affordable” based on federal
     standards.</strong> As a result, you do not qualify for [a tax credit] through [MARKETPLACE]
-    for yourself or any family member who is eligible to benefit from the HRA. But,
-    you can use your HRA to help make purchasing coverage more affordable.
+    for yourself or any family member who is eligible to benefit from the HRA.
+    <strong> But, you can use your HRA to help make purchasing coverage more affordable.</strong>
   hra_results.determination_results.ichra_unaffordable.next_steps: |-
     <p>To find out if you’re eligible for [a tax credit], you will complete the {{marketplace}} application. But first, here are some important things to keep in mind:</p>
     <p>When completing the application:</p>
     <ul>
-    <li>[Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).]</li>
+    <li>Answer “no” when asked if you’re offered health insurance by an employer (unless you are separately offered health insurance by another employer).</li>
     <li>If you qualify for [a tax credit], it will generally be larger than your HRA amount.</li>
     <li>If you enroll with [a tax credit], notify your employer that you are opting out of the HRA. You cannot receive both an HRA and [a tax credit] from [MARKETPLACE]. If you receive both, you may owe money back at tax time.</li>
     </ul>
