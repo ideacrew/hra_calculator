@@ -27,6 +27,16 @@ class MockTranslationLoader implements TranslateLoader {
     },
     "hra_results.determination_results.qsehra_unaffordable": {
       "recommendation": "is not large enough"
+    },
+    "about_you.household_income.frequency": {
+      "annual": "Annual"
+    },
+    "about_hra.hra_type": {
+      "ichra": "Individual Coverage HRA"
+    },
+    "site.month": {
+      "apr": "April",
+      "oct": "October"
     }
   };
 
