@@ -1,7 +1,7 @@
 const selectElements = document.querySelectorAll('input.js-color-swatch');
 const colorPattern = /^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
 
-for (const selectElement of selectElements) {
+Array.prototype.slice.call(selectElements).forEach((selectElement) => {
   selectElement.addEventListener('change', (e) => {
     if (e.currentTarget.value.match(colorPattern)) {
       e.currentTarget.setCustomValidity("")
