@@ -7,6 +7,7 @@ module Transactions
     step :find_member_premium
     step :calculate_hra_cost
     step :determine_affordability
+    step :store_hra_object
     step :load_results_defaulter
 
     def validate(params)
@@ -60,7 +61,12 @@ module Transactions
       return Failure({errors: ["Could not find a valid benefit year for given start_date: #{hra_object.start_month.to_s}"]}) if benefit_year.nil?
 
       hra_object.hra_determination = benefit_year.expected_contribution >= hra_object.hra ? :affordable : :unaffordable
-      Success(hra_object)
+      Success({hra_object: hra_object, expected_contribution: benefit_year.expected_contribution})
+    end
+
+    def store_hra_object(hash_input)
+      ::Transactions::StoreHraDetermination.new.call(hash_input)
+      Success(hash_input[:hra_object])
     end
 
     def load_results_defaulter(hra_object)

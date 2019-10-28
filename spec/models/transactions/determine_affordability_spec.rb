@@ -65,6 +65,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
 
@@ -96,6 +100,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
+          end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
           end
         end
       end
@@ -197,6 +205,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
 
@@ -228,6 +240,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
+          end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
           end
         end
       end
@@ -322,6 +338,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
 
@@ -353,6 +373,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
+          end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
           end
         end
       end
