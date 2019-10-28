@@ -3,7 +3,7 @@ function registerTranslationEvents() {
   function addTranslationNavHandlers() {
     const elements = document.querySelectorAll('#translations .nav-item');
 
-    elements.forEach((element) => {
+    Array.prototype.slice.call(elements).forEach((element) => {
       element.addEventListener('click', (e) => {
         var currentElement  = e.currentTarget;
         var translation_key = currentElement.textContent;
@@ -32,7 +32,7 @@ function registerTranslationEvents() {
 
   const preferences = document.querySelectorAll('#ui_page, #translate_from, #translate_to');
 
-  preferences.forEach((element) => {
+  Array.prototype.slice.call(preferences).forEach((element) => {
     element.addEventListener('change', (e) => {
       var page_element    = document.getElementById('ui_page').value;
       var translate_from  = document.getElementById('translate_from').value;
