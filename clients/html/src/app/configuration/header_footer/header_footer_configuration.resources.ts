@@ -1,7 +1,8 @@
 interface HeaderFooterColorSettings {
   [key: string]: any;
   primary_color?: string | null;
-  typefaces?: string | null;
+  typeface_url?: string | null;
+  typeface_name?: string | null;
 }
 
 export interface HeaderFooterConfigurationResource {
