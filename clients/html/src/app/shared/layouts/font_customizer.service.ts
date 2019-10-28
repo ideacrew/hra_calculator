@@ -1,27 +1,22 @@
 import { ClassProvider } from "@angular/core";
 
 export interface FontCustomizer {
-  customizeFontFromTypefaceUrl(typefacesUrlValue: string | null) : void;
+  customizeFontFromTypefaceUrl(typefacesUrlValue: string | null, typeFaceName: string | null) : void;
 }
 
 export class FontCustomizerService {
   private FONT_FAMILY_ELEMENT_ID = "hra_calculator_custom_font_styles";
   private FONT_LINK_ELEMENT_ID = "hra_calculator_custom_font_css_link";
 
-  customizeFontFromTypefaceUrl(typefacesUrlValue: string | null) {
+  customizeFontFromTypefaceUrl(typefacesUrlValue: string | null, typeFaceName: string | null) {
     if (typefacesUrlValue != null) {
-      var url = new URL(typefacesUrlValue);
-      var familyParam = url.searchParams.get("family");
-      if (familyParam != null) {
-        var familyName = familyParam.split(":", 1)[0];
-        if (familyName != null) {
-          this.applyCustomFont(familyName, typefacesUrlValue);
-        }
+      if (typeFaceName != null) {
+        this.applyCustomFont(typeFaceName, typefacesUrlValue);
       }
     }
   }
 
-  private applyCustomFont(fontFamily, fontUrl) {
+  private applyCustomFont(fontFamily : string, fontUrl : string) {
     this.applyFontUrl(fontUrl);
     this.applyFontFamilyName(fontFamily);
   }

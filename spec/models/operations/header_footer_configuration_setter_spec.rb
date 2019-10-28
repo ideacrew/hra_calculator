@@ -35,7 +35,7 @@ RSpec.describe Operations::HeaderFooterConfigurationSetter, type: :model, dbclea
     end
 
     it 'should have specific keys for colors' do
-      expect(@result[:colors].keys).to eq([:primary_color, :secondary_color, :success_color, :danger_color, :warning_color, :info_color, :typefaces, :bootstrap_pallette])
+      expect(@result[:colors].keys).to eq([:primary_color, :secondary_color, :success_color, :danger_color, :warning_color, :info_color, :typeface_name, :typeface_url, :typefaces, :bootstrap_pallette])
     end
   end
 end
