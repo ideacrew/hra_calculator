@@ -93,7 +93,7 @@ module ApplicationHelper
     end
 
     control = 
-      tag.div(class: "input-group") do
+      tag.div(class: "col-2") do
         preview
       end +
       tag.div(class: 'input-group') do
