@@ -18,6 +18,9 @@
 import '../stylesheets/application'
 import './bootstrap_custom.js'
 import {} from 'jquery-ujs'
+import "core-js/stable/array";
+import "core-js/stable/symbol";
+import "core-js/stable/symbol/iterator";
 import { registerPlanIndexEvents } from  '../js/plan_index'
 import { registerTranslationEvents } from '../js/translations'
 import { registerLanguageDelete } from '../js/language_delete'
