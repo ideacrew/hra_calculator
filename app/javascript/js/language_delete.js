@@ -1,15 +1,18 @@
 function registerLanguageDelete() {
-  const preferences = document.querySelectorAll('#offered_languages .language_option button');
+  const preferences = Array.from(document.querySelectorAll('#offered_languages .language_option button'));
 
-  preferences.forEach((element) => {
-    element.addEventListener('click', (e) => {
-      var lang_id = element.getAttribute('id').split('-')[1];
-      document.querySelectorAll('#offered_languages .delete-language')[0].setAttribute('data-entity-id', lang_id);
+  if (preferences != null) {
+    preferences.forEach((element) => {
+      element.addEventListener('click', (e) => {
+        var lang_id = element.getAttribute('id').split('-')[1];
+        document.querySelectorAll('#offered_languages .delete-language')[0].setAttribute('data-entity-id', lang_id);
+      })
     })
-  })
+  }
 
-  const deleteButtons = document.querySelectorAll('#offered_languages .delete-language');
+  const deleteButtons = Array.from(document.querySelectorAll('#offered_languages .delete-language'));
 
+  if (deleteButtons != null) {
   deleteButtons.forEach((element) => {
     element.addEventListener('click', (e) => {
       
@@ -29,6 +32,7 @@ function registerLanguageDelete() {
       }
     })
   })
+ }
 
 }
 
