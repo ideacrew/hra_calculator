@@ -22,6 +22,7 @@ module Transactions
       ::Locations::ServiceArea.all.destroy_all
       ::Locations::RatingArea.all.destroy_all
       ::Locations::CountyZip.all.destroy_all
+      ::HraDetermination.all.delete_all
       input.each { |tenant| tenant.owner_accounts.destroy_all }
       input.destroy_all
       Success('Process done')
