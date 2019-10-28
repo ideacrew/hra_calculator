@@ -1,5 +1,5 @@
 const selectElements = document.querySelectorAll('input.js-color-swatch');
-const colorPattern = /^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
+const colorPattern = /^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/;
 
 Array.prototype.slice.call(selectElements).forEach((selectElement) => {
   selectElement.addEventListener('change', (e) => {
@@ -25,4 +25,4 @@ Array.prototype.slice.call(selectElements).forEach((selectElement) => {
       }
     }
   });
-}
+})
