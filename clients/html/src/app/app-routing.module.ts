@@ -17,7 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'result',
-    component: ResultComponent,
+    component: ResultComponent
   },
   {
     path: 'info',
@@ -27,10 +27,6 @@ export const routes: Routes = [
       {
         path: 'info',
         loadChildren: () => import('./info/info.module').then(m => m.InfoModule)
-      },
-      {
-        path: 'component',
-        loadChildren: () => import('./component/component.module').then(m => m.ComponentsModule)
       }
     ]
   },
@@ -40,4 +36,4 @@ export const routes: Routes = [
   }
 ];
 
-export class AppRoutingModule { }
+export class AppRoutingModule {}
