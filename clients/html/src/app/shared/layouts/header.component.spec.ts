@@ -3,16 +3,18 @@ import { HeaderFooterConfigurationConsumer } from '../../configuration/header_fo
 import { HeaderFooterConfigurationResource } from '../../configuration/header_footer/header_footer_configuration.resources';
 
 class MockHFConfigurationProvider {
-  getHeaderFooterConfiguration(consumer : HeaderFooterConfigurationConsumer) : any {
+  getHeaderFooterConfiguration(consumer: HeaderFooterConfigurationConsumer) : any {
     consumer.applyHeaderFooterConfiguration(mockResource);
   }
 }
 
 class MockFontCustomizer {
-  public assignedTypefaceUrl : string | null;
+  public assignedTypefaceUrl: string | null;
+  public assignedTypefaceName: string | null;
 
-  customizeFontFromTypefaceUrl(typefacesUrlValue: string | null) : void {
+  customizeFontFromTypefaceUrl(typefacesUrlValue: string | null, typefacesName) : void {
     this.assignedTypefaceUrl = typefacesUrlValue;
+    this.assignedTypefaceName = typefacesName;
   }
 }
 
@@ -21,14 +23,17 @@ var mock_tenant_logo = "My Logo URL";
 var mock_tenant_url = "My Tenant URL";
 var mock_primary_color_code = "My Primary Color Code";
 var mock_typeface_url = "https://fonts.googleapis.com/css?family=Lato:400,700,400italic";
+var mock_typeface_name = "Lato";
 
-var mockResource : HeaderFooterConfigurationResource = {
+var mockResource: HeaderFooterConfigurationResource = {
   marketplace_name: mock_marketplace_name,
   site_logo: mock_tenant_logo,
   marketplace_website_url: mock_tenant_url,
   colors: {
     primary_color: mock_primary_color_code,
-    typefaces: mock_typeface_url
+    typefaces: mock_typeface_url,
+    typeface_url: mock_typeface_url,
+    typeface_name: mock_typeface_name
   }
 };
 
@@ -56,6 +61,7 @@ describe("HeaderComponent",
       var component = new HeaderComponent(mockProvider, fontCustomizer);
       component.ngOnInit();
       expect(fontCustomizer.assignedTypefaceUrl).toEqual(mock_typeface_url);
+      expect(fontCustomizer.assignedTypefaceName).toEqual(mock_typeface_name);
     });
   }
 );
