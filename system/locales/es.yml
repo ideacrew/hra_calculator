@@ -59,7 +59,8 @@ es:
   about_you.place_of_residence.zip.error_required: Se requiere código postal.
   about_you.place_of_residence.zip.error_length: El código postal debe tener 5 dígitos.
   about_you.date_of_birth.header: Fecha de nacimiento
-  about_you.date_of_birth.label: DD/MM/AAAA
+  about_you.date_of_birth.label: MM/DD/AAAA
+  about_you.date_of_birth.placeholder: mm/dd/aaaa
   about_you.date_of_birth.description: TEXTO DE AYUDA DOB FALTANTE
   about_you.date_of_birth.error_required: Se requiere fecha de nacimiento.
   about_you.date_of_birth.error_range: DOB debe ser entre 01/01/1900 hasta hoy.

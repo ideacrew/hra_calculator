@@ -60,6 +60,7 @@ en:
   about_you.place_of_residence.zip.error_length: Zipcode should be 5 digits.
   about_you.date_of_birth.header: Date of Birth
   about_you.date_of_birth.label: MM/DD/YYYY
+  about_you.date_of_birth.placeholder: mm/dd/yyyy
   about_you.date_of_birth.description: MISSING DOB HELP TEXT
   about_you.date_of_birth.error_required: Date of Birth is required.
   about_you.date_of_birth.error_range: DOB must be between 01/01/1900 to Today.
