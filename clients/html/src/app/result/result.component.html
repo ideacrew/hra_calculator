@@ -10,7 +10,7 @@
             </div>
             <div class="content">
               <h2>{{ "hra_results.your_information.header" | tokenized_translate }}</h2>
-                <table style="width:80%">
+                <table style="width:100%">
                   <tr>
                     <td>{{ "hra_results.your_information.residence" | tokenized_translate }}</td>
                     <td style="font-weight:bold">{{ residence }}</td>
@@ -21,23 +21,26 @@
                   </tr>
                   <tr>
                     <td>{{ "hra_results.your_information.plan_year_household_income" | tokenized_translate }}</td>
-                    <td style="font-weight:bold"> $ {{household_amount | number}} ({{household_frequency_text}})</td>
+                    <td *ngIf="isMonthlyIncome" style="font-weight:bold"> $ {{household_amount | number}} ({{"about_you.household_income.frequency.monthly" | tokenized_translate }})</td>
+                    <td *ngIf="isAnnualIncome" style="font-weight:bold"> $ {{household_amount | number}} ({{"about_you.household_income.frequency.annual" | tokenized_translate }})</td>
                   </tr>
                   <tr>
                     <td>{{ "hra_results.your_information.hra_type" | tokenized_translate }}</td>
-                    <td style="font-weight:bold">{{full_hra_type}}</td>
+                    <td *ngIf="isIchra" style="font-weight:bold">{{"about_hra.hra_type.ichra" | tokenized_translate }}</td>
+                    <td *ngIf="isQsehra" style="font-weight:bold">{{"about_hra.hra_type.qsehra" | tokenized_translate }}</td>
                   </tr>
                   <tr>
                     <td>{{ "hra_results.your_information.start_date" | tokenized_translate }}</td>
-                    <td style="font-weight:bold">{{start_month | date: 'MMMM y'}}</td>
+                    <td style="font-weight:bold">{{("site.month."  + (start_month | date: 'MMM').toLowerCase()) | tokenized_translate}} {{start_month | date: 'y'}}</td>
                   </tr>
                   <tr>
                     <td>{{ "hra_results.your_information.end_date" | tokenized_translate }}</td>
-                    <td style="font-weight:bold">{{end_month | date: 'MMMM y'}}</td>
+                    <td style="font-weight:bold">{{("site.month."  + (end_month | date: 'MMM').toLowerCase()) | tokenized_translate}} {{end_month | date: 'y'}}</td>
                   </tr>
                   <tr>
                     <td>{{ "hra_results.your_information.employer_contribution" | tokenized_translate }}</td>
-                    <td style="font-weight:bold"> $ {{hra_amount | number}} ({{hra_frequency_text}})</td>
+                    <td *ngIf="isMonthlyHra" style="font-weight:bold"> $ {{hra_amount | number}} ({{"about_hra.maximum_amount.frequency.monthly" | tokenized_translate }})</td>
+                    <td *ngIf="isTotalHra" style="font-weight:bold"> $ {{hra_amount | number}} ({{"about_hra.maximum_amount.frequency.total" | tokenized_translate }})</td>
                   </tr>
                 </table>
             </div>
