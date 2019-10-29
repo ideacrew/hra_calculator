@@ -114,10 +114,10 @@ export class ResultComponent implements OnInit {
 
     if (this.hra_frequency == 'annually') {
       this.hra_frequency_text = 'Total';
-      this.isMonthlyHra = true;
+      this.isTotalHra = true;
     }else if (this.hra_frequency == 'monthly') {
       this.hra_frequency_text = 'Monthly';
-      this.isTotalHra = true;
+      this.isMonthlyHra = true;
     }
 
     this.updateHRATypes();
