@@ -78,8 +78,8 @@ es:
   about_you.household_income.amount.description: CANTIDAD FALTANTE TEXTO DE AYUDA
   about_you.household_income.amount.error_required: Se requiere cantidad.
   about_hra.header.title: Acerca del HRA que le han ofrecido
-  about_hra.header.paragraph: Ingrese la siguiente información acerca del HRA que
-    le han ofrecido. Todas las respuestas pueden encontrarse en la notificación del
+  about_hra.header.paragraph: <strong>Ingrese la siguiente información acerca del HRA que
+    le han ofrecido.</strong> Todas las respuestas pueden encontrarse en la notificación del
     HRA proporcionada por el empleador.
   about_hra.hra_type.header: Tipo
   about_hra.hra_type.label: Elija uno
@@ -110,7 +110,7 @@ es:
     familiar.
   about_hra.maximum_amount.frequency.label: Frecuencia
   about_hra.maximum_amount.frequency.description: |-
-    Seleccione Cantidad mensual para ingresar la cantidad máxima que el HRA aportaría hacia la cobertura exclusiva del empleado por
+    Seleccione <strong>Cantidad mensual</strong> para ingresar la cantidad máxima que el HRA aportaría hacia la cobertura exclusiva del empleado por
     mes. Seleccione Cantidad total para ingresar la cantidad que el HRA aportaría hacia la cobertura exclusiva del empleado durante la totalidad del periodo comprendido entre el mes de inicio y el mes de terminación.
   about_hra.maximum_amount.frequency.monthly: Mensual
   about_hra.maximum_amount.frequency.total: Total
@@ -119,9 +119,7 @@ es:
   about_hra.maximum_amount.amount.description: CANTIDAD AYUDA TEXTO FALTANTE
   about_hra.maximum_amount.amount.error_required: Se requiere cantidad.
   hra_results.title: Su información y resultados
-  hra_results.footer: Cuando le soliciten establecer el monto de su crédito tributario,
-    reduzca el monto mensual de su HRA de lo que acepta para ayudarlo a evitar deber
-    dinero en la temporada de impuestos
+  hra_results.footer: Los resultados arriba están basados en la información que ha entrado, y esa información no ha sido verificada independientemente. Este no determinan si estas eligible para un crédito tributario.
   hra_results.start_over_button_label: Volver a empezar
   hra_results.print_results_button_label: Imprimir sus resultados
   hra_results.your_information.header: La información que ingresó
@@ -149,7 +147,8 @@ es:
     <li>Si decide no inscribrise en un seguro médico o adquiere cobertura más limitada como un plan de corta duración, no podrá utilizar su HRA.</li>
     </ul>
   hra_results.determination_results.qsehra_unaffordable.recommendation: |-
-    Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos no es lo suficientemente grande por sí sola para que su seguro médico sea "asequible", de acuerdo con las normas federales. Como resultado, es posible que califique para un crédito tributario a través del {{marketplace}}, en base a sus ingresos y otros factores. Si califica para un crédito tributario, puede utilizarlo junto con su HRA, pero le recomendamos ajustar la cantidad para evitar deber dinero en la temporada de impuestos.
+    <strong>Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos no es lo suficientemente grande por sí sola para que su seguro médico sea "asequible", de acuerdo con las normas federales. 
+    Como resultado, es posible que califique para un crédito tributario a través del {{marketplace}}, en base a sus ingresos y otros factores. Si califica para un crédito tributario, puede utilizarlo junto con su HRA, pero le recomendamos ajustar la cantidad para evitar deber dinero en la temporada de impuestos.
   hra_results.determination_results.qsehra_affordable.next_steps: |-
     <p>Complete la solicitud del {{marketplace}} para conocer acerca de sus opciones para la compra de seguro médico con su HRA. Pero primero, aquí encontrará algunas cosas importantes a considerar:</p>
     <ul>
@@ -161,11 +160,9 @@ es:
     que ingresó, no debería aceptar un crédito tributario para adquirir seguro médico
     por medio del {{marketplace}}.
   hra_results.determination_results.qsehra_affordable.recommendation: |-
-    <strong>Según la información que ingresó,
-    su HRA es lo suficientemente grande como para hacer que el seguro de salud sea "asequible" según las normas federales
-    normas.</strong> Como resultado, no califica para un crédito fiscal a través de {{marketplace}}
-    para usted o para cualquier miembro de la familia que sea elegible para beneficiarse de la HRA.
-    Sin embargo, puede usar su HRA para ayudar a que la compra de un plan {{marketplace}} sea más asequible. También puede usar su HRA si se inscribe en otra cobertura.
+    <strong>Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos es lo suficientemente grande para que su seguro médico sea "asequible", de acuerdo con las normas federales.</strong> 
+    Como resultado, usted no califica para un crédito tributario a través del {{marketplace}} ya sea para usted o para cualquier miembro de su familia que reúna los requisitos para beneficiarse del HRA. 
+    No obstante, puede utilizar su HRA para ayudarlo a lograr que la adquisición de cobertura sea más asequible.
   hra_results.determination_results.ichra_affordable.next_steps: |-
     <p>Comprar seguro médico:</p>
     <ul>
@@ -181,7 +178,7 @@ es:
     que ingresó, no debería aceptar un crédito tributario para adquirir seguro médico
     por medio del {{marketplace}}.
   hra_results.determination_results.ichra_affordable.recommendation: |-
-    Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos es lo suficientemente grande para que su seguro médico sea "asequible", de acuerdo con las normas federales. Como resultado, usted no califica para un crédito tributario a través del {{marketplace}} ya sea para usted o para cualquier miembro de su familia que reúna los requisitos para beneficiarse del HRA. No obstante, puede utilizar su HRA para ayudarlo a lograr que la adquisición de cobertura sea más asequible.
+    <strong>Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos es lo suficientemente grande para que su seguro médico sea "asequible", de acuerdo con las normas federales.</strong> Como resultado, usted no califica para un crédito tributario a través del {{marketplace}} ya sea para usted o para cualquier miembro de su familia que reúna los requisitos para beneficiarse del HRA. No obstante, puede utilizar su HRA para ayudarlo a lograr que la adquisición de cobertura sea más asequible.
   hra_results.determination_results.ichra_unaffordable.next_steps: |-
     <p>Para saber si califica para un crédito tributario, complete la solicitud del {{marketplace}}. Pero primero, aquí encontrará algunas cosas importantes a considerar:</p>
     <p>Al completar la solicitud:</p>
@@ -200,7 +197,7 @@ es:
     tributario del {{marketplace}}, debe notificar a su empleador que va a darse de
     baja del HRA.
   hra_results.determination_results.ichra_unaffordable.recommendation: |-
-    Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos no es lo suficientemente grande para que su seguro médico sea "asequible", de acuerdo con los estándares federales. Como resultado, es posible que califique para un crédito tributario para ayudarlo a adquirir cobertura del {{marketplace}}, de acuerdo con sus ingresos y otros factores.
+    <strong>Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos no es lo suficientemente grande para que su seguro médico sea "asequible", de acuerdo con los estándares federales.</strong> Como resultado, es posible que califique para un crédito tributario para ayudarlo a adquirir cobertura del {{marketplace}}, de acuerdo con sus ingresos y otros factores.
   info_and_results.warning.qsehra.unaffordable: N/A
   site.month.jan: Enero
   site.month.feb: Febrero
