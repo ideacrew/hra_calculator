@@ -31,11 +31,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 
 # MongoDB NoSQL database ORM
-# gem 'mongoid',                  '~> 7.1'
-gem 'mongoid',  git: 'https://github.com/mongodb/mongoid.git', branch: 'master'
+gem 'mongoid', '~> 7.0.5'
 gem 'mongoid-locker'
 
-gem 'actiontext', '~> 6.0.0.rc1'
+gem 'actiontext', '~> 6.0.0'
 # Settings, validation and dependency injection
 gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'branch_0.3.2'
 gem 'fast_jsonapi'
