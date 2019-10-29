@@ -110,7 +110,7 @@ es:
     familiar.
   about_hra.maximum_amount.frequency.label: Frecuencia
   about_hra.maximum_amount.frequency.description: |-
-    Seleccione <strong>Cantidad mensual</strong> para ingresar la cantidad máxima que el HRA aportaría hacia la cobertura exclusiva del empleado por
+    Seleccione <strong>Cantidad Mensual</strong> para ingresar la cantidad máxima que el HRA aportaría hacia la cobertura exclusiva del empleado por
     mes. Seleccione Cantidad total para ingresar la cantidad que el HRA aportaría hacia la cobertura exclusiva del empleado durante la totalidad del periodo comprendido entre el mes de inicio y el mes de terminación.
   about_hra.maximum_amount.frequency.monthly: Mensual
   about_hra.maximum_amount.frequency.total: Total
