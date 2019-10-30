@@ -10,7 +10,7 @@ nav_order: 4
 
 _October 29, 2019_
 
-Commit SHA: [Click Here]
+Commit SHA: [Click Here](https://github.com/ideacrew/hra_calculator/commit/6090aad302bf1af72471aaad25fc84de92a20936)
 
 ## What’s Included in this Release?
 
