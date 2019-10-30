@@ -10,7 +10,7 @@ services:
         BUNDLER_VERSION: '2.0.2'
         NODE_MAJOR: '11'
         YARN_VERSION: '1.17.3'
-    image: ideacrew/hra_calculator_app:dev-0.1.0
+    image: hra_calculator_app:dev-0.1.0
     volumes:
       - .:/app:cached
       - rails_cache:/app/tmp/cache
@@ -32,7 +32,7 @@ services:
       - credentials
     stdin_open: true
     tty: true
-    command: bash -c "rm -f tmp/pids/server.pid && bundle && yarn install --check-files && bundle exec puma -C config/puma.rb"
+    command: bash -c "rm -f tmp/pids/server.pid && mkdir -p tmp/pids && bundle && yarn install --check-files && bundle exec puma -C config/puma.rb"
     ports:
       - '3000:3000'
     depends_on:
@@ -43,7 +43,7 @@ services:
     build:
       context: .
       dockerfile: ./.docker/development/web/Dockerfile
-    image: ideacrew/hra_calculator_web:dev-0.1.0
+    image: hra_calculator_web:dev-0.1.0
     volumes:
     volumes:
       - ./clients/html:/app
@@ -55,10 +55,7 @@ services:
       - WEB_CONCURRENCY=1
       - HISTFILE=/app/log/.bash_history
       - EDITOR=vi
-    secrets:
-      - ssl_cert
-      - ssl_key
-    command: bash -c "npm install  && ng serve --host 0.0.0.0 --port 4200"
+    command: bash -c "npm install && npm run start:docker"
     ports:
       - '4200:4200'
     depends_on:
@@ -94,8 +91,4 @@ secrets:
     file: ./config/master.key
   credentials:
     file: ./config/credentials.yml.enc
-  ssl_cert:
-    file: ../certs/fullchain.pem
-  ssl_key:
-    file: ../certs/privkey.pem
 

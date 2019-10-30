@@ -1,0 +1,213 @@
+---
+es:
+  site.title: Recurso de la Cuenta de Reembolso de Gastos Médicos (HRA)
+  site.customer_support: Asistencia al cliente
+  site.benefit_year: Año de beneficios
+  site.next_button_label: Siguiente
+  site.previous_button_label: Anterior
+  getting_started.title: Cómo empezar
+  getting_started.paragraph: |-
+    <p>Este recurso está diseñado para aquellas personas cuyos empleadores les ha ofrecido un Acuerdo de Reembolso de Gastos Médicos (HRA, por sus siglas en inglés) para ayudar a cubrir el costo del seguro médico para el 2020. Para ciertos tipos de HRA que se le ofrezcan, es posible que no califique para un crédito tributario para ayudarlo a adquirir un plan del {{marketplace}}. Este recurso le ayudará a determinar cómo el HRA que se le ofrece afecta su elegibilidad para un crédito tributario y qué debe hacer a continuación.</p>
+    <p>Existen varios tipos de HRA, y solo algunos de ellos requieren que utilice este recurso. Si su HRA requiere el uso de este recurso, usted debió de haber recibido una notificación clara por escrito por parte de su empleador que le explique los términos del HRA. Necesitará esa notificación, junto con información para ayudarlo a estimar su ingreso familiar para el 2020, una vez que esté listo para usar este recurso.</p>
+  getting_started.disclaimer: |-
+    La Robert Wood Johnson Foundation proporcionó asistencia para este recurso. Las opiniones expresadas aquí no necesariamente reflejan
+    las opiniones de la fundación.
+  getting_started.start_button_label: Inicio
+  getting_started.use_if.label: Utilice este recurso si…
+  getting_started.use_if.body: |-
+    <p><strong>Le han ofrecido uno de los siguientes HRA que puede usarse para ayudarlo a adquirir un plan de seguro médico por sí solo:</strong></p>
+    <ul>
+      <li>
+        Un <strong>"Acuerdo de Reembolso de Gastos Médicos de cobertura individual"</strong>
+      </li>
+      <li>
+        Un <strong>"Acuerdo de Reembolso de Gastos Médicos para empleadores pequeños calificados"</strong>("QSEHRA, por sus siglas en inglés")
+      </li>
+    </ul>
+    <br/>
+    <p class="center-italic">(Uno de estos términos aparecerá en la notificación de su empleador)</p>
+  getting_started.do_not_use_if.label: No utilice este recurso si…
+  getting_started.do_not_use_if.body: |-
+    <p><strong>Su empleador le ha ofrecido únicamente una o más de las siguientes:</strong></p>
+    <ul>
+      <li>Un HRA diferente al HRA de cobertura individual o un HRA para empleadores pequeños calificados</li>
+      <li>Una cuenta de ahorros para gastos médicos (HSA, por sus siglas en inglés)</li>
+      <li>Una cuenta de gastos flexible (FSA, por sus siglas en inglés)</li>
+      <li>Seguro médico tradicional patrocinado por el empleador</li>
+      <li>Otros tipos de beneficios de salud</li>
+      <li>Ningún beneficio de salud</li>
+    </ul>
+  about_you.header.title: Acerca de usted
+  about_you.header.paragraph: Ingrese la siguiente información para el miembro de la familia a quien se le haya ofrecido el HRA
+  about_you.header.help: Este es el miembro de la familia cuyo empleador le está ofreciendo el HRA.
+  about_you.place_of_residence.header: Lugar de residencia
+  about_you.place_of_residence.description: Ingrese el lugar de residencia del miembro
+    de la familia, incluso si el empleador está en una ubicación diferente.
+  about_you.place_of_residence.state.label: Estado
+  about_you.place_of_residence.state.description: !ruby/string:Roo::Link
+    str: Si no es residente de este estado, visite https://www.cuidadodesalud.gov/es/get-coverage/
+      para encontrar el Mercado de su estado.
+    href: https://www.healthcare.gov/get-coverage/
+  about_you.place_of_residence.state.error_required: Se requiere estado.
+  about_you.place_of_residence.county.label: Condado
+  about_you.place_of_residence.county.choose_county: Escoger
+  about_you.place_of_residence.county.description: TEXTO DE AYUDA DEL CONDADO FALTANTE
+  about_you.place_of_residence.county.error_required: Se requiere el condado.
+  about_you.place_of_residence.zip.label: Código postal
+  about_you.place_of_residence.zip.description: TEXTO DE AYUDA ZIP DESAPARECIDO
+  about_you.place_of_residence.zip.out_of_state: código postal fuera del estado
+  about_you.place_of_residence.zip.error_required: Se requiere código postal.
+  about_you.place_of_residence.zip.error_length: El código postal debe tener 5 dígitos.
+  about_you.date_of_birth.header: Fecha de nacimiento
+  about_you.date_of_birth.label: MM/DD/AAAA
+  about_you.date_of_birth.placeholder: mm/dd/aaaa
+  about_you.date_of_birth.description: TEXTO DE AYUDA DOB FALTANTE
+  about_you.date_of_birth.error_required: Se requiere fecha de nacimiento.
+  about_you.date_of_birth.error_range: DOB debe ser entre 01/01/1900 hasta hoy.
+  about_you.date_of_birth.error_format: Ingrese el formato de fecha válido (MM / DD / AAAA)
+  about_you.household_income.header: Ingreso familiar esperado
+  about_you.household_income.description: |-
+    Este es su ingreso familiar antes de impuestos. Para la mayoría de las personas, el ingreso familiar anual es igual al ingreso bruto ajustado federal que ingresó en su declaración federal de impuestos (Formulario 1040). Específicamente, el ingreso familiar es igual al ingreso bruto ajustado más los siguientes montos: beneficios de Seguro Social que de otra manera se excluirían del ingreso bruto, intereses de bonos con exención fiscal, cualquier ingreso de fuentes extranjeras excluido del ingreso bruto de acuerdo con la sección 911 del Código de
+    rentas internas (infrecuente), y el ingreso de los dependientes que deben presentar una declaración de impuestos por separado (infrecuente).
+  about_you.household_income.frequency.label: Frecuencia
+  about_you.household_income.frequency.description: TEXTO DE AYUDA DE FRECUENCIA FALTANTE
+  about_you.household_income.frequency.annual: Anual
+  about_you.household_income.frequency.monthly: Mensual
+  about_you.household_income.frequency.error_required: Se requiere frecuencia.
+  about_you.household_income.amount.label: Cantidad
+  about_you.household_income.amount.description: CANTIDAD FALTANTE TEXTO DE AYUDA
+  about_you.household_income.amount.error_required: Se requiere cantidad.
+  about_hra.header.title: Acerca del HRA que le han ofrecido
+  about_hra.header.paragraph: <strong>Ingrese la siguiente información acerca del HRA que
+    le han ofrecido.</strong> Todas las respuestas pueden encontrarse en la notificación del
+    HRA proporcionada por el empleador.
+  about_hra.hra_type.header: Tipo
+  about_hra.hra_type.label: Elija uno
+  about_hra.hra_type.description: El tipo de HRA aparecerá visiblemente en la notificación
+    del empleador.
+  about_hra.hra_type.error_required: Se requiere el tipo de HRA.
+  about_hra.hra_type.ichra: Acuerdo de Reembolso de Gastos Médicos (HRA) de cobertura
+    individual
+  about_hra.hra_type.qsehra: Acuerdo de Reembolso de Gastos Médicos (HRA) para empleadores
+    pequeños calificados (QSEHRA)
+  about_hra.effective_period.header: Periodo de vigencia
+  about_hra.effective_period.choose_month: Escoger
+  about_hra.effective_period.start_month.label: Mes de inicio
+  about_hra.effective_period.start_month.description: Este es el primer mes cuando el HRA está disponible para usted.
+  about_hra.effective_period.start_month.error_required: Se requiere mes de inicio.
+  about_hra.effective_period.end_month.label: Mes de terminación
+  about_hra.effective_period.end_month.description: Este es el último mes del año del plan del HRA.
+  about_hra.effective_period.end_month.error_required: Se requiere mes final.
+  about_hra.maximum_amount.header: Cantidad máxima para el seguro médico exclusivo
+    del empleado
+  about_hra.maximum_amount.description: Esta es la cantidad que el empleador ha ofrecido
+    contribuir al HRA, si usted adquiere seguro médico únicamente para el empleado
+    (excluidos otros miembros de la familia). Algunos empleadores aportan una cantidad
+    si solo el empleado se inscribe en la cobertura (a veces se la conoce como cobertura
+    "exclusiva del titular"), y una cantidad mayor si el empleado más otro miembro
+    de la familia se inscriben en la cobertura. Ingrese la cantidad del HRA si solo
+    el empleado se inscribe, incluso si tiene previsto inscribirse bajo la cobertura
+    familiar.
+  about_hra.maximum_amount.frequency.label: Frecuencia
+  about_hra.maximum_amount.frequency.description: |-
+    Seleccione <strong>Cantidad Mensual</strong> para ingresar la cantidad máxima que el HRA aportaría hacia la cobertura exclusiva del empleado por
+    mes. Seleccione Cantidad total para ingresar la cantidad que el HRA aportaría hacia la cobertura exclusiva del empleado durante la totalidad del periodo comprendido entre el mes de inicio y el mes de terminación.
+  about_hra.maximum_amount.frequency.monthly: Mensual
+  about_hra.maximum_amount.frequency.total: Total
+  about_hra.maximum_amount.frequency.error_required: Se requiere frecuencia.
+  about_hra.maximum_amount.amount.label: Cantidad
+  about_hra.maximum_amount.amount.description: CANTIDAD AYUDA TEXTO FALTANTE
+  about_hra.maximum_amount.amount.error_required: Se requiere cantidad.
+  hra_results.title: Su información y resultados
+  hra_results.footer: Los resultados arriba están basados en la información que ha entrado, y esa información no ha sido verificada independientemente. Este no determinan si estas eligible para un crédito tributario.
+  hra_results.start_over_button_label: Volver a empezar
+  hra_results.print_results_button_label: Imprimir sus resultados
+  hra_results.your_information.header: La información que ingresó
+  hra_results.your_information.residence: Residencia
+  hra_results.your_information.date_of_birth: Fecha de nacimiento
+  hra_results.your_information.plan_year_household_income: Ingreso familiar para 2020
+  hra_results.your_information.hra_type: Tipo de HRA
+  hra_results.your_information.start_date: Fecha de inicio
+  hra_results.your_information.end_date: Fecha de terminación
+  hra_results.your_information.employer_contribution: Contribución del empleador
+  hra_results.your_information.edit_info_button_label: Editar información
+  hra_results.determination_results.your_results_header: Sus resultados
+  hra_results.determination_results.next_steps_header: Siguientes pasos
+  hra_results.determination_results.qsehra_unaffordable.next_steps: |-
+    <p>Para saber si califica para un crédito tributario, complete la solicitud del {{marketplace}}. Pero primero, aquí encontrará algunas cosas importantes a considerar:</p>
+    <p>Al completar la solicitud:</p>
+    <ul>
+    <li>Responda "no" cuando le pregunten si se le ofrece seguro médico a través de un empleador (a menos que otro empleador le ofrezca seguro médico por separado).</li>
+    <li>Si califica para un crédito tributario, el usarlo junto con su HRA lo ayudará a que su cobertura del {{marketplace}} sea más asequible. Cuando le soliciten establecer el monto de su crédito tributario, reduzca el monto mensual de su HRA de lo que acepta para ayudarlo a evitar deber dinero en la temporada de impuestos.</li>
+    <li>Si no reúne los requisitos para un crédito tributario, todavía podrá comprar un plan del {{marketplace}} y utilizar su HRA para pagarlo.</li>
+    </ul>
+    <p>Usar su HRA:</p>
+    <ul>
+    <li>Si se inscribe en un plan del {{marketplace}} o en cobertura mínima necesaria, comunique a su empleador para que pueda usar su HRA.</li>
+    <li>Si decide no inscribrise en un seguro médico o adquiere cobertura más limitada como un plan de corta duración, no podrá utilizar su HRA.</li>
+    </ul>
+  hra_results.determination_results.qsehra_unaffordable.recommendation: |-
+    <strong>Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos no es lo suficientemente grande por sí sola para que su seguro médico sea "asequible", de acuerdo con las normas federales. 
+    Como resultado, es posible que califique para un crédito tributario a través del {{marketplace}}, en base a sus ingresos y otros factores. Si califica para un crédito tributario, puede utilizarlo junto con su HRA, pero le recomendamos ajustar la cantidad para evitar deber dinero en la temporada de impuestos.
+  hra_results.determination_results.qsehra_affordable.next_steps: |-
+    <p>Complete la solicitud del {{marketplace}} para conocer acerca de sus opciones para la compra de seguro médico con su HRA. Pero primero, aquí encontrará algunas cosas importantes a considerar:</p>
+    <ul>
+    <li>Cuando complete la solicitud, no acepte un crédito tributario para adquirir seguro médico por medio del {{marketplace}}. Si lo hace, es posible que deba dinero en la temporada de impuestos. CÓMO INSCRIBIRSE A TRAVÉS DEL MERCADO SIN APTC.</li>
+    <li>Si se inscribe en un plan del {{marketplace}} o en cobertura mínima necesaria, avísele a su empleador para que pueda usar su HRA.</li>
+    <li>Si decide no inscribrise en un seguro médico o adquiere cobertura más limitada como un plan de corta duración, no podrá utilizar su HRA.</li>
+    </ul>
+  hra_results.determination_results.qsehra_affordable.notice: Con base en la información
+    que ingresó, no debería aceptar un crédito tributario para adquirir seguro médico
+    por medio del {{marketplace}}.
+  hra_results.determination_results.qsehra_affordable.recommendation: |-
+    <strong>Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos es lo suficientemente grande para que su seguro médico sea "asequible", de acuerdo con las normas federales.</strong> 
+    Como resultado, usted no califica para un crédito tributario a través del {{marketplace}} ya sea para usted o para cualquier miembro de su familia que reúna los requisitos para beneficiarse del HRA. 
+    No obstante, puede utilizar su HRA para ayudarlo a lograr que la adquisición de cobertura sea más asequible.
+  hra_results.determination_results.ichra_affordable.next_steps: |-
+    <p>Comprar seguro médico:</p>
+    <ul>
+    <li>Su HRA lo puede ayudar a adquirir un plan del {{marketplace}} o cobertura similar fuera del Mercado También puede utilizarlo si está inscrito en Medicare. Si su empleador le ha ofrecido un "acuerdo de reducción de salario" para pagar la proporción de la prima del seguro médico que el HRA no cubre, quizás le resulte mejor utilizar su HRA para comprar un plan que cumpla con los requerimientos de la ACA fuera del Mercado. Consulte sus opciones con su empleador.</li>
+    <li>Si adquiere un plan del {{marketplace}}, no acepte un crédito tributario, o podrá deber dinero en la temporada de impuestos. CÓMO INSCRIBIRSE A TRAVÉS DEL MERCADO SIN APTC.</li>
+    </ul>
+    <p>Informar a su empleador:</p>
+    <ul>
+    <li>Si se inscribe en un plan del {{marketplace}}, cobertura similar fuera del Mercado, o Medicare, informe a su empleador que aceptará el HRA.</li>
+    <li>Si se inscribe en cualquier otra cobertura, incluida la cobertura más limitada como un plan de corta duración, o decide no adquirir seguro médico, no podrá utilizar su HRA y deberá notificar a su empleador que va a darse de baja.</li>
+    </ul>
+  hra_results.determination_results.ichra_affordable.notice: Con base en la información
+    que ingresó, no debería aceptar un crédito tributario para adquirir seguro médico
+    por medio del {{marketplace}}.
+  hra_results.determination_results.ichra_affordable.recommendation: |-
+    <strong>Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos es lo suficientemente grande para que su seguro médico sea "asequible", de acuerdo con las normas federales.</strong> Como resultado, usted no califica para un crédito tributario a través del {{marketplace}} ya sea para usted o para cualquier miembro de su familia que reúna los requisitos para beneficiarse del HRA. No obstante, puede utilizar su HRA para ayudarlo a lograr que la adquisición de cobertura sea más asequible.
+  hra_results.determination_results.ichra_unaffordable.next_steps: |-
+    <p>Para saber si califica para un crédito tributario, complete la solicitud del {{marketplace}}. Pero primero, aquí encontrará algunas cosas importantes a considerar:</p>
+    <p>Al completar la solicitud:</p>
+    <ul>
+    <li>Responda "no" cuando le pregunten si se le ofrece seguro médico a través de un empleador (a menos que otro empleador le ofrezca seguro médico por separado).</li>
+    <li>Si califica para un crédito tributario, este será, por lo general, mayor que el monto de su HRA.</li>
+    <li>Si se inscribe con un crédito tributario, notifique a su empleador que va a darse de baja del HRA. No es posible recibir un HRA y un crédito tributario del {{marketplace}} al mismo tiempo. Si lo hace, puede que deba dinero en la temporada de impuestos.</li>
+    </ul>
+    <p>Si no recibe un crédito tributario:</p>
+    <ul>
+    <li>Su HRA puede ayudarlo a pagar por un plan del {{marketplace}} o cobetura similar fuera del Mercado. También puede utilizarlo si está inscrito en Medicare. Si se inscribe en alguno de estos tipos de cobertura, comunique a su empleador que va a aceptar el Acuerdo de Reembolso de Gastos Médicos.</li>
+    <li>Si se inscribe en cualquier otra cobertura, incluida la cobertura más limitada como un plan de corta duración, o decide no adquirir seguro médico, no podrá utilizar su HRA y deberá notificar a su empleador que va a darse de baja.</li>
+    <li>Si su empleador le ha ofrecido un "acuerdo de reducción de salario" para pagar la proporción de la prima del seguro médico que el HRA no cubre, quizás le resulte mejor utilizar su HRA para comprar un plan que cumpla con los requerimientos de la ACA fuera del Mercado. Consulte sus opciones con su empleador.</li>
+    </ul>
+  hra_results.determination_results.ichra_unaffordable.notice: Si recibe un crédito
+    tributario del {{marketplace}}, debe notificar a su empleador que va a darse de
+    baja del HRA.
+  hra_results.determination_results.ichra_unaffordable.recommendation: |-
+    <strong>Con base en la información que ingresó, su Cuenta de Reembolso de Gastos Médicos no es lo suficientemente grande para que su seguro médico sea "asequible", de acuerdo con los estándares federales.</strong> Como resultado, es posible que califique para un crédito tributario para ayudarlo a adquirir cobertura del {{marketplace}}, de acuerdo con sus ingresos y otros factores.
+  info_and_results.warning.qsehra.unaffordable: N/A
+  site.month.jan: Enero
+  site.month.feb: Febrero
+  site.month.mar: Marzo
+  site.month.apr: Abril
+  site.month.may: Mayo
+  site.month.jun: Junio
+  site.month.jul: Julio
+  site.month.aug: Agosto
+  site.month.sep: Septiembre
+  site.month.oct: Octubre
+  site.month.nov: Noviembre
+  site.month.dec: Diciembre

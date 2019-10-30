@@ -1,5 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed, getTestBed} from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { InfoComponent } from './info.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +9,43 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ResultService } from '../result.service'
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { JwtRefreshService, InitialTokenListener } from '../authentication/jwt_refresh_service';
+import { TokenizedTranslatePipe } from '../translations/tokenized_translate_pipe';
+import { TokenizedHtmlTranslatePipe } from '../translations/tokenized_html_translate_pipe';
+import { TranslateModule, TranslateLoader,  TranslateService } from '@ngx-translate/core';
+import { HeaderFooterConfigurationService } from "../configuration/header_footer/header_footer_configuration.service";
+import { Provider } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
+
+class MockTranslationLoader implements TranslateLoader {
+  private mockTranslations = {
+    "getting_started": {
+      "disclaimer": "Test Tax Credit"
+    }
+  };
+
+  public getTranslation(lang: string): Observable<any> {
+    return of(this.mockTranslations);
+  }
+}
+
+export function createTranslateLoader() {
+  return new MockTranslationLoader();
+}
+
+class MockHeaderFooterService {
+  getHeaderFooterConfiguration(consumer : InfoComponent) {
+
+  };
+}
+
+class MockJwtTokenRefresher {
+  hasToken() {
+    return true;
+  }
+  getFirstToken(initialTokenListener : InitialTokenListener) { }
+};
 
 describe('InfoComponent', () => {
   let component: InfoComponent;
@@ -16,20 +55,48 @@ describe('InfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoComponent ],
-      providers: [
-        { provide: ResultService, useValue: resultServiceStub },
-        { provide: Router, useValue: routerStub },
-        HttpClient,
-        HttpHandler
-      ],
       imports: [
+        CommonModule,
+        BrowserModule,
+        HttpClientModule,
         FormsModule,
         NgbModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TranslateModule.forRoot({
+          loader: {
+              provide: TranslateLoader,
+              useClass: MockTranslationLoader
+          }
+        })
+      ],
+      providers: (<Array<Provider>>[
+        {
+          provide: JwtRefreshService.PROVIDER_TOKEN,
+          useClass: MockJwtTokenRefresher
+        },
+        {
+          provide: HeaderFooterConfigurationService.PROVIDER_TOKEN,
+          useClass: MockHeaderFooterService
+        },
+        { 
+          provide: ResultService,
+          useValue: resultServiceStub
+        },
+        {
+          provide: Router,
+          useValue: routerStub
+        },
+        HttpClient,
+        HttpHandler
+      ]),
+      declarations: [ 
+        InfoComponent,
+        TokenizedHtmlTranslatePipe,
+        TokenizedTranslatePipe
       ]
     })
     .compileComponents();
+    getTestBed().get(TranslateService).use("en");
   }));
 
   beforeEach(() => {

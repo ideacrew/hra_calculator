@@ -31,11 +31,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 
 # MongoDB NoSQL database ORM
-# gem 'mongoid',                  '~> 7.1'
-gem 'mongoid',  git: 'https://github.com/mongodb/mongoid.git', branch: 'master'
+gem 'mongoid', '~> 7.0.5'
 gem 'mongoid-locker'
 
-gem 'actiontext', '~> 6.0.0.rc1'
+gem 'actiontext', '~> 6.0.0'
 # Settings, validation and dependency injection
 gem 'resource_registry',  git:  'https://github.com/ideacrew/resource_registry.git', branch: 'branch_0.3.2'
 gem 'fast_jsonapi'
@@ -52,11 +51,13 @@ gem 'database_cleaner',         '~> 1.7'
 gem 'devise'
 gem 'webpacker',                '~> 4.0.2'
 gem 'pundit',                   '~> 2.1.0'
+gem 'jwt',                 '~> 2.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails', branch: '4-0-dev'
+  gem 'rails-controller-testing'
   gem 'yard' #,                   '~> 0.9.12',  require: false
   gem 'climate_control' #
   gem 'factory_bot_rails',      '~> 4.11'

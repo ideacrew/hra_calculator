@@ -5,7 +5,8 @@ import { CommonModule} from '@angular/common';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,6 +31,12 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
+import { TranslationHttpLoader } from "./translations/translation_loader";
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TokenizedTranslationModule } from './translations/tokenized_translation_module';
+import { JwtRefreshService } from './authentication/jwt_refresh_service';
+
+import { JwtInterceptor }  from './authentication/jwt_interceptor';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -37,6 +44,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true,
   minScrollbarLength: 20
 };
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslationHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -62,7 +73,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LayoutsModule,
     RouterModule.forRoot(routes, { useHash: true }),
     PerfectScrollbarModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [HttpClient]
+        }
+    }),
+    TokenizedTranslationModule
   ],
   providers: [
     {
@@ -72,7 +91,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    JwtRefreshService.providers()
   ],
   bootstrap: [AppComponent]
 })

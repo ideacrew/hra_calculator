@@ -1,5 +1,6 @@
 class Admin::TenantsController < ApplicationController
   layout 'admin'
+  protect_from_forgery except: [:fetch_locales, :edit_translation, :update_translation, :delete_language]
 
   before_action :find_tenant, :authorized_user?
 
@@ -8,7 +9,6 @@ class Admin::TenantsController < ApplicationController
 
   def update
     result = Transactions::UpdateTenant.new.call({tenant: @tenant, tenant_params: tenant_params})
-    tenant = result.value!
 
     if result.success?
       flash[:notice] = 'Successfully updated marketplace settings'
@@ -16,7 +16,7 @@ class Admin::TenantsController < ApplicationController
       flash[:error]  = 'Something went wrong.'
     end
 
-    redirect_to admin_tenant_path(id: tenant.id, tab_name: params[:id]+"_profile")
+    redirect_to admin_tenant_path(id: @tenant.id, tab_name: params[:id]+"_profile")
   end
 
   def upload_logo
@@ -27,7 +27,6 @@ class Admin::TenantsController < ApplicationController
 
   def features_update
     result = Transactions::UpdateTenant.new.call({tenant: @tenant, tenant_params: tenant_params})
-    tenant = result.value!
 
     if result.success?
       flash[:notice] = 'Successfully updated marketplace settings'
@@ -38,27 +37,35 @@ class Admin::TenantsController < ApplicationController
     redirect_to action: :features_show, id: params[:tenant_id], tab_name: params[:tenant_id]+"_features"
   end
 
-  def ui_pages_show
-    @page = @tenant.sites[0].options.where(key: :ui_tool_pages).first
+  def translations_show
+    @translation_entity = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :show]).call(params).value!
   end
 
-  def ui_element_update
-    result = Transactions::UpdateUiElement.new.call({tenant_id: ui_element_params[:tenant_id], ui_element: ui_element_params.slice(:option_id, :option)})
-    ui_element = result.value!
-    if result.success?
-      flash[:notice] = 'Successfully updated page settings'
-    else
-      flash[:error]  = 'Something went wrong.'
+  def fetch_locales
+    @translation_entity = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :fetch_locales]).call(params).value!
+
+    respond_to do |format|
+      format.js { render partial: 'source_translations'}
     end
-
-    redirect_to action: :ui_pages_show, id: params[:tenant_id], tab_name: params[:tenant_id]+"_ui_pages"
   end
 
-  def ui_pages_edit
-    @tenant = Tenants::Tenant.find(params[:tenant_id])
-    @option = @tenant.sites[0].options.where(key: :ui_tool_pages).first.options.find(params[:option_id])
+  def edit_translation
+    @translation_entity = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :edit_translation]).call(params).value!
 
-    # redirect_to action: :ui_pages_show, id: params[:tenant_id], tab_name: params[:tenant_id]+"_ui_pages"
+    respond_to do |format|
+      format.js { render partial: 'edit_translation'}
+    end
+  end
+
+  def update_translation
+    @translation_entity  = Transactions::ConstructTranslation.new.with_step_args(build: [@tenant, :update_translation]).call(params).value!
+    @translation_entity.editable_translation.value = params['translation']['value']
+    
+    if @translation_entity.editable_translation.save
+      @messages = { success: 'Successfully updated translation.' }
+    else
+      @messages = { error: 'Something went wrong.' }
+    end
   end
 
   def plan_index
@@ -79,29 +86,21 @@ class Admin::TenantsController < ApplicationController
     redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
   end
 
-  def zip_county_data
-    params.permit!
-    result = Transactions::CountyZipFile.new.call(params.to_h)
-
-    if result.success?
-      flash[:notice] = result.success
-    else
-      flash[:error] = result.failure[:errors].first
-    end
-
-    redirect_to admin_tenant_plan_index_path(params[:tenant_id], tab_name: params[:tenant_id]+"_plans")
-  end
-
   def plans_destroy
     result = ::Transactions::PlansDestroy.new.call(params)
 
     if result.success?
       flash[:notice] = 'Successfully destroyed plans'
-      redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
     else
-      result.failure
-      # display errors on the same page
+      flash[:error] = result.failure[:errors].first
     end
+
+    redirect_to admin_tenant_plan_index_path(params[:id], tab_name: params[:id]+"_plans")
+  end
+
+  def delete_language
+    supported_languages = @tenant.supported_languages
+    supported_languages.options.where(:id => BSON::ObjectId.from_string(params['lang_id'])).delete
   end
 
   private
@@ -122,9 +121,9 @@ class Admin::TenantsController < ApplicationController
       sites_attributes: [
         :id,
         options_attributes: [
-          :id, :value,
+          :id, :value, :supported_languages,
           child_options_attributes: [
-            :id, :value,
+            :id, :value, 
             child_options_attributes: [:id, :value]
           ]
         ],
@@ -140,10 +139,5 @@ class Admin::TenantsController < ApplicationController
         ]
       ]
     )
-  end
-
-  def ui_element_params
-    params.permit!
-    params.to_h
   end
 end

@@ -5,6 +5,8 @@ module Operations
     def call(key)
       tenant = Tenants::Tenant.find_by_key(key)
       site   = tenant.sites.first
+      enterprise = tenant.enterprise
+      benefit_year = enterprise.benefit_years.last
 
       options = [:site, :branding].inject([])  do |data, key|
         site_option  = site.options.by_key(key).first
@@ -18,7 +20,7 @@ module Operations
 
       color_options = ::Operations::ColorOptions.new.call(tenant)
 
-      Success(option_hash.merge(colors: color_options.value!))
+      Success(option_hash.merge(benefit_year: benefit_year.calendar_year, colors: color_options.value!))
     end
   end
 end

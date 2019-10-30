@@ -66,7 +66,7 @@ module Operations
           end
         end
 
-        return Success('Created Plan for given data')
+        return Success('Created Rating Areas for given data')
       rescue
         return Failure({errors: ["Unable to read data from file #{File.basename(file)}"]})
       end

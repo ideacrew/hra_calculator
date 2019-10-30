@@ -37,7 +37,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
     context 'with valid data' do
       context 'affordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
@@ -65,11 +65,15 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
 
       context 'unaffordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params)
         end
 
@@ -97,6 +101,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
     end
@@ -108,7 +116,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
-      before :each do
+      before do
         @determined_result ||= subject.call(invalid_params)
       end
 
@@ -169,7 +177,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
     context 'with valid data' do
       context 'affordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
@@ -197,11 +205,15 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
 
       context 'unaffordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params)
         end
 
@@ -229,6 +241,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
     end
@@ -240,7 +256,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
-      before :each do
+      before do
         @determined_result ||= subject.call(invalid_params)
       end
 
@@ -294,7 +310,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
 
     context 'with valid data' do
       context 'affordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params.merge!(household_amount: 1000000))
         end
 
@@ -322,11 +338,15 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
 
       context 'unaffordable' do
-        before :each do
+        before do
           @determined_result ||= subject.call(valid_params)
         end
 
@@ -354,6 +374,10 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           it 'should not have any errors for given data' do
             expect(@result[:errors]).to be_empty
           end
+
+          it 'should create HraDetermination object' do
+            expect(::HraDetermination.all.count).to eq(1)
+          end
         end
       end
     end
@@ -365,7 +389,7 @@ describe ::Transactions::DetermineAffordability, dbclean: :after_each do
           hra_frequency: 'monthly', hra_amount: 100, zipcode: '', county: '' }
       end
 
-      before :each do
+      before do
         @determined_result ||= subject.call(invalid_params)
       end
 

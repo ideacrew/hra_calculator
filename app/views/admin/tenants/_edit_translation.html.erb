@@ -1,0 +1,20 @@
+<%= form_for @translation_entity.editable_translation, url: admin_tenant_update_translation_path(tenant_id: @tenant, translation_key: @translation_entity.editable_translation.key), method: :post, remote: true do |form| %>
+  <%= hidden_field_tag 'translation[current_locale]', @translation_entity.current_locale.key %>
+  <%= hidden_field_tag 'translation[translation_key]', @translation_entity.editable_translation.key %>
+  <div class="card">
+    <div class="card-body">
+      <%= rich_text_area_tag 'translation[value]', (form.object.value || form.object.default)&.html_safe %>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="actions">
+      <%= form.submit 'Update', class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("trix-file-accept", function(event) {
+    event.preventDefault();
+  });
+</script>

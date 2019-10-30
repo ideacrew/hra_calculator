@@ -18,7 +18,13 @@
 import '../stylesheets/application'
 import './bootstrap_custom.js'
 import {} from 'jquery-ujs'
+import "core-js/stable/array";
+import "core-js/stable/symbol";
+import "core-js/stable/symbol/iterator";
 import { registerPlanIndexEvents } from  '../js/plan_index'
+import { registerTranslationEvents } from '../js/translations'
+import { registerLanguageDelete } from '../js/language_delete'
+import { registerTenantShowEvents } from '../js/tenant_show'
 
 // require("@rails/ujs").start()
 // require('rails-ujs').start()
@@ -26,12 +32,14 @@ import { registerPlanIndexEvents } from  '../js/plan_index'
 require("@rails/activestorage").start()
 // require("channels")
 
-console.log('Hello World from Webpacker')
-
 require("trix")
 require("@rails/actiontext")
 
 import bsCustomFileInput from 'bs-custom-file-input'
 import 'trix/dist/trix.css'
 
+global.registerPlanIndexEvents   = registerPlanIndexEvents;
+global.registerTranslationEvents = registerTranslationEvents;
+global.registerLanguageDelete    = registerLanguageDelete;
 global.registerPlanIndexEvents = registerPlanIndexEvents;
+global.registerTenantShowEvents = registerTenantShowEvents;

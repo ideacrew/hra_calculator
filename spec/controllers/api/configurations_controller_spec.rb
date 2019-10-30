@@ -6,7 +6,7 @@ require File.join(Rails.root, 'spec/shared_contexts/test_enterprise_admin_seed')
 RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
   include_context 'setup enterprise admin seed'
   let!(:tenant_account) { FactoryBot.create(:account, email: 'admin@market_place.org', enterprise_id: enterprise.id) }
-  let(:header_footer_config_keys) { ["marketplace_name", "marketplace_website_url", "call_center_phone", "site_logo", "colors"] }
+  let(:header_footer_config_keys) { ["marketplace_name", "marketplace_website_url", "call_center_phone", "site_logo", "benefit_year", "colors"] }
 
   describe 'tenant with age_rated and single geographic rating area' do
     let(:tenant_params) do
@@ -18,6 +18,8 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'default_configuration' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :default_configuration, params: {tenant: tenant.key}
       end
 
@@ -60,6 +62,8 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'header_footer_config' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :header_footer_config, params: {tenant: tenant.key}
       end
 
@@ -103,6 +107,8 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'default_configuration' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :default_configuration, params: {tenant: tenant.key}
       end
 
@@ -147,6 +153,8 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
       let(:countyzipcode) { FactoryBot.create(:locations_county_zip) }
 
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :counties, params: {hra_zipcode: countyzipcode.zip.to_s, tenant: tenant.key}
       end
 
@@ -183,6 +191,8 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'header_footer_config' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :header_footer_config, params: {tenant: tenant.key}
       end
 
@@ -226,6 +236,8 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'default_configuration' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :default_configuration, params: {tenant: tenant.key}
       end
 
@@ -268,6 +280,8 @@ RSpec.describe Api::ConfigurationsController, dbclean: :after_each do
 
     context 'header_footer_config' do
       before do
+        token = HraClientSession.issue
+        request.headers["Authorization"] = "Bearer #{token}"
         get :header_footer_config, params: {tenant: tenant.key}
       end
 

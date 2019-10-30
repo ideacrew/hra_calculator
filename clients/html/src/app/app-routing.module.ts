@@ -1,6 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';

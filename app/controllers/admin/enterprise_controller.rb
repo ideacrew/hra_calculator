@@ -5,7 +5,8 @@ class Admin::EnterpriseController < ApplicationController
 
   def show
     @states     = Locations::UsState::NAME_IDS.map(&:first)
-    @accounts   = Account.by_role("Marketplace Owner")
+    @accounts   = Account.all
+    @marketplace_accounts = Account.by_role("Marketplace Owner")
   end
 
   def account_create
@@ -15,7 +16,7 @@ class Admin::EnterpriseController < ApplicationController
     if result.success?
       flash[:notice] = "Account was created successfully."
     else
-      flash[:error]  = result.failure[:errors]
+      flash[:error]  = result.failure[:errors].first
     end
     redirect_to admin_enterprise_url(current_account.enterprise)
   end
@@ -31,17 +32,17 @@ class Admin::EnterpriseController < ApplicationController
     redirect_to action: :show, id: params[:enterprise_id]
   end
 
-  def benefit_year_create
-    create_benefit_year = Transactions::CreateBenefitYear.new
-    result = create_benefit_year.with_step_args(fetch: [enterprise_id: by_create_params[:id]]).call(by_create_params)
+  # def benefit_year_create
+  #   create_benefit_year = Transactions::CreateBenefitYear.new
+  #   result = create_benefit_year.with_step_args(fetch: [enterprise_id: by_create_params[:id]]).call(by_create_params)
 
-    if result.success?
-      redirect_to :show
-    else
-      result.failure
-      # display errors on the same page
-    end
-  end
+  #   if result.success?
+  #     redirect_to :show
+  #   else
+  #     result.failure
+  #     # display errors on the same page
+  #   end
+  # end
 
   def benefit_year_update
     update_benefit_year = Transactions::UpdateBenefitYear.new
@@ -49,7 +50,17 @@ class Admin::EnterpriseController < ApplicationController
     if result.success?
       flash[:notice] = "Successfully updated"
     else
-      flash[:error]  = result.failure[:errors]
+      flash[:error]  = result.failure[:errors].first
+    end
+    redirect_to admin_enterprise_path(params["enterprise_id"])
+  end
+
+  def purge_hra
+    result = ::Transactions::PurgeHra.new.call
+    if result.success?
+      flash[:notice] = 'Successfully purged HRA database.'
+    else
+      flash[:error] = result.failure[:errors].first
     end
     redirect_to admin_enterprise_path(params["enterprise_id"])
   end

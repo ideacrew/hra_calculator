@@ -4,10 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:docker": "ng serve --host 0.0.0.0",
     "build": "ng build",
+    "build_production": "ng build --prod --output-path=dist",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "doc": "compodoc -p src/tsconfig.app.json"
   },
   "private": true,
   "dependencies": {
@@ -21,12 +24,16 @@
     "@angular/platform-browser-dynamic": "^8.0.3",
     "@angular/router": "^8.0.3",
     "@ng-bootstrap/ng-bootstrap": "^4.2.2",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
     "@swimlane/ngx-charts": "^7.0.1",
     "@swimlane/ngx-datatable": "^15.0.2",
+    "@ungap/url-search-params": "^0.1.2",
     "angular-calendar": "^0.25.2",
     "angular-datatables": "^6.0.1",
     "angular-file-uploader": "^5.0.2",
     "angular-notifier": "^4.1.1",
+    "angular-pipes": "^10.0.0",
     "bootstrap": "^4.3.1",
     "c3": "^0.4.23",
     "chart.js": "^2.8.0",
@@ -57,6 +64,7 @@
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",
     "sass": "^1.22.1",
+    "url-search-params-polyfill": "^7.0.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
   },
@@ -65,6 +73,7 @@
     "@angular/cli": "^8.0.6",
     "@angular/compiler-cli": "^8.0.3",
     "@angular/language-service": "^8.0.3",
+    "@compodoc/compodoc": "^1.1.11",
     "@types/c3": "^0.6.4",
     "@types/chartist": "^0.9.46",
     "@types/datatables.net": "^1.10.17",

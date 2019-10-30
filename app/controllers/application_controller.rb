@@ -20,11 +20,12 @@ class ApplicationController < ActionController::Base
   def authentication_not_required?
     devise_controller? ||
       (controller_name == "configurations") ||
-      (controller_name == "hra_results")
+      (controller_name == "hra_results") ||
+      (controller_name == "translations")
   end
 
   def authenticate_me
-    return true if ['configurations', 'hra_results'].include?(controller_name.downcase)
+    return true if ['configurations', 'hra_results', 'translations'].include?(controller_name.downcase)
     authenticate_account!
   end
 

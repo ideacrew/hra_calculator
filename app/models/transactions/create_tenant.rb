@@ -47,6 +47,8 @@ module Transactions
     def persist(input)
       tenant = Tenants::Tenant.new(input.to_h)
       tenant.enterprise_id = @enterprise.id
+      consumer_site = tenant.sites.detect{|site| site.key == :consumer_portal}
+      consumer_site.options.build(key: :translations, namespaces: translations.map(&:to_h))
       
       if tenant.save
         @account.update_attributes!(tenant_id: tenant.id)
@@ -54,6 +56,11 @@ module Transactions
       else
         Failure(tenant)
       end
+    end
+
+    def translations
+      translations = Transactions::LoadTranslations.new.call
+      translations.value!
     end
   end
 end

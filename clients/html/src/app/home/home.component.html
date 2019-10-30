@@ -1,63 +1,44 @@
-<div class="main-content">
+<div class="main-content" *ngIf="hasToken">
   <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
           <div class="container hra_results">
             <div class="content">
-              <h1 style="text-align: left;" >Getting Started</h1>
+              <h1 style="text-align: left;" >{{"getting_started.title" | tokenized_translate}}</h1>
               <hr>
-              <p class="center-text">This tool is for people who have been offered a Health Reimbursement Arrangement (HRA) by an employer to help pay for health insurance for 2020. If you are offered certain types of HRAs, you may not qualify for <span [innerHTML]="taxCredit">{{taxCredit}}</span> to help purchase a <span [innerHTML]="marketPlace">{{marketPlace}}</span> plan. This tool will help you determine how the HRA you're offered affects your eligibility for <span [innerHTML]="taxCredit">{{taxCredit}}</span> and what to do next.</p>
-              <p class="center-text">There are several types of HRAs, and only some of them require you to use this tool. If your HRA requires use of this tool, you should have received a clear written notice from your employer explaining the terms of the HRA. You will need that notice, along with information to help estimate your 2020 household income, when you are ready to use this tool.</p>
+              <div class="center-text" [innerHtml]="'getting_started.paragraph' | tokenized_html_translate"></div>
             </div>
             <div class="row">
               <div class="d-md-inline-flex justify-content-around ie-flex">
                 <div class="col-md-5 col-sm-10">
                   <div class="card border rounded">
                     <div [ngStyle]="{'background-color': primaryColorCode}" class="p-2 bd-highlight card-color">
-                      <i class="fas fa-check fa-2x check-color"></i> Use this tool if...
+                      <i class="fas fa-check fa-2x check-color"></i>
+                      <div class="pt-1"> {{ "getting_started.use_if.label" | tokenized_translate }} </div>
                     </div>
-                    <div class="card-body">
-                      <p><strong>You have been offered one of the following HRAs that can be used to help buy a health insurance plan on your own:</strong></p>
-                      <ul>
-                        <li>
-                          An <strong>"Individual Coverage HRA"</strong>
-                        </li>
-                        <li>
-                          A <strong>"Qualified Small Employer HRA"</strong>("QSEHRA")
-                        </li>
-                      </ul>
-                      <br/>
-                      <p class="center-italic">(One of these terms will appear on the notice from your employer.)</p>
+                    <div class="card-body" [innerHtml]="'getting_started.use_if.body' | tokenized_html_translate">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-5 col-sm-10">
                   <div class="card border rounded">
                     <div [ngStyle]="{'background-color': primaryColorCode}" class="p-2 bd-highlight card-color " >
-                     <i class="fas fa-times-circle fa-2x times-circle-color"></i>  Skip this tool if...
+                     <i class="fas fa-times-circle fa-2x times-circle-color"></i>
+                     <div class="pt-1"> {{ "getting_started.do_not_use_if.label" | tokenized_translate }} </div>
                     </div>
-                    <div class="card-body">
-                      <p><strong>Your employer has only offered you one or more of the following:</strong></p>
-                      <ul>
-                        <li>An HRA other than an Individual Coverage HRA or a Qualified Small Employer HRA</li>
-                        <li>A health savings account (HSA)</li>
-                        <li>A health flexible spending arrangement (FSA)</li>
-                        <li>Traditional employer-sponsored health insurance</li>
-                        <li>Other types of health benefits</li>
-                        <li>No health benefits</li>
-                      </ul>
+                    <div class="card-body" [innerHtml]="'getting_started.do_not_use_if.body' | tokenized_html_translate">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="text-center margin-bottom">
-              <a [ngStyle]="{'background-color': primaryColorCode}" class="btn btn btn-md button-style card-color" routerLink="/info">Start</a>
+              <button [ngStyle]="{'background-color': primaryColorCode}" type="button" class="btn btn btn-md button-style card-color" routerLink="/info">{{ "getting_started.start_button_label" | tokenized_translate }}</button>
             </div>
             <br/>
             <div>
-              <p class="center-italic">Support for this tool was provided by the Robert Wood Johnson Foundation. The views expressed here do not necessarily reflect the views of the Foundation. This tool works from the information you provide, which it does not independently verify. Any results the tool provides do not constitute a determination that you are eligible for a tax credit.</p>
+              <p class="center-italic">{{ "getting_started.disclaimer" | tokenized_translate }}</p>
             </div>
           </div>
         </div>

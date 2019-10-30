@@ -41,10 +41,17 @@ class Options::Option
       title: title,
       description: description,
       type: type,
-      default: default,
-      value: value,
-      aria_label: aria_label,
+      value: value || default
     }
+  end
+
+  def supported_languages=(val)
+    site     = Sites::Site.where('options._id'=> self.id).first
+    language = site.tenant.languages.options.where(key: val.to_sym).first
+    
+    if child_options.by_key(language.key).blank?
+      child_options.build(key: language.key, title: language.title, type: language.type)
+    end
   end
 
   def settings=(params)
@@ -62,5 +69,21 @@ class Options::Option
     file = assignment.read.force_encoding(Encoding::UTF_8)
 
     super(Base64.strict_encode64(file))
+  end
+
+  def to_h
+    if child_options.present?
+      options_hash = child_options.inject({}) do |data, option|
+        if option.to_h.has_key?(option.key)
+          data.merge(option.to_h)
+        else
+          data[option.key] = option.to_h; data
+        end
+      end
+
+      {:"#{key}" => options_hash}
+    else
+      setting_hash
+    end
   end
 end

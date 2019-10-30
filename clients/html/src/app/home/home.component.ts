@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FullComponent } from '../layouts/full/full.component';
-import { BlankComponent } from '../layouts/blank/blank.component';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Component, OnInit, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
+import { JwtRefreshService, JwtTokenRefresher } from '../authentication/jwt_refresh_service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +22,23 @@ export class HomeComponent implements OnInit {
   successColorCode: string;
   warningColorCode: string;
 
-  constructor(private httpClient: HttpClient,) {
+  private _hasToken: boolean = false;
+
+  public get hasToken() : boolean {
+    return this._hasToken;
+  }
+
+  public set hasToken(val) {
+    this._hasToken = val;
+    if (this._hasToken) {
+      this.getInitialInfo();
+    }
+  }
+
+  constructor(
+    @Inject(JwtRefreshService.PROVIDER_TOKEN) private jwtTokenRefresher : JwtTokenRefresher, 
+    private httpClient: HttpClient
+    ) {
     if (environment.production) {
       this.hostKey = window.location.host.split(".",1)[0];
     } else {
@@ -32,7 +47,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getInitialInfo();
+    this.hasToken = this.jwtTokenRefresher.hasToken();
+    if (!this.hasToken) {
+      this.jwtTokenRefresher.getFirstToken(this);
+    }
   }
 
   getInitialInfo() {
@@ -45,8 +63,8 @@ export class HomeComponent implements OnInit {
         this.infoColorCode = res.data.colors.info_color;
         this.successColorCode = res.data.colors.success_color;
         this.warningColorCode = res.data.colors.warning_color;
-        this.marketPlace = res.data.ui_pages.market_place;
-        this.taxCredit = res.data.ui_pages.a_tax_credit;
+        this.marketPlace = res.data.market_place;
+        this.taxCredit = res.data.a_tax_credit;
       },
       (err) => {
         console.log(err)

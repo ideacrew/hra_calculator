@@ -22,31 +22,34 @@ export class ResultComponent implements OnInit {
   hra_frequency_text: String;
   hra_amount: Number;
   full_hra_type: String;
-  hios_id: String;
-  plan_name: String;
-  carrier_name: String;
-  member_premium: Number;
   taxCredit: String;
-  marketPlace: String;
-  help_text_1: String;
-  help_text_2: String;
+  // marketPlace: String;
+  // help_text_1: String;
+  // help_text_2: String;
   secondaryColorCode: String;
   primaryColorCode: String;
   dangerColorCode: string;
   infoColorCode: string;
   successColorCode: string;
   warningColorCode: string;
-  short_term_plan_text: String;
-  minimum_essential_coverage_text: String;
-  minimum_essential_coverage_link: String;
-  enroll_without_aptc_text: String;
-  help_text_3: String;
-  help_text_4: String;
-  help_text_5: String;
+  // short_term_plan_text: String;
+  // minimum_essential_coverage_text: String;
+  // minimum_essential_coverage_link: String;
+  // enroll_without_aptc_text: String;
+  // help_text_3: String;
+  // help_text_4: String;
+  // help_text_5: String;
   showUnaffordableQsehraText: boolean = false;
   showAffordableQsehraText: boolean = false;
   showUnaffordableIchraText: boolean = false;
   showAffordableIchraText: boolean = false;
+  isIchra: boolean = false;
+  isQsehra: boolean = false;
+  isMonthlyIncome: boolean = false;
+  isAnnualIncome: boolean = false;
+  isMonthlyHra: boolean = false;
+  isTotalHra: boolean = false;
+
   residence: String;
   constructor(
     private resultService: ResultService,
@@ -94,22 +97,7 @@ export class ResultComponent implements OnInit {
       this.end_month = this.result.data.end_month;
       this.hra_frequency = this.result.data.hra_frequency;
       this.hra_amount = this.result.data.hra_amount;
-      this.marketPlace = this.result.data.market_place;
-      this.taxCredit = this.result.data.a_tax_credit;
-      this.help_text_1 = this.result.data.answer_no;
-      this.help_text_2 = this.result.data.results_page_help_text_1;
-      this.short_term_plan_text = this.result.data.short_term_plan;
-      this.minimum_essential_coverage_text = this.result.data.minimum_essential_coverage;
-      this.minimum_essential_coverage_link = this.result.data.minimum_essential_coverage_link;
-      this.enroll_without_aptc_text = this.result.data.how_to_enroll;
-      this.help_text_3 = this.result.data.off_market;
-      this.help_text_4 = this.result.data.aca_compliant;
-      this.help_text_5 = this.result.data.results_page_help_text_2;
       this.hra_type = this.result.data.hra_type;
-      this.hios_id = this.result.data.hios_id;
-      this.plan_name = this.result.data.plan_name;
-      this.carrier_name = this.result.data.carrier_name;
-      this.member_premium = this.result.data.member_premium;
       this.hra_determination = this.result.data.hra_determination;
       this.residence = [this.state, this.zipcode, this.county].filter(function(val) { return (val !== null && val !== ""); }).join(" / ")
     }else{
@@ -118,14 +106,18 @@ export class ResultComponent implements OnInit {
 
     if (this.household_frequency == 'annually') {
       this.household_frequency_text = 'Annual';
+      this.isAnnualIncome = true;
     }else if (this.household_frequency == 'monthly') {
       this.household_frequency_text = 'Monthly';
+      this.isMonthlyIncome = true;
     }
 
     if (this.hra_frequency == 'annually') {
       this.hra_frequency_text = 'Total';
+      this.isTotalHra = true;
     }else if (this.hra_frequency == 'monthly') {
       this.hra_frequency_text = 'Monthly';
+      this.isMonthlyHra = true;
     }
 
     this.updateHRATypes();
@@ -134,12 +126,14 @@ export class ResultComponent implements OnInit {
   private updateHRATypes() {
     if(this.hra_type == "qsehra") {
       this.full_hra_type = 'Qualified Small Employer HRA'
+      this.isQsehra = true
       if (this.hra_determination == 'unaffordable'){
         this.showUnaffordableQsehraText = true;
       } else if (this.hra_determination == 'affordable'){
         this.showAffordableQsehraText = true;
       }
     } else if(this.hra_type == "ichra"){
+      this.isIchra = true
       this.full_hra_type = 'Individual Coverage HRA'
       if (this.hra_determination == 'unaffordable'){
         this.showUnaffordableIchraText = true;

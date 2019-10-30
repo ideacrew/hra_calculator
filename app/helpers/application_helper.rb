@@ -32,15 +32,19 @@ module ApplicationHelper
     tag.select(option_list, id: id, class: "form-control")
   end
 
-  def select_dropdown(input_id, list, show_default=false)
+  def select_dropdown(input_id, list, show_default=false, selected=nil)
+    name = (input_id.to_s.scan(/supported_languages/).present? ? input_id : 'admin[' + input_id.to_s + ']')
+   
     return unless list.is_a? Array
-    content_tag(:select, class: "form-control", id: input_id, name: 'admin[' + input_id.to_s + ']', required: true) do
+    content_tag(:select, class: "form-control", id: input_id, name: name, required: true) do
       unless show_default
         concat(content_tag :option, "Select", value: "")
       end
       list.each do |item|
         if item.is_a? Array
-          concat(content_tag :option, item[0], value: item[1])
+          is_selected = false
+          is_selected = true if selected.present? && selected == item[1]
+          concat(content_tag :option, item[0], value: item[1], selected: is_selected)
         elsif item.is_a? Hash
           concat(content_tag :option, item.first[1], value: item.first[0])
         elsif input_id == 'state'
@@ -59,11 +63,13 @@ module ApplicationHelper
     aria_describedby = id
     label = setting[:title] || id.titleize
 
-    tag.div(tag.span('Upload', class: "input-group-text", id: id), class: "input-group-prepend") +
-    tag.div(
+    tag.div(class: "input-group-prepend") do
+      tag.span('Upload', class: "input-group-text", id: id)
+    end +
+    tag.div(class: "custom-file") do
       tag.input(nil, type: "file", id: id, name: id + "[value]", class: "custom-file-input", aria: { describedby: aria_describedby }) +
-      tag.label('Choose File', for: id, value: label, class: "custom-file-label"),
-      class: "custom-file")
+      tag.label('Choose File', for: id, value: label, class: "custom-file-label")
+    end
   end
 
   def input_file_control(setting, form)
@@ -76,14 +82,24 @@ module ApplicationHelper
     else
       tag.span('No logo')
     end
-
-    input = tag.div(tag.span('Upload', class: "input-group-text", id: id) +
-    tag.div(
+ 
+    control_inputs =
+    tag.div(class: "input-group-prepend") do
+      tag.span('Upload', class: "input-group-text", id: id)
+    end +
+    tag.div(class: "custom-file") do
       tag.input(nil, type: "file", id: id, name: form.object_name + "[value]", class: "custom-file-input", aria: { describedby: aria_describedby }) +
-      tag.label('Choose File', for: id, value: label, class: "custom-file-label"),
-      class: "custom-file"),class: "input-group-prepend")
-      # tag.label('Choose File', class: "input-group-text")
-    tag.div(tag.div(preview, class: 'col-2') + tag.div(input, class: 'col'), class: 'row')
+      tag.label('Choose File', for: id, value: label, class: "custom-file-label")
+    end
+
+    control = 
+      tag.div(class: "col-2") do
+        preview
+      end +
+      tag.div(class: 'input-group') do
+        control_inputs
+      end
+    control
   end
 
   # Wrap any input group in <div> tag

@@ -2,7 +2,11 @@ puts "::: Cleaning Database :::"
 Enterprises::Enterprise.delete_all
 Enterprises::BenefitYear.delete_all
 Tenants::Tenant.delete_all
+Locations::CountyZip.delete_all
+Locations::RatingArea.delete_all
+Locations::ServiceArea.delete_all
 Account.delete_all
+HraDetermination.delete_all
 
 puts "::: Creating Enterprise admin :::"
 enterprise = Enterprises::Enterprise.new(owner_organization_name: 'OpenHBX')

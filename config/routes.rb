@@ -20,19 +20,22 @@ Rails.application.routes.draw do
       post :tenant_create
       post :benefit_year_create
       post :benefit_year_update
+      get :purge_hra
     end
 
     resources :tenants, only: [:show, :update] do
-      post :upload_logo
-      get  :features_show
-      put  :features_update
-      get  :ui_pages_show
-      get  :ui_pages_edit
-      patch :ui_element_update
-      get  :plan_index
-      post :upload_plan_data
-      post :zip_county_data
-      get :plans_destroy
+      post   :upload_logo
+      get    :features_show
+      put    :features_update
+      get    :translations_show
+      get    :fetch_locales
+      get    :edit_translation
+      post   :update_translation
+      get    :plan_index
+      post   :upload_plan_data
+      post   :zip_county_data
+      get    :plans_destroy
+      delete :delete_language
     end
   end
 
@@ -53,21 +56,14 @@ Rails.application.routes.draw do
         post :hra_payload
       end
     end
-  end
 
-  resources :hra_results, :defaults => { :format => 'json' } do
-    collection do
-      post :hra_payload
-      get :header_footer_config
+    resources :translations, only: [:show] do
+    end
+
+    resources :client_sessions, only: [] do
+      collection do
+        get :issue_token
+      end
     end
   end
-
-  resources :configurations, :defaults => { :format => 'json' } do
-    collection do
-      get :default_configuration
-      get :counties
-    end
-  end
-
-  # root to: 'admin#index'
 end

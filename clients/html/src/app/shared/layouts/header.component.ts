@@ -40,12 +40,12 @@ export class HeaderComponent implements OnInit {
         this.primaryColorCode = colors.primary_color;
       }
       if (colors.typefaces != null) {
-        this.applyTypefaceConfiguration(colors.typefaces);
+        this.applyTypefaceConfiguration(colors.typeface_url, colors.typeface_name);
       }
     }
   }
 
-  private applyTypefaceConfiguration(tfc: string) {
-    this.fontCustomizer.customizeFontFromTypefaceUrl(tfc);
+  private applyTypefaceConfiguration(tfc: string, tfn: string | null ) {
+    this.fontCustomizer.customizeFontFromTypefaceUrl(tfc, tfn);
   }
 }
