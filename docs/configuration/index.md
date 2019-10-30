@@ -130,6 +130,8 @@ A template mapping file is available here:
 
 ## Tool UI Page - Customize Communication with Your Consumers
 
+### This page is fully supported until [release 1.0.0](https://ideacrew.github.io/hra_calculator/hra_tool/releases/release_1.0.0/). Updates to this section are pending.
+
 In the [MVP Release](https://ideacrew.github.io/hra_calculator/hra_tool/releases/mvp_release/), this page allows the Enterprise owner and/or Marketplace owners to directly input desired text and format for each of the following attributes. At installation the platform will come prepopulated with the "Current Text". These attributes may appear across multiple pages in the anonymous user experience. 
 
 | Template Name	| Current Text |
