@@ -55,9 +55,6 @@ services:
       - WEB_CONCURRENCY=1
       - HISTFILE=/app/log/.bash_history
       - EDITOR=vi
-    secrets:
-      - ssl_cert
-      - ssl_key
     command: bash -c "npm run start:docker"
     ports:
       - '4200:4200'
@@ -94,8 +91,4 @@ secrets:
     file: ./config/master.key
   credentials:
     file: ./config/credentials.yml.enc
-  ssl_cert:
-    file: ../certs/fullchain.pem
-  ssl_key:
-    file: ../certs/privkey.pem
 
