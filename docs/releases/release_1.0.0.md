@@ -14,7 +14,7 @@ Commit SHA: [Click Here](https://github.com/ideacrew/hra_calculator/commit/6090a
 
 ## What’s Included in this Release?
 
-In this release we have delivered our most significant feature enhancement since the [MVP Release](https://ideacrew.github.io/hra_calculator/hra_tool/releases/mvp_release/). The admin user now has access to full language customization and I8n translation tools that will provide more flexibility to the state exchanges & their consumers. The I8n enhancements respond directly to browser language preferences selected by the end user to display the translations stored in the HRA Tool.  
+In this release we have delivered our most significant feature enhancement since the [MVP Release](https://ideacrew.github.io/hra_calculator/hra_tool/releases/mvp_release/). The admin user now has access to full language customization and i18n translation tools that will provide more flexibility to the state exchanges & their consumers. The i18n enhancements respond directly to browser language preferences selected by the end user to display the translations stored in the HRA Tool.  
 
 - We removed the Tools UI page from the marketplace admin interface in favor of the ‘Translations’ page providing the following functionality:
   - Ability to edit format and content of consumer facing static text, tool tips and dynamic messaging. 
