@@ -1,7 +1,9 @@
 <ng-container *ngIf="hasToken">
 <layout-header></layout-header>
-	<router-outlet (activate)="onActivate($event)">
-		<app-spinner></app-spinner>
-	</router-outlet>
+<main>
+  <router-outlet (activate)="onActivate($event)">
+    <app-spinner></app-spinner>
+  </router-outlet>
+</main>
 <layout-footer></layout-footer>
 </ng-container>
