@@ -4,26 +4,30 @@
 }
 
 .card-color {
-	font-size: 18px;
-	text-align: center;
+  font-size: 18px;
+  text-align: center;
   color: white;
-	background-color: #3498DB;
+  background-color: #3498db;
 }
 
-.border-color{
-  border: 2px solid #3498DB;
+.border-color {
+  border: 2px solid #3498db;
 }
 
 .margin-bottom {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .check-color {
-	float: left;
-	color: #68d034;
+  float: left;
+  fill: #68d034;
+  height: 36px;
+  width: 36px;
 }
 
 .times-circle-color {
-	float: left;
-	color: #ff0000;
+  float: left;
+  fill: #ff0000;
+  height: 36px;
+  width: 36px;
 }
