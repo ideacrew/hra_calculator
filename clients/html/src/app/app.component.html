@@ -1,10 +1,14 @@
 <ng-container *ngIf="headerFooterConfigurationService.headerApi$ | async"
   ><ng-container *ngIf="hasToken">
+    <button class="skip-link" (click)="scrollToAnchor('main', 100)">
+      Skip to main
+    </button>
     <layout-header></layout-header>
-    <main *ngIf="defaultConfigService.defaultConfigApi$ | async">
+    <main id="main" *ngIf="defaultConfigService.defaultConfigApi$ | async">
       <router-outlet (activate)="onActivate($event)">
         <app-spinner></app-spinner>
       </router-outlet>
     </main>
-    <layout-footer></layout-footer> </ng-container
-></ng-container>
+    <layout-footer></layout-footer>
+  </ng-container>
+</ng-container>
