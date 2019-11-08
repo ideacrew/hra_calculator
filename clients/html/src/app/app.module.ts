@@ -1,7 +1,6 @@
-import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,12 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxMaskModule } from 'ngx-mask'
-
-import { LayoutsModule } from './shared/layouts/layouts.module';
-
-import { FullComponent } from './layouts/full/full.component';
-import { BlankComponent } from './layouts/blank/blank.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { NavigationComponent } from './shared/header-navigation/navigation.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -31,12 +25,13 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
-import { TranslationHttpLoader } from "./translations/translation_loader";
+import { TranslationHttpLoader } from './translations/translation_loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TokenizedTranslationModule } from './translations/tokenized_translation_module';
 import { JwtRefreshService } from './authentication/jwt_refresh_service';
 
-import { JwtInterceptor }  from './authentication/jwt_interceptor';
+import { JwtInterceptor } from './authentication/jwt_interceptor';
+import { LayoutsModule } from './shared/layouts/layouts.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -53,8 +48,6 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     SpinnerComponent,
-    FullComponent,
-    BlankComponent,
     NavigationComponent,
     BreadcrumbComponent,
     SidebarComponent,
@@ -75,11 +68,11 @@ export function createTranslateLoader(http: HttpClient) {
     PerfectScrollbarModule,
     NgxMaskModule.forRoot(),
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: (createTranslateLoader),
-            deps: [HttpClient]
-        }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
     }),
     TokenizedTranslationModule
   ],
@@ -101,4 +94,4 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

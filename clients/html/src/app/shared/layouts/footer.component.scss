@@ -1,0 +1,19 @@
+.footer-uic {
+  font-size: 18px;
+  color: #bebebe;
+  background-color: #003260;
+  padding: 08px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  a {
+    color: white;
+  }
+}
+
+.footer-by {
+  align-self: center;
+  font-size: 14px;
+}
