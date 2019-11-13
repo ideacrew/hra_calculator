@@ -126,7 +126,7 @@
               <div>
                 <a
                   [ngStyle]="{ 'background-color': primaryColorCode }"
-                  class="btn btn btn-md card-color"
+                  class="btn btn-md card-color"
                   routerLink="/info"
                 >
                   {{
@@ -298,7 +298,7 @@
             <div class="button-nav">
               <a
                 [ngStyle]="{ 'background-color': primaryColorCode }"
-                class="btn btn btn-md card-color"
+                class="btn btn-md card-color"
                 (click)="clearResultForm()"
                 routerLink="/home"
               >
@@ -306,15 +306,15 @@
                   'hra_results.start_over_button_label' | tokenized_translate
                 }}
               </a>
-              <a
+              <button
                 [ngStyle]="{ 'background-color': primaryColorCode }"
-                class="btn btn btn-md card-color"
+                class="btn btn-md card-color"
                 onclick="document.title='HRA Determination Results'; window.print(); return false;"
               >
                 {{
                   'hra_results.print_results_button_label' | tokenized_translate
                 }}
-              </a>
+              </button>
             </div>
             <br /><br />
             <p
