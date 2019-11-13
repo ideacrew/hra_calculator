@@ -85,13 +85,7 @@
                       }}
                     </label>
                     <div class="col-sm-4 state-align">
-                      <input
-                        type="hidden"
-                        formControlName="state"
-                        id="state"
-                        aria-labelledby="state"
-                        aria-describedby="state"
-                      />
+                      <input type="hidden" formControlName="state" id="state" />
                       {{ this.hraForm.value.state }}
                       <ng-template #popContentState>
                         <div
@@ -149,8 +143,6 @@
                           minlength="5"
                           maxlength="5"
                           (input)="getCountyInfo()"
-                          aria-labelledby="zipcode"
-                          aria-describedby="zipcode"
                         />
                         <div
                           *ngIf="
@@ -199,8 +191,6 @@
                           class="form-control form-control-sm"
                           id="county"
                           formControlName="county"
-                          aria-labelledby="county"
-                          aria-describedby="county"
                           [attr.disabled]="isCountyDisabled ? '' : null"
                           required
                         >
@@ -292,8 +282,6 @@
                             (input)="checkDateInput($event)"
                             validateDate
                             validateDateFormat
-                            aria-labelledby="dob"
-                            aria-describedby="dob"
                             required
                           />
                           <div class="input-group-append">
@@ -396,8 +384,6 @@
                             id="household_frequency"
                             formControlName="household_frequency"
                             value="monthly"
-                            aria-labelledby="household_frequency"
-                            aria-describedby="household_frequency"
                             ngModel
                             required
                             (click)="onHouseholdChange('monthly')"
@@ -420,8 +406,6 @@
                             id="household_frequency"
                             formControlName="household_frequency"
                             value="annually"
-                            aria-labelledby="household_frequency"
-                            aria-describedby="household_frequency"
                             ngModel
                             required
                             (click)="onHouseholdChange('annually')"
@@ -479,8 +463,6 @@
                           mask="comma_separator.0"
                           class="form-control"
                           id="household_amount"
-                          aria-labelledby="household_amount-label"
-                          aria-describedby="household_amount-label"
                           formControlName="household_amount"
                           required
                           [attr.disabled]="
@@ -569,8 +551,6 @@
                             type="radio"
                             class="form-control form-control-sm bg-primary-color"
                             id="hra_type"
-                            aria-labelledby="hra_type"
-                            aria-describedby="hra_type"
                             formControlName="hra_type"
                             value="ichra"
                             ngModel
@@ -590,8 +570,6 @@
                             type="radio"
                             class="form-control form-control-sm bg-primary-color"
                             id="hra_type"
-                            aria-labelledby="hra_type"
-                            aria-describedby="hra_type"
                             formControlName="hra_type"
                             value="qsehra"
                             ngModel
@@ -659,8 +637,6 @@
                         (change)="setEffectiveEndOptions($event.target.value)"
                         class="form-control form-control-sm"
                         id="start_month"
-                        aria-labelledby="start_month"
-                        aria-describedby="start_month"
                         formControlName="start_month"
                         ngModel
                         required
@@ -731,8 +707,6 @@
                       <select
                         class="form-control form-control-sm"
                         id="end_month"
-                        aria-labelledby="end_month"
-                        aria-describedby="end_month"
                         formControlName="end_month"
                         ngModel
                         required
@@ -829,8 +803,6 @@
                             type="radio"
                             class="form-control form-control-sm"
                             id="hra_frequency"
-                            aria-labelledby="hra_frequency"
-                            aria-describedby="hra_frequency"
                             formControlName="hra_frequency"
                             value="monthly"
                             ngModel
@@ -853,8 +825,6 @@
                             type="radio"
                             class="form-control form-control-sm"
                             id="hra_frequency"
-                            aria-labelledby="hra_frequency"
-                            aria-describedby="hra_frequency"
                             formControlName="hra_frequency"
                             value="annually"
                             ngModel
@@ -927,8 +897,6 @@
                             hraForm.controls['household_frequency'].invalid
                           "
                           id="hra_amount"
-                          aria-labelledby="hra_amount"
-                          formControlName="hra_amount"
                           ngModel
                           required
                           [attr.disabled]="
