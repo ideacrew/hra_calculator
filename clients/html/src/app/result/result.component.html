@@ -122,11 +122,11 @@
               </table>
             </div>
             <br />
-            <div style="overflow:auto;">
-              <div style="float:left;">
+            <div>
+              <div>
                 <a
                   [ngStyle]="{ 'background-color': primaryColorCode }"
-                  class="btn btn btn-md button-style card-color"
+                  class="btn btn-md card-color"
                   routerLink="/info"
                 >
                   {{
@@ -295,32 +295,26 @@
               </div>
             </div>
             <br /><br />
-            <div style="overflow:auto;">
-              <div style="float:left;">
-                <a
-                  [ngStyle]="{ 'background-color': primaryColorCode }"
-                  class="btn btn btn-md button-style card-color"
-                  (click)="clearResultForm()"
-                  routerLink="/home"
-                >
-                  {{
-                    'hra_results.start_over_button_label' | tokenized_translate
-                  }}
-                </a>
-              </div>
-              <div style="float:right;">
-                <button
-                  [ngStyle]="{ 'background-color': primaryColorCode }"
-                  type="button"
-                  class="btn btn btn-md button-style card-color"
-                  onclick="document.title='HRA Determination Results'; window.print(); return false;"
-                >
-                  {{
-                    'hra_results.print_results_button_label'
-                      | tokenized_translate
-                  }}
-                </button>
-              </div>
+            <div class="button-nav">
+              <a
+                [ngStyle]="{ 'background-color': primaryColorCode }"
+                class="btn btn-md card-color"
+                (click)="clearResultForm()"
+                routerLink="/home"
+              >
+                {{
+                  'hra_results.start_over_button_label' | tokenized_translate
+                }}
+              </a>
+              <button
+                [ngStyle]="{ 'background-color': primaryColorCode }"
+                class="btn btn-md card-color"
+                onclick="document.title='HRA Determination Results'; window.print(); return false;"
+              >
+                {{
+                  'hra_results.print_results_button_label' | tokenized_translate
+                }}
+              </button>
             </div>
             <br /><br />
             <p

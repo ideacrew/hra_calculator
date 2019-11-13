@@ -11,7 +11,7 @@
   }
 }
 
-.step-desription{
+.step-desription {
   font-size: 26px;
 }
 
@@ -40,7 +40,9 @@
   opacity: 1;
 }
 
-#household_frequency, #hra_frequency, #hra_type{
+#household_frequency,
+#hra_frequency,
+#hra_type {
   opacity: 0;
   position: absolute;
   width: 100%;
@@ -53,24 +55,39 @@
   height: 40px;
 }
 
-btn.active  {
+btn.active {
   background-color: #009efb;
   color: #ffffff;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 .card-color {
-	font-size: 18px;
-	text-align: center;
+  font-size: 18px;
+  text-align: center;
   color: white;
-  background-color: #3498DB;
+  background-color: #3498db;
 }
 
 sup {
   font-size: 15px;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btn {
+    width: 150px;
+  }
+}
+
+.page-indicator {
+  margin-top: 2rem;
+  text-align: center;
 }

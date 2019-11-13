@@ -4,18 +4,24 @@
 }
 
 .card-border {
-	border: 1px solid grey;
+  border: 1px solid grey;
 }
 
 .result-box {
-	font-weight:bold;
-	background-color:#cae7fb;
-	text-align: center;
+  font-weight: bold;
+  background-color: #cae7fb;
+  text-align: center;
 }
 
 .card-color {
-	font-size: 18px;
-	text-align: center;
+  font-size: 18px;
+  text-align: center;
   color: white;
-	background-color: #3498DB;
+  background-color: #3498db;
+}
+
+.button-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
