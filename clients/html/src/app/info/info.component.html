@@ -64,7 +64,7 @@
                         <i class="fas fa-question-circle"></i>
                       </sup>
                       <div *ngIf="hraForm.controls['state'].invalid && (hraForm.controls['state'].dirty || hraForm.controls['state'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['state'].errors.required">
+                        <div *ngIf="hraForm.controls['state'].errors.required" role="alert">
                           {{'about_you.place_of_residence.state.error_required' | tokenized_translate}}
                         </div>
                       </div>
@@ -82,10 +82,10 @@
                                id="zipcode" pattern="[0-9]{5}" minlength="5" maxlength="5" (input)="getCountyInfo()"
                                aria-labelledby="zipcode" aria-describedby="zipcode"/>
                         <div *ngIf="hraForm.controls['zipcode'].invalid && (hraForm.controls['zipcode'].dirty || hraForm.controls['zipcode'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                          <div *ngIf="hraForm.controls['zipcode'].errors.required">
+                          <div *ngIf="hraForm.controls['zipcode'].errors.required" role="alert">
                             {{'about_you.place_of_residence.zip.error_required' | tokenized_translate}}
                           </div>
-                          <div *ngIf="hraForm.controls['zipcode'].errors.minlength">
+                          <div *ngIf="hraForm.controls['zipcode'].errors.minlength" role="alert">
                             {{'about_you.place_of_residence.zip.error_length' | tokenized_translate}}
                           </div>
                         </div>
@@ -106,7 +106,7 @@
                           </option>
                         </select>
                         <div *ngIf="hraForm.controls['county'].invalid && (hraForm.controls['county'].dirty || hraForm.controls['county'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                          <div *ngIf="hraForm.controls['county'].errors.required">
+                          <div *ngIf="hraForm.controls['county'].errors.required" role="alert">
                             {{'about_you.place_of_residence.county.error_required' | tokenized_translate}}
                           </div>
                         </div>
@@ -144,13 +144,13 @@
                           </div>
                         </div>
                         <div *ngIf="hraForm.controls['dob'].invalid && (hraForm.controls['dob'].dirty || hraForm.controls['dob'].touched)" class="input-group alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                          <div *ngIf="hraForm.controls['dob'].errors.required">
+                          <div *ngIf="hraForm.controls['dob'].errors.required" role="alert">
                             {{'about_you.date_of_birth.error_required' | tokenized_translate}}
                           </div>
-                          <div *ngIf="hraForm.controls['dob'].errors.invalidDate">
+                          <div *ngIf="hraForm.controls['dob'].errors.invalidDate" role="alert">
                             {{'about_you.date_of_birth.error_range' | tokenized_translate}}
                           </div>
-                          <div *ngIf="hraForm.controls['dob'].errors.invalidDateFormat">
+                          <div *ngIf="hraForm.controls['dob'].errors.invalidDateFormat" role="alert">
                             {{'about_you.date_of_birth.error_format' | tokenized_translate}}
                           </div>
                         </div>
@@ -187,7 +187,7 @@
                           </span>
                         </div>
                         <div *ngIf="hraForm.controls['household_frequency'].invalid && (hraForm.controls['household_frequency'].dirty || hraForm.controls['household_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                          <div *ngIf="hraForm.controls['household_frequency'].errors.required">
+                          <div *ngIf="hraForm.controls['household_frequency'].errors.required" role="alert">
                             {{'about_you.household_income.frequency.error_required' | tokenized_translate}}
                           </div>
                         </div>
@@ -208,7 +208,7 @@
                         </div>
                       </div>
                       <div *ngIf="hraForm.controls['household_amount'].invalid && (hraForm.controls['household_amount'].dirty || hraForm.controls['household_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['household_amount'].errors.required">
+                        <div *ngIf="hraForm.controls['household_amount'].errors.required" role="alert">
                           {{'about_you.household_income.amount.error_required' | tokenized_translate}}
                         </div>
                       </div>
@@ -256,7 +256,7 @@
                         </sup>
                       </div>
                       <div *ngIf="hraForm.controls['hra_type'].invalid && (hraForm.controls['hra_type'].dirty || hraForm.controls['hra_type'].touched)" class="alert alert-danger col-sm-5" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['hra_type'].errors.required">
+                        <div *ngIf="hraForm.controls['hra_type'].errors.required" role="alert">
                           {{'about_hra.hra_type.error_required' | tokenized_translate}}
                         </div>
                       </div>
@@ -279,7 +279,7 @@
                         <option ngbDropdownToggle *ngFor="let option of effectiveStartOptions" [value]="option">{{("site.month."  + (option | date: 'MMM').toLowerCase()) | tokenized_translate}} {{option | date: 'y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['start_month'].invalid && (hraForm.controls['start_month'].dirty || hraForm.controls['start_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['start_month'].errors.required">
+                        <div *ngIf="hraForm.controls['start_month'].errors.required" role="alert">
                           {{'about_hra.effective_period.start_month.error_required' | tokenized_translate}}
                         </div>
                       </div>
@@ -304,7 +304,7 @@
                         <option *ngFor="let option of effectiveEndOptions" [value]="option">{{("site.month."  + (option | date: 'MMM').toLowerCase()) | tokenized_translate}} {{option | date: 'y'}}</option>
                       </select>
                       <div *ngIf="hraForm.controls['end_month'].invalid && (hraForm.controls['end_month'].dirty || hraForm.controls['end_month'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['end_month'].errors.required">
+                        <div *ngIf="hraForm.controls['end_month'].errors.required" role="alert">
                           {{'about_hra.effective_period.end_month.error_required' | tokenized_translate}}
                         </div>
                       </div>
@@ -345,7 +345,7 @@
                         </span>
                       </div>
                       <div *ngIf="hraForm.controls['hra_frequency'].invalid && (hraForm.controls['hra_frequency'].dirty || hraForm.controls['hra_frequency'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['hra_frequency'].errors.required">
+                        <div *ngIf="hraForm.controls['hra_frequency'].errors.required" role="alert">
                           {{'about_hra.maximum_amount.frequency.error_required' | tokenized_translate}}
                         </div>
                       </div>
@@ -372,7 +372,7 @@
                         </div>
                       </div>
                       <div *ngIf="hraForm.controls['hra_amount'].invalid && (hraForm.controls['hra_amount'].dirty || hraForm.controls['hra_amount'].touched)" class="alert alert-danger" [ngStyle]="{'background-color': dangerColorCode}">
-                        <div *ngIf="hraForm.controls['hra_amount'].errors.required">
+                        <div *ngIf="hraForm.controls['hra_amount'].errors.required" role="alert">
                           {{'about_hra.maximum_amount.amount.error_required' | tokenized_translate}}
                         </div>
                       </div>
