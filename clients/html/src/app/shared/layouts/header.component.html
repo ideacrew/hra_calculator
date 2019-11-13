@@ -1,18 +1,30 @@
-<div [ngStyle]="{'background-color': primaryColorCode}" class="header-uic">
+<header class="header-uic">
   <div class="row" style="vertical-align: middle">
     <div class="col-12">
       <div class="card pb-1">
         <div class="container hra_results">
           <div class="row">
             <div class="col-5 header-logo">
-              <a href={{tenant_url}}><img class="img-responsive" src={{tenant_logo_file}} alt="exchange logo" style="height: 60px;"/></a>
+              <a href="{{ tenant_url }}"
+                ><img
+                  class="img-responsive"
+                  src="{{ tenant_logo_file }}"
+                  alt="exchange logo"
+                  style="height: 60px;"
+              /></a>
             </div>
-            <div [ngClass]="(('site.title' | tokenized_translate).length > 24 ? 'col-6 long-header-title' : 'col-6 header-title')">
-              <span>{{"site.title" | tokenized_translate}}</span>
+            <div
+              [ngClass]="
+                ('site.title' | tokenized_translate).length > 24
+                  ? 'col-6 long-header-title'
+                  : 'col-6 header-title'
+              "
+            >
+              <span>{{ 'site.title' | tokenized_translate }}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</header>

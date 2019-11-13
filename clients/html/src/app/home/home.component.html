@@ -20,10 +20,7 @@
               <div class="d-md-inline-flex justify-content-around ie-flex">
                 <div class="col-md-5 col-sm-10">
                   <div class="card border rounded">
-                    <div
-                      [ngStyle]="{ 'background-color': primaryColorCode }"
-                      class="p-2 bd-highlight card-color"
-                    >
+                    <div class="p-2 bd-highlight card-color card-header">
                       <svg aria-hidden="true" class="check-color">
                         <use
                           xlink:href="/assets/images/icons.svg#icon-check"
@@ -45,10 +42,7 @@
                 </div>
                 <div class="col-md-5 col-sm-10">
                   <div class="card border rounded">
-                    <div
-                      [ngStyle]="{ 'background-color': primaryColorCode }"
-                      class="p-2 bd-highlight card-color "
-                    >
+                    <div class="p-2 bd-highlight card-color card-header">
                       <svg aria-hidden="true" class="times-circle-color">
                         <use
                           xlink:href="/assets/images/icons.svg#icon-times-circle"
@@ -74,7 +68,6 @@
             </div>
             <div class="text-center margin-bottom">
               <a
-                [ngStyle]="{ 'background-color': primaryColorCode }"
                 class="btn btn-md button-style card-color"
                 routerLink="/info"
                 >{{

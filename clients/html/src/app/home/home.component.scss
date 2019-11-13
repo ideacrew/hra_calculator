@@ -7,7 +7,6 @@
   font-size: 18px;
   text-align: center;
   color: white;
-  background-color: #3498db;
 }
 
 .border-color {
@@ -30,4 +29,8 @@
   fill: #ff0000;
   height: 36px;
   width: 36px;
+}
+
+.card-header {
+  background-color: var(--primary-color);
 }

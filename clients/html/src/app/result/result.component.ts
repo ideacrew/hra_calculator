@@ -26,12 +26,6 @@ export class ResultComponent implements OnInit {
   // marketPlace: String;
   // help_text_1: String;
   // help_text_2: String;
-  secondaryColorCode: String;
-  primaryColorCode: String;
-  dangerColorCode: string;
-  infoColorCode: string;
-  successColorCode: string;
-  warningColorCode: string;
   // short_term_plan_text: String;
   // minimum_essential_coverage_text: String;
   // minimum_essential_coverage_link: String;
@@ -77,12 +71,6 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
     this.result = this.resultService.results;
     if (this.result) {
-      this.primaryColorCode = this.result.data.colors.primary_color;
-      this.secondaryColorCode = this.result.data.colors.secondary_color;
-      this.dangerColorCode = this.result.data.colors.danger_color;
-      this.infoColorCode = this.result.data.colors.info_color;
-      this.successColorCode = this.result.data.colors.success_color;
-      this.warningColorCode = this.result.data.colors.warning_color;
       this.state = this.result.data.state;
       this.zipcode = this.result.data.zipcode;
       this.county = this.result.data.county;
