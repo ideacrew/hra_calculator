@@ -124,9 +124,8 @@
             <br />
             <div style="overflow:auto;">
               <div style="float:left;">
-                <button
+                <a
                   [ngStyle]="{ 'background-color': primaryColorCode }"
-                  type="button"
                   class="btn btn btn-md button-style card-color"
                   routerLink="/info"
                 >
@@ -134,7 +133,7 @@
                     'hra_results.your_information.edit_info_button_label'
                       | tokenized_translate
                   }}
-                </button>
+                </a>
               </div>
             </div>
             <br />
@@ -298,9 +297,8 @@
             <br /><br />
             <div style="overflow:auto;">
               <div style="float:left;">
-                <button
+                <a
                   [ngStyle]="{ 'background-color': primaryColorCode }"
-                  type="button"
                   class="btn btn btn-md button-style card-color"
                   (click)="clearResultForm()"
                   routerLink="/home"
@@ -308,7 +306,7 @@
                   {{
                     'hra_results.start_over_button_label' | tokenized_translate
                   }}
-                </button>
+                </a>
               </div>
               <div style="float:right;">
                 <button
