@@ -41,7 +41,8 @@ en:
   about_you.header.paragraph: Enter the following information for the family member who is offered the HRA
   about_you.header.help: This is the family member whose employer is offering the HRA.
   about_you.place_of_residence.header: Place of Residence
-  about_you.place_of_residence.description: Enter the family member’s place of residence,
+  about_you.place_of_residence.description: |-
+    Enter the family member’s place of residence,
     even if the employer is located somewhere else.
   about_you.place_of_residence.state.label: State
   about_you.place_of_residence.state.description: |-
@@ -50,21 +51,21 @@ en:
     in your state.
   about_you.place_of_residence.state.error_required: State is required.
   about_you.place_of_residence.county.label: County
-  about_you.place_of_residence.county.choose_county: Choose
+  about_you.place_of_residence.county.choose_county: Select a county...
   about_you.place_of_residence.county.description: MISSING COUNTY HELP TEXT
-  about_you.place_of_residence.county.error_required: County is required.
-  about_you.place_of_residence.zip.label: Zip Code
+  about_you.place_of_residence.county.error_required: County is required. Please choose a county from the dropdown.
+  about_you.place_of_residence.zip.label: ZIP Code
   about_you.place_of_residence.zip.description: MISSING ZIP HELP TEXT
-  about_you.place_of_residence.zip.out_of_state: zipcode out of state
-  about_you.place_of_residence.zip.error_required: Zipcode is required.
-  about_you.place_of_residence.zip.error_length: Zipcode should be 5 digits.
+  about_you.place_of_residence.zip.out_of_state: ZIP Code out of state. Please enter a ZIP code that exists in the chosen state.
+  about_you.place_of_residence.zip.error_required: ZIP Code is required. Please enter a 5 digit ZIP code.
+  about_you.place_of_residence.zip.error_length: ZIP Code should be 5 digits.
   about_you.date_of_birth.header: Date of Birth
   about_you.date_of_birth.label: MM/DD/YYYY
   about_you.date_of_birth.placeholder: mm/dd/yyyy
   about_you.date_of_birth.description: MISSING DOB HELP TEXT
-  about_you.date_of_birth.error_required: Date of Birth is required.
-  about_you.date_of_birth.error_range: DOB must be between 01/01/1900 to Today.
-  about_you.date_of_birth.error_format: Please Enter Valid Date Format(MM/DD/YYYY)
+  about_you.date_of_birth.error_required: Date of birth is required. Please enter a date.
+  about_you.date_of_birth.error_range: Date out of range. Date must be between 1900 and today.
+  about_you.date_of_birth.error_format: Invalid date format. Please enter date in the format MM/DD/YYYY
   about_you.household_income.header: |-
     Expected {{benefit_year}} Household Income
   about_you.household_income.description: |
@@ -75,10 +76,10 @@ en:
   about_you.household_income.frequency.description: MISSING FREQUENCY HELP TEXT
   about_you.household_income.frequency.annual: Annual
   about_you.household_income.frequency.monthly: Monthly
-  about_you.household_income.frequency.error_required: Frequency is required.
+  about_you.household_income.frequency.error_required: Frequency is required. Please choose monthly or annual.
   about_you.household_income.amount.label: Amount
   about_you.household_income.amount.description: MISSING AMOUNT HELP TEXT
-  about_you.household_income.amount.error_required: Amount is required.
+  about_you.household_income.amount.error_required: Amount is required. Please enter your household income in the frequency chosen above.
   about_hra.header.title: About the HRA You've Been Offered
   about_hra.header.paragraph: |-
     <strong>Enter the following information about the HRA that you have
@@ -86,17 +87,17 @@ en:
   about_hra.hra_type.header: Type
   about_hra.hra_type.label: Choose One
   about_hra.hra_type.description: The type of HRA will appear prominently on the notice from the employer.
-  about_hra.hra_type.error_required: Type of HRA is required.
+  about_hra.hra_type.error_required: Type of HRA is required. Please select an option.
   about_hra.hra_type.ichra: Individual Coverage HRA
   about_hra.hra_type.qsehra: Qualified Small Employer HRA (QSEHRA)
   about_hra.effective_period.header: Effective Period
   about_hra.effective_period.choose_month: Choose
   about_hra.effective_period.start_month.label: Start Month
   about_hra.effective_period.start_month.description: This is the first month the HRA is available to you.
-  about_hra.effective_period.start_month.error_required: Start Month is required.
+  about_hra.effective_period.start_month.error_required: Start Month is required. Please choose a month from the dropdown.
   about_hra.effective_period.end_month.label: End Month
   about_hra.effective_period.end_month.description: This is the last month of the HRA plan year.
-  about_hra.effective_period.end_month.error_required: End Month is required.
+  about_hra.effective_period.end_month.error_required: End Month is required. Please choose a month from the dropdown.
   about_hra.maximum_amount.header: Maximum Amount for Employee-Only Health Insurance
   about_hra.maximum_amount.description: |-
     This is the amount the employer has offered to contribute
@@ -111,10 +112,10 @@ en:
     Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month.
   about_hra.maximum_amount.frequency.monthly: Monthly
   about_hra.maximum_amount.frequency.total: Total
-  about_hra.maximum_amount.frequency.error_required: Frequency is required.
+  about_hra.maximum_amount.frequency.error_required: Frequency is required. Please choose monthly or total.
   about_hra.maximum_amount.amount.label: Amount
   about_hra.maximum_amount.amount.description: AMOUNT HELP TEXT MISSING
-  about_hra.maximum_amount.amount.error_required: Amount is required.
+  about_hra.maximum_amount.amount.error_required: Amount is required. Please enter the contribution amount in the frequency chosen above.
   hra_results.title: Your Information and Results
   hra_results.footer: |-
     The results above are based on the information provided,
@@ -137,7 +138,7 @@ en:
   hra_results.product_information.member_premium: Member Premium
   hra_results.determination_results.your_results_header: Your Results
   hra_results.determination_results.next_steps_header: Next Steps
-  hra_results.determination_results.qsehra_unaffordable.next_steps: |- 
+  hra_results.determination_results.qsehra_unaffordable.next_steps: |-
     <p>To find out if you’re eligible for a tax credit, you will complete the {{marketplace}} application. But first, here are some important things to keep in mind:</p>
     <p>When completing the application:</p>
     <ul>
