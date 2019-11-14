@@ -98,15 +98,27 @@ sup {
   + label:hover {
     color: var(--inverted-text-color, #000);
     background-color: var(--primary-color);
+
+    @media screen and (-ms-high-contrast: active) {
+      box-shadow: 0 0px 0px 4px red;
+    }
   }
 
   &:checked + label {
     background-color: var(--primary-color);
     color: var(--inverted-text-color, #000);
+
+    @media screen and (-ms-high-contrast: active) {
+      background-color: WindowText;
+    }
   }
 
   &:focus + label {
     box-shadow: 0 0px 0px 4px rgb(105, 105, 150);
+
+    @media screen and (-ms-high-contrast: active) {
+      box-shadow: 0 0px 0px 4px red;
+    }
   }
 }
 
