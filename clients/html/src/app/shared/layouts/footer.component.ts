@@ -14,7 +14,6 @@ export class FooterComponent implements OnInit {
   customer_support_number: String;
   benefit_year: number;
   today: number = Date.now();
-  primaryColorCode: string;
 
   constructor(
     @Inject(HeaderFooterConfigurationService.PROVIDER_TOKEN)
@@ -36,12 +35,6 @@ export class FooterComponent implements OnInit {
   ): void {
     if (resource.call_center_phone != null) {
       this.customer_support_number = resource.call_center_phone;
-    }
-    var colors = resource.colors;
-    if (colors != null) {
-      if (colors.primary_color != null) {
-        this.primaryColorCode = colors.primary_color;
-      }
     }
   }
 }

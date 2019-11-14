@@ -8,7 +8,7 @@
               <ngb-alert
                 type="danger"
                 (close)="closeAlert()"
-                [ngStyle]="{ 'background-color': dangerColorCode }"
+                class="bg-danger-color"
               >
                 <p class="mb-0" *ngFor="let error of errors">
                   {{ error }}
@@ -111,8 +111,7 @@
                           (hraForm.controls['state'].dirty ||
                             hraForm.controls['state'].touched)
                         "
-                        class="alert alert-danger"
-                        [ngStyle]="{ 'background-color': dangerColorCode }"
+                        class="alert alert-danger bg-danger-color"
                       >
                         <div
                           *ngIf="hraForm.controls['state'].errors.required"
@@ -159,8 +158,7 @@
                             (hraForm.controls['zipcode'].dirty ||
                               hraForm.controls['zipcode'].touched)
                           "
-                          class="alert alert-danger"
-                          [ngStyle]="{ 'background-color': dangerColorCode }"
+                          class="alert alert-danger bg-danger-color"
                         >
                           <div
                             *ngIf="hraForm.controls['zipcode'].errors.required"
@@ -243,8 +241,7 @@
                             (hraForm.controls['county'].dirty ||
                               hraForm.controls['county'].touched)
                           "
-                          class="alert alert-danger"
-                          [ngStyle]="{ 'background-color': dangerColorCode }"
+                          class="alert alert-danger bg-danger-color"
                         >
                           <div
                             *ngIf="hraForm.controls['county'].errors.required"
@@ -316,8 +313,7 @@
                             (hraForm.controls['dob'].dirty ||
                               hraForm.controls['dob'].touched)
                           "
-                          class="input-group alert alert-danger"
-                          [ngStyle]="{ 'background-color': dangerColorCode }"
+                          class="input-group alert alert-danger bg-danger-color"
                         >
                           <div
                             *ngIf="hraForm.controls['dob'].errors.required"
@@ -395,9 +391,8 @@
                           "
                         >
                           <input
-                            [ngStyle]="{ 'background-color': primaryColorCode }"
                             type="radio"
-                            class="form-control form-control-sm"
+                            class="form-control form-control-sm bg-primary-color"
                             id="household_frequency"
                             formControlName="household_frequency"
                             value="monthly"
@@ -420,9 +415,8 @@
                           "
                         >
                           <input
-                            [ngStyle]="{ 'background-color': primaryColorCode }"
                             type="radio"
-                            class="form-control form-control-sm"
+                            class="form-control form-control-sm bg-primary-color"
                             id="household_frequency"
                             formControlName="household_frequency"
                             value="annually"
@@ -444,8 +438,7 @@
                           (hraForm.controls['household_frequency'].dirty ||
                             hraForm.controls['household_frequency'].touched)
                         "
-                        class="alert alert-danger"
-                        [ngStyle]="{ 'background-color': dangerColorCode }"
+                        class="alert alert-danger bg-danger-color"
                       >
                         <div
                           *ngIf="
@@ -506,8 +499,7 @@
                           (hraForm.controls['household_amount'].dirty ||
                             hraForm.controls['household_amount'].touched)
                         "
-                        class="alert alert-danger"
-                        [ngStyle]="{ 'background-color': dangerColorCode }"
+                        class="alert alert-danger bg-danger-color"
                       >
                         <div
                           *ngIf="
@@ -574,9 +566,8 @@
                           "
                         >
                           <input
-                            [ngStyle]="{ 'background-color': primaryColorCode }"
                             type="radio"
-                            class="form-control form-control-sm"
+                            class="form-control form-control-sm bg-primary-color"
                             id="hra_type"
                             aria-labelledby="hra_type"
                             aria-describedby="hra_type"
@@ -596,9 +587,8 @@
                           "
                         >
                           <input
-                            [ngStyle]="{ 'background-color': primaryColorCode }"
                             type="radio"
-                            class="form-control form-control-sm"
+                            class="form-control form-control-sm bg-primary-color"
                             id="hra_type"
                             aria-labelledby="hra_type"
                             aria-describedby="hra_type"
@@ -631,8 +621,7 @@
                           (hraForm.controls['hra_type'].dirty ||
                             hraForm.controls['hra_type'].touched)
                         "
-                        class="alert alert-danger col-sm-5"
-                        [ngStyle]="{ 'background-color': dangerColorCode }"
+                        class="alert alert-danger col-sm-5 bg-danger-color"
                       >
                         <div
                           *ngIf="hraForm.controls['hra_type'].errors.required"
@@ -698,8 +687,7 @@
                           (hraForm.controls['start_month'].dirty ||
                             hraForm.controls['start_month'].touched)
                         "
-                        class="alert alert-danger"
-                        [ngStyle]="{ 'background-color': dangerColorCode }"
+                        class="alert alert-danger bg-danger-color"
                       >
                         <div
                           *ngIf="
@@ -770,8 +758,7 @@
                           (hraForm.controls['end_month'].dirty ||
                             hraForm.controls['end_month'].touched)
                         "
-                        class="alert alert-danger"
-                        [ngStyle]="{ 'background-color': dangerColorCode }"
+                        class="alert alert-danger bg-danger-color"
                       >
                         <div
                           *ngIf="hraForm.controls['end_month'].errors.required"
@@ -886,8 +873,7 @@
                           (hraForm.controls['hra_frequency'].dirty ||
                             hraForm.controls['hra_frequency'].touched)
                         "
-                        class="alert alert-danger"
-                        [ngStyle]="{ 'background-color': dangerColorCode }"
+                        class="alert alert-danger bg-danger-color"
                       >
                         <div
                           *ngIf="
@@ -961,8 +947,7 @@
                           (hraForm.controls['hra_amount'].dirty ||
                             hraForm.controls['hra_amount'].touched)
                         "
-                        class="alert alert-danger"
-                        [ngStyle]="{ 'background-color': dangerColorCode }"
+                        class="alert alert-danger bg-danger-color"
                       >
                         <div
                           *ngIf="hraForm.controls['hra_amount'].errors.required"
@@ -982,9 +967,8 @@
               <div class="nav-buttons">
                 <button
                   *ngIf="currentTab === 0"
-                  [ngStyle]="{ 'background-color': primaryColorCode }"
                   type="button"
-                  class="btn btn-md card-color"
+                  class="btn btn-md card-color bg-primary-color"
                   routerLink="/home"
                 >
                   <i class="fas fa-arrow-circle-left fa-lg"> </i>
@@ -992,9 +976,8 @@
                 </button>
                 <button
                   *ngIf="currentTab === 1"
-                  [ngStyle]="{ 'background-color': primaryColorCode }"
                   type="button"
-                  class="btn btn-md card-color"
+                  class="btn btn-md card-color bg-primary-color"
                   (click)="showTab(currentTab - 1)"
                 >
                   <i class="fas fa-arrow-circle-left fa-lg"> </i>
@@ -1002,9 +985,8 @@
                 </button>
                 <button
                   *ngIf="currentTab === 0"
-                  [ngStyle]="{ 'background-color': primaryColorCode }"
                   type="button"
-                  class="btn btn-md card-color"
+                  class="btn btn-md card-color bg-primary-color"
                   (click)="showTab(currentTab + 1)"
                 >
                   {{ 'site.next_button_label' | tokenized_translate }}
@@ -1012,9 +994,8 @@
                 </button>
                 <button
                   *ngIf="currentTab === 1"
-                  [ngStyle]="{ 'background-color': primaryColorCode }"
                   type="submit"
-                  class="btn btn-md card-color"
+                  class="btn btn-md card-color bg-primary-color"
                 >
                   {{ 'site.next_button_label' | tokenized_translate }}
                   <i class="fas fa-arrow-circle-right fa-lg"> </i>

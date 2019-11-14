@@ -17,7 +17,6 @@ import {
 export class HeaderComponent implements OnInit {
   tenant_logo_file: string = '';
   tenant_url: string = '';
-  primaryColorCode: string;
   marketplaceName: string = 'HRA Tool';
 
   constructor(
@@ -45,9 +44,6 @@ export class HeaderComponent implements OnInit {
     }
     var colors = resource.colors;
     if (colors != null) {
-      if (colors.primary_color != null) {
-        this.primaryColorCode = colors.primary_color;
-      }
       if (colors.typefaces != null) {
         this.applyTypefaceConfiguration(
           colors.typeface_url,

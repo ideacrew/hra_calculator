@@ -80,6 +80,11 @@ button:hover {
   background-color: #4caf50;
 }
 
+a.btn,
+button.btn:not(.btn-outline-secondary) {
+  background-color: var(--primary-color);
+}
+
 a.btn:focus,
 button.btn:focus {
   box-shadow: 0 0 0 4px rgb(105, 105, 105);

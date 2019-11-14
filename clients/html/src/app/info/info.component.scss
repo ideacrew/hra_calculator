@@ -25,6 +25,14 @@
   margin-bottom: auto;
 }
 
+.bg-primary-color {
+  background-color: var(--primary-color);
+}
+
+.bg-danger-color {
+  background-color: var(--danger-color);
+}
+
 .step {
   height: 15px;
   width: 15px;

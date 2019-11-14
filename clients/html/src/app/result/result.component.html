@@ -125,8 +125,7 @@
             <div>
               <div>
                 <a
-                  [ngStyle]="{ 'background-color': primaryColorCode }"
-                  class="btn btn-md card-color"
+                  class="btn btn-md card-color bg-primary-color"
                   routerLink="/info"
                 >
                   {{
@@ -201,8 +200,7 @@
                 ></div>
               </div>
               <div
-                [ngStyle]="{ 'background-color': infoColorCode }"
-                class="pt-4 bd-highlight card-border result-box alert alert-info"
+                class="pt-4 bd-highlight card-border result-box alert alert-info bg-info-color"
               >
                 <p>
                   <i class="fas fa-exclamation-triangle"></i
@@ -241,8 +239,7 @@
                 ></div>
               </div>
               <div
-                [ngStyle]="{ 'background-color': infoColorCode }"
-                class="pt-4 bd-highlight card-border result-box alert alert-info"
+                class="pt-4 bd-highlight card-border result-box alert alert-info bg-info-color"
               >
                 <p>
                   <i class="fas fa-exclamation-triangle"></i
@@ -282,8 +279,7 @@
                 "
               ></div>
               <div
-                [ngStyle]="{ 'background-color': infoColorCode }"
-                class="pt-4 bd-highlight card-border result-box alert alert-info"
+                class="pt-4 bd-highlight card-border result-box alert alert-info bg-info-color"
               >
                 <p>
                   <i class="fas fa-exclamation-triangle"></i>
@@ -297,8 +293,7 @@
             <br /><br />
             <div class="button-nav">
               <a
-                [ngStyle]="{ 'background-color': primaryColorCode }"
-                class="btn btn-md card-color"
+                class="btn btn-md card-color bg-primary-color"
                 (click)="clearResultForm()"
                 routerLink="/home"
               >
@@ -307,8 +302,7 @@
                 }}
               </a>
               <button
-                [ngStyle]="{ 'background-color': primaryColorCode }"
-                class="btn btn-md card-color"
+                class="btn btn-md card-color bg-primary-color"
                 onclick="document.title='HRA Determination Results'; window.print(); return false;"
               >
                 {{
