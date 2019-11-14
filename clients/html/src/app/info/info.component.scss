@@ -100,7 +100,7 @@ sup {
     background-color: var(--primary-color);
 
     @media screen and (-ms-high-contrast: active) {
-      box-shadow: 0 0px 0px 4px red;
+      box-shadow: 0 0px 0px 4px limegreen;
     }
   }
 
@@ -117,7 +117,7 @@ sup {
     box-shadow: 0 0px 0px 4px rgb(105, 105, 150);
 
     @media screen and (-ms-high-contrast: active) {
-      box-shadow: 0 0px 0px 4px red;
+      box-shadow: 0 0px 0px 4px limegreen;
     }
   }
 }
