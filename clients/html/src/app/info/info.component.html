@@ -22,7 +22,7 @@
                 <div class="d-inline-flex ie-flex">
                   <div class="col-md-2">
                     <img
-                      src="../../assets/images/about_you.png"
+                      src="/assets/images/about_you.png"
                       alt=""
                       height="100"
                     />
@@ -85,13 +85,7 @@
                       }}
                     </label>
                     <div class="col-sm-4 state-align">
-                      <input
-                        type="hidden"
-                        formControlName="state"
-                        id="state"
-                        aria-labelledby="state"
-                        aria-describedby="state"
-                      />
+                      <input type="hidden" formControlName="state" id="state" />
                       {{ this.hraForm.value.state }}
                       <ng-template #popContentState>
                         <div
@@ -150,8 +144,6 @@
                           minlength="5"
                           maxlength="5"
                           (input)="getCountyInfo()"
-                          aria-labelledby="zipcode"
-                          aria-describedby="zipcode"
                         />
                         <div
                           *ngIf="
@@ -200,8 +192,6 @@
                           class="form-control form-control-sm"
                           id="county"
                           formControlName="county"
-                          aria-labelledby="county"
-                          aria-describedby="county"
                           [attr.disabled]="isCountyDisabled ? '' : null"
                           required
                         >
@@ -295,8 +285,6 @@
                             (input)="checkDateInput($event)"
                             validateDate
                             validateDateFormat
-                            aria-labelledby="dob"
-                            aria-describedby="dob"
                             required
                           />
                           <div class="input-group-append">
@@ -376,64 +364,46 @@
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <label
-                      class="col-sm-3 col-form-label col-form-label-sm"
-                      for="household_frequency"
-                      >{{
+                    <div
+                      class="col-sm-3 col-form-label col-form-label-sm faux-label"
+                    >
+                      {{
                         'about_you.household_income.frequency.label'
                           | tokenized_translate
-                      }}</label
-                    >
+                      }}
+                    </div>
                     <div class="col-sm-4">
-                      <div class="btn-group" data-toggle="buttons">
-                        <span
-                          [ngClass]="
-                            selectedHouseholdFrequency == 'monthly'
-                              ? 'btn btn-outline-info active'
-                              : 'btn btn-outline-info'
-                          "
-                        >
+                      <div class="btn-group">
+                        <div class="radio-wrapper">
                           <input
                             type="radio"
-                            class="form-control form-control-sm bg-primary-color"
-                            id="household_frequency"
                             formControlName="household_frequency"
+                            id="monthly"
                             value="monthly"
-                            aria-labelledby="household_frequency"
-                            aria-describedby="household_frequency"
-                            ngModel
-                            required
                             (click)="onHouseholdChange('monthly')"
                           />
-                          {{
-                            'about_you.household_income.frequency.monthly'
-                              | tokenized_translate
-                          }}
-                        </span>
-                        <span
-                          [ngClass]="
-                            selectedHouseholdFrequency == 'annually'
-                              ? 'btn btn-outline-info active'
-                              : 'btn btn-outline-info'
-                          "
-                        >
+                          <label for="monthly">
+                            {{
+                              'about_you.household_income.frequency.monthly'
+                                | tokenized_translate
+                            }}
+                          </label>
+                        </div>
+                        <div class="radio-wrapper">
                           <input
                             type="radio"
-                            class="form-control form-control-sm bg-primary-color"
-                            id="household_frequency"
                             formControlName="household_frequency"
+                            id="annually"
                             value="annually"
-                            aria-labelledby="household_frequency"
-                            aria-describedby="household_frequency"
-                            ngModel
-                            required
                             (click)="onHouseholdChange('annually')"
                           />
-                          {{
-                            'about_you.household_income.frequency.annual'
-                              | tokenized_translate
-                          }}
-                        </span>
+                          <label for="annually">
+                            {{
+                              'about_you.household_income.frequency.annual'
+                                | tokenized_translate
+                            }}
+                          </label>
+                        </div>
                       </div>
                       <div
                         *ngIf="
@@ -482,8 +452,6 @@
                           mask="comma_separator.0"
                           class="form-control"
                           id="household_amount"
-                          aria-labelledby="household_amount-label"
-                          aria-describedby="household_amount-label"
                           formControlName="household_amount"
                           required
                           [attr.disabled]="
@@ -557,54 +525,33 @@
                       }}</label
                     >
                     <div class="col-sm-9">
-                      <div
-                        class="btn-group hra-type-group"
-                        data-toggle="buttons"
-                      >
-                        <span
-                          [ngClass]="
-                            selectedHraType == 'ichra'
-                              ? 'btn btn-outline-info active'
-                              : 'btn btn-outline-info'
-                          "
-                        >
+                      <div class="btn-group hra-type-group">
+                        <div class="radio-wrapper">
                           <input
                             type="radio"
-                            class="form-control form-control-sm bg-primary-color"
-                            id="hra_type"
-                            aria-labelledby="hra_type"
-                            aria-describedby="hra_type"
+                            id="ichra"
                             formControlName="hra_type"
                             value="ichra"
-                            ngModel
-                            required
                             (click)="onHraTypeChange('ichra')"
                           />
-                          {{ 'about_hra.hra_type.ichra' | tokenized_translate }}
-                        </span>
-                        <span
-                          [ngClass]="
-                            selectedHraType == 'qsehra'
-                              ? 'btn btn-outline-info active'
-                              : 'btn btn-outline-info'
-                          "
-                        >
+                          <label for="ichra">{{
+                            'about_hra.hra_type.ichra' | tokenized_translate
+                          }}</label>
+                        </div>
+                        <div class="radio-wrapper">
                           <input
                             type="radio"
-                            class="form-control form-control-sm bg-primary-color"
-                            id="hra_type"
-                            aria-labelledby="hra_type"
-                            aria-describedby="hra_type"
+                            id="qsehra"
                             formControlName="hra_type"
                             value="qsehra"
-                            ngModel
-                            required
                             (click)="onHraTypeChange('qsehra')"
                           />
-                          {{
-                            'about_hra.hra_type.qsehra' | tokenized_translate
-                          }}
-                        </span>
+                          <label for="qsehra">
+                            {{
+                              'about_hra.hra_type.qsehra' | tokenized_translate
+                            }}
+                          </label>
+                        </div>
                         <ng-template #popHraType>
                           <div
                             class="tooltip-italic"
@@ -662,11 +609,7 @@
                         (change)="setEffectiveEndOptions($event.target.value)"
                         class="form-control form-control-sm"
                         id="start_month"
-                        aria-labelledby="start_month"
-                        aria-describedby="start_month"
                         formControlName="start_month"
-                        ngModel
-                        required
                       >
                         <option value="" disabled selected hidden>{{
                           'about_hra.effective_period.choose_month'
@@ -734,11 +677,7 @@
                       <select
                         class="form-control form-control-sm"
                         id="end_month"
-                        aria-labelledby="end_month"
-                        aria-describedby="end_month"
                         formControlName="end_month"
-                        ngModel
-                        required
                       >
                         <option value="" disabled selected hidden>{{
                           'about_hra.effective_period.choose_month'
@@ -821,54 +760,36 @@
                     >
                     <div class="col-sm-4">
                       <div class="btn-group" data-toggle="buttons">
-                        <span
-                          [ngClass]="
-                            selectedHraFrequency == 'monthly'
-                              ? 'btn btn-outline-info active'
-                              : 'btn btn-outline-info'
-                          "
-                        >
+                        <div class="radio-wrapper">
                           <input
                             type="radio"
-                            class="form-control form-control-sm"
-                            id="hra_frequency"
-                            aria-labelledby="hra_frequency"
-                            aria-describedby="hra_frequency"
+                            id="monthly-contribution"
                             formControlName="hra_frequency"
                             value="monthly"
-                            ngModel
-                            required
                             (click)="onHraFrequencyChange('monthly')"
                           />
-                          {{
-                            'about_hra.maximum_amount.frequency.monthly'
-                              | tokenized_translate
-                          }}
-                        </span>
-                        <span
-                          [ngClass]="
-                            selectedHraFrequency == 'annually'
-                              ? 'btn btn-outline-info active'
-                              : 'btn btn-outline-info'
-                          "
-                        >
+                          <label for="monthly-contribution">
+                            {{
+                              'about_hra.maximum_amount.frequency.monthly'
+                                | tokenized_translate
+                            }}
+                          </label>
+                        </div>
+                        <div class="radio-wrapper">
                           <input
                             type="radio"
-                            class="form-control form-control-sm"
-                            id="hra_frequency"
-                            aria-labelledby="hra_frequency"
-                            aria-describedby="hra_frequency"
+                            id="annual-contribution"
                             formControlName="hra_frequency"
                             value="annually"
-                            ngModel
-                            required
                             (click)="onHraFrequencyChange('annually')"
                           />
-                          {{
-                            'about_hra.maximum_amount.frequency.total'
-                              | tokenized_translate
-                          }}
-                        </span>
+                          <label for="annual-contribution">
+                            {{
+                              'about_hra.maximum_amount.frequency.total'
+                                | tokenized_translate
+                            }}
+                          </label>
+                        </div>
                       </div>
                       <div
                         *ngIf="
@@ -930,10 +851,7 @@
                             hraForm.controls['household_frequency'].invalid
                           "
                           id="hra_amount"
-                          aria-labelledby="hra_amount"
                           formControlName="hra_amount"
-                          ngModel
-                          required
                           [attr.disabled]="
                             hraForm.controls['hra_frequency'].value == ''
                               ? ''

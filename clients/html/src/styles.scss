@@ -2,6 +2,16 @@
 
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800');
 
+:root {
+  --text-color: #0e0e0e;
+  --inverted-text-color: #f1f1f1;
+}
+
+body {
+  color: var(--text-color);
+  background-color: #f1f1f1;
+}
+
 .center-italic {
   text-align: center;
   font-style: italic;
@@ -16,10 +26,6 @@
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  background-color: #f1f1f1;
 }
 
 #regForm {
@@ -88,4 +94,15 @@ button.btn:not(.btn-outline-secondary) {
 a.btn:focus,
 button.btn:focus {
   box-shadow: 0 0 0 4px rgb(105, 105, 105);
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
