@@ -36,4 +36,28 @@ export class CustomColorsService {
 
     head.appendChild(style);
   }
+
+  // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+  hexToRgb(hex: string) {
+    const [red, green, blue] = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
+      hex
+    );
+    return [parseInt(red, 16), parseInt(green, 16), parseInt(blue, 16)];
+  }
+
+  getLuminance(rgbValue: number[]) {
+    // Formula: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+    for (let value of rgbValue) {
+      value /= 255;
+
+      value =
+        value < 0.03928
+          ? value / 12.92
+          : Math.pow((value + 0.055) / 1.055, 2.4);
+
+      value[i] = value;
+    }
+
+    return 0.2126 * rgba[0] + 0.7152 * rgba[1] + 0.0722 * rgba[2];
+  }
 }
