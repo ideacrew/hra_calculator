@@ -35,7 +35,7 @@ export class CustomColorsService {
     const css = `
     :root {
       --danger-color: ${danger_color};
-      --danger-text-color ${dangerTextColor};
+      --danger-text-color: ${dangerTextColor};
       --info-color: ${info_color};
       --info-text-color ${infoTextColor};
       --primary-color: ${primary_color};
