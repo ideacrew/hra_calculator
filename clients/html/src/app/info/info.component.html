@@ -141,6 +141,7 @@
                       <div class="col-sm-4">
                         <input
                           type="text"
+                          autocomplete="postal-code"
                           class="form-control form-control-sm"
                           (keypress)="numberOnly($event)"
                           formControlName="zipcode"
@@ -278,7 +279,9 @@
                         <div class="input-group">
                           <input
                             class="form-control"
+                            type="text"
                             id="dob"
+                            autocomplete="bday"
                             placeholder="{{
                               'about_you.date_of_birth.placeholder'
                                 | tokenized_translate
