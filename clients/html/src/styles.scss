@@ -106,3 +106,11 @@ button.btn:focus {
   position: absolute;
   width: 1px;
 }
+
+.alert-danger {
+  color: var(--danger-text-color);
+}
+
+.alert-info {
+  color: var(--info-text-color);
+}

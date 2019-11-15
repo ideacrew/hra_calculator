@@ -22,10 +22,22 @@ export class CustomColorsService {
         ? '#010101'
         : '#f1f1f1';
 
+    const dangerTextColor =
+      this.getContrastRatio(danger_color, '#f1f1f1') < 4.5
+        ? '#010101'
+        : '#f1f1f1';
+
+    const infoTextColor =
+      this.getContrastRatio(info_color, '#f1f1f1') < 4.5
+        ? '#010101'
+        : '#f1f1f1';
+
     const css = `
     :root {
       --danger-color: ${danger_color};
+      --danger-text-color ${dangerTextColor};
       --info-color: ${info_color};
+      --info-text-color ${infoTextColor};
       --primary-color: ${primary_color};
       --secondary-color: ${secondary_color};
       --success-color: ${success_color};
