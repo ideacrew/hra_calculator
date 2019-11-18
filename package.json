@@ -2,7 +2,8 @@
   "scripts": {
     "start:web:dev": "cd clients/html && npm run start",
     "start:app:dev": "docker-compose -f docker-compose.dev.yml up app",
-    "start:dev": "concurrently \"yarn start:web:dev\" \"yarn start:app:dev\""
+    "start:dev": "concurrently \"yarn start:web:dev\" \"yarn start:app:dev\"",
+    "seed": "docker exec -it hra_calculator_app_1 /bin/bash -c \"bundle exec rake db:seed\""
   },
   "dependencies": {
     "@rails/actiontext": "^6.0.0",
