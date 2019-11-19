@@ -1,21 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { ResultService } from '../result.service';
 import { validateDate, validateDateFormat } from './date.validator';
-import {
-  NgbDateStruct,
-  NgbDatepickerConfig,
-  NgbCalendar
-} from '@ng-bootstrap/ng-bootstrap';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import {
   JwtRefreshService,
   JwtTokenRefresher
@@ -27,27 +17,27 @@ import {
 })
 export class InfoComponent implements OnInit {
   subtitle: string;
-  currentTab: number = 0;
-  showPrevBtn: boolean = false;
-  showNextBtn: boolean = true;
+  currentTab = 0;
+  showPrevBtn = false;
+  showNextBtn = true;
   hraForm: any;
   countyOptions: any = [];
-  countyPlaceHolder: string = 'Choose';
+  countyPlaceHolder = 'Choose';
   selectedHouseholdFrequency: string;
   selectedHraType: string;
   selectedHraFrequency: string;
-  showZipcode: boolean = false;
-  showCounty: boolean = false;
-  showDob: boolean = true;
+  showZipcode = false;
+  showCounty = false;
+  showDob = true;
   today: any;
   effectiveStartOptions: any = [];
   effectiveEndOptions: any = [];
   currentDate = new Date(2019, 12, 1);
-  showErrors: boolean = false;
+  showErrors = false;
   errors: any = [];
-  isCountyDisabled: boolean = false;
+  isCountyDisabled = false;
   hostKey: string;
-  private _hasToken: boolean = false;
+  private _hasToken = false;
 
   public get hasToken(): boolean {
     return this._hasToken;
@@ -69,8 +59,8 @@ export class InfoComponent implements OnInit {
     private resultService: ResultService,
     private config: NgbDatepickerConfig
   ) {
-    for (var _i = 0; _i < 12; _i++) {
-      let next_date = new Date(
+    for (let _i = 0; _i < 12; _i++) {
+      const next_date = new Date(
         this.currentDate.getFullYear(),
         this.currentDate.getMonth() + _i,
         1
@@ -89,9 +79,9 @@ export class InfoComponent implements OnInit {
 
   setEffectiveEndOptions(val) {
     this.effectiveEndOptions = [];
-    var date = new Date(Date.parse(val.split(' 00:00:00')[0]));
-    for (var _i = 0; _i < 12; _i++) {
-      var next_date = new Date(date.getFullYear(), date.getMonth() + _i, 1);
+    const date = new Date(Date.parse(val.split(' 00:00:00')[0]));
+    for (let _i = 0; _i < 12; _i++) {
+      const next_date = new Date(date.getFullYear(), date.getMonth() + _i, 1);
       this.effectiveEndOptions.push(next_date);
     }
   }
@@ -114,11 +104,14 @@ export class InfoComponent implements OnInit {
   }
 
   checkValue(str, max) {
-    if (str.charAt(0) !== '0' || str == '00') {
-      var num = parseInt(str);
-      if (isNaN(num) || num <= 0 || num > max) num = 1;
+    if (str.charAt(0) !== '0' || str === '00') {
+      let num = parseInt(str, 10);
+      if (isNaN(num) || num <= 0 || num > max) {
+        num = 1;
+      }
       str =
-        num > parseInt(max.toString().charAt(0)) && num.toString().length == 1
+        num > parseInt(max.toString().charAt(0), 10) &&
+        num.toString().length === 1
           ? '0' + num
           : num.toString();
     }
@@ -126,16 +119,20 @@ export class InfoComponent implements OnInit {
   }
 
   checkDateInput(e) {
-    var input = e.target.value;
-    if (/\D\/$/.test(input)) input = input.substr(0, input.length - 3);
-    var values = input.split('/').map(function(v) {
-      return v.replace(/\D/g, '');
-    });
-    if (values[0]) values[0] = this.checkValue(values[0], 12);
-    if (values[1]) values[1] = this.checkValue(values[1], 31);
-    var output = values.map(function(v, i) {
-      return v.length == 2 && i < 2 ? v + ' / ' : v;
-    });
+    let input = e.target.value;
+    if (/\D\/$/.test(input)) {
+      input = input.substr(0, input.length - 3);
+    }
+    const values = input.split('/').map(v => v.replace(/\D/g, ''));
+    if (values[0]) {
+      values[0] = this.checkValue(values[0], 12);
+    }
+    if (values[1]) {
+      values[1] = this.checkValue(values[1], 31);
+    }
+    const output = values.map((v, i) =>
+      v.length === 2 && i < 2 ? v + ' / ' : v
+    );
     e.target.value = output.join('').substr(0, 14);
   }
 
@@ -227,7 +224,7 @@ export class InfoComponent implements OnInit {
           }
           if (this.resultService.formData) {
             if (this.showDob) {
-              var date_string = this.resultService.formData.dob.split('-');
+              const date_string = this.resultService.formData.dob.split('-');
               this.hraForm.patchValue({
                 dob: {
                   year: +date_string[0],
@@ -283,7 +280,7 @@ export class InfoComponent implements OnInit {
   }
 
   getCountyInfo() {
-    if (this.hraForm.value.zipcode.length == 5) {
+    if (this.hraForm.value.zipcode.length === 5) {
       let params = new HttpParams().set('hra_state', this.hraForm.value.state);
       params = params.append('hra_zipcode', this.hraForm.value.zipcode);
       this.httpClient
@@ -296,14 +293,14 @@ export class InfoComponent implements OnInit {
         .subscribe(
           res => {
             console.log(res);
-            if (res.data.counties.length == 0) {
+            if (res.data.counties.length === 0) {
               this.countyOptions = [];
               this.countyPlaceHolder = 'zipcode is outside state';
               this.hraForm.patchValue({
                 county: ''
               });
               this.isCountyDisabled = true;
-            } else if (res.data.counties.length == 1) {
+            } else if (res.data.counties.length === 1) {
               this.countyOptions = res.data.counties;
               this.countyPlaceHolder = 'Choose';
               this.hraForm.patchValue({
@@ -335,8 +332,7 @@ export class InfoComponent implements OnInit {
 
   onSubmit() {
     if (this.hraForm.valid) {
-      var params = this.hraForm.value;
-      this.today;
+      const params = this.hraForm.value;
       if (this.showDob) {
         params.dob = `${params.dob.year}-${params.dob.month}-${params.dob.day}`;
       }
@@ -350,7 +346,7 @@ export class InfoComponent implements OnInit {
         )
         .subscribe(
           res => {
-            if (res.status == 'success') {
+            if (res.status === 'success') {
               this.resultService.setResults(res);
               this.router.navigateByUrl('/result');
             } else {

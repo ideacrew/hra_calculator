@@ -1,4 +1,4 @@
-<header class="header-uic">
+<header class="header-uic" *ngIf="headerConfig$ | async; else loadingSpinner">
   <div class="row" style="vertical-align: middle">
     <div class="col-12">
       <div class="card pb-1">
@@ -28,3 +28,7 @@
     </div>
   </div>
 </header>
+
+<ng-template #loadingSpinner>
+  Loading....
+</ng-template>

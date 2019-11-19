@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 import { CustomColorsService } from './custom-colors.service';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { HeaderFooterConfigurationService } from './configuration/header_footer/header_footer_configuration.service';
+import { DefaultConfigurationService } from './default-configuration.service';
 
 @Component({
   providers: [
@@ -18,8 +20,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
-  hostKey: string;
   hasToken = false;
   defaultConfig$: Observable<any>;
 
@@ -30,29 +30,14 @@ export class AppComponent implements OnInit {
   constructor(
     translate: TranslateService,
     private http: HttpClient,
-    private colorService: CustomColorsService
+    public headerFooterConfigurationService: HeaderFooterConfigurationService,
+    public defaultConfigService: DefaultConfigurationService
   ) {
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');
 
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use(translate.getBrowserLang());
-
-    if (environment.production) {
-      this.hostKey = window.location.host.split('.', 1)[0];
-    } else {
-      this.hostKey = 'dc';
-    }
-
-    this.defaultConfig$ = this.http
-      .get<any>(
-        environment.apiUrl +
-          '/api/configurations/default_configuration?tenant=' +
-          this.hostKey
-      )
-      .pipe(
-        tap(res => this.colorService.registerCustomColors(res.data.colors))
-      );
   }
 
   ngOnInit() {

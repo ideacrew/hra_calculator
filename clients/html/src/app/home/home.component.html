@@ -1,89 +1,98 @@
-<div class="main-content" *ngIf="hasToken">
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <div class="container hra_results">
-            <div class="content">
-              <h1 style="text-align: left;">
-                {{ 'getting_started.title' | tokenized_translate }}
-              </h1>
-              <hr />
-              <div
-                class="center-text"
-                [innerHtml]="
-                  'getting_started.paragraph' | tokenized_html_translate
-                "
-              ></div>
-            </div>
-            <div class="row">
-              <div class="d-md-inline-flex justify-content-around ie-flex">
-                <div class="col-md-5 col-sm-10">
-                  <div class="card border rounded">
-                    <div class="p-2 bd-highlight card-color card-header">
-                      <svg aria-hidden="true" class="check-color">
-                        <use
-                          xlink:href="/assets/images/icons.svg#icon-check"
-                        ></use>
-                      </svg>
-                      <div class="pt-1">
-                        {{
-                          'getting_started.use_if.label' | tokenized_translate
-                        }}
+<ng-container
+  *ngIf="defaultConfigService.configuration$ | async as config; else loading"
+>
+  <div class="main-content" *ngIf="hasToken">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="container hra_results">
+              <div class="content">
+                <h1 style="text-align: left;">
+                  {{ 'getting_started.title' | tokenized_translate }}
+                </h1>
+                <hr />
+                <div
+                  class="center-text"
+                  [innerHtml]="
+                    'getting_started.paragraph' | tokenized_html_translate
+                  "
+                ></div>
+              </div>
+              <div class="row">
+                <div class="d-md-inline-flex justify-content-around ie-flex">
+                  <div class="col-md-5 col-sm-10">
+                    <div class="card border rounded">
+                      <div class="p-2 bd-highlight card-color card-header">
+                        <svg aria-hidden="true" class="check-color">
+                          <use
+                            xlink:href="/assets/images/icons.svg#icon-check"
+                          ></use>
+                        </svg>
+                        <div class="pt-1">
+                          {{
+                            'getting_started.use_if.label' | tokenized_translate
+                          }}
+                        </div>
                       </div>
+                      <div
+                        class="card-body"
+                        [innerHtml]="
+                          'getting_started.use_if.body'
+                            | tokenized_html_translate
+                        "
+                      ></div>
                     </div>
-                    <div
-                      class="card-body"
-                      [innerHtml]="
-                        'getting_started.use_if.body' | tokenized_html_translate
-                      "
-                    ></div>
                   </div>
-                </div>
-                <div class="col-md-5 col-sm-10">
-                  <div class="card border rounded">
-                    <div class="p-2 bd-highlight card-color card-header">
-                      <svg aria-hidden="true" class="times-circle-color">
-                        <use
-                          xlink:href="/assets/images/icons.svg#icon-times-circle"
-                        ></use>
-                      </svg>
-                      <div class="pt-1">
-                        {{
-                          'getting_started.do_not_use_if.label'
-                            | tokenized_translate
-                        }}
+                  <div class="col-md-5 col-sm-10">
+                    <div class="card border rounded">
+                      <div class="p-2 bd-highlight card-color card-header">
+                        <svg aria-hidden="true" class="times-circle-color">
+                          <use
+                            xlink:href="/assets/images/icons.svg#icon-times-circle"
+                          ></use>
+                        </svg>
+                        <div class="pt-1">
+                          {{
+                            'getting_started.do_not_use_if.label'
+                              | tokenized_translate
+                          }}
+                        </div>
                       </div>
+                      <div
+                        class="card-body"
+                        [innerHtml]="
+                          'getting_started.do_not_use_if.body'
+                            | tokenized_html_translate
+                        "
+                      ></div>
                     </div>
-                    <div
-                      class="card-body"
-                      [innerHtml]="
-                        'getting_started.do_not_use_if.body'
-                          | tokenized_html_translate
-                      "
-                    ></div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="text-center margin-bottom">
-              <a
-                class="btn btn-md button-style card-color"
-                routerLink="/info"
-                >{{
-                  'getting_started.start_button_label' | tokenized_translate
-                }}</a
-              >
-            </div>
-            <br />
-            <div>
-              <p class="center-italic">
-                {{ 'getting_started.disclaimer' | tokenized_translate }}
-              </p>
+              <div class="text-center margin-bottom">
+                <a
+                  class="btn btn-md button-style card-color"
+                  routerLink="/info"
+                  >{{
+                    'getting_started.start_button_label' | tokenized_translate
+                  }}</a
+                >
+              </div>
+              <br />
+              <div>
+                <p class="center-italic">
+                  {{ 'getting_started.disclaimer' | tokenized_translate }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </div></ng-container
+>
+
+<ng-template #loading>
+  Loading
+</ng-template>

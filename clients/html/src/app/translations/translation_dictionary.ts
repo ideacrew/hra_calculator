@@ -1,7 +1,7 @@
-import { AboutYouTranslations } from "./about_you";
-import { AboutHraTranslations } from "./about_hra";
-import { CardTranslations } from "./common";
-import { HraResultsTranslations } from "./hra_results";
+import { AboutYouTranslations } from './about_you';
+import { AboutHraTranslations } from './about_hra';
+import { CardTranslations } from './common';
+import { HraResultsTranslations } from './hra_results';
 
 export interface TranslationDictionary {
   site: SiteTranslations;

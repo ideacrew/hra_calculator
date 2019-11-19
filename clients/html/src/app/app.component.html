@@ -1,9 +1,10 @@
-<ng-container *ngIf="hasToken">
-  <layout-header></layout-header>
-  <main *ngIf="defaultConfig$ | async">
-    <router-outlet (activate)="onActivate($event)">
-      <app-spinner></app-spinner>
-    </router-outlet>
-  </main>
-  <layout-footer></layout-footer>
-</ng-container>
+<ng-container *ngIf="headerFooterConfigurationService.headerApi$ | async"
+  ><ng-container *ngIf="hasToken">
+    <layout-header></layout-header>
+    <main *ngIf="defaultConfigService.defaultConfigApi$ | async">
+      <router-outlet (activate)="onActivate($event)">
+        <app-spinner></app-spinner>
+      </router-outlet>
+    </main>
+    <layout-footer></layout-footer> </ng-container
+></ng-container>

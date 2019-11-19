@@ -1,5 +1,3 @@
-import { LabelDescription } from "./common";
-
 export interface AboutHraTranslations {
   header: AboutHraHeaderTranslations;
   hra_type: HraTypeTranslations;
