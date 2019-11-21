@@ -1,33 +1,37 @@
-import {ChangeDetectorRef, Injectable, Inject, Pipe, SecurityContext } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Injectable,
+  Inject,
+  Pipe,
+  PipeTransform
+} from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { HeaderFooterConfigurationResource } from "../configuration/header_footer/header_footer_configuration.resources";
-import { HeaderFooterConfigurationProvider, HeaderFooterConfigurationService } from "../configuration/header_footer/header_footer_configuration.service";
+import { HeaderFooterConfigurationService } from '../configuration/header_footer/header_footer_configuration.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
-@Injectable()
 @Pipe({
   name: 'tokenized_html_translate',
   pure: false // required to update the value when the promise is resolved
 })
-export class TokenizedHtmlTranslatePipe extends TranslatePipe {
-  public benefit_year = (new Date().getFullYear() + 1).toString();
-  public marketplace = "My Marketplace";
-
+export class TokenizedHtmlTranslatePipe extends TranslatePipe
+  implements PipeTransform {
   constructor(
     private sanitizer: DomSanitizer,
-    @Inject(HeaderFooterConfigurationService.PROVIDER_TOKEN) private configurationProvider: HeaderFooterConfigurationProvider,
+    private headerFooterConfiguration: HeaderFooterConfigurationService,
     translate_service: TranslateService,
-    _ref_value: ChangeDetectorRef) {
+    _ref_value: ChangeDetectorRef
+  ) {
     super(translate_service, _ref_value);
-    configurationProvider.getHeaderFooterConfiguration(this);
   }
 
   transform(query: string, ...args: any[]): any {
-    return this.sanitizer.bypassSecurityTrustHtml(super.transform(query, {marketplace: this.marketplace, benefit_year: this.benefit_year}, ...args));
-  }
+    const {
+      benefit_year,
+      marketplace
+    } = this.headerFooterConfiguration.headerFooterConfig.value;
 
-  applyHeaderFooterConfiguration(resource : HeaderFooterConfigurationResource) : void {
-    this.marketplace = resource.marketplace_name;
-    this.benefit_year = resource.benefit_year;
+    return this.sanitizer.bypassSecurityTrustHtml(
+      super.transform(query, { marketplace, benefit_year }, ...args)
+    );
   }
 }

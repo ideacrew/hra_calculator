@@ -1,5 +1,3 @@
-import { LabelDescription } from "./common";
-
 export interface AboutYouTranslations {
   header: AboutYouHeaderTranslations;
   place_of_residence: PlaceOfResidenceTranslations;
