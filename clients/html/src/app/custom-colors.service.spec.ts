@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { CustomColorsService } from './custom-colors.service';
 
-fdescribe('CustomColorsService', () => {
+describe('CustomColorsService', () => {
   let service: CustomColorsService;
 
   beforeEach(() => {
