@@ -1,5 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+  AbstractControl
+} from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
@@ -10,6 +16,7 @@ import {
   JwtRefreshService,
   JwtTokenRefresher
 } from '../authentication/jwt_refresh_service';
+import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './info.component.html',
@@ -17,10 +24,10 @@ import {
 })
 export class InfoComponent implements OnInit {
   subtitle: string;
-  currentTab = 0;
-  showPrevBtn = false;
-  showNextBtn = true;
-  hraForm: any;
+  currentTab: number = 0;
+  showPrevBtn: boolean = false;
+  showNextBtn: boolean = true;
+  hraForm: FormGroup;
   countyOptions: any = [];
   countyPlaceHolder = 'Choose';
   selectedHouseholdFrequency: string;
@@ -38,6 +45,8 @@ export class InfoComponent implements OnInit {
   isCountyDisabled = false;
   hostKey: string;
   private _hasToken = false;
+
+  formSubscription: Subscription;
 
   public get hasToken(): boolean {
     return this._hasToken;
@@ -77,6 +86,30 @@ export class InfoComponent implements OnInit {
     }
   }
 
+  ngOnInit() {
+    const today = new Date();
+    this.today = {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate()
+    };
+    this.hasToken = this.jwtTokenRefresher.hasToken();
+    if (!this.hasToken) {
+      this.jwtTokenRefresher.getFirstToken(this);
+    }
+    this.showTab(0);
+
+    this.formSubscription = this.hraForm.valueChanges.subscribe(v => {
+      if (this.hraForm.get('household_frequency').valid) {
+        this.enableHouseholdIncomeAmount();
+      }
+
+      if (this.hraForm.get('hra_frequency').valid) {
+        this.enableHRAContributionAmount();
+      }
+    });
+  }
+
   setEffectiveEndOptions(val) {
     this.effectiveEndOptions = [];
     const date = new Date(Date.parse(val.split(' 00:00:00')[0]));
@@ -93,14 +126,13 @@ export class InfoComponent implements OnInit {
       county: ['', Validators.required],
       dob: ['', [Validators.required, validateDate, validateDateFormat]],
       household_frequency: ['', Validators.required],
-      household_amount: ['', Validators.required],
+      household_amount: [{ value: '', disabled: true }, [Validators.required]],
       hra_type: ['', Validators.required],
       start_month: ['', Validators.required],
       end_month: ['', Validators.required],
       hra_frequency: ['', Validators.required],
-      hra_amount: ['', Validators.required]
+      hra_amount: [{ value: '', disabled: true }, [Validators.required]]
     });
-    console.log(this.hraForm);
   }
 
   checkValue(str, max) {
@@ -134,20 +166,6 @@ export class InfoComponent implements OnInit {
       v.length === 2 && i < 2 ? v + ' / ' : v
     );
     e.target.value = output.join('').substr(0, 14);
-  }
-
-  ngOnInit() {
-    const today = new Date();
-    this.today = {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate()
-    };
-    this.hasToken = this.jwtTokenRefresher.hasToken();
-    if (!this.hasToken) {
-      this.jwtTokenRefresher.getFirstToken(this);
-    }
-    this.showTab(0);
   }
 
   showTab(n) {
@@ -205,64 +223,56 @@ export class InfoComponent implements OnInit {
           '/api/configurations/default_configuration?tenant=' +
           this.hostKey
       )
-      .subscribe(
-        res => {
-          console.log(res);
-          this.countyOptions = res.data.counties;
-          this.getDisplayInfo(res);
-          this.hraForm.patchValue({
-            state: res.data.state_name
-          });
-          if (!this.showZipcode) {
-            this.hraForm.removeControl('zipcode');
-          }
-          if (!this.showCounty) {
-            this.hraForm.removeControl('county');
-          }
-          if (!this.showDob) {
-            this.hraForm.removeControl('dob');
-          }
-          if (this.resultService.formData) {
-            if (this.showDob) {
-              const date_string = this.resultService.formData.dob.split('-');
-              this.hraForm.patchValue({
-                dob: {
-                  year: +date_string[0],
-                  month: +date_string[1],
-                  day: +date_string[2]
-                }
-              });
-            }
-            this.hraForm.patchValue({
-              state: this.resultService.formData.state,
-              zipcode: this.resultService.formData.zipcode,
-              county: this.resultService.formData.county,
-              household_frequency: this.resultService.formData
-                .household_frequency,
-              household_amount: this.resultService.formData.household_amount,
-              hra_type: this.resultService.formData.hra_type,
-              start_month: this.resultService.formData.start_month,
-              end_month: this.resultService.formData.end_month,
-              hra_frequency: this.resultService.formData.hra_frequency,
-              hra_amount: this.resultService.formData.hra_amount
-            });
-
-            if (this.showZipcode) {
-              this.countyOptions = [this.resultService.formData.county];
-            }
-
-            this.setEffectiveEndOptions(
-              this.resultService.formData.start_month
-            );
-            this.selectedHouseholdFrequency = this.resultService.formData.household_frequency;
-            this.selectedHraFrequency = this.resultService.formData.hra_frequency;
-            this.selectedHraType = this.resultService.formData.hra_type;
-          }
-        },
-        err => {
-          console.log(err);
+      .subscribe(res => {
+        this.countyOptions = res.data.counties;
+        this.getDisplayInfo(res);
+        this.hraForm.patchValue({
+          state: res.data.state_name
+        });
+        if (!this.showZipcode) {
+          this.hraForm.removeControl('zipcode');
         }
-      );
+        if (!this.showCounty) {
+          this.hraForm.removeControl('county');
+        }
+        if (!this.showDob) {
+          this.hraForm.removeControl('dob');
+        }
+        if (this.resultService.formData) {
+          if (this.showDob) {
+            var date_string = this.resultService.formData.dob.split('-');
+            this.hraForm.patchValue({
+              dob: {
+                year: +date_string[0],
+                month: +date_string[1],
+                day: +date_string[2]
+              }
+            });
+          }
+          this.hraForm.patchValue({
+            state: this.resultService.formData.state,
+            zipcode: this.resultService.formData.zipcode,
+            county: this.resultService.formData.county,
+            household_frequency: this.resultService.formData
+              .household_frequency,
+            household_amount: this.resultService.formData.household_amount,
+            hra_type: this.resultService.formData.hra_type,
+            start_month: this.resultService.formData.start_month,
+            end_month: this.resultService.formData.end_month,
+            hra_frequency: this.resultService.formData.hra_frequency,
+            hra_amount: this.resultService.formData.hra_amount
+          });
+
+          if (this.showZipcode) {
+            this.countyOptions = [this.resultService.formData.county];
+          }
+
+          this.setEffectiveEndOptions(this.resultService.formData.start_month);
+          this.selectedHouseholdFrequency = this.resultService.formData.household_frequency;
+          this.selectedHraFrequency = this.resultService.formData.hra_frequency;
+          this.selectedHraType = this.resultService.formData.hra_type;
+        }
+      });
   }
 
   getDisplayInfo(res) {
@@ -292,8 +302,7 @@ export class InfoComponent implements OnInit {
         )
         .subscribe(
           res => {
-            console.log(res);
-            if (res.data.counties.length === 0) {
+            if (res.data.counties.length == 0) {
               this.countyOptions = [];
               this.countyPlaceHolder = 'zipcode is outside state';
               this.hraForm.patchValue({
@@ -317,7 +326,6 @@ export class InfoComponent implements OnInit {
             }
           },
           err => {
-            console.log(err);
             this.countyOptions = [];
           }
         );
@@ -344,21 +352,16 @@ export class InfoComponent implements OnInit {
             this.hostKey,
           this.hraForm.value
         )
-        .subscribe(
-          res => {
-            if (res.status === 'success') {
-              this.resultService.setResults(res);
-              this.router.navigateByUrl('/result');
-            } else {
-              this.errors = res.errors;
-              this.showErrors = true;
-              window.scroll(0, 0);
-            }
-          },
-          err => {
-            console.log(err);
+        .subscribe(res => {
+          if (res.status == 'success') {
+            this.resultService.setResults(res);
+            this.router.navigateByUrl('/result');
+          } else {
+            this.errors = res.errors;
+            this.showErrors = true;
+            window.scroll(0, 0);
           }
-        );
+        });
     } else {
       this.hraForm.markAllAsTouched();
       window.scroll(0, 0);
@@ -366,7 +369,6 @@ export class InfoComponent implements OnInit {
   }
 
   onHouseholdChange(entry: string) {
-    console.log(entry);
     this.selectedHouseholdFrequency = entry;
   }
 
@@ -389,5 +391,19 @@ export class InfoComponent implements OnInit {
   closeAlert() {
     this.showErrors = false;
     this.errors = [];
+  }
+
+  enableHouseholdIncomeAmount(): void {
+    const houseHoldAmount: AbstractControl = this.hraForm.get(
+      'household_amount'
+    );
+    houseHoldAmount.enable({ emitEvent: false });
+  }
+
+  enableHRAContributionAmount(): void {
+    const hraContributionAmount: AbstractControl = this.hraForm.get(
+      'hra_amount'
+    );
+    hraContributionAmount.enable({ emitEvent: false });
   }
 }

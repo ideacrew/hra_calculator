@@ -455,11 +455,7 @@
                           id="household_amount"
                           formControlName="household_amount"
                           required
-                          [attr.disabled]="
-                            hraForm.controls['household_frequency'].value == ''
-                              ? ''
-                              : null
-                          "
+                         
                         />
                         <span
                           class="visually-hidden"
@@ -874,16 +870,8 @@
                           style="text-align: right"
                           mask="comma_separator.0"
                           maxlength="11"
-                          [disabled]="
-                            hraForm.controls['household_frequency'].invalid
-                          "
                           id="hra_amount"
                           formControlName="hra_amount"
-                          [attr.disabled]="
-                            hraForm.controls['hra_frequency'].value == ''
-                              ? ''
-                              : null
-                          "
                         />
                         <span
                           class="visually-hidden"
