@@ -86,30 +86,6 @@ export class InfoComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() {
-    const today = new Date();
-    this.today = {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate()
-    };
-    this.hasToken = this.jwtTokenRefresher.hasToken();
-    if (!this.hasToken) {
-      this.jwtTokenRefresher.getFirstToken(this);
-    }
-    this.showTab(0);
-
-    this.formSubscription = this.hraForm.valueChanges.subscribe(v => {
-      if (this.hraForm.get('household_frequency').valid) {
-        this.enableHouseholdIncomeAmount();
-      }
-
-      if (this.hraForm.get('hra_frequency').valid) {
-        this.enableHRAContributionAmount();
-      }
-    });
-  }
-
   ngOnDestroy() {
     this.formSubscription.unsubscribe();
   }
@@ -152,6 +128,30 @@ export class InfoComponent implements OnInit, OnDestroy {
           : num.toString();
     }
     return str;
+  }
+
+  ngOnInit() {
+    const today = new Date();
+    this.today = {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate()
+    };
+    this.hasToken = this.jwtTokenRefresher.hasToken();
+    if (!this.hasToken) {
+      this.jwtTokenRefresher.getFirstToken(this);
+    }
+    this.showTab(0);
+
+    this.formSubscription = this.hraForm.valueChanges.subscribe(v => {
+      if (this.hraForm.get('household_frequency').valid) {
+        this.enableHouseholdIncomeAmount();
+      }
+
+      if (this.hraForm.get('hra_frequency').valid) {
+        this.enableHRAContributionAmount();
+      }
+    });
   }
 
   checkDateInput(e) {
