@@ -130,6 +130,24 @@ export class InfoComponent implements OnInit, OnDestroy {
     return str;
   }
 
+  checkDateInput(e) {
+    let input = e.target.value;
+    if (/\D\/$/.test(input)) {
+      input = input.substr(0, input.length - 3);
+    }
+    const values = input.split('/').map(v => v.replace(/\D/g, ''));
+    if (values[0]) {
+      values[0] = this.checkValue(values[0], 12);
+    }
+    if (values[1]) {
+      values[1] = this.checkValue(values[1], 31);
+    }
+    const output = values.map((v, i) =>
+      v.length === 2 && i < 2 ? v + ' / ' : v
+    );
+    e.target.value = output.join('').substr(0, 14);
+  }
+
   ngOnInit() {
     const today = new Date();
     this.today = {
@@ -152,24 +170,6 @@ export class InfoComponent implements OnInit, OnDestroy {
         this.enableHRAContributionAmount();
       }
     });
-  }
-
-  checkDateInput(e) {
-    let input = e.target.value;
-    if (/\D\/$/.test(input)) {
-      input = input.substr(0, input.length - 3);
-    }
-    const values = input.split('/').map(v => v.replace(/\D/g, ''));
-    if (values[0]) {
-      values[0] = this.checkValue(values[0], 12);
-    }
-    if (values[1]) {
-      values[1] = this.checkValue(values[1], 31);
-    }
-    const output = values.map((v, i) =>
-      v.length === 2 && i < 2 ? v + ' / ' : v
-    );
-    e.target.value = output.join('').substr(0, 14);
   }
 
   showTab(n) {
