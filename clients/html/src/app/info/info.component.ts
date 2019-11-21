@@ -24,9 +24,9 @@ import { Subscription } from 'rxjs';
 })
 export class InfoComponent implements OnInit, OnDestroy {
   subtitle: string;
-  currentTab: number = 0;
-  showPrevBtn: boolean = false;
-  showNextBtn: boolean = true;
+  currentTab = 0;
+  showPrevBtn = false;
+  showNextBtn = true;
   hraForm: FormGroup;
   countyOptions: any = [];
   countyPlaceHolder = 'Choose';
@@ -244,7 +244,7 @@ export class InfoComponent implements OnInit, OnDestroy {
         }
         if (this.resultService.formData) {
           if (this.showDob) {
-            var date_string = this.resultService.formData.dob.split('-');
+            const date_string = this.resultService.formData.dob.split('-');
             this.hraForm.patchValue({
               dob: {
                 year: +date_string[0],
@@ -306,7 +306,7 @@ export class InfoComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           res => {
-            if (res.data.counties.length == 0) {
+            if (res.data.counties.length === 0) {
               this.countyOptions = [];
               this.countyPlaceHolder = 'zipcode is outside state';
               this.hraForm.patchValue({
@@ -357,7 +357,7 @@ export class InfoComponent implements OnInit, OnDestroy {
           this.hraForm.value
         )
         .subscribe(res => {
-          if (res.status == 'success') {
+          if (res.status === 'success') {
             this.resultService.setResults(res);
             this.router.navigateByUrl('/result');
           } else {
