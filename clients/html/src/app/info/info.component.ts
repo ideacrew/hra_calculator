@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -22,7 +22,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss']
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent implements OnInit, OnDestroy {
   subtitle: string;
   currentTab: number = 0;
   showPrevBtn: boolean = false;
@@ -108,6 +108,10 @@ export class InfoComponent implements OnInit {
         this.enableHRAContributionAmount();
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.formSubscription.unsubscribe();
   }
 
   setEffectiveEndOptions(val) {
