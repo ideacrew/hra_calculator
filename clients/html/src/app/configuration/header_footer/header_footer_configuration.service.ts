@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { HeaderFooterConfigurationResource } from './header_footer_configuration.resources';
 import { Injectable } from '@angular/core';
 import { ResourceResponse } from '../../resources/hra_custom_api';
-import { Observable, Subject, of, EMPTY, BehaviorSubject } from 'rxjs';
-import { tap, map, catchError, take } from 'rxjs/operators';
+import { Observable, of, EMPTY, BehaviorSubject } from 'rxjs';
+import { tap, map, catchError, filter } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class HeaderFooterConfigurationService {
@@ -16,7 +16,7 @@ export class HeaderFooterConfigurationService {
     HeaderFooterConfigurationResource
   > = this.headerFooterConfig.asObservable();
 
-  headerApi$: Observable<HeaderFooterConfigurationResource>;
+  headerFooterConfigApi$: Observable<HeaderFooterConfigurationResource>;
 
   private apiUrl: string;
 
@@ -27,10 +27,11 @@ export class HeaderFooterConfigurationService {
 
     this.apiUrl = `${environment.apiUrl}/api/configurations/header_footer_config?tenant=${hostKey}`;
 
-    this.headerApi$ = this.httpClient
+    this.headerFooterConfigApi$ = this.httpClient
       .get<ResourceResponse<HeaderFooterConfigurationResource>>(this.apiUrl)
       .pipe(
         map(response => response.data),
+        filter<HeaderFooterConfigurationResource>(Boolean),
         tap(configuration => this.headerFooterConfig.next(configuration)),
         catchError(e => {
           console.error({ e });
