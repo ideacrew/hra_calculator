@@ -97,7 +97,8 @@ button.btn:not(.btn-outline-secondary) {
 }
 
 a.btn:focus,
-button.btn:focus {
+button.btn:focus,
+select:focus {
   box-shadow: 0 0 0 4px rgb(105, 105, 105);
 }
 
