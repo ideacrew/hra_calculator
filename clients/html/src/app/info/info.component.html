@@ -599,18 +599,26 @@
                     <label
                       class="col-sm-3 col-form-label col-form-label-sm"
                       for="start_month"
+                      id="start-month-label"
                     >
                       {{
                         'about_hra.effective_period.start_month.label'
                           | tokenized_translate
                       }}
                     </label>
+                    <span class="visually-hidden" id="start-month-span">
+                      {{
+                        'about_hra.effective_period.start_month.description'
+                          | tokenized_translate
+                      }}
+                    </span>
                     <div ngbDropdown class="col-sm-4">
                       <select
                         (change)="setEffectiveEndOptions($event.target.value)"
                         class="form-control form-control-sm"
                         id="start_month"
                         formControlName="start_month"
+                        aria-labelledby="start-month-label start-month-span"
                       >
                         <option value="" disabled selected hidden>{{
                           'about_hra.effective_period.choose_month'
@@ -668,14 +676,22 @@
                     <label
                       class="col-sm-3 col-form-label col-form-label-sm"
                       for="end_month"
+                      id="end-month-label"
                     >
                       {{
                         'about_hra.effective_period.end_month.label'
                           | tokenized_translate
                       }}
                     </label>
+                    <span class="visually-hidden" id="end-month-span">
+                      {{
+                        'about_hra.effective_period.end_month.description'
+                          | tokenized_translate
+                      }}
+                    </span>
                     <div class="col-sm-4">
                       <select
+                        aria-labelledby="end-month-label end-month-span"
                         class="form-control form-control-sm"
                         id="end_month"
                         formControlName="end_month"
