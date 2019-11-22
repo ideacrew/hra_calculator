@@ -362,16 +362,16 @@
                     </sup>
                   </p>
                 </div>
-                <div class="form-group">
+                <fieldset class="form-group">
                   <div class="input-group">
-                    <div
+                    <legend
                       class="col-sm-3 col-form-label col-form-label-sm faux-label"
                     >
                       {{
                         'about_you.household_income.frequency.label'
                           | tokenized_translate
                       }}
-                    </div>
+                    </legend>
                     <div class="col-sm-4">
                       <div class="btn-group">
                         <div class="radio-wrapper">
@@ -428,7 +428,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </fieldset>
                 <div class="form-group">
                   <div class="input-group">
                     <label
@@ -516,75 +516,76 @@
                       }}</strong>
                     </p>
                   </div>
-                  <div class="input-group">
-                    <label
-                      class="col-sm-3 col-form-label col-form-label-sm"
-                      for="hra_type"
-                      >{{
-                        'about_hra.hra_type.label' | tokenized_translate
-                      }}</label
-                    >
-                    <div class="col-sm-9">
-                      <div class="btn-group hra-type-group">
-                        <div class="radio-wrapper">
-                          <input
-                            type="radio"
-                            id="ichra"
-                            formControlName="hra_type"
-                            value="ichra"
-                            (click)="onHraTypeChange('ichra')"
-                          />
-                          <label for="ichra">{{
-                            'about_hra.hra_type.ichra' | tokenized_translate
-                          }}</label>
-                        </div>
-                        <div class="radio-wrapper">
-                          <input
-                            type="radio"
-                            id="qsehra"
-                            formControlName="hra_type"
-                            value="qsehra"
-                            (click)="onHraTypeChange('qsehra')"
-                          />
-                          <label for="qsehra">
-                            {{
-                              'about_hra.hra_type.qsehra' | tokenized_translate
-                            }}
-                          </label>
-                        </div>
-                        <ng-template #popHraType>
-                          <div
-                            class="tooltip-italic"
-                            [innerHTML]="
-                              'about_hra.hra_type.description'
-                                | tokenized_html_translate
-                            "
-                          ></div>
-                        </ng-template>
-                        <sup [ngbPopover]="popHraType">
-                          <i class="fas fa-question-circle"></i>
-                        </sup>
-                      </div>
-                      <div
-                        *ngIf="
-                          hraForm.controls['hra_type'].invalid &&
-                          (hraForm.controls['hra_type'].dirty ||
-                            hraForm.controls['hra_type'].touched)
-                        "
-                        class="alert alert-danger col-sm-5 bg-danger-color"
+                  <fieldset class="form-group">
+                    <div class="input-group">
+                      <legend
+                        class="col-sm-3 col-form-label col-form-label-sm faux-label"
                       >
+                        {{ 'about_hra.hra_type.label' | tokenized_translate }}
+                      </legend>
+                      <div class="col-sm-9">
+                        <div class="btn-group hra-type-group">
+                          <div class="radio-wrapper">
+                            <input
+                              type="radio"
+                              id="ichra"
+                              formControlName="hra_type"
+                              value="ichra"
+                              (click)="onHraTypeChange('ichra')"
+                            />
+                            <label for="ichra">{{
+                              'about_hra.hra_type.ichra' | tokenized_translate
+                            }}</label>
+                          </div>
+                          <div class="radio-wrapper">
+                            <input
+                              type="radio"
+                              id="qsehra"
+                              formControlName="hra_type"
+                              value="qsehra"
+                              (click)="onHraTypeChange('qsehra')"
+                            />
+                            <label for="qsehra">
+                              {{
+                                'about_hra.hra_type.qsehra'
+                                  | tokenized_translate
+                              }}
+                            </label>
+                          </div>
+                          <ng-template #popHraType>
+                            <div
+                              class="tooltip-italic"
+                              [innerHTML]="
+                                'about_hra.hra_type.description'
+                                  | tokenized_html_translate
+                              "
+                            ></div>
+                          </ng-template>
+                          <sup [ngbPopover]="popHraType">
+                            <i class="fas fa-question-circle"></i>
+                          </sup>
+                        </div>
                         <div
-                          *ngIf="hraForm.controls['hra_type'].errors.required"
-                          role="alert"
+                          *ngIf="
+                            hraForm.controls['hra_type'].invalid &&
+                            (hraForm.controls['hra_type'].dirty ||
+                              hraForm.controls['hra_type'].touched)
+                          "
+                          class="alert alert-danger col-sm-5 bg-danger-color"
                         >
-                          {{
-                            'about_hra.hra_type.error_required'
-                              | tokenized_translate
-                          }}
+                          <div
+                            *ngIf="hraForm.controls['hra_type'].errors.required"
+                            role="alert"
+                          >
+                            {{
+                              'about_hra.hra_type.error_required'
+                                | tokenized_translate
+                            }}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </fieldset>
                 </div>
                 <div class="form-group">
                   <p>
@@ -748,16 +749,16 @@
                     </sup>
                   </p>
                 </div>
-                <div class="form-group">
+                <fieldset class="form-group">
                   <div class="input-group">
-                    <label
-                      class="col-sm-3 col-form-label col-form-label-sm"
-                      for="hra_frequency"
-                      >{{
+                    <legend
+                      class="col-sm-3 col-form-label col-form-label-sm faux-label"
+                    >
+                      {{
                         'about_hra.maximum_amount.frequency.label'
                           | tokenized_translate
-                      }}</label
-                    >
+                      }}
+                    </legend>
                     <div class="col-sm-4">
                       <div class="btn-group" data-toggle="buttons">
                         <div class="radio-wrapper">
@@ -825,7 +826,7 @@
                       </sup>
                     </div>
                   </div>
-                </div>
+                </fieldset>
                 <div class="form-group">
                   <div class="input-group">
                     <label

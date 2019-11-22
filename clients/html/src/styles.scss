@@ -43,6 +43,11 @@ input {
   border: 1px solid #aaaaaa;
 }
 
+input[type='radio'] {
+  width: 0;
+  height: 0;
+}
+
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
   background-color: #ffdddd;
