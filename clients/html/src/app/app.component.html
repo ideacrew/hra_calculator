@@ -1,4 +1,4 @@
-<ng-container *ngIf="headerFooterConfigurationService.headerApi$ | async"
+<ng-container *ngIf="appVM$ | async"
   ><ng-container *ngIf="hasToken">
     <button class="skip-link" (click)="scrollToAnchor('main', 100)">
       Skip to main

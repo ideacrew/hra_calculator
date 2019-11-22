@@ -32,6 +32,11 @@ export class CustomColorsService {
         ? '#010101'
         : '#f1f1f1';
 
+    const primaryBorderColor =
+      this.getContrastRatio(primary_color, '#f1f1f1') < 3
+        ? 'rgb(148,148,148)'
+        : primary_color;
+
     const css = `
     :root {
       --danger-color: ${danger_color};
@@ -39,6 +44,7 @@ export class CustomColorsService {
       --info-color: ${info_color};
       --info-text-color ${infoTextColor};
       --primary-color: ${primary_color};
+      --primary-border-color: ${primaryBorderColor};
       --secondary-color: ${secondary_color};
       --success-color: ${success_color};
       --warning-color: ${warning_color};

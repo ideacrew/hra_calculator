@@ -26,9 +26,9 @@
   margin-bottom: auto;
 }
 
-.bg-primary-color {
-  background-color: var(--primary-color);
-}
+// .bg-primary-color {
+//   background-color: var(--primary-color);
+// }
 
 .bg-danger-color {
   background-color: var(--danger-color);
@@ -55,13 +55,6 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.card-color {
-  font-size: 18px;
-  text-align: center;
-  color: white;
-  background-color: #3498db;
-}
-
 sup {
   font-size: 15px;
 }
@@ -73,6 +66,9 @@ sup {
 
   .btn {
     width: 150px;
+    font-size: 18px;
+    color: var(--inverted-text-color);
+    background-color: var(--primary-color);
   }
 }
 
@@ -89,8 +85,9 @@ sup {
   + label {
     padding: 4px 12px;
     border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
     cursor: pointer;
-    border: 1px solid var(--primary-color);
     margin-right: 0.5rem;
     color: var(--text-color, #000);
   }
