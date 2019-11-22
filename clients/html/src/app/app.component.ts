@@ -4,13 +4,11 @@ import { UsDateParserFormatter } from './us_date_parser_formatter';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtRefreshService } from './authentication/jwt_refresh_service';
-import { environment } from 'src/environments/environment';
-import { CustomColorsService } from './custom-colors.service';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { HeaderFooterConfigurationService } from './configuration/header_footer/header_footer_configuration.service';
 import { DefaultConfigurationService } from './default-configuration.service';
 import { DOCUMENT } from '@angular/common';
+import { HeaderFooterConfigurationResource } from './configuration/header_footer/header_footer_configuration.resources';
 
 @Component({
   providers: [
@@ -23,6 +21,11 @@ import { DOCUMENT } from '@angular/common';
 export class AppComponent implements OnInit {
   hasToken = false;
   defaultConfig$: Observable<any>;
+
+  appVM$: Observable<any> = combineLatest([
+    this.headerFooterConfigurationService.headerFooterConfigApi$,
+    this.defaultConfigService.defaultConfigApi$
+  ]);
 
   onActivate(event: any) {
     window.scroll(0, 0);

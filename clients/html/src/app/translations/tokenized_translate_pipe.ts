@@ -24,12 +24,14 @@ export class TokenizedTranslatePipe extends TranslatePipe
       marketplace_name
     } = this.headerFooterConfiguration.headerFooterConfig.value;
 
-    return this.stp.transform(
+    const transformedQuery = this.stp.transform(
       super.transform(
         query,
         { marketplace: marketplace_name, benefit_year },
         ...args
       )
     );
+
+    return transformedQuery;
   }
 }

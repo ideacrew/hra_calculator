@@ -1,8 +1,7 @@
 .footer-uic {
   font-size: 18px;
-  color: #bebebe;
   background-color: var(--primary-color);
-  padding: 08px;
+  padding: 8px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -11,9 +10,4 @@
   span {
     color: var(--inverted-text-color);
   }
-}
-
-.footer-by {
-  align-self: center;
-  font-size: 14px;
 }

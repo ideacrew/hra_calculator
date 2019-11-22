@@ -18,10 +18,7 @@ body {
 }
 
 .button-style {
-  background-color: #3498db;
-  display: block;
   margin: auto;
-  width: 150px;
 }
 
 * {
@@ -62,10 +59,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.8;
-}
-
 #prevBtn {
   background-color: #bbbbbb;
 }
@@ -94,6 +87,15 @@ button:hover {
 a.btn,
 button.btn:not(.btn-outline-secondary) {
   background-color: var(--primary-color);
+  min-width: 150px;
+  font-size: 18px;
+  color: var(--inverted-text-color);
+  border: 1px solid var(--primary-border-color);
+}
+
+a.btn:hover,
+button.btn:not(.btn-outline-secondary):hover {
+  color: var(--inverted-text-color);
 }
 
 a.btn:focus,
@@ -119,4 +121,12 @@ select:focus {
 
 .alert-info {
   color: var(--info-text-color);
+}
+
+.input-group-text,
+input[type='text'].form-control,
+select.form-control,
+select.form-control:focus,
+.radio-wrapper > input[type='radio'] + label {
+  border-color: rgb(148, 148, 148);
 }
