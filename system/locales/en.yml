@@ -79,6 +79,7 @@ en:
   about_you.household_income.frequency.error_required: Frequency is required. Please choose monthly or annual.
   about_you.household_income.amount.label: Amount
   about_you.household_income.amount.description: MISSING AMOUNT HELP TEXT
+  about_you.household_income.amount.aria_description: Enter the household amount in the chosen frequency
   about_you.household_income.amount.error_required: Amount is required. Please enter your household income in the frequency chosen above.
   about_hra.header.title: About the HRA You've Been Offered
   about_hra.header.paragraph: |-
@@ -110,6 +111,7 @@ en:
   about_hra.maximum_amount.frequency.label: Frequency (choose one)
   about_hra.maximum_amount.frequency.description: |-
     Choose <strong>Monthly Amount</strong> to enter the maximum amount the HRA would pay towards employee-only coverage per month. Choose <strong>Total Amount</strong> to enter the amount the HRA would pay towards employee-only coverage over the entire period between the start month and the end month.
+  about_hra.maximum_amount.amount.aria_description: Enter the amount your employer has offered to contribute in the frequency selected
   about_hra.maximum_amount.frequency.monthly: Monthly
   about_hra.maximum_amount.frequency.total: Total
   about_hra.maximum_amount.frequency.error_required: Frequency is required. Please choose monthly or total.

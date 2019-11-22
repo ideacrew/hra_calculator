@@ -446,6 +446,7 @@
                           <span class="input-group-text">$</span>
                         </div>
                         <input
+                          aria-describedby="household-amount-description"
                           type="text"
                           style="text-align: right"
                           maxlength="11"
@@ -460,6 +461,14 @@
                               : null
                           "
                         />
+                        <span
+                          class="visually-hidden"
+                          id="household-amount-description"
+                          >{{
+                            'about_you.household_income.amount.aria_description'
+                              | tokenized_translate
+                          }}</span
+                        >
                         <div class="input-group-append">
                           <span class="input-group-text">.00</span>
                         </div>
@@ -843,6 +852,7 @@
                           <span class="input-group-text">$</span>
                         </div>
                         <input
+                          aria-describedby="hra-amount-description"
                           type="text"
                           class="form-control"
                           style="text-align: right"
@@ -859,6 +869,14 @@
                               : null
                           "
                         />
+                        <span
+                          class="visually-hidden"
+                          id="hra-amount-description"
+                          >{{
+                            'about_hra.maximum_amount.amount.aria_description'
+                              | tokenized_translate
+                          }}</span
+                        >
                         <div class="input-group-append">
                           <span class="input-group-text">.00</span>
                         </div>
