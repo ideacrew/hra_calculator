@@ -85,7 +85,7 @@ button {
 }
 
 a.btn,
-button.btn:not(.btn-outline-secondary) {
+button.btn:not(.btn-outline-secondary):not(.ngb-dp-arrow-btn) {
   background-color: var(--primary-color);
   min-width: 150px;
   font-size: 18px;
