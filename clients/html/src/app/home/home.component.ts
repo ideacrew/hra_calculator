@@ -1,10 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from './../../environments/environment';
-import {
-  JwtRefreshService,
-  JwtTokenRefresher
-} from '../authentication/jwt_refresh_service';
+import { JwtService } from '../authentication/jwt-refresh.service';
 import { DefaultConfigurationService } from '../default-configuration.service';
 
 @Component({
@@ -28,15 +23,14 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(
-    @Inject(JwtRefreshService.PROVIDER_TOKEN)
-    private jwtTokenRefresher: JwtTokenRefresher,
+    private jwtService: JwtService,
     public defaultConfigService: DefaultConfigurationService
   ) {}
 
   ngOnInit() {
-    this.hasToken = this.jwtTokenRefresher.hasToken();
+    this.hasToken = this.jwtService.hasValidToken;
     if (!this.hasToken) {
-      this.jwtTokenRefresher.getFirstToken(this);
+      this.jwtService.getToken();
     }
   }
 }

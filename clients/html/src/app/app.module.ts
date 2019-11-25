@@ -28,7 +28,7 @@ import { ResultComponent } from './result/result.component';
 import { TranslationHttpLoader } from './translations/translation_loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TokenizedTranslationModule } from './translations/tokenized_translation_module';
-import { JwtRefreshService } from './authentication/jwt_refresh_service';
+import { JwtService } from './authentication/jwt-refresh.service';
 
 import { JwtInterceptor } from './authentication/jwt_interceptor';
 import { LayoutsModule } from './shared/layouts/layouts.module';
@@ -89,8 +89,7 @@ export function createTranslateLoader(http: HttpClient) {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    },
-    JwtRefreshService.providers()
+    }
   ],
   bootstrap: [AppComponent]
 })

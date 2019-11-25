@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateLoader } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
-import { JwtRefreshService } from '../authentication/jwt_refresh_service';
+import { JwtService } from '../authentication/jwt-refresh.service';
 
 export class TranslationHttpLoader implements TranslateLoader {
   private hostKey = 'dc';
@@ -21,7 +21,7 @@ export class TranslationHttpLoader implements TranslateLoader {
       'Content-Type': 'text/plain'
     });
     const skipHeaders = requestHeaders.set(
-      JwtRefreshService.SKIP_INTERCEPTORS_HEADER,
+      JwtService.SKIP_INTERCEPTORS_HEADER,
       'true'
     );
     return this.http.get(

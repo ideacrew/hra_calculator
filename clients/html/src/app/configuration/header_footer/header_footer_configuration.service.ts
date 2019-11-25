@@ -4,7 +4,7 @@ import { HeaderFooterConfigurationResource } from './header_footer_configuration
 import { Injectable } from '@angular/core';
 import { ResourceResponse } from '../../resources/hra_custom_api';
 import { Observable, of, EMPTY, BehaviorSubject } from 'rxjs';
-import { tap, map, catchError, filter } from 'rxjs/operators';
+import { tap, map, catchError, filter, retry } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class HeaderFooterConfigurationService {

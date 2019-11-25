@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl,
   AbstractControl
 } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -12,11 +11,8 @@ import { Router } from '@angular/router';
 import { ResultService } from '../result.service';
 import { validateDate, validateDateFormat } from './date.validator';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import {
-  JwtRefreshService,
-  JwtTokenRefresher
-} from '../authentication/jwt_refresh_service';
 import { Subscription } from 'rxjs';
+import { JwtService } from '../authentication/jwt-refresh.service';
 
 @Component({
   templateUrl: './info.component.html',
@@ -60,8 +56,7 @@ export class InfoComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    @Inject(JwtRefreshService.PROVIDER_TOKEN)
-    private jwtTokenRefresher: JwtTokenRefresher,
+    private jwtService: JwtService,
     private fb: FormBuilder,
     private httpClient: HttpClient,
     private router: Router,
@@ -155,9 +150,9 @@ export class InfoComponent implements OnInit, OnDestroy {
       month: today.getMonth() + 1,
       day: today.getDate()
     };
-    this.hasToken = this.jwtTokenRefresher.hasToken();
+    this.hasToken = this.jwtService.hasValidToken;
     if (!this.hasToken) {
-      this.jwtTokenRefresher.getFirstToken(this);
+      this.jwtService.getToken();
     }
     this.showTab(0);
 
