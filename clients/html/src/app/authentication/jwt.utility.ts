@@ -1,4 +1,3 @@
-import { Maybe } from '../maybe';
 import { JwtSessionToken } from './jwtSessionToken';
 
 export class JwtUtility {

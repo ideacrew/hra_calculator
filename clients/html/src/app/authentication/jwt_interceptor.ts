@@ -13,7 +13,7 @@ import { JwtSessionToken } from './jwtSessionToken';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private jwtService: JwtService) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -26,8 +26,7 @@ export class JwtInterceptor implements HttpInterceptor {
     const currentUser = JwtUtility.currentUser;
     if (currentUser && JwtUtility.valid(currentUser)) {
       if (JwtUtility.inRefreshWindow(currentUser)) {
-        const refresh_service = new JwtService(this.http);
-        refresh_service.getToken;
+        this.jwtService.getToken();
       }
       const newRequest = request.clone({
         headers: request.headers.set(
