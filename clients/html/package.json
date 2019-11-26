@@ -27,8 +27,6 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "@ungap/url-search-params": "^0.1.2",
-    "angular-calendar": "^0.25.2",
-    "angular-notifier": "^4.1.1",
     "angular-pipes": "^10.0.0",
     "bootstrap": "^4.3.1",
     "c3": "^0.4.23",

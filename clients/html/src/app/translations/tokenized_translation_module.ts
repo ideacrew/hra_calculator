@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenizedTranslatePipe } from './tokenized_translate_pipe';
 import { TokenizedHtmlTranslatePipe } from './tokenized_html_translate_pipe';
-import { NgPipesModule } from 'angular-pipes'
+import { NgPipesModule } from 'angular-pipes';
 
 @NgModule({
-  declarations: [
-    TokenizedTranslatePipe,
-    TokenizedHtmlTranslatePipe
-  ],
+  declarations: [TokenizedTranslatePipe, TokenizedHtmlTranslatePipe],
   imports: [
     CommonModule,
     BrowserModule,
@@ -19,9 +16,6 @@ import { NgPipesModule } from 'angular-pipes'
     HttpClientModule,
     NgPipesModule
   ],
-  exports: [
-    TokenizedTranslatePipe,
-    TokenizedHtmlTranslatePipe
-  ]
+  exports: [TokenizedTranslatePipe, TokenizedHtmlTranslatePipe]
 })
-export class TokenizedTranslationModule { }
+export class TokenizedTranslationModule {}
