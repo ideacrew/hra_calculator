@@ -6,10 +6,9 @@ import {
   HttpInterceptor,
   HttpClient
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { JwtUtility } from './jwt.utility';
 import { JwtService } from './jwt-refresh.service';
-import { JwtSessionToken } from './jwtSessionToken';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {

@@ -5,9 +5,7 @@
     </button>
     <layout-header></layout-header>
     <main id="main" *ngIf="defaultConfigService.defaultConfigApi$ | async">
-      <router-outlet (activate)="onActivate($event)">
-        <app-spinner></app-spinner>
-      </router-outlet>
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
     </main>
     <layout-footer></layout-footer>
   </ng-container>
