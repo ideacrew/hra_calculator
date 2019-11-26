@@ -97,16 +97,30 @@ export class InfoComponent implements OnInit, OnDestroy {
   createForm() {
     this.hraForm = this.fb.group({
       state: ['', Validators.required],
-      zipcode: ['', Validators.required],
+      zipcode: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(5),
+          Validators.pattern('[0-9]{5}')
+        ]
+      ],
       county: ['', Validators.required],
       dob: ['', [Validators.required, validateDate, validateDateFormat]],
       household_frequency: ['', Validators.required],
-      household_amount: [{ value: '', disabled: true }, [Validators.required]],
+      household_amount: [
+        { value: '', disabled: true },
+        [Validators.required, Validators.maxLength(11)]
+      ],
       hra_type: ['', Validators.required],
       start_month: ['', Validators.required],
       end_month: ['', Validators.required],
       hra_frequency: ['', Validators.required],
-      hra_amount: [{ value: '', disabled: true }, [Validators.required]]
+      hra_amount: [
+        { value: '', disabled: true },
+        [Validators.required, Validators.maxLength(11)]
+      ]
     });
   }
 
