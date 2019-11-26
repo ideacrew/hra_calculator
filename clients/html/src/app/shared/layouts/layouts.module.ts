@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header.component';
 import { FooterComponent } from './footer.component';
 
-import { FontCustomizerService } from './font_customizer.service';
 import { TokenizedTranslationModule } from '../../translations/tokenized_translation_module';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { TokenizedTranslationModule } from '../../translations/tokenized_transla
     HttpClientModule,
     TokenizedTranslationModule
   ],
-  providers: [FontCustomizerService.providers()],
   exports: [HeaderComponent, FooterComponent]
 })
 export class LayoutsModule {}

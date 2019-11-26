@@ -1,10 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HeaderFooterConfigurationService } from '../../configuration/header_footer/header_footer_configuration.service';
 import { HeaderFooterConfigurationResource } from '../../configuration/header_footer/header_footer_configuration.resources';
-import {
-  FontCustomizerService,
-  FontCustomizer
-} from './font_customizer.service';
+import { FontCustomizerService } from './font_customizer.service';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -21,8 +18,7 @@ export class HeaderComponent implements OnInit {
   headerConfig$: Observable<HeaderFooterConfigurationResource>;
 
   constructor(
-    @Inject(FontCustomizerService.PROVIDER_TOKEN)
-    private fontCustomizer: FontCustomizer,
+    private fontCustomizerService: FontCustomizerService,
     public configurationService: HeaderFooterConfigurationService
   ) {}
 
@@ -52,6 +48,6 @@ export class HeaderComponent implements OnInit {
   }
 
   private applyTypefaceConfiguration(tfc: string, tfn: string | null) {
-    this.fontCustomizer.customizeFontFromTypefaceUrl(tfc, tfn);
+    this.fontCustomizerService.customizeFontFromTypefaceUrl(tfc, tfn);
   }
 }
