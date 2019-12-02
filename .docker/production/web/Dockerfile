@@ -37,7 +37,7 @@ RUN npm run build_production
 ############
 
 # base image
-FROM nginx:1.16.0-alpine
+FROM nginx:1.17.6-alpine
 
 # copy artifact build from the 'build environment'
 COPY --from=build /app/dist /usr/share/nginx/html
