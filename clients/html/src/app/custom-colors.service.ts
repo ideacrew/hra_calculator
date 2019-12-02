@@ -42,7 +42,7 @@ export class CustomColorsService {
       --danger-color: ${danger_color};
       --danger-text-color: ${dangerTextColor};
       --info-color: ${info_color};
-      --info-text-color ${infoTextColor};
+      --info-text-color: ${infoTextColor};
       --primary-color: ${primary_color};
       --primary-border-color: ${primaryBorderColor};
       --secondary-color: ${secondary_color};
