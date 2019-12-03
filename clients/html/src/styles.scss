@@ -5,6 +5,10 @@
 :root {
   --text-color: #0e0e0e;
   --inverted-text-color: #f1f1f1;
+  --primary-color: hsl(120%, 50%, 50%);
+  --primary-border-color: hsl(120%, 50%, 50%);
+  --danger-text-color: hsl(120%, 50%, 50%);
+  --info-text-color: hsl(120%, 50%, 50%);
 }
 
 body {
