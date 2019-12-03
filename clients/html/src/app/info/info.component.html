@@ -912,7 +912,7 @@
                 <button
                   *ngIf="currentTab === 0"
                   type="button"
-                  class="btn btn-md"
+                  class="btn btn-md ic-button"
                   routerLink="/home"
                 >
                   <i class="fas fa-arrow-circle-left fa-lg"> </i>
@@ -921,7 +921,7 @@
                 <button
                   *ngIf="currentTab === 1"
                   type="button"
-                  class="btn btn-md"
+                  class="btn btn-md ic-button"
                   (click)="showTab(currentTab - 1)"
                 >
                   <i class="fas fa-arrow-circle-left fa-lg"> </i>
@@ -930,7 +930,7 @@
                 <button
                   *ngIf="currentTab === 0"
                   type="button"
-                  class="btn btn-md"
+                  class="btn btn-md ic-button"
                   (click)="showTab(currentTab + 1)"
                 >
                   {{ 'site.next_button_label' | tokenized_translate }}
@@ -939,7 +939,7 @@
                 <button
                   *ngIf="currentTab === 1"
                   type="submit"
-                  class="btn btn-md"
+                  class="btn btn-md ic-button"
                 >
                   {{ 'site.next_button_label' | tokenized_translate }}
                   <i class="fas fa-arrow-circle-right fa-lg"> </i>

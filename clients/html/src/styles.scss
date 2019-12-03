@@ -88,8 +88,7 @@ button {
   background-color: #4caf50;
 }
 
-a.btn,
-button.btn:not(.btn-outline-secondary):not(.ngb-dp-arrow-btn) {
+.ic-button {
   background-color: var(--primary-color);
   min-width: 150px;
   font-size: 18px;
@@ -97,13 +96,11 @@ button.btn:not(.btn-outline-secondary):not(.ngb-dp-arrow-btn) {
   border: 1px solid var(--primary-border-color);
 }
 
-a.btn:hover,
-button.btn:not(.btn-outline-secondary):hover {
+.ic-button:hover {
   color: var(--inverted-text-color);
 }
 
-a.btn:focus,
-button.btn:focus,
+.ic-button:focus,
 select:focus {
   box-shadow: 0 0 0 4px rgb(105, 105, 105);
 }
