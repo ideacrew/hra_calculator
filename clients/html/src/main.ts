@@ -7,11 +7,11 @@ import { environment } from './environments/environment';
 import cssVars from 'css-vars-ponyfill';
 
 cssVars({
-  include: 'style',
+  include: 'style,link[rel="stylesheet"]:not([href*="//"])',
   onlyLegacy: true,
   watch: true,
   onComplete(cssText, styleNode, cssVariables) {
-    console.log(cssText);
+    console.log('cssText:', cssText);
   }
 });
 

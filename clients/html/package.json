@@ -66,6 +66,7 @@
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",
     "sass": "^1.22.1",
+    "svgxuse": "^1.2.6",
     "url-search-params-polyfill": "^7.0.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
