@@ -78,11 +78,13 @@ These configurations determine how the system calculates HRA affordability and w
 
 These configuration settings also manage what information is collected on the the Consumer Portal's **About You** page.  For example, setting **Use Age Rating?** to **Yes** will require the consumer enter a date of birth.  A **Geographic Area Rating Model**set to **Single Rating Area** will not collect any information related to the consumer's residence.  **County-based** and **Zipcode-Based** settings will collect requisite information necessary to find the premium rating table applicable to the consumer's residence.
 
-## Plans Page - Import Plan Information
+## Health Plans Page - Import Plan Information
 
-The **Plans** page enables you to upload plans, premiums, service and rating area data necessary to calculate HRA affordability.  Here you can import new plan data, view imported plans and delete all plan content from the database.  
+The **Plans** page enables you to upload plans, premiums, service and rating area data necessary to calculate HRA affordability. Here you can import new plan data, view imported plans and delete all plan content from the database.  
 
-The HRA Tool accepts source data in one of two file formats, depending on the content type.  Following is list of all file names and respective types used by the system:
+The **Health Plans** import feature accepts plan data sets only in zip file format and must be structured as shown below. There is no need to manually filter out silver plans from the serff templates because the system will execute that task as part of import. In [Release 0.2.0](https://ideacrew.github.io/hra_calculator/hra_tool/releases/release_0.2.0/), there was update provided to improve accuracy of the affordability alogorithm requiring, modifications to plan data requirements.
+
+*File Requirements*
 
 | Source File Name | Description | File Type |
 | :---------- | :---------- | :-------- |
@@ -91,9 +93,7 @@ The HRA Tool accepts source data in one of two file formats, depending on the co
 | service_areas.xlsx | Plan Service Areas in SERFF Excel format | MS Excel Open XML | 
 | county_zipcode.xlsx | Plan Service Areas in SERFF Excel format | MS Excel Open XML| 
 
-The **Import SERFF Template** feature accepts plan data sets in zip file format structured as shown below. In [Release 0.2.0](https://ideacrew.github.io/hra_calculator/hra_tool/releases/release_0.2.0/), there was update provided to improve accuracy of the affordability alogorithm requiring, modifications to plan data requirements.
-
-### Release 0.2.0 UPDATE
+*Structure Requirements*
 
 1. SERFF Templates will be the top-level folder
 1. Each Carrier will have its own named folder nested within the SERFF Templates folder
@@ -120,7 +120,7 @@ serff_templates.zip
 
 The zip file set is organized into directories by carrier.  Names given to the carrier directories will appear in the plan table carrier column.  For best results, use snake case (words seperated by underscore '_') to name them.  For example, a directory named "first_carrier_name" will appear in the plan table as: "First Carrier Name"
 
->> You should include all carriers and all supporting data in a single zip file.  While the system will accept multiple uploads, unless all plan data is present the HRA Tool Consumer Portal may return incorrect determinations 
+>> As referenced above, you should include all carriers and all supporting data in a single zip file.  While the system will accept multiple uploads, unless all plan data is present the HRA Tool Consumer Portal may return incorrect determinations 
 >> The County / ZipCode file is not to be nested within a Carrier folder, but rather have its own folder nested within the SERFF Templates folder.
 
 A template mapping file is available here:
