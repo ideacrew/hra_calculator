@@ -2,13 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { UsDateParserFormatter } from './us_date_parser_formatter';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
 import { JwtService } from './authentication/jwt-refresh.service';
 import { Observable, combineLatest } from 'rxjs';
 import { HeaderFooterConfigurationService } from './configuration/header_footer/header_footer_configuration.service';
 import { DefaultConfigurationService } from './default-configuration.service';
 import { DOCUMENT } from '@angular/common';
-import { HeaderFooterConfigurationResource } from './configuration/header_footer/header_footer_configuration.resources';
 
 @Component({
   providers: [
