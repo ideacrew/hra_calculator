@@ -41,7 +41,6 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.9",
     "css-vars-ponyfill": "^2.1.2",
-    "d3": "^4.8.0",
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
     "date-input-polyfill": "^2.14.0",
