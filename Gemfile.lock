@@ -265,7 +265,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (4.0.1)
-    puma (3.12.1)
+    puma (3.12.2)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.7)
@@ -419,7 +419,7 @@ DEPENDENCIES
   nokogiri (~> 1.10)
   nokogiri-happymapper (~> 0.8.0)
   pry-byebug
-  puma (~> 3.11)
+  puma (~> 3.12)
   pundit (~> 2.1.0)
   rack-cors
   rails (~> 6.0.0)
