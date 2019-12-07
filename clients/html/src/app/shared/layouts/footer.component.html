@@ -1,8 +1,24 @@
-<footer [ngStyle]="{'background-color': primaryColorCode}" class="footer-uic">
-	<div class="container">
-		<div class="row py-2">
-			<a class="col-md-6">{{"site.customer_support" | tokenized_translate}}: {{customer_support_number}}</a>
-			<a class="col-md-6 footer-by text-right">{{"site.benefit_year" | tokenized_translate}}: {{benefit_year}}</a>
-		</div>
-	</div>
+<footer
+  class="footer-uic"
+  *ngIf="
+    footerConfigurationService.headerFooterConfig$ | async as config;
+    else loading
+  "
+>
+  <div class="container">
+    <div class="row py-2">
+      <span class="col-md-6"
+        >{{ 'site.customer_support' | tokenized_translate }}:
+        {{ config.call_center_phone }}</span
+      >
+      <span class="col-md-6 footer-by text-right"
+        >{{ 'site.benefit_year' | tokenized_translate }}:
+        {{ config.benefit_year }}</span
+      >
+    </div>
+  </div>
 </footer>
+
+<ng-template #loading>
+  Loading...
+</ng-template>

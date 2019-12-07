@@ -1,7 +1,6 @@
-import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,58 +9,27 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxMaskModule } from 'ngx-mask'
-
-import { LayoutsModule } from './shared/layouts/layouts.module';
-
-import { FullComponent } from './layouts/full/full.component';
-import { BlankComponent } from './layouts/blank/blank.component';
-
-import { NavigationComponent } from './shared/header-navigation/navigation.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { routes } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SpinnerComponent } from './shared/spinner.component';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
 import { ResultComponent } from './result/result.component';
-import { TranslationHttpLoader } from "./translations/translation_loader";
+import { TranslationHttpLoader } from './translations/translation_loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TokenizedTranslationModule } from './translations/tokenized_translation_module';
-import { JwtRefreshService } from './authentication/jwt_refresh_service';
 
-import { JwtInterceptor }  from './authentication/jwt_interceptor';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
-  wheelSpeed: 1,
-  wheelPropagation: true,
-  minScrollbarLength: 20
-};
+import { JwtInterceptor } from './authentication/jwt_interceptor';
+import { LayoutsModule } from './shared/layouts/layouts.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslationHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SpinnerComponent,
-    FullComponent,
-    BlankComponent,
-    NavigationComponent,
-    BreadcrumbComponent,
-    SidebarComponent,
-    HomeComponent,
-    InfoComponent,
-    ResultComponent
-  ],
+  declarations: [AppComponent, HomeComponent, InfoComponent, ResultComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -72,22 +40,17 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule,
     LayoutsModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    PerfectScrollbarModule,
     NgxMaskModule.forRoot(),
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: (createTranslateLoader),
-            deps: [HttpClient]
-        }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
     }),
     TokenizedTranslationModule
   ],
   providers: [
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
@@ -96,9 +59,8 @@ export function createTranslateLoader(http: HttpClient) {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    },
-    JwtRefreshService.providers()
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

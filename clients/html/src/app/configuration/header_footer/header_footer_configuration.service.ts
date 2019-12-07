@@ -1,57 +1,42 @@
 import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { HeaderFooterConfigurationResource } from "./header_footer_configuration.resources";
-import { ClassProvider, Injectable } from '@angular/core';
+import { HeaderFooterConfigurationResource } from './header_footer_configuration.resources';
+import { Injectable } from '@angular/core';
 import { ResourceResponse } from '../../resources/hra_custom_api';
+import { Observable, of, EMPTY, BehaviorSubject } from 'rxjs';
+import { tap, map, catchError, filter, retry } from 'rxjs/operators';
 
-export interface HeaderFooterConfigurationConsumer {
-  applyHeaderFooterConfiguration(resource : HeaderFooterConfigurationResource) : void;
-}
-
-export interface HeaderFooterConfigurationProvider {
-  getHeaderFooterConfiguration(consumer : HeaderFooterConfigurationConsumer) : any;
-}
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HeaderFooterConfigurationService {
-  private hostKey: string;
+  headerFooterConfig: BehaviorSubject<
+    HeaderFooterConfigurationResource
+  > = new BehaviorSubject(undefined);
+
+  headerFooterConfig$: Observable<
+    HeaderFooterConfigurationResource
+  > = this.headerFooterConfig.asObservable();
+
+  headerFooterConfigApi$: Observable<HeaderFooterConfigurationResource>;
+
   private apiUrl: string;
 
-  public configResource: HeaderFooterConfigurationResource | null = null;
+  constructor(private httpClient: HttpClient) {
+    const hostKey = environment.production
+      ? window.location.host.split('.', 1)[0]
+      : 'dc';
 
-  constructor(private httpClient: HttpClient) { 
-    if (environment.production) {
-      this.hostKey = window.location.host.split(".",1)[0];
-    } else {
-      this.hostKey = "dc";
-    }
-    this.apiUrl = environment.apiUrl + "/api/configurations/header_footer_config?tenant=" + this.hostKey;
+    this.apiUrl = `${environment.apiUrl}/api/configurations/header_footer_config?tenant=${hostKey}`;
+
+    this.headerFooterConfigApi$ = this.httpClient
+      .get<ResourceResponse<HeaderFooterConfigurationResource>>(this.apiUrl)
+      .pipe(
+        map(response => response.data),
+        filter<HeaderFooterConfigurationResource>(Boolean),
+        tap(configuration => this.headerFooterConfig.next(configuration)),
+        catchError(e => {
+          console.error({ e });
+          return of(EMPTY); // we could return a "fallback" configuration object here
+        })
+      );
   }
-
-  getHeaderFooterConfiguration(consumer : HeaderFooterConfigurationConsumer) {
-    if (this.configResource != null) {
-      consumer.applyHeaderFooterConfiguration(this.configResource);
-      return;
-    }
-    var service = this;
-    this.httpClient.get<ResourceResponse<HeaderFooterConfigurationResource>>(this.apiUrl).subscribe(
-      (res:ResourceResponse<HeaderFooterConfigurationResource>) => {
-        service.configResource = res.data;
-        consumer.applyHeaderFooterConfiguration(res.data);
-      },
-      (err) => {
-        console.log("GOT ERROR");
-        console.log(err);
-      }
-    );
-  }
-
-  static providers() : ClassProvider {
-    return {
-      provide: HeaderFooterConfigurationService.PROVIDER_TOKEN,
-      useClass: HeaderFooterConfigurationService
-    };
-  }
-
-  static PROVIDER_TOKEN = "DI_TOKEN_FOR_HeaderFooterConfigurationProvider";
 }

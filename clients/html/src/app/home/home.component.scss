@@ -1,0 +1,32 @@
+.main-content {
+  margin-top: 80px;
+  margin-bottom: 75px;
+}
+
+.card-color {
+  font-size: 18px;
+  text-align: center;
+  color: var(--inverted-text-color);
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.check-color {
+  float: left;
+  fill: #68d034;
+  height: 36px;
+  width: 36px;
+}
+
+.times-circle-color {
+  float: left;
+  fill: #ff0001;
+  height: 36px;
+  width: 36px;
+}
+
+.card-header {
+  background-color: var(--primary-color);
+}

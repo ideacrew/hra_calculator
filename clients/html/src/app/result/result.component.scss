@@ -1,0 +1,24 @@
+.main-content {
+  margin-top: 80px;
+  margin-bottom: 75px;
+}
+
+.card-border {
+  border: 1px solid grey;
+}
+
+.result-box {
+  font-weight: bold;
+  background-color: #cae7fb;
+  text-align: center;
+}
+
+.button-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bg-info-color {
+  background-color: var(--info-color);
+}

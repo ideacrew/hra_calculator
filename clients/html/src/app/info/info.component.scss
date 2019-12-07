@@ -4,14 +4,15 @@
   p {
     font-size: 18px;
   }
-  label {
+  label,
+  .faux-label {
     font-weight: 400;
     font-size: 16px;
     padding-left: 0;
   }
 }
 
-.step-desription{
+.step-desription {
   font-size: 26px;
 }
 
@@ -23,6 +24,14 @@
 .state-align {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+// .bg-primary-color {
+//   background-color: var(--primary-color);
+// }
+
+.bg-danger-color {
+  background-color: var(--danger-color);
 }
 
 .step {
@@ -40,37 +49,76 @@
   opacity: 1;
 }
 
-#household_frequency, #hra_frequency, #hra_type{
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  cursor: pointer;
-  display: inline-grid;
-}
-
-.hra-type-group label {
-  font-size: 10px;
-  height: 40px;
-}
-
-btn.active  {
-  background-color: #009efb;
-  color: #ffffff;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.card-color {
-	font-size: 18px;
-	text-align: center;
-  color: white;
-  background-color: #3498DB;
-}
-
 sup {
   font-size: 15px;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .ic-button {
+    width: 150px;
+    font-size: 18px;
+  }
+}
+
+.page-indicator {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.radio-wrapper > input[type='radio'] {
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+
+  + label {
+    padding: 4px 12px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    color: var(--text-color, #000);
+  }
+
+  + label:hover {
+    color: var(--inverted-text-color, #000);
+    background-color: var(--primary-color);
+
+    @media screen and (-ms-high-contrast: active) {
+      box-shadow: 0 0px 0px 4px limegreen;
+    }
+  }
+
+  &:checked + label {
+    background-color: var(--primary-color);
+    color: var(--inverted-text-color, #000);
+
+    @media screen and (-ms-high-contrast: active) {
+      background-color: WindowText;
+    }
+  }
+
+  &:focus + label {
+    box-shadow: 0 0px 0px 4px rgb(105, 105, 150);
+
+    @media screen and (-ms-high-contrast: active) {
+      box-shadow: 0 0px 0px 4px limegreen;
+    }
+  }
+}
+
+pre {
+  position: fixed;
+  left: 5px;
+  top: 50%;
 }

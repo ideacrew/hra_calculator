@@ -1,0 +1,133 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800');
+
+:root {
+  --text-color: #0e0e0e;
+  --inverted-text-color: #f1f1f1;
+  --primary-color: hsl(120%, 50%, 50%);
+  --primary-border-color: hsl(120%, 50%, 50%);
+  --danger-text-color: hsl(120%, 50%, 50%);
+  --info-text-color: hsl(120%, 50%, 50%);
+}
+
+body {
+  color: var(--text-color);
+  background-color: #f1f1f1;
+}
+
+.center-italic {
+  text-align: center;
+  font-style: italic;
+}
+
+.button-style {
+  margin: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  min-width: 300px;
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  border: 1px solid #aaaaaa;
+}
+
+input[type='radio'] {
+  width: 0;
+  height: 0;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+button {
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4caf50;
+}
+
+.ic-button {
+  background-color: var(--primary-color);
+  min-width: 150px;
+  font-size: 18px;
+  color: var(--inverted-text-color);
+  border: 1px solid var(--primary-border-color);
+}
+
+.ic-button:hover {
+  color: var(--inverted-text-color);
+}
+
+.ic-button:focus,
+select:focus {
+  box-shadow: 0 0 0 4px rgb(105, 105, 105);
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.alert-danger {
+  color: var(--danger-text-color);
+}
+
+.alert-info {
+  color: var(--info-text-color);
+}
+
+.input-group-text,
+input[type='text'].form-control,
+select.form-control,
+select.form-control:focus,
+.radio-wrapper > input[type='radio'] + label {
+  border-color: rgb(148, 148, 148);
+}

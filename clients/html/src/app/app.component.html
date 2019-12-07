@@ -1,7 +1,12 @@
-<ng-container *ngIf="hasToken">
-<layout-header></layout-header>
-	<router-outlet (activate)="onActivate($event)">
-		<app-spinner></app-spinner>
-	</router-outlet>
-<layout-footer></layout-footer>
+<ng-container *ngIf="jwtService.hasValidToken">
+  <ng-container *ngIf="appVM$ | async">
+    <button class="skip-link" (click)="scrollToAnchor('main', 100)">
+      Skip to main
+    </button>
+    <layout-header></layout-header>
+    <main id="main" *ngIf="defaultConfigService.defaultConfigApi$ | async">
+      <router-outlet (activate)="onActivate($event)"> </router-outlet>
+    </main>
+    <layout-footer></layout-footer>
+  </ng-container>
 </ng-container>

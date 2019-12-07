@@ -10,17 +10,14 @@ const routes: Routes = [
     path: '',
     data: {
       title: 'Info Page',
-      urls: [
-        { title: 'Dashboard', url: '/dashboard' },
-        { title: 'Info Page' }
-      ]
-    },
+      urls: [{ title: 'Dashboard', url: '/dashboard' }, { title: 'Info Page' }]
+    }
     // component: InfoComponent
   }
 ];
 
 @NgModule({
-  imports: [ReactiveFormsModule, CommonModule, RouterModule.forChild(routes)],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule.forChild(routes)]
   // declarations: [InfoComponent]
 })
 export class InfoModule {}
