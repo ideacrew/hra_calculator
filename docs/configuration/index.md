@@ -101,7 +101,7 @@ The **Health Plans** import feature accepts plan data sets only in zip file form
 	 - Service Area template in .xlsx format
 	 - Plan and Benefit template in .xml format
 	 - Rates template in .xml format
-1. The County / ZipCode mapping file is required for all states and must be in .xlsx format. The caveat is that only the states that use zip-code geographic rating areas need to populate the zip-code values in the table, otherwise the zip-code rows can be left blank under the zip-code header. __Important: The rating area naming convention used in the County / ZipCode mapping file must identically match the naming convention used in the Rates templates. The County / ZipCode file is not to be nested within a Carrier folder, but rather have its own folder nested within the SERFF Templates folder.__ An example of the zip file layout is found below:
+1. The County / ZipCode mapping file is required for all states and must be in .xlsx format. The caveat is that only the states that use zip-code geographic rating areas need to populate the zip-code values in the table, otherwise the zip-code rows can be left blank under the zip-code header. __Important: The rating area naming convention used in the County / ZipCode mapping file must identically match the naming convention used in the Plan & Rating templates (ie: County names should be entered with a leading capital letter followed by lower case letters). The County / ZipCode file is not to be nested within a Carrier folder, but rather have its own folder nested within the SERFF Templates folder.__ An example of the zip file layout is found below:
 
 
 ```
