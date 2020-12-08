@@ -1,0 +1,96 @@
+version: '3.4'
+
+services:
+  app: &app
+    image: ideacrew/hra_calculator_app:${IMAGE_TAG}
+    volumes:
+      - rails_cache:/app/tmp/cache
+      - bundle:/bundle
+      - node_modules:/app/node_modules
+    tmpfs:
+      - /tmp
+    environment:
+      - NODE_ENV=production
+      - RAILS_ENV=${RAILS_ENV:-production}
+      - REDIS_URL=redis://redis:6379/
+      - BOOTSNAP_CACHE_DIR=/bundle/bootsnap
+      - WEB_CONCURRENCY=1
+      - HISTFILE=/app/log/.bash_history
+      - EDITOR=vi
+    secrets:
+      - master_key
+      - credentials
+    command: bash -c "rm -f tmp/pids/server.pid &&
+                      mkdir -p tmp/pids/ &&
+                      cat /run/secrets/master_key > /app/config/master.key &&
+                      cat /run/secrets/credentials > /app/config/credentials.yml.enc &&
+                      bundle &&
+                      bundle exec puma -C config/puma.rb"
+    ports:
+      - 3000
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    image: mongo:4.2
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - 27017
+
+  web: &web
+    image: ideacrew/hra_calculator_web:${IMAGE_TAG}
+    volumes:
+      - node_modules:/app/node_modules
+    tmpfs:
+      - /tmp
+    environment:
+      - NODE_ENV=production
+      - WEB_CONCURRENCY=1
+      - HISTFILE=/app/log/.bash_history
+      - EDITOR=vi
+    secrets:
+      - ssl_cert
+      - ssl_key
+    command: sh -c 'cat /run/secrets/ssl_cert > /etc/ssl/ssl_cert.pem &&
+                    cat /run/secrets/ssl_key > /etc/ssl/ssl_key.pem &&
+                    nginx -g "daemon off;"'
+    ports:
+      - '8080:80'
+      - '4443:443'
+    depends_on:
+      - rails
+
+  redis:
+    image: redis:3.2-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+  mongo:
+    image: mongo:4.2
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - 27017
+
+volumes:
+  redis:
+  bundle:
+  node_modules:
+  rails_cache:
+  mongodb:
+  mongodb_config:
+
+secrets: 
+  master_key:
+    file: ./config/master.key
+  credentials:
+    file: ./config/credentials.yml.enc
+  ssl_cert:
+    file: ../certs/fullchain.pem
+  ssl_key:
+    file: ../certs/privkey.pem
