@@ -31,7 +31,7 @@ module Operations
           location_ids = locations.map do |loc_record|
             query_criteria = {
                                state: state_abbreviation,
-                               county_name: loc_record['county_name']
+                               county_name: loc_record['county_name'].strip
                              }
             query_criteria.merge!({zip: loc_record['zip']}) unless tenant.geographic_rating_area_model == 'county'
             county_zip = ::Locations::CountyZip.where(query_criteria).first
