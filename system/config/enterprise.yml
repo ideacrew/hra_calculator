@@ -18,3 +18,7 @@ namespaces:
             default: 0.0978
             type: :float
             description: For 2020 the factor is 0.0978 and should not be changed.
+          - key: :2021
+            default: 0.0978
+            type: :float
+            description: For 2021 the factor is 0.0978 and should not be changed.

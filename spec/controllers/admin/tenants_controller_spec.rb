@@ -135,7 +135,7 @@ RSpec.describe Admin::TenantsController, type: :controller, dbclean: :after_each
     end
 
     it 'should set some instance variables' do
-      expect(controller.instance_variable_get(:@years)).to eq([2020])
+      expect(controller.instance_variable_get(:@years)).to eq([2020, 2021])
       expect(controller.instance_variable_get(:@tenant)).to eq(tenant)
       expect(controller.instance_variable_get(:@products)).to eq(tenant.products.all)
     end

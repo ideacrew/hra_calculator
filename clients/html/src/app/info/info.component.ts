@@ -35,7 +35,7 @@ export class InfoComponent implements OnInit, OnDestroy {
   today: any;
   effectiveStartOptions: any = [];
   effectiveEndOptions: any = [];
-  currentDate = new Date(2019, 12, 1);
+  currentDate = new Date(new Date().getFullYear() - 1, 12, 1);
   showErrors = false;
   errors: any = [];
   isCountyDisabled = false;

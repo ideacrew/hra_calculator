@@ -18,6 +18,7 @@ module Operations
         (2..last_row).each do |row_number| # data starts from row 2, row 1 has headers
           row_info = sheet_data.row(row_number)
           county_name = row_info[@headers["county"]].squish!
+          county_name.strip!
           zip_code = (tenant.geographic_rating_area_model == 'county') ? nil : row_info[@headers["zip"]].squish!
           query_criteria = {state: state_abbreviation, county_name: county_name}
           query_criteria.merge!({zip: zip_code}) unless tenant.geographic_rating_area_model == 'county'

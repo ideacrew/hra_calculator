@@ -11,7 +11,6 @@ module Parser
     element :statements, String, tag: 'statements'
     element :status, String, tag: 'status'
     element :attestation_indicator, String, tag: 'attestationIndicator'
-    element :tin, String, tag: 'tin'
     element :issuer_id, String, tag: 'issuerId'
     element :submission_type, String, tag: 'submissionType'
     element :market_type, String, tag: 'marketType'
@@ -29,7 +28,6 @@ module Parser
         statements: statements.present? ? statements.gsub(/\n/,'').strip : "",
         status: status.present? ? status.gsub(/\n/,'').strip : "",
         attestation_indicator: attestation_indicator.present? ? attestation_indicator.gsub(/\n/,'').strip : "",
-        tin: tin.present? ? tin.gsub(/\n/,'').strip : "",
         issuer_id: issuer_id.present? ? issuer_id.gsub(/\n/,'').strip : "",
         submission_type: submission_type.present? ? submission_type.gsub(/\n/,'').strip : "",
         market_type: market_type.present? ? market_type.gsub(/\n/,'').strip : "",
